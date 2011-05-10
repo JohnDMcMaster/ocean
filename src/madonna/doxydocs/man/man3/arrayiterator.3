@@ -1,0 +1,76 @@
+.TH ArrayIterator 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ArrayIterator \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <basearr.h>\fR
+.PP
+Inherits \fBBoxIterator\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBArrayIterator\fR ( const \fBBaseArray\fR& )"
+.br
+.ti -1c
+.RI "virtual \fB~ArrayIterator\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator int\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator Item &\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBget\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBoperator++\fR (int)"
+.br
+.ti -1c
+.RI "virtual void \fBrestart\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS ArrayIterator::ArrayIterator (const \fBBaseArray\fR & toIterate)\fC [inline]\fR
+.PP
+Definition at line 94 of file basearr.h.
+.SS ArrayIterator::~ArrayIterator ()\fC [virtual]\fR
+.PP
+Definition at line 210 of file basearr.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBItem\fR & ArrayIterator::get ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 233 of file basearr.C.
+.SS ArrayIterator::operator \fBItem\fR & ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 221 of file basearr.C.
+.SS ArrayIterator::operator int ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 215 of file basearr.C.
+.SS \fBItem\fR & ArrayIterator::operator++ (int)\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 252 of file basearr.C.
+.SS void ArrayIterator::restart ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 246 of file basearr.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

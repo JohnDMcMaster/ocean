@@ -1,0 +1,117 @@
+\subsection{glob\-Route.h File Reference}
+\label{globRoute.h}\index{globRoute.h@{glob\-Route.h}}
+{\tt \#include $<$sealib.h$>$}\par
+{\tt \#include $<$sdfset.h$>$}\par
+{\tt \#include $<$graph.h$>$}\par
+{\tt \#include $<$graph\-Steiner.h$>$}\par
+{\tt \#include "genpart.h"}\par
+{\tt \#include "matrix\-Grid.h"}\par
+{\tt \#include "image.h"}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf expansion\-Grid}
+\item 
+class {\bf expansion\-Grid\-Edge}
+\item 
+class {\bf expansion\-Grid\-Terminal}
+\item 
+class {\bf expansion\-Grid\-Vertex}
+\item 
+class {\bf glob\-Net}
+\item 
+class {\bf glob\-Term}
+\end{CompactItemize}
+\subsubsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum {\bf point\-Of\-Compass} \{ {\bf Nowhere}, 
+{\bf South}, 
+{\bf East}, 
+{\bf North}, 
+{\bf West}
+ \}
+\item 
+enum {\bf edge\-Direction} \{ {\bf Horizontal\-Edge}, 
+{\bf Vertical\-Edge}
+ \}
+\item 
+enum {\bf expansion\-Grid\-Vertex\-Type} \{ {\bf Partition\-GV}, 
+{\bf Horizontal\-Channel\-GV}, 
+{\bf Vertical\-Channel\-GV}, 
+{\bf Channel\-Crossing\-GV}
+ \}
+\end{CompactItemize}
+
+
+\subsubsection{Enumeration Type Documentation}
+\label{globRoute.h_a12}
+\index{globRoute.h@{glob\-Route.h}!edgeDirection@{edgeDirection}}
+\index{edgeDirection@{edgeDirection}!globRoute.h@{glob\-Route.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum edge\-Direction}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{HorizontalEdge@{HorizontalEdge}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!HorizontalEdge@{Horizontal\-Edge}}\item[
+\label{globRoute.h_a5}
+{\em Horizontal\-Edge}]\index{VerticalEdge@{VerticalEdge}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!VerticalEdge@{Vertical\-Edge}}\item[
+\label{globRoute.h_a6}
+{\em Vertical\-Edge}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 24 of file glob\-Route.h.\small\begin{verbatim}00024 {HorizontalEdge, VerticalEdge}
+\end{verbatim}\normalsize 
+\label{globRoute.h_a13}
+\index{globRoute.h@{glob\-Route.h}!expansionGridVertexType@{expansionGridVertexType}}
+\index{expansionGridVertexType@{expansionGridVertexType}!globRoute.h@{glob\-Route.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum expansion\-Grid\-Vertex\-Type}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{PartitionGV@{PartitionGV}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!PartitionGV@{Partition\-GV}}\item[
+\label{globRoute.h_a7}
+{\em Partition\-GV}]\index{HorizontalChannelGV@{HorizontalChannelGV}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!HorizontalChannelGV@{Horizontal\-Channel\-GV}}\item[
+\label{globRoute.h_a8}
+{\em Horizontal\-Channel\-GV}]\index{VerticalChannelGV@{VerticalChannelGV}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!VerticalChannelGV@{Vertical\-Channel\-GV}}\item[
+\label{globRoute.h_a9}
+{\em Vertical\-Channel\-GV}]\index{ChannelCrossingGV@{ChannelCrossingGV}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!ChannelCrossingGV@{Channel\-Crossing\-GV}}\item[
+\label{globRoute.h_a10}
+{\em Channel\-Crossing\-GV}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 25 of file glob\-Route.h.\small\begin{verbatim}00025 {PartitionGV,
+00026           HorizontalChannelGV,
+00027           VerticalChannelGV,
+00028           ChannelCrossingGV}
+\end{verbatim}\normalsize 
+\label{globRoute.h_a11}
+\index{globRoute.h@{glob\-Route.h}!pointOfCompass@{pointOfCompass}}
+\index{pointOfCompass@{pointOfCompass}!globRoute.h@{glob\-Route.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum point\-Of\-Compass}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{Nowhere@{Nowhere}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!Nowhere@{Nowhere}}\item[
+\label{globRoute.h_a0}
+{\em Nowhere}]\index{South@{South}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!South@{South}}\item[
+\label{globRoute.h_a1}
+{\em South}]\index{East@{East}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!East@{East}}\item[
+\label{globRoute.h_a2}
+{\em East}]\index{North@{North}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!North@{North}}\item[
+\label{globRoute.h_a3}
+{\em North}]\index{West@{West}!globRoute.h@{glob\-Route.h}}\index{globRoute.h@{globRoute.h}!West@{West}}\item[
+\label{globRoute.h_a4}
+{\em West}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 23 of file glob\-Route.h.\small\begin{verbatim}00023 {Nowhere, South, East, North, West}
+\end{verbatim}\normalsize 

@@ -1,0 +1,84 @@
+.TH matrixInt 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+matrixInt \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <matrixInt.h>\fR
+.PP
+Inherited by \fBconnectInfo\fR\fC [private]\fR, and \fBdistInfo\fR\fC [private]\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBmatrixInt\fR (int dimension1, int dimension2)"
+.br
+.ti -1c
+.RI "\fBmatrixInt\fR (matrixInt&)"
+.br
+.ti -1c
+.RI "\fB~matrixInt\fR ()"
+.br
+.ti -1c
+.RI "int* \fBoperator[]\fR (int i)"
+.br
+.ti -1c
+.RI "int \fBdimension1\fR ()"
+.br
+.ti -1c
+.RI "int \fBdimension2\fR ()"
+.br
+.ti -1c
+.RI "matrixInt& \fBexchangeRows\fR (int a, int b)"
+.br
+.ti -1c
+.RI "matrixInt& \fBexchangeColumns\fR (int a, int b)"
+.br
+.ti -1c
+.RI "void \fBprint\fR (\fBTransposition\fR =NotTransposed)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS matrixInt::matrixInt (int dimension1, int dimension2)
+.PP
+Definition at line 10 of file matrixInt.C.
+.SS matrixInt::matrixInt (matrixInt & orig)
+.PP
+Definition at line 17 of file matrixInt.C.
+.SS matrixInt::~matrixInt ()
+.PP
+Definition at line 26 of file matrixInt.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int matrixInt::dimension1 ()\fC [inline]\fR
+.PP
+Definition at line 26 of file matrixInt.h.
+.PP
+Referenced by \fBdistInfo::numparts\fR(), and \fBconnectInfo::numparts\fR().
+.SS int matrixInt::dimension2 ()\fC [inline]\fR
+.PP
+Definition at line 27 of file matrixInt.h.
+.SS matrixInt & matrixInt::exchangeColumns (int a, int b)
+.PP
+Definition at line 60 of file matrixInt.C.
+.PP
+Referenced by \fBdistInfo::exchange\fR().
+.SS matrixInt & matrixInt::exchangeRows (int a, int b)
+.PP
+Definition at line 51 of file matrixInt.C.
+.PP
+Referenced by \fBdistInfo::exchange\fR().
+.SS int * matrixInt::operator[] (int i)\fC [inline]\fR
+.PP
+Definition at line 25 of file matrixInt.h.
+.SS void matrixInt::print (\fBTransposition\fR transp = NotTransposed)
+.PP
+Definition at line 75 of file matrixInt.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

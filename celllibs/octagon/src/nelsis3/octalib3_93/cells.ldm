@@ -1,0 +1,520 @@
+:: use cldm without -o
+:: project = /usr1/ocean/celllibs/octagon/PA-RISC1.1_8/nelsis3/octalib3_93
+:: process = octagon
+:: lambda = 0.1
+:: extraction of all cells
+ms dlatch
+term in 147 161 183 197 Q
+term in 183 197 75 89 QN
+term in 3 17 3 17 vss
+term in 219 233 219 233 vdd
+term in 39 53 219 233 D
+term in 39 53 147 161 C
+term in 39 53 183 197 CN
+box in 36 56 108 128
+box in 0 20 144 164
+box in 36 56 180 200
+box in 72 92 180 200
+box in 0 20 216 236
+box in 108 128 216 236
+box in 0 20 108 128
+box in 72 92 108 128
+box in 36 56 144 164
+box in 72 92 144 164
+box in 0 20 180 200
+box in 36 56 216 236
+box in 39 89 147 161
+box in 3 53 183 197
+box in 75 197 183 197
+box in 3 53 219 233
+box in 111 161 219 233
+box in 3 17 111 161
+box in 216 236 144 164
+box in 180 200 180 200
+box in 144 164 216 236
+box in 219 233 147 233
+box in 144 164 36 56
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 108 128 72 92
+box in 144 164 72 92
+box in 216 236 72 92
+box in 147 197 3 17
+box in 111 233 75 89
+box in 147 161 3 53
+box in 0 20 36 56
+box in 72 92 72 92
+box in 72 92 0 20
+box in 36 56 36 56
+box in 0 20 72 92
+box in 3 89 3 17
+box in 39 89 39 53
+box in 39 89 111 125
+box in 3 17 39 89
+box in 75 89 39 89
+box in 111 125 3 89
+box co 79 85 7 13
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 43 49 43 49
+box co 7 13 79 85
+box co 115 121 79 85
+box co 151 157 79 85
+box co 223 229 79 85
+box co 7 13 115 121
+box co 79 85 115 121
+box co 43 49 151 157
+box co 79 85 151 157
+box co 223 229 151 157
+box co 7 13 187 193
+box co 187 193 187 193
+box co 43 49 223 229
+box co 151 157 223 229
+box ins 2 18 38 54
+box ins 146 162 38 54
+box ins 74 90 74 90
+box ins 38 54 110 126
+box ins 2 18 146 162
+box ins 38 54 182 198
+box ins 74 90 182 198
+box ins 2 18 218 234
+box ins 110 126 218 234
+box ins 4 160 40 52
+box ins 4 16 148 232
+box ins 40 52 112 196
+box ins 76 88 76 196
+box ins 112 124 40 232
+box cos 6 14 42 50
+box cos 150 158 42 50
+box cos 78 86 78 86
+box cos 42 50 114 122
+box cos 6 14 150 158
+box cos 42 50 186 194
+box cos 78 86 186 194
+box cos 6 14 222 230
+box cos 114 122 222 230
+me
+ms dualInv
+term in 147 161 39 53 BN
+term in 219 233 39 53 B
+term in 39 53 219 233 A
+term in 39 53 147 161 AN
+term in 219 233 219 233 vdd
+term in 3 17 3 17 vss
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 36 56 36 56
+box in 108 128 36 56
+box in 180 200 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 0 20 108 128
+box in 36 56 108 128
+box in 72 92 108 128
+box in 216 236 108 128
+box in 0 20 144 164
+box in 72 92 144 164
+box in 0 20 180 200
+box in 36 56 180 200
+box in 180 200 180 200
+box in 108 128 216 236
+box in 3 125 3 17
+box in 147 233 3 17
+box in 3 53 39 53
+box in 111 197 39 53
+box in 111 233 75 89
+box in 3 89 219 233
+box in 111 233 219 233
+box in 3 17 3 125
+box in 3 17 147 233
+box in 39 53 3 53
+box in 39 53 111 197
+box in 75 89 111 233
+box in 183 197 183 233
+box in 219 233 3 89
+box in 219 233 111 233
+box in 3 53 3 53
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 43 49 43 49
+box co 115 121 43 49
+box co 187 193 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 7 13 115 121
+box co 43 49 115 121
+box co 79 85 115 121
+box co 223 229 115 121
+box co 7 13 151 157
+box co 79 85 151 157
+box co 7 13 187 193
+box co 43 49 187 193
+box co 187 193 187 193
+box co 115 121 223 229
+me
+ms iv110
+term in 111 125 39 53 Y
+term in 111 125 75 89 A
+term in 219 233 219 233 vdd
+term in 3 17 3 17 vss
+box in 36 56 36 56
+box in 108 128 36 56
+box in 180 200 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 180 200 180 200
+box in 3 53 3 17
+box in 111 197 39 53
+box in 111 161 75 89
+box in 183 233 183 197
+box in 39 53 3 53
+box in 219 233 183 233
+box co 43 49 43 49
+box co 115 121 43 49
+box co 187 193 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 187 193 187 193
+me
+ms na210
+term in 3 17 3 17 vss
+term in 219 233 219 233 vdd
+term in 111 125 75 89 A
+term in 111 125 39 53 Y
+term in 147 161 3 17 B
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 36 56 36 56
+box in 180 200 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 216 236 108 128
+box in 180 200 180 200
+box in 3 53 3 17
+box in 147 197 3 17
+box in 111 197 39 53
+box in 111 161 75 89
+box in 183 233 183 197
+box in 39 53 3 53
+box in 111 125 3 53
+box in 219 233 111 233
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 43 49 43 49
+box co 187 193 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 223 229 115 121
+box co 187 193 187 193
+me
+ms dfr11
+term in 723 737 183 197 vdd
+term in 471 485 3 17 vss
+term in 615 629 75 89 R
+term in 651 665 471 485 D
+term in 435 449 183 197 CK
+term in 39 53 327 341 QN
+term in 147 161 435 449 Q
+box in 219 269 219 269
+box in 723 737 219 269
+box in 651 665 363 413
+box in 579 593 363 449
+box in 543 557 255 305
+box in 507 521 399 449
+box in 471 485 219 269
+box in 327 341 327 413
+box in 255 269 219 269
+box in 219 233 219 269
+box in 219 233 75 125
+box ins 652 664 40 376
+box ins 616 628 148 196
+box ins 508 520 4 412
+box ins 436 448 184 232
+box ins 400 412 292 340
+box ins 400 412 220 268
+box ins 364 376 256 340
+box ins 328 340 112 160
+box ins 292 304 76 304
+box ins 256 268 400 484
+box ins 256 268 292 340
+box ins 256 268 148 196
+box ins 256 268 40 124
+box ins 220 232 328 412
+box ins 148 160 40 448
+box ins 76 88 292 340
+box ins 4 16 4 412
+box in 471 521 471 485
+box in 579 629 435 449
+box in 471 521 435 449
+box in 471 521 399 413
+box in 219 305 399 413
+box in 327 377 327 341
+box in 183 233 291 305
+box in 471 557 255 269
+box in 219 269 255 269
+box in 219 269 219 233
+box in 615 701 183 197
+box in 219 269 183 197
+box in 327 413 147 161
+box in 219 413 111 125
+box in 147 233 75 89
+box in 183 269 39 53
+box in 471 521 3 17
+box in 39 269 3 17
+box ins 220 268 400 412
+box ins 220 268 328 340
+box ins 256 304 292 304
+box ins 364 412 256 268
+box ins 400 448 220 232
+box ins 256 520 4 16
+box int 149 339 437 447
+box int 77 411 329 339
+box int 257 627 149 159
+box int 257 339 113 123
+box cot 330 338 438 446
+box int 329 339 437 447
+box ins 326 342 434 450
+box cot 150 158 438 446
+box int 149 159 437 447
+box ins 146 162 434 450
+box cot 402 410 330 338
+box int 401 411 329 339
+box ins 398 414 326 342
+box cot 78 86 330 338
+box int 77 87 329 339
+box ins 74 90 326 342
+box cot 618 626 150 158
+box int 617 627 149 159
+box ins 614 630 146 162
+box cot 258 266 150 158
+box int 257 267 149 159
+box ins 254 270 146 162
+box cot 330 338 114 122
+box int 329 339 113 123
+box ins 326 342 110 126
+box cot 258 266 114 122
+box int 257 267 113 123
+box ins 254 270 110 126
+box cos 510 518 402 410
+box ins 506 522 398 414
+box in 504 524 396 416
+box cos 6 14 402 410
+box ins 2 18 398 414
+box in 0 20 396 416
+box cos 654 662 366 374
+box ins 650 666 362 378
+box in 648 668 360 380
+box cos 366 374 330 338
+box ins 362 378 326 342
+box in 360 380 324 344
+box cos 402 410 294 302
+box ins 398 414 290 306
+box in 396 416 288 308
+box cos 78 86 294 302
+box ins 74 90 290 306
+box in 72 92 288 308
+box cos 618 626 186 194
+box ins 614 630 182 198
+box in 612 632 180 200
+box cos 258 266 186 194
+box ins 254 270 182 198
+box in 252 272 180 200
+box cos 330 338 150 158
+box ins 326 342 146 162
+box in 324 344 144 164
+box cos 294 302 78 86
+box ins 290 306 74 90
+box in 288 308 72 92
+box cos 654 662 42 50
+box ins 650 666 38 54
+box in 648 668 36 56
+box cos 258 266 42 50
+box ins 254 270 38 54
+box in 252 272 36 56
+box cos 150 158 42 50
+box ins 146 162 38 54
+box in 144 164 36 56
+box cos 474 482 6 14
+box ins 470 486 2 18
+box in 468 488 0 20
+box cos 258 266 6 14
+box ins 254 270 2 18
+box in 252 272 0 20
+box cos 6 14 6 14
+box ins 2 18 2 18
+box in 0 20 0 20
+mc <dl_la2> dlatch my r3 252 252
+mc <dl_la1> dlatch my 252 0
+mc <di_buf> dualInv mx 0 252
+mc <iv_notC> iv110 3 3
+mc <iv_dr> iv110 r9 507 255
+mc <na_nand> na210 mx 507 255
+mc <iv_notR> iv110 507 3
+me
+ms buf20
+term in 3 17 3 17 vss
+term in 219 233 219 233 vdd
+term in 111 125 75 89 A
+term in 39 53 111 125 Y
+box in 36 56 36 56
+box in 108 128 36 56
+box in 180 200 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 36 56 108 128
+box in 72 92 108 128
+box in 72 92 144 164
+box in 36 56 180 200
+box in 180 200 180 200
+box in 3 53 39 53
+box in 75 197 39 53
+box in 111 161 75 89
+box in 183 233 219 233
+box in 3 17 3 53
+box in 39 53 111 197
+box in 75 89 39 161
+box in 183 197 183 233
+box co 43 49 43 49
+box co 115 121 43 49
+box co 187 193 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 43 49 115 121
+box co 79 85 115 121
+box co 79 85 151 157
+box co 43 49 187 193
+box co 187 193 187 193
+me
+ms no210
+term in 144 164 0 20 B
+term in 108 128 36 56 Y
+term in 108 128 72 92 A
+term in 216 236 216 236 vdd
+term in 0 20 0 20 vss
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 36 56 36 56
+box in 108 128 36 56
+box in 216 236 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 180 200 180 200
+box in 0 128 0 20
+box in 144 200 0 20
+box in 108 236 36 56
+box in 108 164 72 92
+box in 180 236 180 200
+box in 36 56 0 56
+box in 216 236 180 236
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 43 49 43 49
+box co 115 121 43 49
+box co 223 229 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 187 193 187 193
+me
+ms na310
+term in 3 17 3 17 vss
+term in 219 233 219 233 vdd
+term in 111 125 75 89 A
+term in 147 161 183 197 Y
+term in 147 161 3 17 B
+term in 75 89 111 125 C
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 108 128 72 92
+box in 144 164 72 92
+box in 180 200 72 92
+box in 36 56 108 128
+box in 72 92 108 128
+box in 180 200 108 128
+box in 216 236 108 128
+box in 72 92 144 164
+box in 36 56 180 200
+box in 72 92 180 200
+box in 108 128 180 200
+box in 180 200 180 200
+box in 3 125 3 17
+box in 147 197 3 17
+box in 111 161 75 89
+box in 147 197 147 161
+box in 39 161 183 197
+box in 183 233 183 197
+box in 39 53 111 197
+box in 75 89 111 161
+box in 147 161 147 197
+box in 183 197 75 161
+box in 219 233 111 233
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 115 121 79 85
+box co 151 157 79 85
+box co 187 193 79 85
+box co 43 49 115 121
+box co 79 85 115 121
+box co 187 193 115 121
+box co 223 229 115 121
+box co 79 85 151 157
+box co 43 49 187 193
+box co 79 85 187 193
+box co 115 121 187 193
+box co 187 193 187 193
+me
+ms no310
+term in 3 17 3 17 vss
+term in 219 233 219 233 vdd
+term in 111 125 75 89 A
+term in 75 89 183 197 Y
+term in 147 161 3 17 B
+term in 75 89 111 125 C
+box in 108 128 0 20
+box in 144 164 0 20
+box in 180 200 0 20
+box in 36 56 36 56
+box in 108 128 36 56
+box in 108 128 72 92
+box in 144 164 72 92
+box in 36 56 108 128
+box in 72 92 108 128
+box in 216 236 108 128
+box in 72 92 144 164
+box in 36 56 180 200
+box in 72 92 180 200
+box in 3 125 3 17
+box in 147 197 3 17
+box in 75 125 39 53
+box in 39 89 75 89
+box in 111 161 75 89
+box in 39 89 183 197
+box in 39 53 3 53
+box in 39 53 75 197
+box in 75 89 39 89
+box in 75 89 111 161
+box in 219 233 111 233
+box co 115 121 7 13
+box co 151 157 7 13
+box co 187 193 7 13
+box co 43 49 43 49
+box co 115 121 43 49
+box co 115 121 79 85
+box co 151 157 79 85
+box co 43 49 115 121
+box co 79 85 115 121
+box co 223 229 115 121
+box co 79 85 151 157
+box co 43 49 187 193
+box co 79 85 187 193
+me
+:: eof

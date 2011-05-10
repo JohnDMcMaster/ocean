@@ -1,0 +1,15 @@
+.i 2 
+.o 1
+.r off1 
+-1  off1 off1 0
+10  off1 off1 0
+00  off1 off0 0
+-1  off0 off0 0
+00  off0 off0 0
+10  off0 on1  1
+-1  on1  on1  1
+10  on1  on1  1
+00  on1  on0  1
+-1  on0  on0  1
+00  on0  on0  1
+10  on0  off1 0

@@ -1,0 +1,159 @@
+\subsection{matrix\-Grid  Class Reference}
+\label{matrixGrid}\index{matrixGrid@{matrix\-Grid}}
+{\tt \#include $<$matrix\-Grid.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf matrix\-Grid} (int dimension1, int dimension2)
+\item 
+{\bf matrix\-Grid} (matrix\-Grid\&)
+\item 
+{\bf $\sim$matrix\-Grid} ()
+\item 
+{\bf expansion\-Grid\-Vertex}$\ast$$\ast$ {\bf operator[$\,$]} (int i)
+\item 
+int {\bf dimension1} ()
+\item 
+int {\bf dimension2} ()
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf create\-And\-Initialize} (int dimension1, int dimension2)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf expansion\-Grid\-Vertex}$\ast$$\ast$$\ast$ {\bf thematrix}
+\item 
+int {\bf dim1}
+\item 
+int {\bf dim2}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{matrixGrid_a0}
+\index{matrixGrid@{matrix\-Grid}!matrixGrid@{matrixGrid}}
+\index{matrixGrid@{matrixGrid}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Grid::matrix\-Grid (int {\em dimension1}, int {\em dimension2})}\hfill
+
+
+
+Definition at line 10 of file matrix\-Grid.C.\small\begin{verbatim}00011 {
+00012    createAndInitialize(dimension1,dimension2);
+00013 }
+\end{verbatim}\normalsize 
+\label{matrixGrid_a1}
+\index{matrixGrid@{matrix\-Grid}!matrixGrid@{matrixGrid}}
+\index{matrixGrid@{matrixGrid}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Grid::matrix\-Grid (matrix\-Grid \& {\em orig})}\hfill
+
+
+
+Definition at line 17 of file matrix\-Grid.C.\small\begin{verbatim}00018 {
+00019    dim1 = orig.dim1;
+00020    dim2 = orig.dim2;
+00021    thematrix = orig.thematrix;  // do not copy the array, just the pointer...
+00022 }
+\end{verbatim}\normalsize 
+\label{matrixGrid_a2}
+\index{matrixGrid@{matrix\-Grid}!~matrixGrid@{$\sim$matrixGrid}}
+\index{~matrixGrid@{$\sim$matrixGrid}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Grid::$\sim$matrix\-Grid ()}\hfill
+
+
+
+Definition at line 26 of file matrix\-Grid.C.\small\begin{verbatim}00027 {
+00028    for (int i=0; i<dim1; ++i)
+00029       delete thematrix[i];
+00030    delete thematrix; 
+00031 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{matrixGrid_c0}
+\index{matrixGrid@{matrix\-Grid}!createAndInitialize@{createAndInitialize}}
+\index{createAndInitialize@{createAndInitialize}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void matrix\-Grid::create\-And\-Initialize (int {\em dimension1}, int {\em dimension2})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 35 of file matrix\-Grid.C.
+
+Referenced by {\bf matrix\-Grid}().\small\begin{verbatim}00036 {
+00037    dim1 = dimension1;
+00038    dim2 = dimension2;
+00039    thematrix = new (expansionGridVertex **[dim1]);
+00040    for (int i=0; i<dim1; ++i)
+00041    {
+00042       expansionGridVertex **subarray = new (expansionGridVertex *[dim2]);
+00043       for (int j=0; j<dim2; ++j)
+00044      subarray[j] = 0;   // initialize the matrix to null.
+00045       thematrix[i] = subarray;
+00046    }
+00047 }
+\end{verbatim}\normalsize 
+\label{matrixGrid_a4}
+\index{matrixGrid@{matrix\-Grid}!dimension1@{dimension1}}
+\index{dimension1@{dimension1}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Grid::dimension1 ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 26 of file matrix\-Grid.h.
+
+Referenced by {\bf expansion\-Grid::nwires}().\small\begin{verbatim}00026 {return dim1;}
+\end{verbatim}\normalsize 
+\label{matrixGrid_a5}
+\index{matrixGrid@{matrix\-Grid}!dimension2@{dimension2}}
+\index{dimension2@{dimension2}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Grid::dimension2 ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 27 of file matrix\-Grid.h.
+
+Referenced by {\bf expansion\-Grid::nwires}().\small\begin{verbatim}00027 {return dim2;}
+\end{verbatim}\normalsize 
+\label{matrixGrid_a3}
+\index{matrixGrid@{matrix\-Grid}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Vertex} $\ast$$\ast$ matrix\-Grid::operator[$\,$] (int {\em i})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 25 of file matrix\-Grid.h.\small\begin{verbatim}00025 {return thematrix[i];}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{matrixGrid_o1}
+\index{matrixGrid@{matrix\-Grid}!dim1@{dim1}}
+\index{dim1@{dim1}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Grid::dim1\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 19 of file matrix\-Grid.h.\label{matrixGrid_o2}
+\index{matrixGrid@{matrix\-Grid}!dim2@{dim2}}
+\index{dim2@{dim2}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Grid::dim2\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 19 of file matrix\-Grid.h.\label{matrixGrid_o0}
+\index{matrixGrid@{matrix\-Grid}!thematrix@{thematrix}}
+\index{thematrix@{thematrix}!matrixGrid@{matrix\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Vertex} $\ast$$\ast$$\ast$ matrix\-Grid::thematrix\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 18 of file matrix\-Grid.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf matrix\-Grid.h}\item 
+{\bf matrix\-Grid.C}\end{CompactItemize}

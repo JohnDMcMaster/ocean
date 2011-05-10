@@ -1,0 +1,78 @@
+.TH Window 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Window \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <window.h>\fR
+.PP
+Inherits \fBCluster\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBWindow\fR (\fBCluster\fR &c,int w,int h)"
+.br
+.ti -1c
+.RI "\fB~Window\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "void \fBgetDiv\fR (char* ,int *,int *,int*,int*)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "int \fBwidth\fR"
+.br
+.ti -1c
+.RI "int \fBhigh\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Window::Window (\fBCluster\fR & c, int w, int h)
+.PP
+Definition at line 24 of file window.h.
+.SS Window::~Window ()\fC [inline]\fR
+.PP
+Definition at line 27 of file window.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void Window::getDiv (char * str, int * colNum, int * rowNum, int * newWidth, int * newHigh)
+.PP
+Definition at line 14 of file window.C.
+.PP
+Referenced by \fBPlcm::createPlane\fR().
+.SS char * Window::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 30 of file window.h.
+.SS \fBclassType\fR Window::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 29 of file window.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int Window::high
+.PP
+Definition at line 33 of file window.h.
+.SS int Window::width
+.PP
+Definition at line 32 of file window.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

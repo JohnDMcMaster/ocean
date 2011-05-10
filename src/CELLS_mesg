@@ -1,0 +1,868 @@
++++++++++++++++++ START OF COMPILING OCEAN CELL LIBRARIES ++++++++++++++++
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+File cells.sls:
+Parsing network: Cap
+Warning: network Cap, unconnected terminal p
+Warning: network Cap, unconnected terminal n
+Parsing network: Res
+Warning: network Res, unconnected terminal p
+Warning: network Res, unconnected terminal n
+Parsing network: Penh
+Warning: network Penh, unconnected terminal d
+Warning: network Penh, unconnected terminal s
+Warning: network Penh, unconnected terminal g
+Parsing network: Nenh
+Warning: network Nenh, unconnected terminal g
+Warning: network Nenh, unconnected terminal s
+Warning: network Nenh, unconnected terminal d
+Parsing network: penhHack
+Warning: network penhHack, unconnected terminal d
+Warning: network penhHack, unconnected terminal s
+Warning: network penhHack, unconnected terminal g
+Parsing network: nenhHack
+Warning: network nenhHack, unconnected terminal g
+Warning: network nenhHack, unconnected terminal s
+Warning: network nenhHack, unconnected terminal d
+cldm: WARNING: Using no-origin mode (= new default)!
+cldm: WARNING: Header says to use origin mode!
+cldm: WARNING: You must use option -x!
+cldm: -- program finished --
+------ no name: converting everything in mapfile ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+WARNING: nelsis layout cell 'Error_Marker' occurs 2 times in maptable
+
+------ reading map file ------
+------ reading nelsis circuit-cell 'Cap' ------
+------ reading nelsis circuit-cell 'Res' ------
+------ reading nelsis circuit-cell 'nenhHack' ------
+------ reading nelsis circuit-cell 'Nenh' ------
+------ reading nelsis circuit-cell 'penhHack' ------
+------ reading nelsis circuit-cell 'Penh' ------
+------ reading nelsis layout-cell 'cap' ------
+------ reading nelsis layout-cell 'res' ------
+------ reading nelsis layout-cell 'nenh' ------
+------ reading nelsis layout-cell 'Nenh' ------
+------ reading nelsis layout-cell 'penh' ------
+------ reading nelsis layout-cell 'Penh' ------
+------ reading nelsis layout-cell 'Via_ps_in' ------
+------ reading nelsis layout-cell 'Via_op_in' ------
+------ reading nelsis layout-cell 'Via_on_in' ------
+------ reading nelsis layout-cell 'Via_in_ins' ------
+------ writing nelsis 'Cap' as sdfcir 'cap(cap(primitives)) ------
+------ writing nelsis 'cap' as sdflay 'cap(cap(cap(primitives)))' ------
+------ writing nelsis 'Res' as sdfcir 'res(res(primitives)) ------
+------ writing nelsis 'res' as sdflay 'res(res(res(primitives)))' ------
+------ writing nelsis 'nenh' as sdflay 'nenh(nenh(nenh(primitives)))' ------
+------ writing nelsis 'nenhHack' as sdfcir 'nenh(nenh(primitives)) ------
+------ writing nelsis 'Nenh' as sdflay 'Nenh(Nenh(Nenh(primitives)))' ------
+------ writing nelsis 'Nenh' as sdfcir 'Nenh(Nenh(primitives)) ------
+------ writing nelsis 'penh' as sdflay 'penh(penh(penh(primitives)))' ------
+------ writing nelsis 'penhHack' as sdfcir 'penh(penh(primitives)) ------
+------ writing nelsis 'Penh' as sdflay 'Penh(Penh(Penh(primitives)))' ------
+------ writing nelsis 'Penh' as sdfcir 'Penh(Penh(primitives)) ------
+------ writing nelsis 'Via_ps_in' as sdflay 'Via_ps_in(Via_ps_in(Via_ps_in(primitives)))' ------
+------ writing nelsis 'Via_op_in' as sdflay 'Via_op_in(Via_op_in(Via_op_in(primitives)))' ------
+------ writing nelsis 'Via_on_in' as sdflay 'Via_on_in(Via_on_in(Via_on_in(primitives)))' ------
+------ writing nelsis 'Via_in_ins' as sdflay 'Via_in_ins(Via_in_ins(Via_in_ins(primitives)))' ------
+------ nelsea: task completed ------
+Expanding Cap
+Expanding Res
+Expanding Penh
+Expanding Nenh
+Expanding penhHack
+Expanding nenhHack
+======= running "gnarp -CFb primitives mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+cap             cap             primitives      0    1
+res             res             primitives      0    1
+nenh            nenh            primitives      0    1
+Nenh            Nenh            primitives      0    1
+penh            penh            primitives      0    1
+Penh            Penh            primitives      0    1
+Via_ps_in       Via_ps_in       primitives      0    1
+Via_op_in       Via_op_in       primitives      0    1
+Via_on_in       Via_on_in       primitives      0    1
+Via_in_ins      Via_in_ins      primitives      0    1
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/digilib8_93 =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= importing library primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/digilib8_93 =======
+File cells.sls:
+Parsing network: buf40
+Warning: network buf40, unconnected terminal vss
+Warning: network buf40, unconnected terminal vdd
+Parsing network: de211
+Warning: network de211, unconnected terminal vss
+Warning: network de211, unconnected terminal vdd
+Parsing network: de310
+Warning: network de310, unconnected terminal vss
+Warning: network de310, unconnected terminal vdd
+Parsing network: dfn10
+Warning: network dfn10, unconnected terminal vss
+Warning: network dfn10, unconnected terminal vdd
+Parsing network: dfr11
+Warning: network dfr11, unconnected terminal vss
+Warning: network dfr11, unconnected terminal vdd
+Parsing network: ex210
+Warning: network ex210, unconnected terminal vss
+Warning: network ex210, unconnected terminal vdd
+Parsing network: iv110
+Warning: network iv110, unconnected terminal vss
+Warning: network iv110, unconnected terminal vdd
+Parsing network: mu111
+Warning: network mu111, unconnected terminal vss
+Warning: network mu111, unconnected terminal vdd
+Parsing network: mu210
+Warning: network mu210, unconnected terminal vss
+Warning: network mu210, unconnected terminal vdd
+Parsing network: na210
+Warning: network na210, unconnected terminal vss
+Warning: network na210, unconnected terminal vdd
+Parsing network: na310
+Warning: network na310, unconnected terminal vss
+Warning: network na310, unconnected terminal vdd
+Parsing network: no210
+Warning: network no210, unconnected terminal vss
+Warning: network no210, unconnected terminal vdd
+Parsing network: no310
+Warning: network no310, unconnected terminal vss
+Warning: network no310, unconnected terminal vdd
+Parsing network: Buf40
+Parsing network: De211
+Parsing network: De310
+Parsing network: Dfn10
+Parsing network: Dfr11
+Parsing network: Ex210
+Parsing network: Iv110
+Parsing network: Mu111
+Parsing network: Mu210
+Parsing network: Na210
+Parsing network: Na310
+Parsing network: No210
+Parsing network: No310
+cldm: -- program finished --
+------ no name: converting everything in mapfile ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+
+------ reading map file ------
+------ reading nelsis circuit-cell 'No310' ------
+------ reading nelsis circuit-cell 'No210' ------
+------ reading nelsis circuit-cell 'Na310' ------
+------ reading nelsis circuit-cell 'Na210' ------
+------ reading nelsis circuit-cell 'Mu210' ------
+------ reading nelsis circuit-cell 'Mu111' ------
+------ reading nelsis circuit-cell 'Iv110' ------
+------ reading nelsis circuit-cell 'Ex210' ------
+------ reading nelsis circuit-cell 'Dfr11' ------
+------ reading nelsis circuit-cell 'Dfn10' ------
+------ reading nelsis circuit-cell 'De211' ------
+------ reading nelsis circuit-cell 'De310' ------
+------ reading nelsis circuit-cell 'Buf40' ------
+------ reading nelsis layout-cell 'no310' ------
+------ reading nelsis layout-cell 'na310' ------
+------ reading nelsis layout-cell 'na210' ------
+------ reading nelsis layout-cell 'mu210' ------
+------ reading nelsis layout-cell 'mu111' ------
+------ reading nelsis layout-cell 'iv110' ------
+------ reading nelsis layout-cell 'ex210' ------
+------ reading nelsis layout-cell 'dfr11' ------
+------ reading nelsis layout-cell 'dfn10' ------
+------ reading nelsis layout-cell 'de211' ------
+------ reading nelsis layout-cell 'de310' ------
+------ reading nelsis layout-cell 'no210' ------
+------ reading nelsis layout-cell 'buf40' ------
+------ writing nelsis 'no310' as sdflay 'no310(no310(no310(digilib8_93)))' ------
+------ writing nelsis 'na310' as sdflay 'na310(na310(na310(digilib8_93)))' ------
+------ writing nelsis 'na210' as sdflay 'na210(na210(na210(digilib8_93)))' ------
+------ writing nelsis 'mu210' as sdflay 'mu210(mu210(mu210(digilib8_93)))' ------
+------ writing nelsis 'mu111' as sdflay 'mu111(mu111(mu111(digilib8_93)))' ------
+------ writing nelsis 'iv110' as sdflay 'iv110(iv110(iv110(digilib8_93)))' ------
+------ writing nelsis 'ex210' as sdflay 'ex210(ex210(ex210(digilib8_93)))' ------
+------ writing nelsis 'dfr11' as sdflay 'dfr11(dfr11(dfr11(digilib8_93)))' ------
+------ writing nelsis 'dfn10' as sdflay 'dfn10(dfn10(dfn10(digilib8_93)))' ------
+------ writing nelsis 'de211' as sdflay 'de211(de211(de211(digilib8_93)))' ------
+------ writing nelsis 'de310' as sdflay 'de310(de310(de310(digilib8_93)))' ------
+------ writing nelsis 'no210' as sdflay 'no210(no210(no210(digilib8_93)))' ------
+------ writing nelsis 'buf40' as sdflay 'buf40(buf40(buf40(digilib8_93)))' ------
+------ writing nelsis 'No310' as sdfcir 'no310(no310(digilib8_93)) ------
+------ writing nelsis 'No210' as sdfcir 'no210(no210(digilib8_93)) ------
+------ writing nelsis 'Na310' as sdfcir 'na310(na310(digilib8_93)) ------
+------ writing nelsis 'Na210' as sdfcir 'na210(na210(digilib8_93)) ------
+------ writing nelsis 'Mu210' as sdfcir 'mu210(mu210(digilib8_93)) ------
+------ writing nelsis 'Mu111' as sdfcir 'mu111(mu111(digilib8_93)) ------
+------ writing nelsis 'Iv110' as sdfcir 'iv110(iv110(digilib8_93)) ------
+------ writing nelsis 'Ex210' as sdfcir 'ex210(ex210(digilib8_93)) ------
+------ writing nelsis 'Dfr11' as sdfcir 'dfr11(dfr11(digilib8_93)) ------
+------ writing nelsis 'Dfn10' as sdfcir 'dfn10(dfn10(digilib8_93)) ------
+------ writing nelsis 'De211' as sdfcir 'de211(de211(digilib8_93)) ------
+------ writing nelsis 'De310' as sdfcir 'de310(de310(digilib8_93)) ------
+------ writing nelsis 'Buf40' as sdfcir 'buf40(buf40(digilib8_93)) ------
+------ nelsea: task completed ------
+Expanding buf40
+Expanding de211
+Expanding de310
+Expanding dfn10
+Expanding dfr11
+Expanding ex210
+Expanding iv110
+Expanding mu111
+Expanding mu210
+Expanding na210
+Expanding na310
+Expanding no210
+Expanding no310
+Expanding Buf40
+Expanding De211
+Expanding De310
+Expanding Dfn10
+Expanding Dfr11
+Expanding Ex210
+Expanding Iv110
+Expanding Mu111
+Expanding Mu210
+Expanding Na210
+Expanding Na310
+Expanding No210
+Expanding No310
+======= running "gnarp -CFb digilib8_93 mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+no310           no310           digilib8_93     0    1
+no210           no210           digilib8_93     0    1
+na310           na310           digilib8_93     0    1
+na210           na210           digilib8_93     0    1
+mu210           mu210           digilib8_93     0    1
+mu111           mu111           digilib8_93     0    1
+iv110           iv110           digilib8_93     0    1
+ex210           ex210           digilib8_93     0    1
+dfr11           dfr11           digilib8_93     0    1
+dfn10           dfn10           digilib8_93     0    1
+de211           de211           digilib8_93     0    1
+de310           de310           digilib8_93     0    1
+buf40           buf40           digilib8_93     0    1
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/analib8_93 =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= importing library primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/analib8_93 =======
+File cells.sls:
+Parsing network: ln3x3
+Warning: network ln3x3, unconnected terminal vss
+Warning: network ln3x3, unconnected terminal vdd
+Parsing network: lp3x3
+Warning: network lp3x3, unconnected terminal vss
+Warning: network lp3x3, unconnected terminal vdd
+Parsing network: mir_nin
+Warning: network mir_nin, unconnected terminal vdd
+Parsing network: mir_nout
+Warning: network mir_nout, unconnected terminal vdd
+Parsing network: mir_pin
+Warning: network mir_pin, unconnected terminal vss
+Parsing network: mir_pout
+Warning: network mir_pout, unconnected terminal vss
+Parsing network: osc10
+Warning: network osc10, unconnected terminal vss
+Warning: network osc10, unconnected terminal vdd
+Parsing network: Ln3x3
+Parsing network: Lp3x3
+Parsing network: Mir_nin
+Parsing network: Mir_nout
+Parsing network: Mir_pin
+Parsing network: Mir_pout
+Parsing network: Osc10
+cldm: -- program finished --
+------ no name: converting everything in mapfile ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+
+------ reading map file ------
+------ reading nelsis circuit-cell 'Osc10' ------
+------ reading nelsis circuit-cell 'mir_pout' ------
+------ reading nelsis circuit-cell 'mir_pin' ------
+------ reading nelsis circuit-cell 'mir_nout' ------
+------ reading nelsis circuit-cell 'mir_nin' ------
+------ reading nelsis circuit-cell 'lp3x3' ------
+------ reading nelsis circuit-cell 'ln3x3' ------
+------ reading nelsis layout-cell 'osc10' ------
+------ reading nelsis layout-cell 'mir_pout' ------
+------ reading nelsis layout-cell 'mir_pin' ------
+------ reading nelsis layout-cell 'mir_nout' ------
+------ reading nelsis layout-cell 'mir_nin' ------
+------ reading nelsis layout-cell 'lp3x3' ------
+------ reading nelsis layout-cell 'ln3x3' ------
+------ writing nelsis 'osc10' as sdflay 'osc10(osc10(osc10(analib8_93)))' ------
+------ writing nelsis 'mir_pout' as sdflay 'mir_pout(mir_pout(mir_pout(analib8_93)))' ------
+------ writing nelsis 'mir_pin' as sdflay 'mir_pin(mir_pin(mir_pin(analib8_93)))' ------
+------ writing nelsis 'mir_nout' as sdflay 'mir_nout(mir_nout(mir_nout(analib8_93)))' ------
+------ writing nelsis 'mir_nin' as sdflay 'mir_nin(mir_nin(mir_nin(analib8_93)))' ------
+------ writing nelsis 'lp3x3' as sdflay 'lp3x3(lp3x3(lp3x3(analib8_93)))' ------
+------ writing nelsis 'ln3x3' as sdflay 'ln3x3(ln3x3(ln3x3(analib8_93)))' ------
+------ writing nelsis 'Osc10' as sdfcir 'osc10(osc10(analib8_93)) ------
+------ writing nelsis 'mir_pout' as sdfcir 'mir_pout(mir_pout(analib8_93)) ------
+------ writing nelsis 'mir_pin' as sdfcir 'mir_pin(mir_pin(analib8_93)) ------
+------ writing nelsis 'mir_nout' as sdfcir 'mir_nout(mir_nout(analib8_93)) ------
+------ writing nelsis 'mir_nin' as sdfcir 'mir_nin(mir_nin(analib8_93)) ------
+------ writing nelsis 'lp3x3' as sdfcir 'lp3x3(lp3x3(analib8_93)) ------
+------ writing nelsis 'ln3x3' as sdfcir 'ln3x3(ln3x3(analib8_93)) ------
+------ nelsea: task completed ------
+Expanding ln3x3
+Expanding lp3x3
+Expanding mir_nin
+Expanding mir_nout
+Expanding mir_pin
+Expanding mir_pout
+Expanding osc10
+Expanding Ln3x3
+Expanding Lp3x3
+Expanding Mir_nin
+Expanding Mir_nout
+Expanding Mir_pin
+Expanding Mir_pout
+Expanding Osc10
+======= running "gnarp -CFb analib8_93 mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+osc10           osc10           analib8_93      0    1
+mir_pout        mir_pout        analib8_93      0    1
+mir_pin         mir_pin         analib8_93      0    1
+mir_nout        mir_nout        analib8_93      0    1
+mir_nin         mir_nin         analib8_93      0    1
+lp3x3           lp3x3           analib8_93      0    1
+ln3x3           ln3x3           analib8_93      0    1
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/exlib8_93 =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= importing library primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/exlib8_93 =======
+File cells.sls:
+Parsing network: buf20
+Warning: network buf20, unconnected terminal vss
+Warning: network buf20, unconnected terminal vdd
+Parsing network: dfn102
+Warning: network dfn102, unconnected terminal vss
+Warning: network dfn102, unconnected terminal vdd
+Parsing network: dfr112
+Warning: network dfr112, unconnected terminal vss
+Warning: network dfr112, unconnected terminal vdd
+Parsing network: add10
+Warning: network add10, unconnected terminal vss
+Warning: network add10, unconnected terminal vdd
+Parsing network: buf100
+Warning: network buf100, unconnected terminal vss
+Warning: network buf100, unconnected terminal vdd
+Parsing network: itb20
+Parsing network: Buf20
+Parsing network: Dfn102
+Parsing network: Dfr112
+Parsing network: Add10
+Parsing network: Buf100
+Parsing network: Itb20
+cldm: -- program finished --
+------ no name: converting everything in mapfile ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+
+------ reading map file ------
+------ reading nelsis circuit-cell 'Dfr112' ------
+------ reading nelsis circuit-cell 'Dfn102' ------
+------ reading nelsis circuit-cell 'Buf20' ------
+------ reading nelsis circuit-cell 'Buf100' ------
+------ reading nelsis circuit-cell 'Add10' ------
+------ reading nelsis circuit-cell 'Itb20' ------
+------ reading nelsis layout-cell 'dfr112' ------
+------ reading nelsis layout-cell 'dfn102' ------
+------ reading nelsis layout-cell 'buf20' ------
+------ reading nelsis layout-cell 'buf100' ------
+------ reading nelsis layout-cell 'add10' ------
+------ reading nelsis layout-cell 'itb20' ------
+------ writing nelsis 'dfr112' as sdflay 'dfr112(dfr112(dfr112(exlib8_93)))' ------
+------ writing nelsis 'dfn102' as sdflay 'dfn102(dfn102(dfn102(exlib8_93)))' ------
+------ writing nelsis 'buf20' as sdflay 'buf20(buf20(buf20(exlib8_93)))' ------
+------ writing nelsis 'buf100' as sdflay 'buf100(buf100(buf100(exlib8_93)))' ------
+------ writing nelsis 'add10' as sdflay 'add10(add10(add10(exlib8_93)))' ------
+------ writing nelsis 'itb20' as sdflay 'itb20(itb20(itb20(exlib8_93)))' ------
+------ writing nelsis 'Dfr112' as sdfcir 'dfr112(dfr112(exlib8_93)) ------
+------ writing nelsis 'Dfn102' as sdfcir 'dfn102(dfn102(exlib8_93)) ------
+------ writing nelsis 'Buf20' as sdfcir 'buf20(buf20(exlib8_93)) ------
+------ writing nelsis 'Buf100' as sdfcir 'buf100(buf100(exlib8_93)) ------
+------ writing nelsis 'Add10' as sdfcir 'add10(add10(exlib8_93)) ------
+------ writing nelsis 'Itb20' as sdfcir 'itb20(itb20(exlib8_93)) ------
+------ nelsea: task completed ------
+Expanding buf20
+Expanding dfn102
+Expanding dfr112
+Expanding add10
+Expanding buf100
+Expanding itb20
+Expanding Buf20
+Expanding Dfn102
+Expanding Dfr112
+Expanding Add10
+Expanding Buf100
+Expanding Itb20
+======= running "gnarp -CFb exlib8_93 mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+dfr112          dfr112          exlib8_93       0    1
+dfn102          dfn102          exlib8_93       0    1
+buf20           buf20           exlib8_93       0    1
+buf100          buf100          exlib8_93       0    1
+add10           add10           exlib8_93       0    1
+itb20           itb20           exlib8_93       0    1
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/pdimc3tud_0295 =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= importing library primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/pdimc3tud_0295 =======
+File cells.sls:
+Parsing network: an02d1
+Parsing network: an03d1
+Parsing network: an04d1
+Parsing network: ao01d1
+Parsing network: ao04d1
+Parsing network: ao05d1
+Parsing network: dfctnb
+Parsing network: dfntnb
+Parsing network: in01d1
+Parsing network: in01d2
+Parsing network: in01d3
+Parsing network: in01d4
+Parsing network: it01d1
+Parsing network: it02d1
+Parsing network: lacfnb
+Parsing network: lactnb
+Parsing network: mfctnb
+Parsing network: mfntnb
+Parsing network: mx21d1
+Parsing network: nd02d1
+Parsing network: nd03d1
+Parsing network: nd04d1
+Parsing network: ni01d2
+Parsing network: ni01d3
+Parsing network: nr02d1
+Parsing network: nr03d1
+Parsing network: nr04d1
+Parsing network: oa01d1
+Parsing network: oa04d1
+Parsing network: oa05d1
+Parsing network: or02d1
+Parsing network: or03d1
+Parsing network: or04d1
+Parsing network: xn02d1
+Parsing network: xo02d1
+cldm: WARNING: Using no-origin mode (= new default)!
+cldm: WARNING: Header contains no info about mode!
+cldm: WARNING: Use option -x for origin mode!
+cldm: -- program finished --
+------ converting everything in nelsis celllist to seadif ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+------ reading nelsis circuit-cell 'an02d1' ------
+------ reading nelsis circuit-cell 'an03d1' ------
+------ reading nelsis circuit-cell 'an04d1' ------
+------ reading nelsis circuit-cell 'ao01d1' ------
+------ reading nelsis circuit-cell 'ao04d1' ------
+------ reading nelsis circuit-cell 'ao05d1' ------
+------ reading nelsis circuit-cell 'dfctnb' ------
+------ reading nelsis circuit-cell 'dfntnb' ------
+------ reading nelsis circuit-cell 'in01d1' ------
+------ reading nelsis circuit-cell 'in01d2' ------
+------ reading nelsis circuit-cell 'in01d3' ------
+------ reading nelsis circuit-cell 'in01d4' ------
+------ reading nelsis circuit-cell 'it01d1' ------
+------ reading nelsis circuit-cell 'it02d1' ------
+------ reading nelsis circuit-cell 'lacfnb' ------
+------ reading nelsis circuit-cell 'lactnb' ------
+------ reading nelsis circuit-cell 'mfctnb' ------
+------ reading nelsis circuit-cell 'mfntnb' ------
+------ reading nelsis circuit-cell 'mx21d1' ------
+------ reading nelsis circuit-cell 'nd02d1' ------
+------ reading nelsis circuit-cell 'nd03d1' ------
+------ reading nelsis circuit-cell 'nd04d1' ------
+------ reading nelsis circuit-cell 'ni01d2' ------
+------ reading nelsis circuit-cell 'ni01d3' ------
+------ reading nelsis circuit-cell 'nr02d1' ------
+------ reading nelsis circuit-cell 'nr03d1' ------
+------ reading nelsis circuit-cell 'nr04d1' ------
+------ reading nelsis circuit-cell 'oa01d1' ------
+------ reading nelsis circuit-cell 'oa04d1' ------
+------ reading nelsis circuit-cell 'oa05d1' ------
+------ reading nelsis circuit-cell 'or02d1' ------
+------ reading nelsis circuit-cell 'or03d1' ------
+------ reading nelsis circuit-cell 'or04d1' ------
+------ reading nelsis circuit-cell 'xn02d1' ------
+------ reading nelsis circuit-cell 'xo02d1' ------
+------ reading nelsis layout-cell 'an02d1' ------
+------ reading nelsis layout-cell 'an03d1' ------
+------ reading nelsis layout-cell 'an04d1' ------
+------ reading nelsis layout-cell 'ao01d1' ------
+------ reading nelsis layout-cell 'ao04d1' ------
+------ reading nelsis layout-cell 'ao05d1' ------
+------ reading nelsis layout-cell 'dfctnb' ------
+------ reading nelsis layout-cell 'dfntnb' ------
+------ reading nelsis layout-cell 'in01d1' ------
+------ reading nelsis layout-cell 'in01d2' ------
+------ reading nelsis layout-cell 'in01d3' ------
+------ reading nelsis layout-cell 'in01d4' ------
+------ reading nelsis layout-cell 'it01d1' ------
+------ reading nelsis layout-cell 'it02d1' ------
+------ reading nelsis layout-cell 'lacfnb' ------
+------ reading nelsis layout-cell 'lactnb' ------
+------ reading nelsis layout-cell 'mfctnb' ------
+------ reading nelsis layout-cell 'mfntnb' ------
+------ reading nelsis layout-cell 'mx21d1' ------
+------ reading nelsis layout-cell 'nd02d1' ------
+------ reading nelsis layout-cell 'nd03d1' ------
+------ reading nelsis layout-cell 'nd04d1' ------
+------ reading nelsis layout-cell 'ni01d2' ------
+------ reading nelsis layout-cell 'ni01d3' ------
+------ reading nelsis layout-cell 'nr02d1' ------
+------ reading nelsis layout-cell 'nr03d1' ------
+------ reading nelsis layout-cell 'nr04d1' ------
+------ reading nelsis layout-cell 'oa01d1' ------
+------ reading nelsis layout-cell 'oa04d1' ------
+------ reading nelsis layout-cell 'oa05d1' ------
+------ reading nelsis layout-cell 'or02d1' ------
+------ reading nelsis layout-cell 'or03d1' ------
+------ reading nelsis layout-cell 'or04d1' ------
+------ reading nelsis layout-cell 'xn02d1' ------
+------ reading nelsis layout-cell 'xo02d1' ------
+------ writing nelsis 'xo02d1' as sdflay 'xo02d1(xo02d1(xo02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'xn02d1' as sdflay 'xn02d1(xn02d1(xn02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'or04d1' as sdflay 'or04d1(or04d1(or04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'or03d1' as sdflay 'or03d1(or03d1(or03d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'or02d1' as sdflay 'or02d1(or02d1(or02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'oa05d1' as sdflay 'oa05d1(oa05d1(oa05d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'oa04d1' as sdflay 'oa04d1(oa04d1(oa04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'oa01d1' as sdflay 'oa01d1(oa01d1(oa01d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'nr04d1' as sdflay 'nr04d1(nr04d1(nr04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'nr03d1' as sdflay 'nr03d1(nr03d1(nr03d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'nr02d1' as sdflay 'nr02d1(nr02d1(nr02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'ni01d3' as sdflay 'ni01d3(ni01d3(ni01d3(pdimc3tud_0295)))' ------
+------ writing nelsis 'ni01d2' as sdflay 'ni01d2(ni01d2(ni01d2(pdimc3tud_0295)))' ------
+------ writing nelsis 'nd04d1' as sdflay 'nd04d1(nd04d1(nd04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'nd03d1' as sdflay 'nd03d1(nd03d1(nd03d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'nd02d1' as sdflay 'nd02d1(nd02d1(nd02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'mx21d1' as sdflay 'mx21d1(mx21d1(mx21d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'mfntnb' as sdflay 'mfntnb(mfntnb(mfntnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'mfctnb' as sdflay 'mfctnb(mfctnb(mfctnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'lactnb' as sdflay 'lactnb(lactnb(lactnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'lacfnb' as sdflay 'lacfnb(lacfnb(lacfnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'it02d1' as sdflay 'it02d1(it02d1(it02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'it01d1' as sdflay 'it01d1(it01d1(it01d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'in01d4' as sdflay 'in01d4(in01d4(in01d4(pdimc3tud_0295)))' ------
+------ writing nelsis 'in01d3' as sdflay 'in01d3(in01d3(in01d3(pdimc3tud_0295)))' ------
+------ writing nelsis 'in01d2' as sdflay 'in01d2(in01d2(in01d2(pdimc3tud_0295)))' ------
+------ writing nelsis 'in01d1' as sdflay 'in01d1(in01d1(in01d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'dfntnb' as sdflay 'dfntnb(dfntnb(dfntnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'dfctnb' as sdflay 'dfctnb(dfctnb(dfctnb(pdimc3tud_0295)))' ------
+------ writing nelsis 'ao05d1' as sdflay 'ao05d1(ao05d1(ao05d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'ao04d1' as sdflay 'ao04d1(ao04d1(ao04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'ao01d1' as sdflay 'ao01d1(ao01d1(ao01d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'an04d1' as sdflay 'an04d1(an04d1(an04d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'an03d1' as sdflay 'an03d1(an03d1(an03d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'an02d1' as sdflay 'an02d1(an02d1(an02d1(pdimc3tud_0295)))' ------
+------ writing nelsis 'xo02d1' as sdfcir 'xo02d1(xo02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'xn02d1' as sdfcir 'xn02d1(xn02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'or04d1' as sdfcir 'or04d1(or04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'or03d1' as sdfcir 'or03d1(or03d1(pdimc3tud_0295)) ------
+------ writing nelsis 'or02d1' as sdfcir 'or02d1(or02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'oa05d1' as sdfcir 'oa05d1(oa05d1(pdimc3tud_0295)) ------
+------ writing nelsis 'oa04d1' as sdfcir 'oa04d1(oa04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'oa01d1' as sdfcir 'oa01d1(oa01d1(pdimc3tud_0295)) ------
+------ writing nelsis 'nr04d1' as sdfcir 'nr04d1(nr04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'nr03d1' as sdfcir 'nr03d1(nr03d1(pdimc3tud_0295)) ------
+------ writing nelsis 'nr02d1' as sdfcir 'nr02d1(nr02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'ni01d3' as sdfcir 'ni01d3(ni01d3(pdimc3tud_0295)) ------
+------ writing nelsis 'ni01d2' as sdfcir 'ni01d2(ni01d2(pdimc3tud_0295)) ------
+------ writing nelsis 'nd04d1' as sdfcir 'nd04d1(nd04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'nd03d1' as sdfcir 'nd03d1(nd03d1(pdimc3tud_0295)) ------
+------ writing nelsis 'nd02d1' as sdfcir 'nd02d1(nd02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'mx21d1' as sdfcir 'mx21d1(mx21d1(pdimc3tud_0295)) ------
+------ writing nelsis 'mfntnb' as sdfcir 'mfntnb(mfntnb(pdimc3tud_0295)) ------
+------ writing nelsis 'mfctnb' as sdfcir 'mfctnb(mfctnb(pdimc3tud_0295)) ------
+------ writing nelsis 'lactnb' as sdfcir 'lactnb(lactnb(pdimc3tud_0295)) ------
+------ writing nelsis 'lacfnb' as sdfcir 'lacfnb(lacfnb(pdimc3tud_0295)) ------
+------ writing nelsis 'it02d1' as sdfcir 'it02d1(it02d1(pdimc3tud_0295)) ------
+------ writing nelsis 'it01d1' as sdfcir 'it01d1(it01d1(pdimc3tud_0295)) ------
+------ writing nelsis 'in01d4' as sdfcir 'in01d4(in01d4(pdimc3tud_0295)) ------
+------ writing nelsis 'in01d3' as sdfcir 'in01d3(in01d3(pdimc3tud_0295)) ------
+------ writing nelsis 'in01d2' as sdfcir 'in01d2(in01d2(pdimc3tud_0295)) ------
+------ writing nelsis 'in01d1' as sdfcir 'in01d1(in01d1(pdimc3tud_0295)) ------
+------ writing nelsis 'dfntnb' as sdfcir 'dfntnb(dfntnb(pdimc3tud_0295)) ------
+------ writing nelsis 'dfctnb' as sdfcir 'dfctnb(dfctnb(pdimc3tud_0295)) ------
+------ writing nelsis 'ao05d1' as sdfcir 'ao05d1(ao05d1(pdimc3tud_0295)) ------
+------ writing nelsis 'ao04d1' as sdfcir 'ao04d1(ao04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'ao01d1' as sdfcir 'ao01d1(ao01d1(pdimc3tud_0295)) ------
+------ writing nelsis 'an04d1' as sdfcir 'an04d1(an04d1(pdimc3tud_0295)) ------
+------ writing nelsis 'an03d1' as sdfcir 'an03d1(an03d1(pdimc3tud_0295)) ------
+------ writing nelsis 'an02d1' as sdfcir 'an02d1(an02d1(pdimc3tud_0295)) ------
+------ nelsea: task completed ------
+Expanding an02d1
+Expanding an03d1
+Expanding an04d1
+Expanding ao01d1
+Expanding ao04d1
+Expanding ao05d1
+Expanding dfctnb
+Expanding dfntnb
+Expanding in01d1
+Expanding in01d2
+Expanding in01d3
+Expanding in01d4
+Expanding it01d1
+Expanding it02d1
+Expanding lacfnb
+Expanding lactnb
+Expanding mfctnb
+Expanding mfntnb
+Expanding mx21d1
+Expanding nd02d1
+Expanding nd03d1
+Expanding nd04d1
+Expanding ni01d2
+Expanding ni01d3
+Expanding nr02d1
+Expanding nr03d1
+Expanding nr04d1
+Expanding oa01d1
+Expanding oa04d1
+Expanding oa05d1
+Expanding or02d1
+Expanding or03d1
+Expanding or04d1
+Expanding xn02d1
+Expanding xo02d1
+======= running "gnarp -CFb pdimc3tud_0295 mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+an02d1          an02d1          pdimc3tud_0295  0    1
+an03d1          an03d1          pdimc3tud_0295  0    1
+an04d1          an04d1          pdimc3tud_0295  0    1
+ao01d1          ao01d1          pdimc3tud_0295  0    1
+ao04d1          ao04d1          pdimc3tud_0295  0    1
+ao05d1          ao05d1          pdimc3tud_0295  0    1
+dfctnb          dfctnb          pdimc3tud_0295  0    1
+dfntnb          dfntnb          pdimc3tud_0295  0    1
+in01d1          in01d1          pdimc3tud_0295  0    1
+in01d2          in01d2          pdimc3tud_0295  0    1
+in01d3          in01d3          pdimc3tud_0295  0    1
+in01d4          in01d4          pdimc3tud_0295  0    1
+it01d1          it01d1          pdimc3tud_0295  0    1
+it02d1          it02d1          pdimc3tud_0295  0    1
+lacfnb          lacfnb          pdimc3tud_0295  0    1
+lactnb          lactnb          pdimc3tud_0295  0    1
+mfctnb          mfctnb          pdimc3tud_0295  0    1
+mfntnb          mfntnb          pdimc3tud_0295  0    1
+mx21d1          mx21d1          pdimc3tud_0295  0    1
+nd02d1          nd02d1          pdimc3tud_0295  0    1
+nd03d1          nd03d1          pdimc3tud_0295  0    1
+nd04d1          nd04d1          pdimc3tud_0295  0    1
+ni01d2          ni01d2          pdimc3tud_0295  0    1
+ni01d3          ni01d3          pdimc3tud_0295  0    1
+nr02d1          nr02d1          pdimc3tud_0295  0    1
+nr03d1          nr03d1          pdimc3tud_0295  0    1
+nr04d1          nr04d1          pdimc3tud_0295  0    1
+oa01d1          oa01d1          pdimc3tud_0295  0    1
+oa04d1          oa04d1          pdimc3tud_0295  0    1
+oa05d1          oa05d1          pdimc3tud_0295  0    1
+or02d1          or02d1          pdimc3tud_0295  0    1
+or03d1          or03d1          pdimc3tud_0295  0    1
+or04d1          or04d1          pdimc3tud_0295  0    1
+xn02d1          xn02d1          pdimc3tud_0295  0    1
+xo02d1          xo02d1          pdimc3tud_0295  0    1
+======= creating project /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/bonding11_93 =======
+======= copying source files to /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/primitives =======
+======= importing library primitives =======
+======= compiling and installing /users/cad/ocean/celllibs/fishbone/i486_Linux/nelsis3/bonding11_93 =======
+File cells.sls:
+Parsing network: bond_leer
+Warning: network bond_leer, unconnected terminal vss
+Warning: network bond_leer, unconnected terminal bf1
+Warning: network bond_leer, unconnected terminal bf2
+Warning: network bond_leer, unconnected terminal bf3
+Warning: network bond_leer, unconnected terminal vdd
+Warning: network bond_leer, unconnected terminal bf4
+Warning: network bond_leer, unconnected terminal bf5
+Warning: network bond_leer, unconnected terminal bf6
+Parsing network: bond_bar
+Warning: network bond_bar, unconnected terminal t1
+Warning: network bond_bar, unconnected terminal t2
+Warning: network bond_bar, unconnected terminal t3
+Warning: network bond_bar, unconnected terminal t4
+Warning: network bond_bar, unconnected terminal t5
+Warning: network bond_bar, unconnected terminal t6
+Warning: network bond_bar, unconnected terminal t7
+Warning: network bond_bar, unconnected terminal t8
+Warning: network bond_bar, unconnected terminal t9
+Warning: network bond_bar, unconnected terminal t10
+Warning: network bond_bar, unconnected terminal t11
+Warning: network bond_bar, unconnected terminal t12
+Warning: network bond_bar, unconnected terminal t13
+Warning: network bond_bar, unconnected terminal t14
+Warning: network bond_bar, unconnected terminal t15
+Warning: network bond_bar, unconnected terminal t16
+Warning: network bond_bar, unconnected terminal t17
+Warning: network bond_bar, unconnected terminal t18
+Warning: network bond_bar, unconnected terminal t19
+Warning: network bond_bar, unconnected terminal t20
+Warning: network bond_bar, unconnected terminal t21
+Warning: network bond_bar, unconnected terminal t22
+Warning: network bond_bar, unconnected terminal t23
+Warning: network bond_bar, unconnected terminal t24
+Warning: network bond_bar, unconnected terminal t25
+Warning: network bond_bar, unconnected terminal t26
+Warning: network bond_bar, unconnected terminal t27
+Warning: network bond_bar, unconnected terminal t28
+Warning: network bond_bar, unconnected terminal t29
+Warning: network bond_bar, unconnected terminal t30
+Warning: network bond_bar, unconnected terminal t31
+Warning: network bond_bar, unconnected terminal t32
+Parsing network: bondflap8
+Warning: network bondflap8, unconnected terminal bf1
+Warning: network bondflap8, unconnected terminal bf2
+Warning: network bondflap8, unconnected terminal bf3
+Warning: network bondflap8, unconnected terminal bf4
+Warning: network bondflap8, unconnected terminal bf5
+Warning: network bondflap8, unconnected terminal bf6
+Warning: network bondflap8, unconnected terminal bf7
+Warning: network bondflap8, unconnected terminal bf8
+cldm: -- program finished --
+------ no name: converting everything in mapfile ------
+------ opening nelsis ------
+------ reading image description file '/users/cad/ocean/celllibs/fishbone/image.seadif' ------
+------ opening seadif ------
+
+------ reading map file ------
+------ reading nelsis circuit-cell 'bondflap8' ------
+------ reading nelsis circuit-cell 'bond_bar' ------
+------ reading nelsis circuit-cell 'bond_leer' ------
+------ reading nelsis layout-cell 'bond_bar' ------
+------ reading nelsis layout-cell 'bond_leer' ------
+ERROR: Via(s) at illegal position (not removed): (84,56), (124,56), 
+       (164,56), (204,56), (244,56), (284,56), (324,56), (364,56), 
+       (404,56), (444,56), (484,56), (524,56), (1044,56), (1084,56), 
+       (1124,56), (1164,56), (1204,56), (1244,56), (1284,56), (1324,56), 
+       (1364,56), (1404,56), (1444,56), (1484,56), (2044,56), (2084,56), 
+       (2124,56), (2164,56), (2204,56), (2244,56), (2284,56), (2324,56), 
+       (2364,56), (2404,56), (2444,56), (2484,56), (84,232), (124,232), 
+       (164,232), (204,232), (244,232), (284,232), (324,232), (364,232), 
+       (404,232), (444,232), (484,232), (524,232), (1044,232), (1084,232), 
+       (1124,232), (1164,232), (1204,232), (1244,232), (1284,232), (1324,232), 
+       (1364,232), (1404,232), (1444,232), (1484,232), (2044,232), (2084,232), 
+       (2124,232), (2164,232), (2204,232), (2244,232), (2284,232), (2324,232), 
+       (2364,232), (2404,232), (2444,232), (2484,232), (84,264), (124,264), 
+       (164,264), (204,264), (244,264), (284,264), (324,264), (364,264), 
+       (404,264), (444,264), (484,264), (524,264), (1044,264), (1084,264), 
+       (1124,264), (1164,264), (1204,264), (1244,264), (1284,264), (1324,264), 
+       (1364,264), (1404,264), (1444,264), (1484,264), (2044,264), (2084,264), 
+       (2124,264), (2164,264), (2204,264), (2244,264), (2284,264), (2324,264), 
+       (2364,264), (2404,264), (2444,264), (2484,264), (84,472), (124,472), 
+       (164,472), (204,472), (244,472), (284,472), (324,472), (364,472), 
+       (404,472), (444,472), (484,472), (524,472), (1044,472), (1084,472), 
+       (1124,472), (1164,472), (1204,472), (1244,472), (1284,472), (1324,472), 
+       (1364,472), (1404,472), (1444,472), (1484,472), (2044,472), (2084,472), 
+       (2124,472), (2164,472), (2204,472), (2244,472), (2284,472), (2324,472), 
+       (2364,472), (2404,472), (2444,472), (2484,472), (84,1044), (124,1044), 
+       (164,1044), (204,1044), (244,1044), (284,1044), (324,1044), (364,1044), 
+       (404,1044), (444,1044), (484,1044), (524,1044), (2044,1044), (2084,1044), 
+       (2124,1044), (2164,1044), (2204,1044), (2244,1044), (2284,1044), (2324,1044), 
+       (2364,1044), (2404,1044), (2444,1044), (2484,1044), (84,1220), (124,1220), 
+       (164,1220), (204,1220), (244,1220), (284,1220), (324,1220), (364,1220), 
+       (404,1220), (444,1220), (484,1220), (524,1220), (2044,1220), (2084,1220), 
+       (2124,1220), (2164,1220), (2204,1220), (2244,1220), (2284,1220), (2324,1220), 
+       (2364,1220), (2404,1220), (2444,1220), (2484,1220), (84,1252), (124,1252), 
+       (164,1252), (204,1252), (244,1252), (284,1252), (324,1252), (364,1252), 
+       (404,1252), (444,1252), (484,1252), (524,1252), (2044,1252), (2084,1252), 
+       (2124,1252), (2164,1252), (2204,1252), (2244,1252), (2284,1252), (2324,1252), 
+       (2364,1252), (2404,1252), (2444,1252), (2484,1252), (84,1460), (124,1460), 
+       (164,1460), (204,1460), (244,1460), (284,1460), (324,1460), (364,1460), 
+       (404,1460), (444,1460), (484,1460), (524,1460), (2044,1460), (2084,1460), 
+       (2124,1460), (2164,1460), (2204,1460), (2244,1460), (2284,1460), (2324,1460), 
+       (2364,1460), (2404,1460), (2444,1460), (2484,1460), (84,2032), (124,2032), 
+       (164,2032), (204,2032), (244,2032), (284,2032), (324,2032), (364,2032), 
+       (404,2032), (444,2032), (484,2032), (524,2032), (1044,2032), (1084,2032), 
+       (1124,2032), (1164,2032), (1204,2032), (1244,2032), (1284,2032), (1324,2032), 
+       (1364,2032), (1404,2032), (1444,2032), (1484,2032), (2044,2032), (2084,2032), 
+       (2124,2032), (2164,2032), (2204,2032), (2244,2032), (2284,2032), (2324,2032), 
+       (2364,2032), (2404,2032), (2444,2032), (2484,2032), (84,2208), (124,2208), 
+       (164,2208), (204,2208), (244,2208), (284,2208), (324,2208), (364,2208), 
+       (404,2208), (444,2208), (484,2208), (524,2208), (1044,2208), (1084,2208), 
+       (1124,2208), (1164,2208), (1204,2208), (1244,2208), (1284,2208), (1324,2208), 
+       (1364,2208), (1404,2208), (1444,2208), (1484,2208), (2044,2208), (2084,2208), 
+       (2124,2208), (2164,2208), (2204,2208), (2244,2208), (2284,2208), (2324,2208), 
+       (2364,2208), (2404,2208), (2444,2208), (2484,2208), (84,2240), (124,2240), 
+       (164,2240), (204,2240), (244,2240), (284,2240), (324,2240), (364,2240), 
+       (404,2240), (444,2240), (484,2240), (524,2240), (1044,2240), (1084,2240), 
+       (1124,2240), (1164,2240), (1204,2240), (1244,2240), (1284,2240), (1324,2240), 
+       (1364,2240), (1404,2240), (1444,2240), (1484,2240), (2044,2240), (2084,2240), 
+       (2124,2240), (2164,2240), (2204,2240), (2244,2240), (2284,2240), (2324,2240), 
+       (2364,2240), (2404,2240), (2444,2240), (2484,2240), (84,2448), (124,2448), 
+       (164,2448), (204,2448), (244,2448), (284,2448), (324,2448), (364,2448), 
+       (404,2448), (444,2448), (484,2448), (524,2448), (1044,2448), (1084,2448), 
+       (1124,2448), (1164,2448), (1204,2448), (1244,2448), (1284,2448), (1324,2448), 
+       (1364,2448), (1404,2448), (1444,2448), (1484,2448), (2044,2448), (2084,2448), 
+       (2124,2448), (2164,2448), (2204,2448), (2244,2448), (2284,2448), (2324,2448), 
+       (2364,2448), (2404,2448), (2444,2448), (2484,2448), 
+------ reading nelsis layout-cell 'bondflap_8' ------
+ERROR: Via(s) at illegal position (not removed): (44,232), (84,232), 
+       (124,232), (164,232), (204,232), (244,232), (284,232), (324,232), 
+       (364,232), (404,232), (444,232), (484,232), (1004,232), (1044,232), 
+       (1084,232), (1124,232), (1164,232), (1204,232), (1244,232), (1284,232), 
+       (1324,232), (1364,232), (1404,232), (1444,232), (1484,232), (2004,232), 
+       (2044,232), (2084,232), (2124,232), (2164,232), (2204,232), (2244,232), 
+       (2284,232), (2324,232), (2364,232), (2404,232), (2444,232), (2484,232), 
+       (44,264), (84,264), (124,264), (164,264), (204,264), (244,264), 
+       (284,264), (324,264), (364,264), (404,264), (444,264), (484,264), 
+       (1004,264), (1044,264), (1084,264), (1124,264), (1164,264), (1204,264), 
+       (1244,264), (1284,264), (1324,264), (1364,264), (1404,264), (1444,264), 
+       (1484,264), (2004,264), (2044,264), (2084,264), (2124,264), (2164,264), 
+       (2204,264), (2244,264), (2284,264), (2324,264), (2364,264), (2404,264), 
+       (2444,264), (2484,264), (44,1220), (84,1220), (124,1220), (164,1220), 
+       (204,1220), (244,1220), (284,1220), (324,1220), (364,1220), (404,1220), 
+       (444,1220), (484,1220), (2004,1220), (2044,1220), (2084,1220), (2124,1220), 
+       (2164,1220), (2204,1220), (2244,1220), (2284,1220), (2324,1220), (2364,1220), 
+       (2404,1220), (2444,1220), (2484,1220), (44,1252), (84,1252), (124,1252), 
+       (164,1252), (204,1252), (244,1252), (284,1252), (324,1252), (364,1252), 
+       (404,1252), (444,1252), (484,1252), (2004,1252), (2044,1252), (2084,1252), 
+       (2124,1252), (2164,1252), (2204,1252), (2244,1252), (2284,1252), (2324,1252), 
+       (2364,1252), (2404,1252), (2444,1252), (2484,1252), (44,2208), (84,2208), 
+       (124,2208), (164,2208), (204,2208), (244,2208), (284,2208), (324,2208), 
+       (364,2208), (404,2208), (444,2208), (484,2208), (1004,2208), (1044,2208), 
+       (1084,2208), (1124,2208), (1164,2208), (1204,2208), (1244,2208), (1284,2208), 
+       (1324,2208), (1364,2208), (1404,2208), (1444,2208), (1484,2208), (2004,2208), 
+       (2044,2208), (2084,2208), (2124,2208), (2164,2208), (2204,2208), (2244,2208), 
+       (2284,2208), (2324,2208), (2364,2208), (2404,2208), (2444,2208), (2484,2208), 
+       (44,2240), (84,2240), (124,2240), (164,2240), (204,2240), (244,2240), 
+       (284,2240), (324,2240), (364,2240), (404,2240), (444,2240), (484,2240), 
+       (1004,2240), (1044,2240), (1084,2240), (1124,2240), (1164,2240), (1204,2240), 
+       (1244,2240), (1284,2240), (1324,2240), (1364,2240), (1404,2240), (1444,2240), 
+       (1484,2240), (2004,2240), (2044,2240), (2084,2240), (2124,2240), (2164,2240), 
+       (2204,2240), (2244,2240), (2284,2240), (2324,2240), (2364,2240), (2404,2240), 
+       (2444,2240), (2484,2240), 
+------ writing nelsis 'bond_bar' as sdflay 'bond_bar(bond_bar(bond_bar(bonding11_93)))' ------
+------ writing nelsis 'bond_leer' as sdflay 'bond_leer(bond_leer(bond_leer(bonding11_93)))' ------
+------ writing nelsis 'bondflap_8' as sdflay 'bondflap_8(bondflap_8(bondflap_8(bonding11_93)))' ------
+------ writing nelsis 'bondflap8' as sdfcir 'bondflap8(bondflap8(bonding11_93)) ------
+------ writing nelsis 'bond_bar' as sdfcir 'bond_bar(bond_bar(bonding11_93)) ------
+------ writing nelsis 'bond_leer' as sdfcir 'bond_leer(bond_leer(bonding11_93)) ------
+------ nelsea: task completed ------
+Expanding bond_leer
+Expanding bond_bar
+Expanding bondflap8
+======= running "gnarp -CFb bonding11_93 mkLibprim" =======
+circuit         function        library        prev curr
+--------------------------------------------------------
+bondflap8       bondflap8       bonding11_93    0    1
+bond_bar        bond_bar        bonding11_93    0    1
+bond_leer       bond_leer       bonding11_93    0    1
+bondflap_8      bondflap_8      bonding11_93    0    1
+======= ICELLS: program finished =======
+++++++++++++++++++ END OF COMPILING OCEAN CELL LIBRARIES ++++++++++++++++

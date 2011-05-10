@@ -1,0 +1,82 @@
+.TH expansionGridEdge 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+expansionGridEdge \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <globRoute.h>\fR
+.PP
+Inherits \fBgraphEdge\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBexpansionGridEdge\fR (int edgeLength, int _x_, int _y_, \fBedgeDirection\fR dir)"
+.br
+.ti -1c
+.RI "\fBaddToOccupation\fR (int d)"
+.br
+.ti -1c
+.RI "\fBaddToCapacity\fR (int d)"
+.br
+.ti -1c
+.RI "const \fBedgeDirection\fR \fBdirection\fR ()"
+.br
+.ti -1c
+.RI "const int \fBx\fR ()"
+.br
+.ti -1c
+.RI "const int \fBy\fR ()"
+.br
+.ti -1c
+.RI "const int \fBlength\fR ()"
+.br
+.ti -1c
+.RI "virtual int \fBeWeight\fR ()"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS expansionGridEdge::expansionGridEdge (int edgeLength, int _x_, int _y_, \fBedgeDirection\fR dir)
+.PP
+Definition at line 194 of file globRoute.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS expansionGridEdge::addToCapacity (int d)\fC [inline]\fR
+.PP
+Definition at line 52 of file globRoute.h.
+.SS expansionGridEdge::addToOccupation (int d)\fC [inline]\fR
+.PP
+Definition at line 51 of file globRoute.h.
+.PP
+Referenced by \fBexpansionGrid::nwires\fR(), and \fBexpansionGrid::routeGlobNet\fR().
+.SS const \fBedgeDirection\fR expansionGridEdge::direction ()\fC [inline]\fR
+.PP
+Definition at line 53 of file globRoute.h.
+.SS int expansionGridEdge::eWeight ()\fC [virtual]\fR
+.PP
+Definition at line 211 of file globRoute.C.
+.SS const int expansionGridEdge::length ()\fC [inline]\fR
+.PP
+Definition at line 56 of file globRoute.h.
+.PP
+Referenced by \fBexpansionGrid::nwires\fR().
+.SS void expansionGridEdge::print ()\fC [virtual]\fR
+.PP
+Definition at line 368 of file globRoute.C.
+.SS const int expansionGridEdge::x ()\fC [inline]\fR
+.PP
+Definition at line 54 of file globRoute.h.
+.SS const int expansionGridEdge::y ()\fC [inline]\fR
+.PP
+Definition at line 55 of file globRoute.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,85 @@
+\subsection{List\-Element  Class Reference}
+\label{ListElement}\index{ListElement@{List\-Element}}
+{\tt \#include $<$lstelem.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf List\-Element} ( {\bf Item} $\ast$i )
+\item 
+{\bf $\sim$List\-Element} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+List\-Element$\ast$ {\bf next}
+\item 
+{\bf Item}$\ast$ {\bf data}
+\end{CompactItemize}
+\subsubsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf List}
+\item 
+class {\bf List\-Iterator}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ListElement_a0}
+\index{ListElement@{List\-Element}!ListElement@{ListElement}}
+\index{ListElement@{ListElement}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Element::List\-Element ({\bf Item} $\ast$ {\em i})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 29 of file lstelem.h.\small\begin{verbatim}00029 { data = i; next = 0; }
+\end{verbatim}\normalsize 
+\label{ListElement_a1}
+\index{ListElement@{List\-Element}!~ListElement@{$\sim$ListElement}}
+\index{~ListElement@{$\sim$ListElement}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Element::$\sim$List\-Element ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 30 of file lstelem.h.\small\begin{verbatim}00030 { delete data; }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Friends And Related Function Documentation}
+\label{ListElement_l0}
+\index{ListElement@{List\-Element}!List@{List}}
+\index{List@{List}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}class List\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 35 of file lstelem.h.\label{ListElement_l1}
+\index{ListElement@{List\-Element}!ListIterator@{ListIterator}}
+\index{ListIterator@{ListIterator}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}class List\-Iterator\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 36 of file lstelem.h.
+
+\subsubsection{Member Data Documentation}
+\label{ListElement_o1}
+\index{ListElement@{List\-Element}!data@{data}}
+\index{data@{data}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} $\ast$ List\-Element::data\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 34 of file lstelem.h.\label{ListElement_o0}
+\index{ListElement@{List\-Element}!next@{next}}
+\index{next@{next}!ListElement@{List\-Element}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Element $\ast$ List\-Element::next\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 33 of file lstelem.h.
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf lstelem.h}\end{CompactItemize}

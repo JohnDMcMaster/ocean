@@ -1,0 +1,47 @@
+
+
+		       About the 'fishbone' libraries
+		       ==============================
+
+This directory contains the set of libraries which we have for basic design on
+the 'fishbone' Sea-of-Gates chip at Delft University of Technology. The
+following project directories (= NELSIS libraries) are included:
+
+primitives:
+	Contains the primitive (minimal) set of cells which must be included in
+        each [project you make. It contains the basic fishbone image, the via
+	patterns, and other lementary cells.
+
+oplib1_93:
+	Contains the basic cell library (version of january 1993). The library
+	was developed for a practical course (the OP) a Delft University. 
+	Therefore it doesn't contain fancy complicated cells. It is, however,
+	sufficient for most applications.
+
+bonding:
+	Contains a set of bonding patterns to finish the designs on a 
+	multi-project chip.
+
+chip:	
+	Contains the chip which we have at Delft University of Technology,
+	uncluding the bonding pads and other peculatities.
+
+templ1_93:
+	Template of an empty project directory for an average user. The 
+	project imports the proper cells from the libraries 'primitives',
+	'oplib1_93' and 'bonding'. It also contains the proper startup and
+	customization files for vaious tools.
+
+the file LIBRARIES:
+        the generation file for the cell/chip
+
+The directory 'celllibs/fishbone/src' contains the ascii source files from
+which the NELSIS libraries can be compiled using the scrip ICELLS. This
+'compilation' is necessary because some library files are machine dependent, or
+dependent on the position in the file system. You cannot just move a directory
+to a different place.
+
+   Patrick Groeneveld and Paul Stravers, jan 1993
+
+
+

@@ -1,0 +1,2988 @@
+\begin{theindex}
+
+  \item {\_\-EQUIVLIST}, 8
+    \subitem {a}, 8
+    \subitem {b}, 8
+    \subitem {mtx}, 9
+    \subitem {next}, 9
+  \item {\_\-GLOBAL\_\-ROUTING}, 9
+    \subitem {horizontal\_\-channels}, 9
+    \subitem {small\_\-channels}, 9
+    \subitem {vertical\_\-channels}, 9
+  \item {\_\-IMAGEDESC}, 9
+    \subitem {estransp}, 10
+    \subitem {mirroraxis}, 10
+    \subitem {numaxis}, 10
+    \subitem {numlayers}, 10
+    \subitem {numsector}, 10
+    \subitem {overlap}, 10
+    \subitem {powerlines}, 10
+    \subitem {routeorient}, 10
+    \subitem {sectorlist}, 10
+    \subitem {size}, 10
+    \subitem {stamp}, 11
+  \item {\_\-MIR}, 11
+    \subitem {area}, 11
+    \subitem {morearea}, 11
+    \subitem {mtx}, 11
+  \item {\_\-MIRROR}, 11
+    \subitem {axis}, 12
+    \subitem {axisid}, 12
+    \subitem {delta}, 12
+    \subitem {equivalence}, 12
+    \subitem {logaxisid}, 12
+    \subitem {mtx}, 12
+    \subitem {next}, 12
+  \item {\_\-NETCOSTINFO}, 12
+    \subitem {clm}, 12
+    \subitem {costfunction}, 12
+    \subitem {ncells}, 13
+    \subitem {numparts}, 13
+    \subitem {row}, 13
+  \item {\_\-NETSTATE}, 13
+    \subitem {clm}, 13
+    \subitem {cost}, 13
+    \subitem {deviation}, 13
+    \subitem {dist}, 13
+    \subitem {netid}, 14
+    \subitem {numparts}, 14
+    \subitem {nx}, 14
+    \subitem {ny}, 14
+    \subitem {row}, 14
+    \subitem {xl}, 14
+    \subitem {xr}, 14
+    \subitem {yb}, 14
+    \subitem {yt}, 14
+  \item {\_\-PARTCELL}, 14
+    \subitem {area}, 15
+    \subitem {cinst}, 15
+    \subitem {copycinst}, 15
+    \subitem {flag}, 15
+    \subitem {next}, 15
+    \subitem {partition}, 15
+    \subitem {partlist}, 15
+    \subitem {prev}, 15
+    \subitem {topnets}, 15
+  \item {\_\-PARTITION}, 15
+    \subitem {candidates}, 16
+    \subitem {cellarea}, 16
+    \subitem {flag}, 16
+    \subitem {height}, 16
+    \subitem {members}, 16
+    \subitem {next}, 16
+    \subitem {nmembers}, 16
+    \subitem {numid}, 16
+    \subitem {permitarea}, 16
+    \subitem {prev}, 16
+    \subitem {targetarea}, 17
+    \subitem {width}, 17
+  \item {\_\-PARTLIST}, 17
+    \subitem {cell}, 17
+    \subitem {gain}, 17
+    \subitem {ismember}, 17
+    \subitem {nextincell}, 17
+    \subitem {nextinpart}, 17
+    \subitem {partition}, 17
+    \subitem {previnpart}, 18
+  \item {\_\-PIVOT}, 18
+    \subitem {children}, 18
+    \subitem {father}, 18
+    \subitem {imagedesc}, 18
+    \subitem {lx}, 18
+    \subitem {ly}, 18
+    \subitem {maxmore}, 19
+    \subitem {numsectors}, 19
+    \subitem {plaza}, 19
+    \subitem {wbbx}, 19
+    \subitem {wlx}, 19
+    \subitem {wly}, 19
+    \subitem {wx}, 19
+    \subitem {wy}, 19
+    \subitem {x}, 19
+    \subitem {y}, 19
+  \item {\_\-PLAZGLAF}, 19
+    \subitem {flag}, 20
+    \subitem {layinst}, 20
+    \subitem {layout}, 20
+    \subitem {mlist}, 20
+    \subitem {more}, 20
+    \subitem {next}, 20
+  \item {\_\-PNET}, 20
+    \subitem {ignore}, 21
+    \subitem {net}, 21
+    \subitem {next}, 21
+  \item {\_\-POWERLINE}, 21
+    \subitem {layer}, 21
+    \subitem {name}, 21
+    \subitem {next}, 21
+    \subitem {orient}, 21
+    \subitem {row\_\-or\_\-column}, 21
+  \item {\_\-ROUTING\_\-CHANNEL}, 22
+    \subitem {length}, 22
+    \subitem {ncells}, 22
+    \subitem {nwires}, 22
+  \item {\_\-ROUTING\_\-INFO}, 22
+    \subitem {channel}, 22
+  \item {\_\-SECTORLIST}, 23
+    \subitem {next}, 23
+    \subitem {point}, 23
+    \subitem {sectorid}, 23
+  \item {\_\-SLICE\_\-INFO}, 23
+    \subitem {cX}, 23
+    \subitem {cY}, 23
+    \subitem {height}, 23
+    \subitem {layerTrans}, 24
+    \subitem {width}, 24
+  \item {\_\-TOTALP}, 24
+    \subitem {area}, 24
+    \subitem {bestmove}, 24
+    \subitem {bestnetcost}, 25
+    \subitem {bestpart}, 25
+    \subitem {cooling}, 25
+    \subitem {costfunction}, 25
+    \subitem {netcost}, 25
+    \subitem {nmoves}, 25
+    \subitem {numcells}, 25
+    \subitem {numparts}, 25
+    \subitem {nx}, 25
+    \subitem {ny}, 25
+    \subitem {partcell}, 25
+    \subitem {partition}, 25
+    \subitem {repeat}, 25
+    \subitem {routing}, 26
+    \subitem {stopcriterion}, 26
+    \subitem {strtnetcost}, 26
+    \subitem {temperature}, 26
+    \subitem {tmpstatebuf}, 26
+    \subitem {topcell}, 26
+  \item {\_\-\_\-endOfLibClass}
+    \subitem {basedefs.h}, 184
+  \item {\_\-\_\-firstUserClass}
+    \subitem {basedefs.h}, 184
+  \item {\_\-capacity}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-compass}
+    \subitem {expansion\-Grid\-Terminal}, 78
+  \item {\_\-direction}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-length}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-net}
+    \subitem {glob\-Net}, 82
+  \item {\_\-occupation}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-partition}
+    \subitem {expansion\-Grid\-Vertex}, 80
+  \item {\_\-type}
+    \subitem {expansion\-Grid\-Vertex}, 80
+  \item {\_\-weight}
+    \subitem {glob\-Net}, 82
+  \item {\_\-x}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-x\_\-coord}
+    \subitem {expansion\-Grid\-Vertex}, 80
+  \item {\_\-y}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {\_\-y\_\-coord}
+    \subitem {expansion\-Grid\-Vertex}, 80
+  \item {$\sim$Array}
+    \subitem {Array}, 27
+  \item {$\sim$ArrayIterator}
+    \subitem {Array\-Iterator}, 29
+  \item {$\sim$BaseArray}
+    \subitem {Base\-Array}, 32
+  \item {$\sim$Box}
+    \subitem {Box}, 39
+  \item {$\sim$BoxIterator}
+    \subitem {Box\-Iterator}, 42
+  \item {$\sim$Cluster}
+    \subitem {Cluster}, 47
+  \item {$\sim$CriCandidate}
+    \subitem {Cri\-Candidate}, 51
+  \item {$\sim$CriNet}
+    \subitem {Cri\-Net}, 53
+  \item {$\sim$CriPoint}
+    \subitem {Cri\-Point}, 55
+  \item {$\sim$DivTable}
+    \subitem {Div\-Table}, 60
+  \item {$\sim$Dummy}
+    \subitem {Dummy}, 61
+  \item {$\sim$ImageMap}
+    \subitem {Image\-Map}, 85
+  \item {$\sim$Item}
+    \subitem {Item}, 92
+  \item {$\sim$LayMap}
+    \subitem {Lay\-Map}, 95
+  \item {$\sim$List}
+    \subitem {List}, 108
+  \item {$\sim$ListElement}
+    \subitem {List\-Element}, 111
+  \item {$\sim$ListIterator}
+    \subitem {List\-Iterator}, 112
+  \item {$\sim$Package}
+    \subitem {Package}, 120
+  \item {$\sim$ParserInterface}
+    \subitem {Parser\-Interface}, 123
+  \item {$\sim$Pattern}
+    \subitem {Pattern}, 129
+  \item {$\sim$Plane}
+    \subitem {Plane}, 138
+  \item {$\sim$PlaneCell}
+    \subitem {Plane\-Cell}, 140
+  \item {$\sim$Plcm}
+    \subitem {Plcm}, 144
+  \item {$\sim$Point}
+    \subitem {Point}, 173
+  \item {$\sim$ProtArea}
+    \subitem {Prot\-Area}, 175
+  \item {$\sim$Transparency}
+    \subitem {Transparency}, 178
+  \item {$\sim$Window}
+    \subitem {Window}, 182
+  \item {$\sim$matrixGrid}
+    \subitem {matrix\-Grid}, 115
+  \item {$\sim$matrixInt}
+    \subitem {matrix\-Int}, 117
+
+  \indexspace
+
+  \item {a}
+    \subitem {\_\-EQUIVLIST}, 8
+  \item {absolute}
+    \subitem {cluster\-Perm.C}, 187
+  \item {acceptBranch}
+    \subitem {glob\-Route.C}, 209
+  \item {acceptCandidateEvenIfNegativeGain}
+    \subitem {main.C}, 251
+  \item {actualMatrix}
+    \subitem {Lay\-Map}, 105
+  \item {add}
+    \subitem {Array}, 27
+    \subitem {Base\-Array}, 33
+    \subitem {List}, 108
+    \subitem {Package}, 120
+  \item {addAt}
+    \subitem {Array}, 27
+  \item {addCriticalPoints}
+    \subitem {Lay\-Map}, 96
+  \item {addCriticals}
+    \subitem {Pattern}, 130
+  \item {addFeeds}
+    \subitem {Image\-Map}, 86
+  \item {addFreeNet}
+    \subitem {Plcm}, 144
+  \item {addImageOverlap}
+    \subitem {Parser\-Interface}, 123
+  \item {addMirrorAxis}
+    \subitem {Parser\-Interface}, 123
+  \item {addPowerLine}
+    \subitem {Parser\-Interface}, 123
+  \item {addTerms}
+    \subitem {Lay\-Map}, 96
+  \item {addToCapacity}
+    \subitem {expansion\-Grid\-Edge}, 75
+  \item {addToOccupation}
+    \subitem {expansion\-Grid\-Edge}, 75
+  \item {addWires}
+    \subitem {Lay\-Map}, 97
+  \item {ALIGNBITS}
+    \subitem {stuff.C}, 280
+  \item {ALIGNMOD}
+    \subitem {stuff.C}, 280
+  \item {allocArray2}
+    \subitem {usrlib.C}, 282
+    \subitem {usrlib.h}, 285
+  \item {alreadyhavefun}
+    \subitem {part.h}, 259
+  \item {applyPermutation}
+    \subitem {cluster\-Perm.C}, 187
+  \item {area}
+    \subitem {\_\-MIR}, 11
+    \subitem {\_\-PARTCELL}, 15
+    \subitem {\_\-TOTALP}, 24
+  \item {Array}, 26
+    \subitem {$\sim$Array}, 27
+    \subitem {add}, 27
+    \subitem {addAt}, 27
+    \subitem {Array}, 27
+    \subitem {myName}, 28
+    \subitem {myNo}, 28
+    \subitem {operator[]}, 28
+  \item {array}
+    \subitem {Plane}, 139
+  \item {array.C}, 183
+  \item {array.h}, 183
+  \item {arrayClass}
+    \subitem {basedefs.h}, 184
+  \item {ArrayIterator}
+    \subitem {Array\-Iterator}, 29
+    \subitem {Base\-Array}, 37
+  \item {Array\-Iterator}, 29
+    \subitem {$\sim$ArrayIterator}, 29
+    \subitem {ArrayIterator}, 29
+    \subitem {beingIterated}, 31
+    \subitem {currentIndex}, 31
+    \subitem {get}, 29
+    \subitem {operator int}, 30
+    \subitem {operator Item \&}, 30
+    \subitem {operator++}, 30
+    \subitem {restart}, 31
+  \item {arraySize}
+    \subitem {Base\-Array}, 33
+  \item {assignstatebuf}
+    \subitem {part.h}, 259
+  \item {axis}
+    \subitem {\_\-MIRROR}, 12
+  \item {axisid}
+    \subitem {\_\-MIRROR}, 12
+
+  \indexspace
+
+  \item {b}
+    \subitem {\_\-EQUIVLIST}, 8
+  \item {balloc}
+    \subitem {im.h}, 213
+    \subitem {part.h}, 259
+    \subitem {stuff.C}, 280
+  \item {basearr.C}, 183
+  \item {basearr.h}, 184
+  \item {BaseArray}
+    \subitem {Base\-Array}, 32
+  \item {Base\-Array}, 31
+    \subitem {$\sim$BaseArray}, 32
+    \subitem {add}, 33
+    \subitem {ArrayIterator}, 37
+    \subitem {arraySize}, 33
+    \subitem {BaseArray}, 32
+    \subitem {bottomBound}, 33
+    \subitem {bottombound}, 37
+    \subitem {delta}, 37
+    \subitem {initIterator}, 33
+    \subitem {isEqual}, 33
+    \subitem {itemAt}, 34
+    \subitem {myName}, 34
+    \subitem {myNo}, 34
+    \subitem {pickOut}, 34, 35
+    \subitem {printContentsOn}, 35
+    \subitem {reallocate}, 36
+    \subitem {remove}, 37
+    \subitem {theArray}, 37
+    \subitem {topBound}, 37
+    \subitem {topbound}, 37
+    \subitem {whereToAdd}, 37
+  \item {basedefs.h}, 184
+    \subitem {\_\-\_\-endOfLibClass}, 184
+    \subitem {\_\-\_\-firstUserClass}, 184
+    \subitem {arrayClass}, 184
+    \subitem {boxClass}, 184
+    \subitem {classType}, 185
+    \subitem {countType}, 185
+    \subitem {dummyClass}, 185
+    \subitem {itemClass}, 185
+    \subitem {listClass}, 185
+    \subitem {listElementClass}, 185
+    \subitem {packageClass}, 185
+    \subitem {sizeType}, 185
+  \item {BBX\_\-AREA}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-ARRAY\_\-SIZE}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-AVAIL}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-MAX\_\-X}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-MAX\_\-Y}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-MEAN\_\-X}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-MEAN\_\-Y}
+    \subitem {findrect.C}, 197
+  \item {BBX\_\-N\_\-CELL}
+    \subitem {findrect.C}, 197
+  \item {beingIterated}
+    \subitem {Array\-Iterator}, 31
+  \item {bestmove}
+    \subitem {\_\-TOTALP}, 24
+  \item {bestnetcost}
+    \subitem {\_\-TOTALP}, 25
+  \item {bestpart}
+    \subitem {\_\-TOTALP}, 25
+  \item {bfree}
+    \subitem {im.h}, 213
+    \subitem {part.h}, 259
+    \subitem {stuff.C}, 280
+  \item {blockChannels}
+    \subitem {Plcm}, 144
+  \item {bname}
+    \subitem {main.C}, 238
+  \item {Boolean}
+    \subitem {sea.h}, 279
+  \item {bottomBound}
+    \subitem {Base\-Array}, 33
+  \item {bottombound}
+    \subitem {Base\-Array}, 37
+  \item {Box}, 38
+    \subitem {$\sim$Box}, 39
+    \subitem {Box}, 38
+    \subitem {BoxIterator}, 41
+    \subitem {getItemsInBox}, 39
+    \subitem {initIterator}, 39
+    \subitem {isEmpty}, 39
+    \subitem {isEqual}, 39
+    \subitem {itemsInBox}, 41
+    \subitem {makeFooter}, 40
+    \subitem {makeHeader}, 40
+    \subitem {makeSeparator}, 40
+    \subitem {myName}, 40
+    \subitem {myNo}, 41
+    \subitem {print}, 41
+  \item {box.C}, 185
+  \item {box.h}, 185
+  \item {boxClass}
+    \subitem {basedefs.h}, 184
+  \item {BoxIterator}
+    \subitem {Box}, 41
+    \subitem {Box\-Iterator}, 42
+  \item {Box\-Iterator}, 42
+    \subitem {$\sim$BoxIterator}, 42
+    \subitem {BoxIterator}, 42
+    \subitem {get}, 42
+    \subitem {operator int}, 43
+    \subitem {operator Item \&}, 42
+    \subitem {operator++}, 43
+    \subitem {restart}, 43
+  \item {buildExpansionGrid}
+    \subitem {expansion\-Grid}, 64
+  \item {buildExpansionGridEdges}
+    \subitem {expansion\-Grid}, 64
+  \item {buildExpansionGridVertices}
+    \subitem {expansion\-Grid}, 65
+  \item {buildGlobNets}
+    \subitem {expansion\-Grid}, 66
+
+  \indexspace
+
+  \item {calcTransp}
+    \subitem {Plcm}, 144
+  \item {candidates}
+    \subitem {\_\-PARTITION}, 16
+  \item {cell}
+    \subitem {\_\-PARTLIST}, 17
+  \item {cellarea}
+    \subitem {\_\-PARTITION}, 16
+  \item {cellname}
+    \subitem {Pattern}, 136
+  \item {CFUNC}
+    \subitem {genpart.h}, 208
+  \item {channel}
+    \subitem {\_\-ROUTING\_\-INFO}, 22
+  \item {CHANNEL\_\-DEBUG}
+    \subitem {plcminit.C}, 277
+  \item {ChannelCrossingGV}
+    \subitem {glob\-Route.h}, 211
+  \item {checkThatCircuitLooksReasonable}
+    \subitem {main.C}, 239
+  \item {checkThisEdgeSide}
+    \subitem {glob\-Route.C}, 209
+  \item {children}
+    \subitem {\_\-PIVOT}, 18
+  \item {chk}
+    \subitem {Plane}, 138
+  \item {cinst}
+    \subitem {\_\-PARTCELL}, 15
+  \item {circuit\_\-name}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 251
+  \item {circuitName}
+    \subitem {Plcm}, 171
+  \item {classType}
+    \subitem {basedefs.h}, 185
+  \item {clearFeedNo}
+    \subitem {Image\-Map}, 87
+  \item {clearFlags}
+    \subitem {Lay\-Map}, 98
+    \subitem {Plcm}, 146
+  \item {Clm}
+    \subitem {cost.h}, 191
+  \item {clm}
+    \subitem {\_\-NETCOSTINFO}, 12
+    \subitem {\_\-NETSTATE}, 13
+  \item {Clst}, 43
+    \subitem {Clst}, 44
+    \subitem {criticalPoints}, 46
+    \subitem {myName}, 45
+    \subitem {myNo}, 45
+    \subitem {operator \&}, 45
+    \subitem {operator Boolean}, 45
+    \subitem {operator List \&}, 46
+    \subitem {operator\texttt{|}=}, 46
+    \subitem {print}, 46
+  \item {clst.C}, 186
+  \item {clst.h}, 186
+  \item {ClstClass}
+    \subitem {phil.h}, 268
+  \item {Cluster}, 46
+    \subitem {$\sim$Cluster}, 47
+    \subitem {Cluster}, 47, 48
+    \subitem {cX}, 49
+    \subitem {cY}, 49
+    \subitem {isEqual}, 48
+    \subitem {myName}, 48
+    \subitem {myNo}, 49
+    \subitem {operator clusterMapType}, 49
+    \subitem {operator\texttt{|}=}, 49
+    \subitem {pattern}, 49
+  \item {cluster.C}, 186
+  \item {cluster.h}, 186
+    \subitem {clusterMapType}, 186
+  \item {ClusterClass}
+    \subitem {phil.h}, 268
+  \item {clusterCost}
+    \subitem {cluster\-Perm.C}, 188
+  \item {clusterMapType}
+    \subitem {cluster.h}, 186
+  \item {cluster\-Perm.C}, 187
+    \subitem {absolute}, 187
+    \subitem {applyPermutation}, 187
+    \subitem {clusterCost}, 188
+    \subitem {clusterPermutate}, 188
+    \subitem {generatePermutations}, 188
+    \subitem {INFINITY}, 187
+    \subitem {permutateThisPartitioning}, 189
+  \item {clusterPermutate}
+    \subitem {cluster\-Perm.C}, 188
+  \item {cols}
+    \subitem {Image\-Map}, 91
+    \subitem {Plane}, 139
+  \item {compact.C}, 190
+  \item {compaction}
+    \subitem {Plcm}, 148
+  \item {compactSide}
+    \subitem {Plcm}, 146
+  \item {compactType}
+    \subitem {plcm.h}, 277
+  \item {compass}
+    \subitem {expansion\-Grid\-Terminal}, 78
+  \item {computeBbxStatistics}
+    \subitem {findrect.C}, 198
+  \item {computeMeanBbx}
+    \subitem {findrect.C}, 199
+  \item {computetransrotmtx}
+    \subitem {im.h}, 213
+    \subitem {initimagedsc.C}, 224
+  \item {connectInfo}
+    \subitem {connect\-Info}, 50
+  \item {connect\-Info}, 49
+    \subitem {connectInfo}, 50
+    \subitem {numparts}, 50
+    \subitem {operator()}, 51
+  \item {cooling}
+    \subitem {\_\-TOTALP}, 25
+  \item {copycinst}
+    \subitem {\_\-PARTCELL}, 15
+  \item {copycpr}
+    \subitem {part.h}, 259
+  \item {coreCellOverlap}
+    \subitem {findrect.C}, 205
+  \item {coreCellSize}
+    \subitem {findrect.C}, 205
+  \item {coreCellsToGridPoints}
+    \subitem {findrect.C}, 199
+  \item {cost}
+    \subitem {\_\-NETSTATE}, 13
+  \item {cost.h}, 190
+    \subitem {Clm}, 191
+    \subitem {COSTSTATE}, 191
+    \subitem {COSTVEC}, 191
+    \subitem {cvrt\_\-to\_\-clm}, 191
+    \subitem {cvrt\_\-to\_\-row}, 191
+    \subitem {FreeNetstate}, 191
+    \subitem {LIST}, 191
+    \subitem {NETSTATE}, 191
+    \subitem {NETSTATEPTR}, 191
+    \subitem {NewNetstate}, 191
+    \subitem {NEXT}, 191
+    \subitem {PREV}, 191
+    \subitem {Row}, 191
+  \item {cost16x4}
+    \subitem {part.h}, 259
+  \item {cost3x3}
+    \subitem {part.h}, 259
+  \item {cost4x4}
+    \subitem {part.h}, 260
+  \item {cost5x4}
+    \subitem {part.h}, 260
+  \item {cost6x4}
+    \subitem {part.h}, 260
+  \item {cost8x4}
+    \subitem {part.h}, 260
+  \item {costfunction}
+    \subitem {\_\-NETCOSTINFO}, 12
+    \subitem {\_\-TOTALP}, 25
+  \item {costmincut}
+    \subitem {main.C}, 239
+  \item {costquad}
+    \subitem {part.h}, 260
+  \item {COSTSTATE}
+    \subitem {cost.h}, 191
+  \item {COSTVEC}
+    \subitem {cost.h}, 191
+  \item {countType}
+    \subitem {basedefs.h}, 185
+  \item {create}
+    \subitem {Lay\-Map}, 99
+  \item {createAndInitialize}
+    \subitem {matrix\-Grid}, 115
+    \subitem {matrix\-Int}, 117
+  \item {createPlane}
+    \subitem {Plcm}, 148
+  \item {cri.C}, 192
+    \subitem {operator \&}, 192
+    \subitem {operator\texttt{|}=}, 192
+  \item {cri.h}, 193
+  \item {cricand.h}, 193
+  \item {CriCandidate}
+    \subitem {Cri\-Candidate}, 51
+  \item {Cri\-Candidate}, 51
+    \subitem {$\sim$CriCandidate}, 51
+    \subitem {CriCandidate}, 51
+    \subitem {myName}, 52
+    \subitem {myNo}, 52
+    \subitem {neighbors}, 52
+  \item {CriCandidateClass}
+    \subitem {phil.h}, 268
+  \item {criLines}
+    \subitem {Image\-Map}, 91
+  \item {CriNet}
+    \subitem {Cri\-Net}, 53
+  \item {Cri\-Net}, 52
+    \subitem {$\sim$CriNet}, 53
+    \subitem {CriNet}, 53
+    \subitem {isEqual}, 53
+    \subitem {myName}, 53
+    \subitem {myNo}, 53
+    \subitem {name}, 54
+    \subitem {print}, 53
+  \item {CriNetClass}
+    \subitem {phil.h}, 268
+  \item {CriPoint}
+    \subitem {Cri\-Point}, 54, 55
+  \item {Cri\-Point}, 54
+    \subitem {$\sim$CriPoint}, 55
+    \subitem {CriPoint}, 54, 55
+    \subitem {isEqual}, 55
+    \subitem {layer}, 57
+    \subitem {myName}, 55
+    \subitem {myNo}, 55
+    \subitem {net}, 57
+    \subitem {operator \&}, 56
+    \subitem {operator\texttt{|}=}, 56
+    \subitem {print}, 55
+  \item {CriPointClass}
+    \subitem {phil.h}, 268
+  \item {CriticalAreaFlag}
+    \subitem {phil.h}, 269
+  \item {criticalFeed}
+    \subitem {Image\-Map}, 88
+  \item {criticalIsland}
+    \subitem {Image\-Map}, 89
+  \item {criticalPoints}
+    \subitem {Clst}, 46
+  \item {currentElement}
+    \subitem {List\-Iterator}, 114
+  \item {currentIndex}
+    \subitem {Array\-Iterator}, 31
+  \item {cvrt\_\-to\_\-clm}
+    \subitem {cost.h}, 191
+  \item {cvrt\_\-to\_\-row}
+    \subitem {cost.h}, 191
+  \item {cX}
+    \subitem {\_\-SLICE\_\-INFO}, 23
+    \subitem {Cluster}, 49
+  \item {cY}
+    \subitem {\_\-SLICE\_\-INFO}, 23
+    \subitem {Cluster}, 49
+
+  \indexspace
+
+  \item {data}
+    \subitem {List\-Element}, 111
+  \item {debug.C}, 193
+    \subitem {printchild}, 194
+    \subitem {printequiv}, 194
+    \subitem {printmtx}, 194
+    \subitem {printpivot}, 195
+    \subitem {printstamp}, 195
+  \item {deletePos}
+    \subitem {Plcm}, 150
+  \item {delta}
+    \subitem {\_\-MIRROR}, 12
+    \subitem {Base\-Array}, 37
+  \item {deviation}
+    \subitem {\_\-NETSTATE}, 13
+  \item {DiffusionLayer}
+    \subitem {phil.h}, 270
+  \item {dim1}
+    \subitem {matrix\-Grid}, 116
+    \subitem {matrix\-Int}, 119
+  \item {dim2}
+    \subitem {matrix\-Grid}, 116
+    \subitem {matrix\-Int}, 119
+  \item {dimension1}
+    \subitem {matrix\-Grid}, 115
+    \subitem {matrix\-Int}, 118
+  \item {dimension2}
+    \subitem {matrix\-Grid}, 115
+    \subitem {matrix\-Int}, 118
+  \item {direction}
+    \subitem {expansion\-Grid\-Edge}, 76
+  \item {dist}
+    \subitem {\_\-NETSTATE}, 13
+  \item {distInfo}
+    \subitem {dist\-Info}, 57
+  \item {dist\-Info}, 57
+    \subitem {distInfo}, 57
+    \subitem {exchange}, 58
+    \subitem {numparts}, 58
+    \subitem {operator()}, 58
+  \item {DivTabClass}
+    \subitem {phil.h}, 268
+  \item {DivTable}
+    \subitem {Div\-Table}, 59
+  \item {Div\-Table}, 58
+    \subitem {$\sim$DivTable}, 60
+    \subitem {DivTable}, 59
+    \subitem {myName}, 60
+    \subitem {myNo}, 61
+  \item {div\-Table.C}, 195
+  \item {div\-Table.h}, 195
+  \item {doCheck}
+    \subitem {Pattern}, 136
+  \item {doCompresion}
+    \subitem {main.C}, 251
+    \subitem {phil.C}, 266
+  \item {domove\_\-and\_\-copy\_\-netstate}
+    \subitem {part.h}, 260
+  \item {dontCheckChildPorts}
+    \subitem {main.C}, 251
+  \item {dopartitioning}
+    \subitem {part.h}, 260
+  \item {doPlacement}
+    \subitem {Plcm}, 151
+  \item {doTranAna}
+    \subitem {main.C}, 251
+    \subitem {phil.C}, 266
+  \item {doTransAna}
+    \subitem {Pattern}, 136
+    \subitem {Plcm}, 171
+  \item {doTranspAnalysis}
+    \subitem {Plcm}, 153
+  \item {downWay}
+    \subitem {layout\-Map\-Type}, 106
+  \item {drawmirroraxis}
+    \subitem {im.h}, 213
+    \subitem {initimagedsc.C}, 225
+  \item {Dummy}, 61
+    \subitem {$\sim$Dummy}, 61
+    \subitem {Dummy}, 61
+    \subitem {isEqual}, 62
+    \subitem {myName}, 62
+    \subitem {myNo}, 62
+    \subitem {operator delete}, 62
+    \subitem {print}, 62
+  \item {dummyClass}
+    \subitem {basedefs.h}, 185
+
+  \indexspace
+
+  \item {East}
+    \subitem {glob\-Route.h}, 212
+  \item {EDGE}
+    \subitem {plaza.h}, 275
+  \item {edge}
+    \subitem {expansion\-Grid\-Vertex}, 79
+  \item {edgeDirection}
+    \subitem {glob\-Route.h}, 211
+  \item {EDOS}
+    \subitem {usrlib.h}, 284
+  \item {EFNFND}
+    \subitem {usrlib.h}, 284
+  \item {EGerror}
+    \subitem {expansion\-Grid}, 64
+  \item {EINDEX}
+    \subitem {usrlib.h}, 284
+  \item {EINPDAT}
+    \subitem {usrlib.h}, 284
+  \item {enable\_\-reset\_\-alarm\_\-flag}
+    \subitem {part.h}, 260
+  \item {ENOTMEM}
+    \subitem {usrlib.h}, 284
+  \item {equivalence}
+    \subitem {\_\-MIRROR}, 12
+  \item {EQUIVLIST}
+    \subitem {image.h}, 223
+  \item {EQUIVLISTPTR}
+    \subitem {image.h}, 223
+  \item {estransp}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {ESYS}
+    \subitem {usrlib.h}, 284
+  \item {ETASKIMP}
+    \subitem {usrlib.h}, 284
+  \item {EUNKNOW}
+    \subitem {usrlib.h}, 284
+  \item {eWeight}
+    \subitem {expansion\-Grid\-Edge}, 76
+  \item {EWRCFG}
+    \subitem {usrlib.h}, 284
+  \item {EWRITE}
+    \subitem {usrlib.h}, 284
+  \item {exchange}
+    \subitem {dist\-Info}, 58
+  \item {exchangeColumns}
+    \subitem {matrix\-Int}, 118
+  \item {exchangeRows}
+    \subitem {matrix\-Int}, 118
+  \item {exitpartitionstructures}
+    \subitem {part.h}, 260
+  \item {expandableDirection}
+    \subitem {findrect.C}, 205
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 251
+    \subitem {phil.C}, 266
+  \item {expansionGrid}
+    \subitem {expansion\-Grid}, 64
+  \item {expansion\-Grid}, 63
+    \subitem {buildExpansionGrid}, 64
+    \subitem {buildExpansionGridEdges}, 64
+    \subitem {buildExpansionGridVertices}, 65
+    \subitem {buildGlobNets}, 66
+    \subitem {EGerror}, 64
+    \subitem {expansionGrid}, 64
+    \subitem {findEdge}, 66
+    \subitem {heavyWeight}, 74
+    \subitem {image}, 74
+    \subitem {instance2xy}, 67
+    \subitem {lightWeightHorizontal}, 74
+    \subitem {lightWeightVertical}, 74
+    \subitem {makeEdge}, 67
+    \subitem {makeRoutingInfo}, 67
+    \subitem {nwires}, 68
+    \subitem {nx}, 68
+    \subitem {ny}, 68
+    \subitem {printRoute}, 69
+    \subitem {printRouteGlobNet}, 70
+    \subitem {printRouteSummary}, 70
+    \subitem {printRouting}, 70
+    \subitem {roundWiresToCells}, 71
+    \subitem {routeGlobNet}, 71
+    \subitem {routeGlobNets}, 72
+    \subitem {summarizeGlobNets}, 73
+    \subitem {sumRoutingInfo}, 72
+    \subitem {theglobnets}, 74
+    \subitem {thegraph}, 74
+    \subitem {thematrix}, 74
+    \subitem {totalp}, 74
+  \item {expansionGridEdge}
+    \subitem {expansion\-Grid\-Edge}, 75
+  \item {expansion\-Grid\-Edge}, 74
+    \subitem {\_\-capacity}, 77
+    \subitem {\_\-direction}, 77
+    \subitem {\_\-length}, 77
+    \subitem {\_\-occupation}, 77
+    \subitem {\_\-x}, 77
+    \subitem {\_\-y}, 77
+    \subitem {addToCapacity}, 75
+    \subitem {addToOccupation}, 75
+    \subitem {direction}, 76
+    \subitem {eWeight}, 76
+    \subitem {expansionGridEdge}, 75
+    \subitem {length}, 76
+    \subitem {overCapacityReward}, 77
+    \subitem {print}, 76
+    \subitem {underCapacityPenalty}, 77
+    \subitem {x}, 76
+    \subitem {y}, 76
+  \item {expansionGridTerminal}
+    \subitem {expansion\-Grid\-Terminal}, 78
+  \item {expansion\-Grid\-Terminal}, 77
+    \subitem {\_\-compass}, 78
+    \subitem {compass}, 78
+    \subitem {expansionGridTerminal}, 78
+  \item {expansionGridVertex}
+    \subitem {expansion\-Grid\-Vertex}, 79
+  \item {expansion\-Grid\-Vertex}, 78
+    \subitem {\_\-partition}, 80
+    \subitem {\_\-type}, 80
+    \subitem {\_\-x\_\-coord}, 80
+    \subitem {\_\-y\_\-coord}, 80
+    \subitem {edge}, 79
+    \subitem {expansionGridVertex}, 79
+    \subitem {neighbor}, 79
+    \subitem {print}, 79
+    \subitem {type}, 79
+    \subitem {xCoord}, 79
+    \subitem {yCoord}, 80
+  \item {expansionGridVertexType}
+    \subitem {glob\-Route.h}, 211
+  \item {extraplaza}
+    \subitem {findrect.C}, 205
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 251
+
+  \indexspace
+
+  \item {false}
+    \subitem {sea.h}, 279
+  \item {father}
+    \subitem {\_\-PIVOT}, 18
+  \item {findEdge}
+    \subitem {expansion\-Grid}, 66
+  \item {findItem}
+    \subitem {Package}, 120
+  \item {findNetId}
+    \subitem {Lay\-Map}, 100
+  \item {findNewLeftBottom}
+    \subitem {Pattern}, 131
+  \item {findrect.C}, 196
+    \subitem {BBX\_\-AREA}, 197
+    \subitem {BBX\_\-ARRAY\_\-SIZE}, 197
+    \subitem {BBX\_\-AVAIL}, 197
+    \subitem {BBX\_\-MAX\_\-X}, 197
+    \subitem {BBX\_\-MAX\_\-Y}, 197
+    \subitem {BBX\_\-MEAN\_\-X}, 197
+    \subitem {BBX\_\-MEAN\_\-Y}, 197
+    \subitem {BBX\_\-N\_\-CELL}, 197
+    \subitem {computeBbxStatistics}, 198
+    \subitem {computeMeanBbx}, 199
+    \subitem {coreCellOverlap}, 205
+    \subitem {coreCellSize}, 205
+    \subitem {coreCellsToGridPoints}, 199
+    \subitem {expandableDirection}, 205
+    \subitem {extraplaza}, 205
+    \subitem {findrectangleandcostfunctions}, 200
+    \subitem {gridPointsToCoreCells}, 203
+    \subitem {makeChannels}, 205
+    \subitem {MAX}, 197
+    \subitem {MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS}, 197
+    \subitem {MEAN\_\-CELLS\_\-PER\_\-AREA}, 198
+    \subitem {MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED}, 198
+    \subitem {No\-Rounding}, 198
+    \subitem {NOTINITIALIZED}, 198
+    \subitem {oldfashionedwayofdoingthings}, 204
+    \subitem {otherDirection}, 204
+    \subitem {requestedGridPoints}, 205
+    \subitem {Round\-Down}, 198
+    \subitem {RoundingPolicy}, 198
+    \subitem {Round\-Near}, 198
+    \subitem {Round\-Up}, 198
+    \subitem {targetAreas}, 205
+    \subitem {targetGridPoints}, 206
+    \subitem {thecostfunctions}, 206
+    \subitem {thinkAboutGridSize}, 204
+    \subitem {TOO\_\-BIG}, 198
+    \subitem {TOO\_\-SMALL}, 198
+    \subitem {VERY\_\-NEGATIVE}, 198
+  \item {findrectangleandcostfunctions}
+    \subitem {findrect.C}, 200
+  \item {findSlice}
+    \subitem {Plcm}, 153
+  \item {fixnetlist}
+    \subitem {part.h}, 260
+  \item {flag}
+    \subitem {\_\-PARTCELL}, 15
+    \subitem {\_\-PARTITION}, 16
+    \subitem {\_\-PLAZGLAF}, 20
+  \item {flagType}
+    \subitem {phil.h}, 269
+  \item {freeArray2}
+    \subitem {usrlib.C}, 282
+    \subitem {usrlib.h}, 285
+  \item {FreeEquivlist}
+    \subitem {image.h}, 222
+  \item {freeFlagItem1}
+    \subitem {Plcm}, 154
+  \item {freeFlagItem2}
+    \subitem {Plcm}, 154
+  \item {FreeImagedesc}
+    \subitem {image.h}, 222
+  \item {FreeMirror}
+    \subitem {image.h}, 222
+  \item {freeNets}
+    \subitem {Lay\-Map}, 105
+    \subitem {Plcm}, 171
+  \item {FreeNetstate}
+    \subitem {cost.h}, 191
+  \item {FreePartcell}
+    \subitem {genpart.h}, 207
+  \item {FreePartition}
+    \subitem {genpart.h}, 207
+  \item {FreePartlist}
+    \subitem {genpart.h}, 207
+  \item {FreePlazglaf}
+    \subitem {plaza.h}, 275
+  \item {FreePnet}
+    \subitem {genpart.h}, 207
+  \item {FreeSectorlist}
+    \subitem {image.h}, 222
+  \item {FreeTotalp}
+    \subitem {genpart.h}, 207
+  \item {freeTracks}
+    \subitem {Transparency}, 178
+  \item {fromPartitioner}
+    \subitem {Plcm}, 171
+  \item {function\_\-name}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 251
+  \item {functionName}
+    \subitem {Plcm}, 171
+
+  \indexspace
+
+  \item {gain}
+    \subitem {\_\-PARTLIST}, 17
+  \item {gainnetstate}
+    \subitem {part.h}, 260
+  \item {gencost}
+    \subitem {part.h}, 260
+  \item {generatePermutations}
+    \subitem {cluster\-Perm.C}, 188
+  \item {genpart}
+    \subitem {part.h}, 260
+  \item {genpart.h}, 206
+    \subitem {CFUNC}, 208
+    \subitem {FreePartcell}, 207
+    \subitem {FreePartition}, 207
+    \subitem {FreePartlist}, 207
+    \subitem {FreePnet}, 207
+    \subitem {FreeTotalp}, 207
+    \subitem {MAXNETCOSTFUNCTIONS}, 207
+    \subitem {NETCOSTINFO}, 208
+    \subitem {NETCOSTINFOPTR}, 208
+    \subitem {NewPartcell}, 207
+    \subitem {NewPartition}, 207
+    \subitem {NewPartlist}, 207
+    \subitem {NewPnet}, 208
+    \subitem {NewTotalp}, 208
+    \subitem {PARTCELL}, 208
+    \subitem {PARTCELLPTR}, 208
+    \subitem {PARTITION}, 208
+    \subitem {PARTITIONPTR}, 208
+    \subitem {PARTLIST}, 208
+    \subitem {PARTLISTPTR}, 208
+    \subitem {PNET}, 208
+    \subitem {PNETPTR}, 208
+    \subitem {TOTALP}, 208
+    \subitem {TOTALPPTR}, 208
+  \item {get}
+    \subitem {Array\-Iterator}, 29
+    \subitem {Box\-Iterator}, 42
+    \subitem {List\-Iterator}, 112
+  \item {getCriticals}
+    \subitem {Plane}, 138
+  \item {getDiv}
+    \subitem {Window}, 182
+  \item {getEffSize}
+    \subitem {Plane}, 138
+  \item {getHor}
+    \subitem {Lay\-Map}, 100
+    \subitem {Pattern}, 131
+  \item {getImageDesc}
+    \subitem {Parser\-Interface}, 123
+    \subitem {phil.C}, 264
+    \subitem {phil\_\-glob.h}, 271
+  \item {getImageMap}
+    \subitem {Parser\-Interface}, 124
+  \item {getItemsInBox}
+    \subitem {Box}, 39
+  \item {getPattern}
+    \subitem {Plane}, 139
+  \item {getpid}
+    \subitem {plcm.C}, 276
+  \item {getTranMaps}
+    \subitem {Pattern}, 131
+  \item {getVer}
+    \subitem {Lay\-Map}, 101
+    \subitem {Pattern}, 132
+  \item {givenCircuit}
+    \subitem {Plcm}, 171
+  \item {GLOBAL\_\-ROUTING}
+    \subitem {routing.h}, 278
+  \item {GLOBAL\_\-ROUTINGPTR}
+    \subitem {routing.h}, 278
+  \item {globNet}
+    \subitem {glob\-Net}, 81
+  \item {glob\-Net}, 80
+    \subitem {\_\-net}, 82
+    \subitem {\_\-weight}, 82
+    \subitem {globNet}, 81
+    \subitem {isInNet}, 81
+    \subitem {isInRoute}, 81
+    \subitem {net}, 81
+    \subitem {print}, 82
+    \subitem {route}, 82
+    \subitem {weight}, 82
+  \item {glob\-Route.C}, 209
+    \subitem {acceptBranch}, 209
+    \subitem {checkThisEdgeSide}, 209
+    \subitem {isPowerOrGroundNet}, 210
+    \subitem {makeRoutingInfo}, 210
+    \subitem {RouteAsciiFile}, 210
+  \item {globRoute.h}
+    \subitem {Channel\-Crossing\-GV}, 211
+    \subitem {East}, 212
+    \subitem {Horizontal\-Channel\-GV}, 211
+    \subitem {Horizontal\-Edge}, 211
+    \subitem {North}, 212
+    \subitem {Nowhere}, 212
+    \subitem {Partition\-GV}, 211
+    \subitem {South}, 212
+    \subitem {Vertical\-Channel\-GV}, 211
+    \subitem {Vertical\-Edge}, 211
+    \subitem {West}, 212
+  \item {glob\-Route.h}, 210
+    \subitem {edgeDirection}, 211
+    \subitem {expansionGridVertexType}, 211
+    \subitem {pointOfCompass}, 211
+  \item {globRouting}
+    \subitem {Plcm}, 171
+  \item {globTerm}
+    \subitem {glob\-Term}, 83
+  \item {glob\-Term}, 82
+    \subitem {globTerm}, 83
+    \subitem {gridVx}, 83
+  \item {goDeeper}
+    \subitem {Lay\-Map}, 101
+  \item {graph\-Edge}, 83
+  \item {graph\-Terminal}, 83
+  \item {graph\-Vertex}, 84
+  \item {gridPointsToCoreCells}
+    \subitem {findrect.C}, 203
+  \item {gridVx}
+    \subitem {glob\-Term}, 83
+
+  \indexspace
+
+  \item {hasItem}
+    \subitem {Package}, 121
+  \item {head}
+    \subitem {List}, 110
+  \item {heavyWeight}
+    \subitem {expansion\-Grid}, 74
+  \item {height}
+    \subitem {\_\-PARTITION}, 16
+    \subitem {\_\-SLICE\_\-INFO}, 23
+  \item {high}
+    \subitem {Window}, 183
+  \item {highnumpart}
+    \subitem {main.C}, 252
+  \item {hor}
+    \subitem {Pattern}, 136
+  \item {horGridMap}
+    \subitem {Transparency}, 180
+  \item {HorizC}
+    \subitem {plcm.h}, 277
+  \item {horizontal\_\-channels}
+    \subitem {\_\-GLOBAL\_\-ROUTING}, 9
+  \item {HorizontalChannelGV}
+    \subitem {glob\-Route.h}, 211
+  \item {HorizontalEdge}
+    \subitem {glob\-Route.h}, 211
+
+  \indexspace
+
+  \item {ignore}
+    \subitem {\_\-PNET}, 21
+  \item {im.h}, 212
+    \subitem {balloc}, 213
+    \subitem {bfree}, 213
+    \subitem {computetransrotmtx}, 213
+    \subitem {drawmirroraxis}, 213
+    \subitem {initimagedesc}, 214
+    \subitem {labelallsectors}, 215
+    \subitem {labelhalfsector}, 215
+    \subitem {labelsector}, 216
+    \subitem {mkequivalencelist}, 216
+    \subitem {mtxaddvec}, 217
+    \subitem {mtxapply}, 217
+    \subitem {mtxapplytocrd}, 217
+    \subitem {mtxchain}, 217
+    \subitem {mtxcopy}, 218
+    \subitem {mtxdoubletonormal}, 218
+    \subitem {mtxidentity}, 218
+    \subitem {mtxtranslate}, 219
+    \subitem {printchild}, 219
+    \subitem {printequiv}, 219
+    \subitem {printmtx}, 220
+    \subitem {printpivot}, 220
+    \subitem {printstamp}, 220
+    \subitem {readmirroraxis}, 220
+  \item {image}
+    \subitem {expansion\-Grid}, 74
+  \item {image.h}, 221
+    \subitem {EQUIVLIST}, 223
+    \subitem {EQUIVLISTPTR}, 223
+    \subitem {FreeEquivlist}, 222
+    \subitem {FreeImagedesc}, 222
+    \subitem {FreeMirror}, 222
+    \subitem {FreeSectorlist}, 222
+    \subitem {IMAGEDESC}, 223
+    \subitem {IMAGEDESCPTR}, 223
+    \subitem {MIRROR}, 223
+    \subitem {MIRRORPTR}, 223
+    \subitem {NewEquivlist}, 222
+    \subitem {NewImagedesc}, 222
+    \subitem {NewMirror}, 222
+    \subitem {NewSectorlist}, 222
+    \subitem {POWERLINE}, 223
+    \subitem {POWERLINEPTR}, 223
+    \subitem {SECTORLIST}, 223
+    \subitem {SECTORLISTPTR}, 223
+    \subitem {X1}, 222
+    \subitem {X2}, 223
+    \subitem {Y1}, 223
+    \subitem {Y2}, 223
+  \item {IMAGEDESC}
+    \subitem {image.h}, 223
+  \item {imagedesc}
+    \subitem {\_\-PIVOT}, 18
+  \item {IMAGEDESCPTR}
+    \subitem {image.h}, 223
+  \item {ImageMap}
+    \subitem {Image\-Map}, 85
+  \item {Image\-Map}, 84
+    \subitem {$\sim$ImageMap}, 85
+    \subitem {addFeeds}, 86
+    \subitem {clearFeedNo}, 87
+    \subitem {cols}, 91
+    \subitem {criLines}, 91
+    \subitem {criticalFeed}, 88
+    \subitem {criticalIsland}, 89
+    \subitem {ImageMap}, 85
+    \subitem {LayMap}, 91
+    \subitem {map}, 91
+    \subitem {myName}, 90
+    \subitem {myNo}, 90
+    \subitem {recognizeNeighbors}, 90
+    \subitem {rows}, 91
+    \subitem {tmpStamp}, 91
+  \item {imageMap}
+    \subitem {Lay\-Map}, 105
+    \subitem {Parser\-Interface}, 127
+    \subitem {Plcm}, 171
+  \item {image\-Map.C}, 223
+  \item {image\-Map.h}, 224
+  \item {ImageMapClass}
+    \subitem {phil.h}, 269
+  \item {INC\_\-FACT}
+    \subitem {phil.C}, 264
+  \item {INFINITY}
+    \subitem {cluster\-Perm.C}, 187
+  \item {init\_\-row\_\-clm\_\-transformation\_\-arrays}
+    \subitem {part.h}, 260
+  \item {initFlag}
+    \subitem {Lay\-Map}, 105
+  \item {INITIAL\_\-COOLING}
+    \subitem {main.C}, 238
+  \item {initial\_\-cooling}
+    \subitem {main.C}, 252
+  \item {INITIAL\_\-TEMPERATURE}
+    \subitem {main.C}, 238
+  \item {initial\_\-temperature}
+    \subitem {main.C}, 252
+  \item {initimagedesc}
+    \subitem {im.h}, 214
+    \subitem {initimagedsc.C}, 226
+  \item {initimagedsc.C}, 224
+    \subitem {computetransrotmtx}, 224
+    \subitem {drawmirroraxis}, 225
+    \subitem {initimagedesc}, 226
+    \subitem {labelallsectors}, 226
+    \subitem {labelhalfsector}, 227
+    \subitem {labelsector}, 227
+    \subitem {mkequivalencelist}, 228
+    \subitem {mtxdoubletonormal}, 228
+    \subitem {readmirroraxis}, 229
+  \item {initImages}
+    \subitem {Parser\-Interface}, 124
+  \item {initIterator}
+    \subitem {Base\-Array}, 33
+    \subitem {Box}, 39
+    \subitem {List}, 108
+    \subitem {Package}, 121
+  \item {initnetcostinfo}
+    \subitem {part.h}, 260
+  \item {initnetstate}
+    \subitem {part.h}, 260
+  \item {initsignals}
+    \subitem {part.h}, 260
+  \item {INLINE}
+    \subitem {usrlib.h}, 284
+  \item {instance2xy}
+    \subitem {expansion\-Grid}, 67
+  \item {is}
+    \subitem {Prot\-Area}, 176
+  \item {isEmpty}
+    \subitem {Box}, 39
+    \subitem {Plcm}, 155
+  \item {isEqual}
+    \subitem {Base\-Array}, 33
+    \subitem {Box}, 39
+    \subitem {Cluster}, 48
+    \subitem {Cri\-Net}, 53
+    \subitem {Cri\-Point}, 55
+    \subitem {Dummy}, 62
+    \subitem {Item}, 92
+    \subitem {Pattern}, 132
+    \subitem {Point}, 174
+  \item {isInNet}
+    \subitem {glob\-Net}, 81
+  \item {isInRoute}
+    \subitem {glob\-Net}, 81
+  \item {isMac}
+    \subitem {Pattern}, 136
+  \item {isMacro}
+    \subitem {Pattern}, 132
+  \item {ismember}
+    \subitem {\_\-PARTLIST}, 17
+  \item {isPowerOrGroundNet}
+    \subitem {glob\-Route.C}, 210
+  \item {Item}, 91
+    \subitem {$\sim$Item}, 92
+    \subitem {isEqual}, 92
+    \subitem {Item}, 92
+    \subitem {myName}, 92
+    \subitem {myNo}, 93
+    \subitem {NOTHING}, 94
+    \subitem {operator delete}, 93
+    \subitem {operator new}, 93
+    \subitem {operator$<$$<$}, 94
+    \subitem {print}, 94
+  \item {item.C}, 229
+    \subitem {theDummyItem}, 230
+  \item {item.h}, 230
+    \subitem {NOITEM}, 230
+    \subitem {operator!=}, 230
+    \subitem {operator$<$$<$}, 230
+    \subitem {operator==}, 231
+  \item {itemAt}
+    \subitem {Base\-Array}, 34
+  \item {itemClass}
+    \subitem {basedefs.h}, 185
+  \item {itemsInBox}
+    \subitem {Box}, 41
+
+  \indexspace
+
+  \item {keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr}
+    \subitem {part.h}, 260
+  \item {keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake}
+    \subitem {part.h}, 261
+  \item {keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr}
+    \subitem {part.h}, 261
+  \item {keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake}
+    \subitem {part.h}, 261
+
+  \indexspace
+
+  \item {labelallsectors}
+    \subitem {im.h}, 215
+    \subitem {initimagedsc.C}, 226
+  \item {labelhalfsector}
+    \subitem {im.h}, 215
+    \subitem {initimagedsc.C}, 227
+  \item {labelsector}
+    \subitem {im.h}, 216
+    \subitem {initimagedsc.C}, 227
+  \item {layer}
+    \subitem {\_\-POWERLINE}, 21
+    \subitem {Cri\-Point}, 57
+  \item {layers}
+    \subitem {layout\-Map\-Type}, 106
+  \item {layerTrans}
+    \subitem {\_\-SLICE\_\-INFO}, 24
+  \item {layerType}
+    \subitem {phil.h}, 270
+  \item {layinst}
+    \subitem {\_\-PLAZGLAF}, 20
+  \item {layInstancesList}
+    \subitem {Plcm}, 171
+  \item {LayMap}
+    \subitem {Image\-Map}, 91
+    \subitem {Lay\-Map}, 95
+  \item {Lay\-Map}, 94
+    \subitem {$\sim$LayMap}, 95
+    \subitem {actualMatrix}, 105
+    \subitem {addCriticalPoints}, 96
+    \subitem {addTerms}, 96
+    \subitem {addWires}, 97
+    \subitem {clearFlags}, 98
+    \subitem {create}, 99
+    \subitem {findNetId}, 100
+    \subitem {freeNets}, 105
+    \subitem {getHor}, 100
+    \subitem {getVer}, 101
+    \subitem {goDeeper}, 101
+    \subitem {imageMap}, 105
+    \subitem {initFlag}, 105
+    \subitem {LayMap}, 95
+    \subitem {layout}, 105
+    \subitem {map}, 105
+    \subitem {recognizeTerminals}, 102
+    \subitem {refresh}, 102
+    \subitem {search}, 102
+    \subitem {viaToCriticalArea}, 105
+    \subitem {xMax}, 105
+    \subitem {xMin}, 105
+    \subitem {yMax}, 105
+    \subitem {yMin}, 105
+  \item {lay\-Map.C}, 231
+  \item {lay\-Map.h}, 231
+  \item {LayMapClass}
+    \subitem {phil.h}, 269
+  \item {layout}
+    \subitem {\_\-PLAZGLAF}, 20
+    \subitem {Lay\-Map}, 105
+  \item {layout\-Map\-Type}, 106
+    \subitem {downWay}, 106
+    \subitem {layers}, 106
+    \subitem {leftWay}, 106
+    \subitem {rightWay}, 106
+    \subitem {termNo}, 106
+    \subitem {uniNo}, 106
+    \subitem {upWay}, 106
+    \subitem {visited}, 106
+  \item {layoutName}
+    \subitem {Plcm}, 171
+  \item {layoutname}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 252
+  \item {layoutToBuild}
+    \subitem {Plcm}, 171
+  \item {leftWay}
+    \subitem {layout\-Map\-Type}, 106
+  \item {length}
+    \subitem {\_\-ROUTING\_\-CHANNEL}, 22
+    \subitem {expansion\-Grid\-Edge}, 76
+  \item {library\_\-name}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 252
+  \item {libraryName}
+    \subitem {Plcm}, 172
+  \item {lightWeightHorizontal}
+    \subitem {expansion\-Grid}, 74
+  \item {lightWeightVertical}
+    \subitem {expansion\-Grid}, 74
+  \item {LIST}
+    \subitem {cost.h}, 191
+  \item {List}, 107
+    \subitem {$\sim$List}, 108
+    \subitem {add}, 108
+    \subitem {head}, 110
+    \subitem {initIterator}, 108
+    \subitem {List}, 107
+    \subitem {List\-Element}, 111
+    \subitem {ListIterator}, 110
+    \subitem {myName}, 108
+    \subitem {myNo}, 108
+    \subitem {peekHead}, 109
+    \subitem {pickOut}, 109
+    \subitem {remove}, 110
+  \item {list.C}, 231
+  \item {list.h}, 232
+  \item {listClass}
+    \subitem {basedefs.h}, 185
+  \item {ListElement}
+    \subitem {List\-Element}, 111
+  \item {List\-Element}, 110
+    \subitem {$\sim$ListElement}, 111
+    \subitem {data}, 111
+    \subitem {List}, 111
+    \subitem {ListElement}, 111
+    \subitem {ListIterator}, 111
+    \subitem {next}, 111
+  \item {listElementClass}
+    \subitem {basedefs.h}, 185
+  \item {ListIterator}
+    \subitem {List}, 110
+    \subitem {List\-Element}, 111
+    \subitem {List\-Iterator}, 112
+  \item {List\-Iterator}, 111
+    \subitem {$\sim$ListIterator}, 112
+    \subitem {currentElement}, 114
+    \subitem {get}, 112
+    \subitem {ListIterator}, 112
+    \subitem {operator int}, 113
+    \subitem {operator Item \&}, 112
+    \subitem {operator++}, 113
+    \subitem {restart}, 113
+    \subitem {startingElement}, 114
+  \item {logaxisid}
+    \subitem {\_\-MIRROR}, 12
+  \item {lstelem.h}, 232
+  \item {lx}
+    \subitem {\_\-PIVOT}, 18
+  \item {ly}
+    \subitem {\_\-PIVOT}, 18
+
+  \indexspace
+
+  \item {macroMinSize}
+    \subitem {main.C}, 252
+    \subitem {phil.C}, 267
+    \subitem {Plcm}, 172
+  \item {madonna}
+    \subitem {madonna.C}, 233
+    \subitem {main.C}, 239
+  \item {madonna.C}, 232
+    \subitem {circuit\_\-name}, 235
+    \subitem {expandableDirection}, 235
+    \subitem {extraplaza}, 235
+    \subitem {function\_\-name}, 235
+    \subitem {layoutname}, 235
+    \subitem {library\_\-name}, 235
+    \subitem {madonna}, 233
+    \subitem {madonnamakeminiplaza}, 235
+    \subitem {madonnamakepartition}, 235
+    \subitem {printNetlistStatistics}, 234
+    \subitem {requestedGridPoints}, 235
+    \subitem {thiscir}, 236
+    \subitem {thiscirtab}, 236
+    \subitem {thisfun}, 236
+    \subitem {thisfuntab}, 236
+    \subitem {thislay}, 236
+    \subitem {thislaytab}, 236
+    \subitem {thislib}, 236
+    \subitem {thislibtab}, 236
+  \item {madonna\_\-}
+    \subitem {part.h}, 261
+  \item {madonna\_\-version}
+    \subitem {main.C}, 252
+    \subitem {thedate.C}, 281
+  \item {madonnaAllowRandomMoves}
+    \subitem {main.C}, 252
+  \item {madonnamakeminiplaza}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 252
+  \item {madonnamakepartition}
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 252
+  \item {madonnastat}
+    \subitem {part.h}, 261
+  \item {main}
+    \subitem {main.C}, 241
+  \item {main.C}, 236
+    \subitem {acceptCandidateEvenIfNegativeGain}, 251
+    \subitem {bname}, 238
+    \subitem {checkThatCircuitLooksReasonable}, 239
+    \subitem {circuit\_\-name}, 251
+    \subitem {costmincut}, 239
+    \subitem {doCompresion}, 251
+    \subitem {dontCheckChildPorts}, 251
+    \subitem {doTranAna}, 251
+    \subitem {expandableDirection}, 251
+    \subitem {extraplaza}, 251
+    \subitem {function\_\-name}, 251
+    \subitem {highnumpart}, 252
+    \subitem {INITIAL\_\-COOLING}, 238
+    \subitem {initial\_\-cooling}, 252
+    \subitem {INITIAL\_\-TEMPERATURE}, 238
+    \subitem {initial\_\-temperature}, 252
+    \subitem {layoutname}, 252
+    \subitem {library\_\-name}, 252
+    \subitem {macroMinSize}, 252
+    \subitem {madonna}, 239
+    \subitem {madonna\_\-version}, 252
+    \subitem {madonnaAllowRandomMoves}, 252
+    \subitem {madonnamakeminiplaza}, 252
+    \subitem {madonnamakepartition}, 252
+    \subitem {main}, 241
+    \subitem {makeChannels}, 252
+    \subitem {markChilds}, 248
+    \subitem {maxNumberOfClusterPermutations}, 252
+    \subitem {MAXSTR}, 238
+    \subitem {my\_\-new\_\-handler}, 249
+    \subitem {NOTINITIALIZED}, 238
+    \subitem {partWriteAllCir}, 249
+    \subitem {partWriteAllCir\_\-1}, 249
+    \subitem {partWriteAllCir\_\-2}, 250
+    \subitem {permutateClustersAtExit}, 252
+    \subitem {phil\_\-verbose}, 253
+    \subitem {PRECISION}, 238
+    \subitem {printpartstat}, 250
+    \subitem {printstatisticsinstatusfield}, 250
+    \subitem {processid}, 253
+    \subitem {rand\_\-points}, 253
+    \subitem {requestedGridPoints}, 253
+    \subitem {RouteAsciiFile}, 251
+    \subitem {RouteAsciiStreamBuf}, 251
+    \subitem {SDFWRITEALLMASK}, 238
+    \subitem {set\_\-srand}, 253
+    \subitem {slicingLayout}, 253
+    \subitem {stopquotient}, 253
+    \subitem {strng}, 253
+    \subitem {thedate}, 253
+    \subitem {thehost}, 253
+  \item {makeChannels}
+    \subitem {findrect.C}, 205
+    \subitem {main.C}, 252
+    \subitem {phil.C}, 267
+  \item {makeEdge}
+    \subitem {expansion\-Grid}, 67
+  \item {makeFooter}
+    \subitem {Box}, 40
+  \item {makeHeader}
+    \subitem {Box}, 40
+  \item {makeRandomMove}
+    \subitem {part.h}, 261
+  \item {makeRoutingInfo}
+    \subitem {expansion\-Grid}, 67
+    \subitem {glob\-Route.C}, 210
+  \item {makeSeparator}
+    \subitem {Box}, 40
+  \item {makeWindows}
+    \subitem {Plcm}, 155
+  \item {map}
+    \subitem {Image\-Map}, 91
+    \subitem {Lay\-Map}, 105
+  \item {mark}
+    \subitem {Plane}, 139
+  \item {markChilds}
+    \subitem {main.C}, 248
+  \item {markPowerLines}
+    \subitem {Pattern}, 132
+  \item {matrix}
+    \subitem {Pattern}, 136
+  \item {matrixGrid}
+    \subitem {matrix\-Grid}, 114
+  \item {matrix\-Grid}, 114
+    \subitem {$\sim$matrixGrid}, 115
+    \subitem {createAndInitialize}, 115
+    \subitem {dim1}, 116
+    \subitem {dim2}, 116
+    \subitem {dimension1}, 115
+    \subitem {dimension2}, 115
+    \subitem {matrixGrid}, 114
+    \subitem {operator[]}, 115
+    \subitem {thematrix}, 116
+  \item {matrix\-Grid.C}, 253
+  \item {matrix\-Grid.h}, 254
+  \item {matrixInt}
+    \subitem {matrix\-Int}, 117
+  \item {matrix\-Int}, 116
+    \subitem {$\sim$matrixInt}, 117
+    \subitem {createAndInitialize}, 117
+    \subitem {dim1}, 119
+    \subitem {dim2}, 119
+    \subitem {dimension1}, 118
+    \subitem {dimension2}, 118
+    \subitem {exchangeColumns}, 118
+    \subitem {exchangeRows}, 118
+    \subitem {matrixInt}, 117
+    \subitem {operator[]}, 118
+    \subitem {print}, 118
+    \subitem {thematrix}, 119
+  \item {matrix\-Int.C}, 254
+  \item {matrixInt.h}
+    \subitem {Not\-Transposed}, 254
+    \subitem {Transposed}, 254
+  \item {matrix\-Int.h}, 254
+    \subitem {Transposition}, 254
+  \item {MAX}
+    \subitem {findrect.C}, 197
+    \subitem {plaza.h}, 275
+  \item {MAX\_\-NON\_\-BLOCK\_\-DSTY\_\-HOR}
+    \subitem {plcm.h}, 277
+  \item {MAX\_\-NON\_\-BLOCK\_\-DSTY\_\-VER}
+    \subitem {plcm.h}, 277
+  \item {MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS}
+    \subitem {findrect.C}, 197
+  \item {maxmore}
+    \subitem {\_\-PIVOT}, 19
+  \item {MAXNETCOSTFUNCTIONS}
+    \subitem {genpart.h}, 207
+  \item {maxNumberOfClusterPermutations}
+    \subitem {main.C}, 252
+  \item {MAXSTR}
+    \subitem {main.C}, 238
+  \item {maxX}
+    \subitem {Prot\-Area}, 176
+  \item {maxY}
+    \subitem {Prot\-Area}, 176
+  \item {mayBeJoined}
+    \subitem {Plcm}, 155
+  \item {MEAN\_\-CELLS\_\-PER\_\-AREA}
+    \subitem {findrect.C}, 198
+  \item {MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED}
+    \subitem {findrect.C}, 198
+  \item {members}
+    \subitem {\_\-PARTITION}, 16
+  \item {Metal1Layer}
+    \subitem {phil.h}, 270
+  \item {Metal2Layer}
+    \subitem {phil.h}, 270
+  \item {MetalsViaLayer}
+    \subitem {phil.h}, 270
+  \item {MIN}
+    \subitem {plaza.h}, 275
+  \item {MIR}
+    \subitem {plaza.h}, 275
+  \item {MIRPTR}
+    \subitem {plaza.h}, 275
+  \item {MIRROR}
+    \subitem {image.h}, 223
+  \item {mirroraxis}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {MIRRORPTR}
+    \subitem {image.h}, 223
+  \item {mkequivalencelist}
+    \subitem {im.h}, 216
+    \subitem {initimagedsc.C}, 228
+  \item {mlist}
+    \subitem {\_\-PLAZGLAF}, 20
+  \item {more}
+    \subitem {\_\-PLAZGLAF}, 20
+  \item {morearea}
+    \subitem {\_\-MIR}, 11
+  \item {movecandidateandupdategains}
+    \subitem {part.h}, 261
+  \item {moveCell}
+    \subitem {Plcm}, 156
+  \item {mtx}
+    \subitem {\_\-EQUIVLIST}, 9
+    \subitem {\_\-MIR}, 11
+    \subitem {\_\-MIRROR}, 12
+  \item {mtx.C}, 254
+    \subitem {mtxaddvec}, 255
+    \subitem {mtxapply}, 255
+    \subitem {mtxapplytocrd}, 255
+    \subitem {mtxchain}, 255
+    \subitem {mtxcopy}, 255
+    \subitem {mtxidentity}, 256
+    \subitem {mtxtranslate}, 256
+  \item {mtxaddvec}
+    \subitem {im.h}, 217
+    \subitem {mtx.C}, 255
+  \item {mtxapply}
+    \subitem {im.h}, 217
+    \subitem {mtx.C}, 255
+  \item {mtxapplytocrd}
+    \subitem {im.h}, 217
+    \subitem {mtx.C}, 255
+  \item {mtxchain}
+    \subitem {im.h}, 217
+    \subitem {mtx.C}, 255
+  \item {mtxcopy}
+    \subitem {im.h}, 218
+    \subitem {mtx.C}, 255
+  \item {mtxdoubletonormal}
+    \subitem {im.h}, 218
+    \subitem {initimagedsc.C}, 228
+  \item {mtxidentity}
+    \subitem {im.h}, 218
+    \subitem {mtx.C}, 256
+  \item {mtxtranslate}
+    \subitem {im.h}, 219
+    \subitem {mtx.C}, 256
+  \item {my\_\-new\_\-handler}
+    \subitem {main.C}, 249
+  \item {myfree}
+    \subitem {myfree.C}, 256
+  \item {myfree.C}, 256
+    \subitem {myfree}, 256
+  \item {myName}
+    \subitem {Array}, 28
+    \subitem {Base\-Array}, 34
+    \subitem {Box}, 40
+    \subitem {Clst}, 45
+    \subitem {Cluster}, 48
+    \subitem {Cri\-Candidate}, 52
+    \subitem {Cri\-Net}, 53
+    \subitem {Cri\-Point}, 55
+    \subitem {Div\-Table}, 60
+    \subitem {Dummy}, 62
+    \subitem {Image\-Map}, 90
+    \subitem {Item}, 92
+    \subitem {List}, 108
+    \subitem {Package}, 121
+    \subitem {Pattern}, 133
+    \subitem {Plane\-Cell}, 141
+    \subitem {Point}, 174
+    \subitem {Prot\-Area}, 176
+    \subitem {Window}, 182
+  \item {myNo}
+    \subitem {Array}, 28
+    \subitem {Base\-Array}, 34
+    \subitem {Box}, 41
+    \subitem {Clst}, 45
+    \subitem {Cluster}, 49
+    \subitem {Cri\-Candidate}, 52
+    \subitem {Cri\-Net}, 53
+    \subitem {Cri\-Point}, 55
+    \subitem {Div\-Table}, 61
+    \subitem {Dummy}, 62
+    \subitem {Image\-Map}, 90
+    \subitem {Item}, 93
+    \subitem {List}, 108
+    \subitem {Package}, 121
+    \subitem {Pattern}, 133
+    \subitem {Plane\-Cell}, 141
+    \subitem {Point}, 174
+    \subitem {Prot\-Area}, 176
+    \subitem {Window}, 182
+
+  \indexspace
+
+  \item {name}
+    \subitem {\_\-POWERLINE}, 21
+    \subitem {Cri\-Net}, 54
+  \item {ncells}
+    \subitem {\_\-NETCOSTINFO}, 13
+    \subitem {\_\-ROUTING\_\-CHANNEL}, 22
+  \item {neighbor}
+    \subitem {expansion\-Grid\-Vertex}, 79
+  \item {neighbors}
+    \subitem {Cri\-Candidate}, 52
+  \item {net}
+    \subitem {\_\-PNET}, 21
+    \subitem {Cri\-Point}, 57
+    \subitem {glob\-Net}, 81
+  \item {netcost}
+    \subitem {\_\-TOTALP}, 25
+  \item {NETCOSTINFO}
+    \subitem {genpart.h}, 208
+  \item {NETCOSTINFOPTR}
+    \subitem {genpart.h}, 208
+  \item {netdisappearsinsinglepartition}
+    \subitem {part.h}, 261
+  \item {netid}
+    \subitem {\_\-NETSTATE}, 14
+  \item {NETSTATE}
+    \subitem {cost.h}, 191
+  \item {netstatecost}
+    \subitem {part.h}, 261
+  \item {netstatecost2}
+    \subitem {part.h}, 261
+  \item {NETSTATEPTR}
+    \subitem {cost.h}, 191
+  \item {NewEquivlist}
+    \subitem {image.h}, 222
+  \item {NewImagedesc}
+    \subitem {image.h}, 222
+  \item {NewMirror}
+    \subitem {image.h}, 222
+  \item {NewNetstate}
+    \subitem {cost.h}, 191
+  \item {NewPartcell}
+    \subitem {genpart.h}, 207
+  \item {NewPartition}
+    \subitem {genpart.h}, 207
+  \item {NewPartlist}
+    \subitem {genpart.h}, 207
+  \item {NewPlazglaf}
+    \subitem {plaza.h}, 275
+  \item {NewPnet}
+    \subitem {genpart.h}, 208
+  \item {NewSectorlist}
+    \subitem {image.h}, 222
+  \item {NewTotalp}
+    \subitem {genpart.h}, 208
+  \item {NEXT}
+    \subitem {cost.h}, 191
+  \item {next}
+    \subitem {\_\-EQUIVLIST}, 9
+    \subitem {\_\-MIRROR}, 12
+    \subitem {\_\-PARTCELL}, 15
+    \subitem {\_\-PARTITION}, 16
+    \subitem {\_\-PLAZGLAF}, 20
+    \subitem {\_\-PNET}, 21
+    \subitem {\_\-POWERLINE}, 21
+    \subitem {\_\-SECTORLIST}, 23
+    \subitem {List\-Element}, 111
+  \item {nextincell}
+    \subitem {\_\-PARTLIST}, 17
+  \item {nextinpart}
+    \subitem {\_\-PARTLIST}, 17
+  \item {nmembers}
+    \subitem {\_\-PARTITION}, 16
+  \item {nmoves}
+    \subitem {\_\-TOTALP}, 25
+  \item {NO\_\-ERROR}
+    \subitem {usrlib.h}, 285
+  \item {noConflicts}
+    \subitem {Plcm}, 157
+  \item {NOITEM}
+    \subitem {item.h}, 230
+  \item {NoneLayer}
+    \subitem {phil.h}, 270
+  \item {noOfLayers}
+    \subitem {Pattern}, 136
+  \item {NoRounding}
+    \subitem {findrect.C}, 198
+  \item {North}
+    \subitem {glob\-Route.h}, 212
+  \item {NOTHING}
+    \subitem {Item}, 94
+  \item {NOTINITIALIZED}
+    \subitem {findrect.C}, 198
+    \subitem {main.C}, 238
+  \item {NotTransposed}
+    \subitem {matrix\-Int.h}, 254
+  \item {Nowhere}
+    \subitem {glob\-Route.h}, 212
+  \item {NULL}
+    \subitem {sea.h}, 279
+  \item {numaxis}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {numcells}
+    \subitem {\_\-TOTALP}, 25
+  \item {numid}
+    \subitem {\_\-PARTITION}, 16
+  \item {numLayers}
+    \subitem {Parser\-Interface}, 124
+  \item {numlayers}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {numparts}
+    \subitem {\_\-NETCOSTINFO}, 13
+    \subitem {\_\-NETSTATE}, 14
+    \subitem {\_\-TOTALP}, 25
+    \subitem {connect\-Info}, 50
+    \subitem {dist\-Info}, 58
+  \item {numsector}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {numsectors}
+    \subitem {\_\-PIVOT}, 19
+  \item {nwires}
+    \subitem {\_\-ROUTING\_\-CHANNEL}, 22
+    \subitem {expansion\-Grid}, 68
+  \item {nx}
+    \subitem {\_\-NETSTATE}, 14
+    \subitem {\_\-TOTALP}, 25
+    \subitem {expansion\-Grid}, 68
+  \item {ny}
+    \subitem {\_\-NETSTATE}, 14
+    \subitem {\_\-TOTALP}, 25
+    \subitem {expansion\-Grid}, 68
+
+  \indexspace
+
+  \item {oldfashionedwayofdoingthings}
+    \subitem {findrect.C}, 204
+  \item {operator \&}
+    \subitem {Clst}, 45
+    \subitem {cri.C}, 192
+    \subitem {Cri\-Point}, 56
+  \item {operator Boolean}
+    \subitem {Clst}, 45
+  \item {operator clusterMapType}
+    \subitem {Cluster}, 49
+  \item {operator delete}
+    \subitem {Dummy}, 62
+    \subitem {Item}, 93
+  \item {operator int}
+    \subitem {Array\-Iterator}, 30
+    \subitem {Box\-Iterator}, 43
+    \subitem {List\-Iterator}, 113
+  \item {operator Item \&}
+    \subitem {Array\-Iterator}, 30
+    \subitem {Box\-Iterator}, 42
+    \subitem {List\-Iterator}, 112
+  \item {operator List \&}
+    \subitem {Clst}, 46
+  \item {operator new}
+    \subitem {Item}, 93
+  \item {operator short $\ast$}
+    \subitem {Pattern}, 133
+  \item {operator!=}
+    \subitem {item.h}, 230
+  \item {operator()}
+    \subitem {connect\-Info}, 51
+    \subitem {dist\-Info}, 58
+  \item {operator++}
+    \subitem {Array\-Iterator}, 30
+    \subitem {Box\-Iterator}, 43
+    \subitem {List\-Iterator}, 113
+  \item {operator$<$$<$}
+    \subitem {Item}, 94
+    \subitem {item.h}, 230
+  \item {operator=}
+    \subitem {Transparency}, 179
+  \item {operator==}
+    \subitem {item.h}, 231
+  \item {operator[]}
+    \subitem {Array}, 28
+    \subitem {matrix\-Grid}, 115
+    \subitem {matrix\-Int}, 118
+  \item {operator\texttt{|}=}
+    \subitem {Clst}, 46
+    \subitem {Cluster}, 49
+    \subitem {cri.C}, 192
+    \subitem {Cri\-Point}, 56
+  \item {orient}
+    \subitem {\_\-POWERLINE}, 21
+  \item {otherDirection}
+    \subitem {findrect.C}, 204
+  \item {overCapacityReward}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {overlap}
+    \subitem {\_\-IMAGEDESC}, 10
+
+  \indexspace
+
+  \item {Package}, 119
+    \subitem {$\sim$Package}, 120
+    \subitem {add}, 120
+    \subitem {findItem}, 120
+    \subitem {hasItem}, 121
+    \subitem {initIterator}, 121
+    \subitem {myName}, 121
+    \subitem {myNo}, 121
+    \subitem {Package}, 120
+    \subitem {pickOut}, 121
+    \subitem {remove}, 122
+  \item {package.C}, 257
+  \item {package.h}, 257
+  \item {packageClass}
+    \subitem {basedefs.h}, 185
+  \item {parInt}
+    \subitem {phil.C}, 267
+  \item {parser\-If.C}, 257
+    \subitem {pperror}, 257
+    \subitem {pplex}, 257
+    \subitem {ppparse}, 257
+  \item {parser\-If.h}, 258
+  \item {ParserInterface}
+    \subitem {Parser\-Interface}, 123
+  \item {Parser\-Interface}, 122
+    \subitem {$\sim$ParserInterface}, 123
+    \subitem {addImageOverlap}, 123
+    \subitem {addMirrorAxis}, 123
+    \subitem {addPowerLine}, 123
+    \subitem {getImageDesc}, 123
+    \subitem {getImageMap}, 124
+    \subitem {imageMap}, 127
+    \subitem {initImages}, 124
+    \subitem {numLayers}, 124
+    \subitem {ParserInterface}, 123
+    \subitem {processFeeds}, 124
+    \subitem {read}, 124
+    \subitem {removeDuplicates}, 125
+    \subitem {setDim}, 126
+    \subitem {setNumLayers}, 126
+    \subitem {setRouteOrient}, 126
+    \subitem {setTransparency}, 127
+    \subitem {thisImage}, 127
+  \item {part.h}, 258
+    \subitem {alreadyhavefun}, 259
+    \subitem {assignstatebuf}, 259
+    \subitem {balloc}, 259
+    \subitem {bfree}, 259
+    \subitem {copycpr}, 259
+    \subitem {cost16x4}, 259
+    \subitem {cost3x3}, 259
+    \subitem {cost4x4}, 260
+    \subitem {cost5x4}, 260
+    \subitem {cost6x4}, 260
+    \subitem {cost8x4}, 260
+    \subitem {costquad}, 260
+    \subitem {domove\_\-and\_\-copy\_\-netstate}, 260
+    \subitem {dopartitioning}, 260
+    \subitem {enable\_\-reset\_\-alarm\_\-flag}, 260
+    \subitem {exitpartitionstructures}, 260
+    \subitem {fixnetlist}, 260
+    \subitem {gainnetstate}, 260
+    \subitem {gencost}, 260
+    \subitem {genpart}, 260
+    \subitem {init\_\-row\_\-clm\_\-transformation\_\-arrays}, 260
+    \subitem {initnetcostinfo}, 260
+    \subitem {initnetstate}, 260
+    \subitem {initsignals}, 260
+    \subitem {keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr}, 260
+    \subitem {keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake}, 261
+    \subitem {keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr}, 261
+    \subitem {keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake}, 261
+    \subitem {madonna\_\-}, 261
+    \subitem {madonnastat}, 261
+    \subitem {makeRandomMove}, 261
+    \subitem {movecandidateandupdategains}, 261
+    \subitem {netdisappearsinsinglepartition}, 261
+    \subitem {netstatecost}, 261
+    \subitem {netstatecost2}, 261
+    \subitem {plazareadlayout}, 261
+    \subitem {prefabmakemembersandcandidates}, 261
+    \subitem {raise\_\-alarm\_\-flag}, 261
+    \subitem {readlayoutofchildren}, 261
+    \subitem {rememberthispartitioning}, 261
+    \subitem {sizeofstatebuf}, 261
+    \subitem {sizeofstatebuf2}, 261
+    \subitem {startofstatebuf}, 261
+    \subitem {updategains}, 262
+    \subitem {updategainsincellsinnet}, 262
+    \subitem {updateTemperature}, 262
+  \item {PARTCELL}
+    \subitem {genpart.h}, 208
+  \item {partcell}
+    \subitem {\_\-TOTALP}, 25
+  \item {PARTCELLPTR}
+    \subitem {genpart.h}, 208
+  \item {PARTITION}
+    \subitem {genpart.h}, 208
+  \item {partition}
+    \subitem {\_\-PARTCELL}, 15
+    \subitem {\_\-PARTLIST}, 17
+    \subitem {\_\-TOTALP}, 25
+  \item {PartitionGV}
+    \subitem {glob\-Route.h}, 211
+  \item {PARTITIONPTR}
+    \subitem {genpart.h}, 208
+  \item {PARTLIST}
+    \subitem {genpart.h}, 208
+  \item {partlist}
+    \subitem {\_\-PARTCELL}, 15
+  \item {PARTLISTPTR}
+    \subitem {genpart.h}, 208
+  \item {partWriteAllCir}
+    \subitem {main.C}, 249
+  \item {partWriteAllCir\_\-1}
+    \subitem {main.C}, 249
+  \item {partWriteAllCir\_\-2}
+    \subitem {main.C}, 250
+  \item {Pattern}, 127
+    \subitem {$\sim$Pattern}, 129
+    \subitem {addCriticals}, 130
+    \subitem {cellname}, 136
+    \subitem {doCheck}, 136
+    \subitem {doTransAna}, 136
+    \subitem {findNewLeftBottom}, 131
+    \subitem {getHor}, 131
+    \subitem {getTranMaps}, 131
+    \subitem {getVer}, 132
+    \subitem {hor}, 136
+    \subitem {isEqual}, 132
+    \subitem {isMac}, 136
+    \subitem {isMacro}, 132
+    \subitem {markPowerLines}, 132
+    \subitem {matrix}, 136
+    \subitem {myName}, 133
+    \subitem {myNo}, 133
+    \subitem {noOfLayers}, 136
+    \subitem {operator short $\ast$}, 133
+    \subitem {Pattern}, 129
+    \subitem {removeUnnessesery}, 133
+    \subitem {scan}, 133
+    \subitem {scanSlice}, 135
+    \subitem {tranMaps}, 136
+    \subitem {ver}, 136
+  \item {pattern}
+    \subitem {Cluster}, 49
+    \subitem {Plane\-Cell}, 141
+  \item {pattern.C}, 262
+    \subitem {recognizeLayer}, 262
+  \item {pattern.h}, 263
+    \subitem {transGridType}, 263
+  \item {PatternClass}
+    \subitem {phil.h}, 269
+  \item {peekHead}
+    \subitem {List}, 109
+  \item {permitarea}
+    \subitem {\_\-PARTITION}, 16
+  \item {permutateClustersAtExit}
+    \subitem {main.C}, 252
+  \item {permutateThisPartitioning}
+    \subitem {cluster\-Perm.C}, 189
+  \item {phil}
+    \subitem {phil.C}, 264
+    \subitem {phil\_\-glob.h}, 272
+  \item {phil.C}, 263
+    \subitem {doCompresion}, 266
+    \subitem {doTranAna}, 266
+    \subitem {expandableDirection}, 266
+    \subitem {getImageDesc}, 264
+    \subitem {INC\_\-FACT}, 264
+    \subitem {macroMinSize}, 267
+    \subitem {makeChannels}, 267
+    \subitem {parInt}, 267
+    \subitem {phil}, 264
+    \subitem {phil\_\-verbose}, 267
+    \subitem {plcm}, 267
+    \subitem {rand\_\-points}, 267
+    \subitem {readImageFile}, 266
+    \subitem {requestedGridPoints}, 267
+    \subitem {set\_\-srand}, 267
+    \subitem {slicingLayout}, 267
+  \item {phil.h}, 267
+    \subitem {ClstClass}, 268
+    \subitem {ClusterClass}, 268
+    \subitem {CriCandidateClass}, 268
+    \subitem {CriNetClass}, 268
+    \subitem {CriPointClass}, 268
+    \subitem {Critical\-Area\-Flag}, 269
+    \subitem {Diffusion\-Layer}, 270
+    \subitem {DivTabClass}, 268
+    \subitem {flagType}, 269
+    \subitem {ImageMapClass}, 269
+    \subitem {layerType}, 270
+    \subitem {LayMapClass}, 269
+    \subitem {Metal1Layer}, 270
+    \subitem {Metal2Layer}, 270
+    \subitem {Metals\-Via\-Layer}, 270
+    \subitem {None\-Layer}, 270
+    \subitem {PatternClass}, 269
+    \subitem {PlaneCellClass}, 269
+    \subitem {PlaneClass}, 269
+    \subitem {PlcmClass}, 269
+    \subitem {PointClass}, 269
+    \subitem {Poly\-Layer}, 270
+    \subitem {ProtAreaClass}, 269
+    \subitem {recognizeLayer}, 270
+    \subitem {Terminal\-Flag}, 269
+    \subitem {Via\-Layer}, 270
+    \subitem {WindowClass}, 269
+  \item {phil\_\-glob.h}, 271
+    \subitem {getImageDesc}, 271
+    \subitem {phil}, 272
+    \subitem {readImageFile}, 273
+    \subitem {SLICE\_\-INFO}, 271
+    \subitem {SLICE\_\-INFO\_\-TYPE}, 271
+    \subitem {SLICE\_\-INFOPTR}, 271
+  \item {phil\_\-verbose}
+    \subitem {main.C}, 253
+    \subitem {phil.C}, 267
+  \item {pickOut}
+    \subitem {Base\-Array}, 34, 35
+    \subitem {List}, 109
+    \subitem {Package}, 121
+  \item {PIVOT}
+    \subitem {plaza.h}, 275
+  \item {PIVOTPTR}
+    \subitem {plaza.h}, 275
+  \item {placeGroup}
+    \subitem {Plcm}, 157
+  \item {placement}
+    \subitem {Plcm}, 162
+  \item {placeOneCell}
+    \subitem {Plcm}, 160
+  \item {Plane}, 137
+    \subitem {$\sim$Plane}, 138
+    \subitem {array}, 139
+    \subitem {chk}, 138
+    \subitem {cols}, 139
+    \subitem {getCriticals}, 138
+    \subitem {getEffSize}, 138
+    \subitem {getPattern}, 139
+    \subitem {mark}, 139
+    \subitem {Plane}, 137
+    \subitem {rows}, 139
+  \item {plane}
+    \subitem {Plcm}, 172
+  \item {plane.C}, 274
+  \item {plane.h}, 274
+  \item {PlaneCell}
+    \subitem {Plane\-Cell}, 140
+  \item {Plane\-Cell}, 140
+    \subitem {$\sim$PlaneCell}, 140
+    \subitem {myName}, 141
+    \subitem {myNo}, 141
+    \subitem {pattern}, 141
+    \subitem {PlaneCell}, 140
+  \item {PlaneCellClass}
+    \subitem {phil.h}, 269
+  \item {PlaneClass}
+    \subitem {phil.h}, 269
+  \item {plaza}
+    \subitem {\_\-PIVOT}, 19
+  \item {plaza.h}, 274
+    \subitem {EDGE}, 275
+    \subitem {FreePlazglaf}, 275
+    \subitem {MAX}, 275
+    \subitem {MIN}, 275
+    \subitem {MIR}, 275
+    \subitem {MIRPTR}, 275
+    \subitem {NewPlazglaf}, 275
+    \subitem {PIVOT}, 275
+    \subitem {PIVOTPTR}, 275
+    \subitem {PLAZGLAF}, 275
+    \subitem {PLAZGLAFPTR}, 275
+  \item {plazareadlayout}
+    \subitem {part.h}, 261
+  \item {PLAZGLAF}
+    \subitem {plaza.h}, 275
+  \item {PLAZGLAFPTR}
+    \subitem {plaza.h}, 275
+  \item {Plcm}, 141
+    \subitem {$\sim$Plcm}, 144
+    \subitem {addFreeNet}, 144
+    \subitem {blockChannels}, 144
+    \subitem {calcTransp}, 144
+    \subitem {circuitName}, 171
+    \subitem {clearFlags}, 146
+    \subitem {compaction}, 148
+    \subitem {compactSide}, 146
+    \subitem {createPlane}, 148
+    \subitem {deletePos}, 150
+    \subitem {doPlacement}, 151
+    \subitem {doTransAna}, 171
+    \subitem {doTranspAnalysis}, 153
+    \subitem {findSlice}, 153
+    \subitem {freeFlagItem1}, 154
+    \subitem {freeFlagItem2}, 154
+    \subitem {freeNets}, 171
+    \subitem {fromPartitioner}, 171
+    \subitem {functionName}, 171
+    \subitem {givenCircuit}, 171
+    \subitem {globRouting}, 171
+    \subitem {imageMap}, 171
+    \subitem {isEmpty}, 155
+    \subitem {layInstancesList}, 171
+    \subitem {layoutName}, 171
+    \subitem {layoutToBuild}, 171
+    \subitem {libraryName}, 172
+    \subitem {macroMinSize}, 172
+    \subitem {makeWindows}, 155
+    \subitem {mayBeJoined}, 155
+    \subitem {moveCell}, 156
+    \subitem {noConflicts}, 157
+    \subitem {placeGroup}, 157
+    \subitem {placement}, 162
+    \subitem {placeOneCell}, 160
+    \subitem {plane}, 172
+    \subitem {Plcm}, 143
+    \subitem {prepare}, 162
+    \subitem {random\_\-points}, 172
+    \subitem {read}, 164
+    \subitem {readCommands}, 165
+    \subitem {readLayouts}, 165
+    \subitem {recover}, 165
+    \subitem {removeEmptySlices}, 166
+    \subitem {set\_\-srand}, 172
+    \subitem {setBbx}, 167
+    \subitem {sizeOk}, 167
+    \subitem {slicesInHor}, 172
+    \subitem {slicesInVer}, 172
+    \subitem {slicingLayout}, 172
+    \subitem {sortGroup}, 168
+    \subitem {thisImage}, 172
+    \subitem {totalArea}, 172
+    \subitem {transList}, 168
+    \subitem {tryThisCellHere}, 168
+    \subitem {tryThisCluster}, 169
+    \subitem {verboseMode}, 172
+    \subitem {write}, 170
+  \item {plcm}
+    \subitem {phil.C}, 267
+  \item {plcm.C}, 275
+    \subitem {getpid}, 276
+    \subitem {TRANS\_\-DEBUG}, 276
+  \item {plcm.h}, 276
+    \subitem {compactType}, 277
+    \subitem {Horiz\-C}, 277
+    \subitem {MAX\_\-NON\_\-BLOCK\_\-DSTY\_\-HOR}, 277
+    \subitem {MAX\_\-NON\_\-BLOCK\_\-DSTY\_\-VER}, 277
+    \subitem {Vert\-C}, 277
+  \item {PlcmClass}
+    \subitem {phil.h}, 269
+  \item {plcminit.C}, 277
+    \subitem {CHANNEL\_\-DEBUG}, 277
+  \item {PNET}
+    \subitem {genpart.h}, 208
+  \item {PNETPTR}
+    \subitem {genpart.h}, 208
+  \item {Point}, 173
+    \subitem {$\sim$Point}, 173
+    \subitem {isEqual}, 174
+    \subitem {myName}, 174
+    \subitem {myNo}, 174
+    \subitem {Point}, 173
+    \subitem {print}, 174
+    \subitem {x}, 174
+    \subitem {y}, 174
+  \item {point}
+    \subitem {\_\-SECTORLIST}, 23
+  \item {point.C}, 277
+  \item {point.h}, 278
+  \item {PointClass}
+    \subitem {phil.h}, 269
+  \item {pointOfCompass}
+    \subitem {glob\-Route.h}, 211
+  \item {PolyLayer}
+    \subitem {phil.h}, 270
+  \item {POWERLINE}
+    \subitem {image.h}, 223
+  \item {POWERLINEPTR}
+    \subitem {image.h}, 223
+  \item {powerlines}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {pperror}
+    \subitem {parser\-If.C}, 257
+  \item {pplex}
+    \subitem {parser\-If.C}, 257
+  \item {ppparse}
+    \subitem {parser\-If.C}, 257
+  \item {PRECISION}
+    \subitem {main.C}, 238
+  \item {prefabmakemembersandcandidates}
+    \subitem {part.h}, 261
+  \item {prepare}
+    \subitem {Plcm}, 162
+  \item {PREV}
+    \subitem {cost.h}, 191
+  \item {prev}
+    \subitem {\_\-PARTCELL}, 15
+    \subitem {\_\-PARTITION}, 16
+  \item {previnpart}
+    \subitem {\_\-PARTLIST}, 18
+  \item {print}
+    \subitem {Box}, 41
+    \subitem {Clst}, 46
+    \subitem {Cri\-Net}, 53
+    \subitem {Cri\-Point}, 55
+    \subitem {Dummy}, 62
+    \subitem {expansion\-Grid\-Edge}, 76
+    \subitem {expansion\-Grid\-Vertex}, 79
+    \subitem {glob\-Net}, 82
+    \subitem {Item}, 94
+    \subitem {matrix\-Int}, 118
+    \subitem {Point}, 174
+  \item {printchild}
+    \subitem {debug.C}, 194
+    \subitem {im.h}, 219
+  \item {printContentsOn}
+    \subitem {Base\-Array}, 35
+  \item {printequiv}
+    \subitem {debug.C}, 194
+    \subitem {im.h}, 219
+  \item {printmtx}
+    \subitem {debug.C}, 194
+    \subitem {im.h}, 220
+  \item {printNetlistStatistics}
+    \subitem {madonna.C}, 234
+  \item {printpartstat}
+    \subitem {main.C}, 250
+  \item {printpivot}
+    \subitem {debug.C}, 195
+    \subitem {im.h}, 220
+  \item {printRoute}
+    \subitem {expansion\-Grid}, 69
+  \item {printRouteGlobNet}
+    \subitem {expansion\-Grid}, 70
+  \item {printRouteSummary}
+    \subitem {expansion\-Grid}, 70
+  \item {printRouting}
+    \subitem {expansion\-Grid}, 70
+  \item {printstamp}
+    \subitem {debug.C}, 195
+    \subitem {im.h}, 220
+  \item {printstatisticsinstatusfield}
+    \subitem {main.C}, 250
+  \item {processFeeds}
+    \subitem {Parser\-Interface}, 124
+  \item {processid}
+    \subitem {main.C}, 253
+  \item {ProtArea}
+    \subitem {Prot\-Area}, 175
+  \item {Prot\-Area}, 175
+    \subitem {$\sim$ProtArea}, 175
+    \subitem {is}, 176
+    \subitem {maxX}, 176
+    \subitem {maxY}, 176
+    \subitem {myName}, 176
+    \subitem {myNo}, 176
+    \subitem {ProtArea}, 175
+    \subitem {update}, 176
+  \item {prot\-Area.C}, 278
+  \item {prot\-Area.h}, 278
+  \item {ProtAreaClass}
+    \subitem {phil.h}, 269
+
+  \indexspace
+
+  \item {raise\_\-alarm\_\-flag}
+    \subitem {part.h}, 261
+  \item {rand\_\-points}
+    \subitem {main.C}, 253
+    \subitem {phil.C}, 267
+  \item {random\_\-points}
+    \subitem {Plcm}, 172
+  \item {read}
+    \subitem {Parser\-Interface}, 124
+    \subitem {Plcm}, 164
+  \item {readCommands}
+    \subitem {Plcm}, 165
+  \item {readImageFile}
+    \subitem {phil.C}, 266
+    \subitem {phil\_\-glob.h}, 273
+  \item {readlayoutofchildren}
+    \subitem {part.h}, 261
+  \item {readLayouts}
+    \subitem {Plcm}, 165
+  \item {readmirroraxis}
+    \subitem {im.h}, 220
+    \subitem {initimagedsc.C}, 229
+  \item {reallocate}
+    \subitem {Base\-Array}, 36
+  \item {recognizeLayer}
+    \subitem {pattern.C}, 262
+    \subitem {phil.h}, 270
+  \item {recognizeNeighbors}
+    \subitem {Image\-Map}, 90
+  \item {recognizeTerminals}
+    \subitem {Lay\-Map}, 102
+  \item {recover}
+    \subitem {Plcm}, 165
+  \item {refresh}
+    \subitem {Lay\-Map}, 102
+  \item {rememberthispartitioning}
+    \subitem {part.h}, 261
+  \item {remove}
+    \subitem {Base\-Array}, 37
+    \subitem {List}, 110
+    \subitem {Package}, 122
+  \item {removeDuplicates}
+    \subitem {Parser\-Interface}, 125
+  \item {removeEmptySlices}
+    \subitem {Plcm}, 166
+  \item {removeUnnessesery}
+    \subitem {Pattern}, 133
+  \item {repeat}
+    \subitem {\_\-TOTALP}, 25
+  \item {requestedGridPoints}
+    \subitem {findrect.C}, 205
+    \subitem {madonna.C}, 235
+    \subitem {main.C}, 253
+    \subitem {phil.C}, 267
+  \item {restart}
+    \subitem {Array\-Iterator}, 31
+    \subitem {Box\-Iterator}, 43
+    \subitem {List\-Iterator}, 113
+  \item {rightWay}
+    \subitem {layout\-Map\-Type}, 106
+  \item {RoundDown}
+    \subitem {findrect.C}, 198
+  \item {RoundingPolicy}
+    \subitem {findrect.C}, 198
+  \item {RoundNear}
+    \subitem {findrect.C}, 198
+  \item {RoundUp}
+    \subitem {findrect.C}, 198
+  \item {roundWiresToCells}
+    \subitem {expansion\-Grid}, 71
+  \item {route}
+    \subitem {glob\-Net}, 82
+  \item {RouteAsciiFile}
+    \subitem {glob\-Route.C}, 210
+    \subitem {main.C}, 251
+  \item {RouteAsciiStreamBuf}
+    \subitem {main.C}, 251
+  \item {routeGlobNet}
+    \subitem {expansion\-Grid}, 71
+  \item {routeGlobNets}
+    \subitem {expansion\-Grid}, 72
+  \item {routeorient}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {routing}
+    \subitem {\_\-TOTALP}, 26
+  \item {routing.h}, 278
+    \subitem {GLOBAL\_\-ROUTING}, 278
+    \subitem {GLOBAL\_\-ROUTINGPTR}, 278
+    \subitem {ROUTING\_\-CHANNEL}, 278
+    \subitem {ROUTING\_\-CHANNELPTR}, 278
+    \subitem {ROUTING\_\-INFO}, 278
+    \subitem {ROUTING\_\-INFOPTR}, 279
+  \item {ROUTING\_\-CHANNEL}
+    \subitem {routing.h}, 278
+  \item {ROUTING\_\-CHANNELPTR}
+    \subitem {routing.h}, 278
+  \item {ROUTING\_\-INFO}
+    \subitem {routing.h}, 278
+  \item {ROUTING\_\-INFOPTR}
+    \subitem {routing.h}, 279
+  \item {Row}
+    \subitem {cost.h}, 191
+  \item {row}
+    \subitem {\_\-NETCOSTINFO}, 13
+    \subitem {\_\-NETSTATE}, 14
+  \item {row\_\-or\_\-column}
+    \subitem {\_\-POWERLINE}, 21
+  \item {rows}
+    \subitem {Image\-Map}, 91
+    \subitem {Plane}, 139
+
+  \indexspace
+
+  \item {scan}
+    \subitem {Pattern}, 133
+  \item {scanSlice}
+    \subitem {Pattern}, 135
+  \item {sdfset}, 177
+  \item {sdfset\-Elmt}, 177
+  \item {SDFWRITEALLMASK}
+    \subitem {main.C}, 238
+  \item {sea.h}, 279
+    \subitem {Boolean}, 279
+    \subitem {false}, 279
+    \subitem {NULL}, 279
+    \subitem {true}, 279
+  \item {search}
+    \subitem {Lay\-Map}, 102
+  \item {sectorid}
+    \subitem {\_\-SECTORLIST}, 23
+  \item {SECTORLIST}
+    \subitem {image.h}, 223
+  \item {sectorlist}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {SECTORLISTPTR}
+    \subitem {image.h}, 223
+  \item {set\_\-srand}
+    \subitem {main.C}, 253
+    \subitem {phil.C}, 267
+    \subitem {Plcm}, 172
+  \item {setBbx}
+    \subitem {Plcm}, 167
+  \item {setDim}
+    \subitem {Parser\-Interface}, 126
+  \item {setNumLayers}
+    \subitem {Parser\-Interface}, 126
+  \item {setRouteOrient}
+    \subitem {Parser\-Interface}, 126
+  \item {setTransparency}
+    \subitem {Parser\-Interface}, 127
+  \item {size}
+    \subitem {\_\-IMAGEDESC}, 10
+  \item {sizeHor}
+    \subitem {Transparency}, 180
+  \item {sizeofstatebuf}
+    \subitem {part.h}, 261
+  \item {sizeofstatebuf2}
+    \subitem {part.h}, 261
+  \item {sizeOk}
+    \subitem {Plcm}, 167
+  \item {sizeType}
+    \subitem {basedefs.h}, 185
+  \item {sizeVer}
+    \subitem {Transparency}, 180
+  \item {SLICE\_\-INFO}
+    \subitem {phil\_\-glob.h}, 271
+  \item {SLICE\_\-INFO\_\-TYPE}
+    \subitem {phil\_\-glob.h}, 271
+  \item {SLICE\_\-INFOPTR}
+    \subitem {phil\_\-glob.h}, 271
+  \item {slicesInHor}
+    \subitem {Plcm}, 172
+  \item {slicesInVer}
+    \subitem {Plcm}, 172
+  \item {slicingLayout}
+    \subitem {main.C}, 253
+    \subitem {phil.C}, 267
+    \subitem {Plcm}, 172
+  \item {small\_\-channels}
+    \subitem {\_\-GLOBAL\_\-ROUTING}, 9
+  \item {sortGroup}
+    \subitem {Plcm}, 168
+  \item {South}
+    \subitem {glob\-Route.h}, 212
+  \item {stamp}
+    \subitem {\_\-IMAGEDESC}, 11
+  \item {startingElement}
+    \subitem {List\-Iterator}, 114
+  \item {startofstatebuf}
+    \subitem {part.h}, 261
+  \item {stopcriterion}
+    \subitem {\_\-TOTALP}, 26
+  \item {stopquotient}
+    \subitem {main.C}, 253
+  \item {strng}
+    \subitem {main.C}, 253
+  \item {strtnetcost}
+    \subitem {\_\-TOTALP}, 26
+  \item {stuff.C}, 279
+    \subitem {ALIGNBITS}, 280
+    \subitem {ALIGNMOD}, 280
+    \subitem {balloc}, 280
+    \subitem {bfree}, 280
+  \item {summarizeGlobNets}
+    \subitem {expansion\-Grid}, 73
+  \item {sumRoutingInfo}
+    \subitem {expansion\-Grid}, 72
+
+  \indexspace
+
+  \item {targetarea}
+    \subitem {\_\-PARTITION}, 17
+  \item {targetAreas}
+    \subitem {findrect.C}, 205
+  \item {targetGridPoints}
+    \subitem {findrect.C}, 206
+  \item {temperature}
+    \subitem {\_\-TOTALP}, 26
+  \item {TerminalFlag}
+    \subitem {phil.h}, 269
+  \item {termNo}
+    \subitem {layout\-Map\-Type}, 106
+  \item {theArray}
+    \subitem {Base\-Array}, 37
+  \item {thecostfunctions}
+    \subitem {findrect.C}, 206
+  \item {THEDATE}
+    \subitem {thedate.C}, 281
+  \item {thedate}
+    \subitem {main.C}, 253
+    \subitem {thedate.C}, 281
+  \item {thedate.C}, 280
+    \subitem {madonna\_\-version}, 281
+    \subitem {THEDATE}, 281
+    \subitem {thedate}, 281
+    \subitem {THEHOST}, 281
+    \subitem {thehost}, 281
+    \subitem {THEMAN}, 281
+    \subitem {theman}, 281
+  \item {theDummyItem}
+    \subitem {item.C}, 230
+  \item {theglobnets}
+    \subitem {expansion\-Grid}, 74
+  \item {thegraph}
+    \subitem {expansion\-Grid}, 74
+  \item {THEHOST}
+    \subitem {thedate.C}, 281
+  \item {thehost}
+    \subitem {main.C}, 253
+    \subitem {thedate.C}, 281
+  \item {THEMAN}
+    \subitem {thedate.C}, 281
+  \item {theman}
+    \subitem {thedate.C}, 281
+  \item {thematrix}
+    \subitem {expansion\-Grid}, 74
+    \subitem {matrix\-Grid}, 116
+    \subitem {matrix\-Int}, 119
+  \item {thinkAboutGridSize}
+    \subitem {findrect.C}, 204
+  \item {thiscir}
+    \subitem {madonna.C}, 236
+  \item {thiscirtab}
+    \subitem {madonna.C}, 236
+  \item {thisfun}
+    \subitem {madonna.C}, 236
+  \item {thisfuntab}
+    \subitem {madonna.C}, 236
+  \item {thisImage}
+    \subitem {Parser\-Interface}, 127
+    \subitem {Plcm}, 172
+  \item {thislay}
+    \subitem {madonna.C}, 236
+  \item {thislaytab}
+    \subitem {madonna.C}, 236
+  \item {thislib}
+    \subitem {madonna.C}, 236
+  \item {thislibtab}
+    \subitem {madonna.C}, 236
+  \item {tmpStamp}
+    \subitem {Image\-Map}, 91
+  \item {tmpstatebuf}
+    \subitem {\_\-TOTALP}, 26
+  \item {TOO\_\-BIG}
+    \subitem {findrect.C}, 198
+  \item {TOO\_\-SMALL}
+    \subitem {findrect.C}, 198
+  \item {topBound}
+    \subitem {Base\-Array}, 37
+  \item {topbound}
+    \subitem {Base\-Array}, 37
+  \item {topcell}
+    \subitem {\_\-TOTALP}, 26
+  \item {topnets}
+    \subitem {\_\-PARTCELL}, 15
+  \item {totalArea}
+    \subitem {Plcm}, 172
+  \item {TOTALP}
+    \subitem {genpart.h}, 208
+  \item {totalp}
+    \subitem {expansion\-Grid}, 74
+  \item {TOTALPPTR}
+    \subitem {genpart.h}, 208
+  \item {tranMaps}
+    \subitem {Pattern}, 136
+  \item {TRANS\_\-DEBUG}
+    \subitem {plcm.C}, 276
+  \item {transform}
+    \subitem {Transparency}, 179
+  \item {transGridType}
+    \subitem {pattern.h}, 263
+  \item {transList}
+    \subitem {Plcm}, 168
+  \item {Transparency}, 177
+    \subitem {$\sim$Transparency}, 178
+    \subitem {freeTracks}, 178
+    \subitem {horGridMap}, 180
+    \subitem {operator=}, 179
+    \subitem {sizeHor}, 180
+    \subitem {sizeVer}, 180
+    \subitem {transform}, 179
+    \subitem {Transparency}, 178
+    \subitem {verGridMap}, 180
+  \item {Transposed}
+    \subitem {matrix\-Int.h}, 254
+  \item {Transposition}
+    \subitem {matrix\-Int.h}, 254
+  \item {tree\-Vertex}, 181
+  \item {true}
+    \subitem {sea.h}, 279
+  \item {tryThisCellHere}
+    \subitem {Plcm}, 168
+  \item {tryThisCluster}
+    \subitem {Plcm}, 169
+  \item {type}
+    \subitem {expansion\-Grid\-Vertex}, 79
+
+  \indexspace
+
+  \item {underCapacityPenalty}
+    \subitem {expansion\-Grid\-Edge}, 77
+  \item {uniNo}
+    \subitem {layout\-Map\-Type}, 106
+  \item {update}
+    \subitem {Prot\-Area}, 176
+  \item {updategains}
+    \subitem {part.h}, 262
+  \item {updategainsincellsinnet}
+    \subitem {part.h}, 262
+  \item {updateTemperature}
+    \subitem {part.h}, 262
+  \item {upWay}
+    \subitem {layout\-Map\-Type}, 106
+  \item {usrErr}
+    \subitem {usrlib.C}, 282
+    \subitem {usrlib.h}, 286
+  \item {usrErrCodes}
+    \subitem {usrlib.C}, 283
+  \item {usrlib.C}, 281
+    \subitem {allocArray2}, 282
+    \subitem {freeArray2}, 282
+    \subitem {usrErr}, 282
+    \subitem {usrErrCodes}, 283
+    \subitem {warning}, 283
+  \item {usrlib.h}, 283
+    \subitem {allocArray2}, 285
+    \subitem {EDOS}, 284
+    \subitem {EFNFND}, 284
+    \subitem {EINDEX}, 284
+    \subitem {EINPDAT}, 284
+    \subitem {ENOTMEM}, 284
+    \subitem {ESYS}, 284
+    \subitem {ETASKIMP}, 284
+    \subitem {EUNKNOW}, 284
+    \subitem {EWRCFG}, 284
+    \subitem {EWRITE}, 284
+    \subitem {freeArray2}, 285
+    \subitem {INLINE}, 284
+    \subitem {NO\_\-ERROR}, 285
+    \subitem {usrErr}, 286
+    \subitem {warning}, 286
+
+  \indexspace
+
+  \item {ver}
+    \subitem {Pattern}, 136
+  \item {verboseMode}
+    \subitem {Plcm}, 172
+  \item {verGridMap}
+    \subitem {Transparency}, 180
+  \item {VertC}
+    \subitem {plcm.h}, 277
+  \item {vertical\_\-channels}
+    \subitem {\_\-GLOBAL\_\-ROUTING}, 9
+  \item {VerticalChannelGV}
+    \subitem {glob\-Route.h}, 211
+  \item {VerticalEdge}
+    \subitem {glob\-Route.h}, 211
+  \item {VERY\_\-NEGATIVE}
+    \subitem {findrect.C}, 198
+  \item {ViaLayer}
+    \subitem {phil.h}, 270
+  \item {viaToCriticalArea}
+    \subitem {Lay\-Map}, 105
+  \item {visited}
+    \subitem {layout\-Map\-Type}, 106
+
+  \indexspace
+
+  \item {warning}
+    \subitem {usrlib.C}, 283
+    \subitem {usrlib.h}, 286
+  \item {wbbx}
+    \subitem {\_\-PIVOT}, 19
+  \item {weight}
+    \subitem {glob\-Net}, 82
+  \item {West}
+    \subitem {glob\-Route.h}, 212
+  \item {whereToAdd}
+    \subitem {Base\-Array}, 37
+  \item {width}
+    \subitem {\_\-PARTITION}, 17
+    \subitem {\_\-SLICE\_\-INFO}, 24
+    \subitem {Window}, 183
+  \item {Window}, 181
+    \subitem {$\sim$Window}, 182
+    \subitem {getDiv}, 182
+    \subitem {high}, 183
+    \subitem {myName}, 182
+    \subitem {myNo}, 182
+    \subitem {width}, 183
+    \subitem {Window}, 181
+  \item {window.C}, 286
+  \item {window.h}, 286
+  \item {WindowClass}
+    \subitem {phil.h}, 269
+  \item {wlx}
+    \subitem {\_\-PIVOT}, 19
+  \item {wly}
+    \subitem {\_\-PIVOT}, 19
+  \item {write}
+    \subitem {Plcm}, 170
+  \item {wx}
+    \subitem {\_\-PIVOT}, 19
+  \item {wy}
+    \subitem {\_\-PIVOT}, 19
+
+  \indexspace
+
+  \item {x}
+    \subitem {\_\-PIVOT}, 19
+    \subitem {expansion\-Grid\-Edge}, 76
+    \subitem {Point}, 174
+  \item {X1}
+    \subitem {image.h}, 222
+  \item {X2}
+    \subitem {image.h}, 223
+  \item {xCoord}
+    \subitem {expansion\-Grid\-Vertex}, 79
+  \item {xl}
+    \subitem {\_\-NETSTATE}, 14
+  \item {xMax}
+    \subitem {Lay\-Map}, 105
+  \item {xMin}
+    \subitem {Lay\-Map}, 105
+  \item {xr}
+    \subitem {\_\-NETSTATE}, 14
+
+  \indexspace
+
+  \item {y}
+    \subitem {\_\-PIVOT}, 19
+    \subitem {expansion\-Grid\-Edge}, 76
+    \subitem {Point}, 174
+  \item {Y1}
+    \subitem {image.h}, 223
+  \item {Y2}
+    \subitem {image.h}, 223
+  \item {yb}
+    \subitem {\_\-NETSTATE}, 14
+  \item {yCoord}
+    \subitem {expansion\-Grid\-Vertex}, 80
+  \item {yMax}
+    \subitem {Lay\-Map}, 105
+  \item {yMin}
+    \subitem {Lay\-Map}, 105
+  \item {yt}
+    \subitem {\_\-NETSTATE}, 14
+
+\end{theindex}

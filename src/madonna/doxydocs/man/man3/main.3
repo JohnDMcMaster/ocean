@@ -1,0 +1,319 @@
+.TH main.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+main.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio.h>\fR
+.br
+\fC#include <stream.h>\fR
+.br
+\fC#include <stdlib.h>\fR
+.br
+\fC#include <string.h>\fR
+.br
+\fC#include <sys/types.h>\fR
+.br
+\fC#include <sys/times.h>\fR
+.br
+\fC#include <unistd.h>\fR
+.br
+\fC#include <new.h>\fR
+.br
+\fC#include <sea.h>\fR
+.br
+\fC#include <genpart.h>\fR
+.br
+\fC#include "sdferrors.h"\fR
+.br
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBPRECISION\fR  10"
+.br
+.ti -1c
+.RI "#define \fBINITIAL_TEMPERATURE\fR  0.50"
+.br
+.ti -1c
+.RI "#define \fBINITIAL_COOLING\fR  0.99"
+.br
+.ti -1c
+.RI "#define \fBNOTINITIALIZED\fR  -1"
+.br
+.ti -1c
+.RI "#define \fBMAXSTR\fR  300"
+.br
+.ti -1c
+.RI "#define \fBSDFWRITEALLMASK\fR  0x8000"
+.br
+.ti -1c
+.RI "#define \fBMAXSTR\fR  300"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "CIRCUITPTR \fBmadonna\fR (CIRCUIT *)"
+.br
+.ti -1c
+.RI "void \fBmarkChilds\fR (CIRCUIT*)"
+.br
+.ti -1c
+.RI "int \fBmain\fR (int argc,char *argv[])"
+.br
+.ti -1c
+.RI "int \fBcostmincut\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "void \fBprintpartstat\fR (\fBTOTALPPTR\fR total)"
+.br
+.in -1c
+.SS Variables
+
+.in +1c
+.ti -1c
+.RI "int \fBrequestedGridPoints\fR [3] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}"
+.br
+.ti -1c
+.RI "int \fBexpandableDirection\fR = NOTINITIALIZED"
+.br
+.ti -1c
+.RI "char* \fBthedate\fR = THEDATE"
+.br
+.ti -1c
+.RI "char * \fBthehost\fR = THEHOST"
+.br
+.ti -1c
+.RI "char* \fBmadonna_version\fR = "3.2""
+.br
+.ti -1c
+.RI "int \fBdontCheckChildPorts\fR"
+.br
+.ti -1c
+.RI "int \fBhighnumpart\fR = 16"
+.br
+.ti -1c
+.RI "int \fBstopquotient\fR = 100"
+.br
+.ti -1c
+.RI "int \fBprocessid\fR"
+.br
+.ti -1c
+.RI "int \fBmadonnamakeminiplaza\fR = TRUE"
+.br
+.ti -1c
+.RI "int \fBmadonnamakepartition\fR = TRUE"
+.br
+.ti -1c
+.RI "int \fBpermutateClustersAtExit\fR = TRUE"
+.br
+.ti -1c
+.RI "int \fBmaxNumberOfClusterPermutations\fR = 2"
+.br
+.ti -1c
+.RI "int \fBmadonnaAllowRandomMoves\fR = NIL"
+.br
+.ti -1c
+.RI "int \fBacceptCandidateEvenIfNegativeGain\fR = NIL"
+.br
+.ti -1c
+.RI "int \fBset_srand\fR = 0"
+.br
+.ti -1c
+.RI "int \fBphil_verbose\fR = 0"
+.br
+.ti -1c
+.RI "int \fBrand_points\fR = 1"
+.br
+.ti -1c
+.RI "int \fBdoCompresion\fR = 1"
+.br
+.ti -1c
+.RI "double \fBextraplaza\fR = 1.0"
+.br
+.ti -1c
+.RI "int \fBmacroMinSize\fR = 100"
+.br
+.ti -1c
+.RI "int \fBslicingLayout\fR = 1"
+.br
+.ti -1c
+.RI "int \fBdoTranAna\fR = -1"
+.br
+.ti -1c
+.RI "int \fBmakeChannels\fR = 0"
+.br
+.ti -1c
+.RI "char* \fBcircuit_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBfunction_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBlibrary_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBlayoutname\fR = NIL"
+.br
+.ti -1c
+.RI "STRING \fBRouteAsciiFile\fR = NIL"
+.br
+.ti -1c
+.RI "double \fBinitial_temperature\fR = INITIAL_TEMPERATURE"
+.br
+.ti -1c
+.RI "double \fBinitial_cooling\fR = INITIAL_COOLING"
+.br
+.ti -1c
+.RI "filebuf \fBRouteAsciiStreamBuf\fR"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define INITIAL_COOLING  0.99
+.PP
+Definition at line 26 of file main.C.
+.SS #define INITIAL_TEMPERATURE  0.50
+.PP
+Definition at line 25 of file main.C.
+.SS #define MAXSTR  300
+.PP
+Definition at line 615 of file main.C.
+.SS #define MAXSTR  300
+.PP
+Definition at line 615 of file main.C.
+.SS #define NOTINITIALIZED  -1
+.PP
+Definition at line 43 of file main.C.
+.SS #define PRECISION  10
+.PP
+Definition at line 24 of file main.C.
+.SS #define SDFWRITEALLMASK  0x8000
+.PP
+Definition at line 573 of file main.C.
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS int costmincut (int netdistr[], int numparts)
+.PP
+Definition at line 643 of file main.C.
+.SS CIRCUITPTR madonna (CIRCUIT * circuit)
+.PP
+Definition at line 76 of file madonna.C.
+.PP
+Referenced by \fBmain\fR().
+.SS int main (int argc, char * argv[])
+.PP
+Definition at line 114 of file main.C.
+.SS void markChilds (CIRCUIT * cPtr)
+.PP
+Definition at line 523 of file main.C.
+.PP
+Referenced by \fBmain\fR().
+.SS void printpartstat (\fBTOTALPPTR\fR total)
+.PP
+Definition at line 659 of file main.C.
+.SH VARIABLE DOCUMENTATION
+.PP 
+.SS STRING RouteAsciiFile = NIL
+.PP
+Definition at line 103 of file main.C.
+.SS filebuf RouteAsciiStreamBuf
+.PP
+Definition at line 108 of file main.C.
+.SS int acceptCandidateEvenIfNegativeGain = NIL
+.PP
+Definition at line 86 of file main.C.
+.SS char * circuit_name = NIL
+.PP
+Definition at line 98 of file main.C.
+.SS int doCompresion = 1
+.PP
+Definition at line 90 of file main.C.
+.SS int doTranAna = -1
+.PP
+Definition at line 94 of file main.C.
+.SS int dontCheckChildPorts
+.PP
+Definition at line 72 of file main.C.
+.SS int expandableDirection = NOTINITIALIZED
+.PP
+Definition at line 46 of file main.C.
+.SS double extraplaza = 1.0
+.PP
+Definition at line 91 of file main.C.
+.SS char * function_name = NIL
+.PP
+Definition at line 99 of file main.C.
+.SS int highnumpart = 16
+.PP
+Definition at line 77 of file main.C.
+.SS double initial_cooling = INITIAL_COOLING
+.PP
+Definition at line 106 of file main.C.
+.SS double initial_temperature = INITIAL_TEMPERATURE
+.PP
+Definition at line 105 of file main.C.
+.SS char * layoutname = NIL
+.PP
+Definition at line 101 of file main.C.
+.SS char * library_name = NIL
+.PP
+Definition at line 100 of file main.C.
+.SS int macroMinSize = 100
+.PP
+Definition at line 92 of file main.C.
+.SS int madonnaAllowRandomMoves = NIL
+.PP
+Definition at line 85 of file main.C.
+.SS char * madonna_version = "3.2"
+.PP
+Definition at line 70 of file main.C.
+.SS int madonnamakeminiplaza = TRUE
+.PP
+Definition at line 81 of file main.C.
+.SS int madonnamakepartition = TRUE
+.PP
+Definition at line 82 of file main.C.
+.SS int makeChannels = 0
+.PP
+Definition at line 95 of file main.C.
+.SS int maxNumberOfClusterPermutations = 2
+.PP
+Definition at line 84 of file main.C.
+.SS int permutateClustersAtExit = TRUE
+.PP
+Definition at line 83 of file main.C.
+.SS int phil_verbose = 0
+.PP
+Definition at line 88 of file main.C.
+.SS int processid
+.PP
+Definition at line 80 of file main.C.
+.SS int rand_points = 1
+.PP
+Definition at line 89 of file main.C.
+.SS int requestedGridPoints[] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}
+.PP
+Definition at line 45 of file main.C.
+.SS int set_srand = 0
+.PP
+Definition at line 87 of file main.C.
+.SS int slicingLayout = 1
+.PP
+Definition at line 93 of file main.C.
+.SS int stopquotient = 100
+.PP
+Definition at line 78 of file main.C.
+.SS char * thedate = THEDATE
+.PP
+Definition at line 69 of file main.C.
+.SS char * thehost = THEHOST
+.PP
+Definition at line 69 of file main.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,123 @@
+\subsection{usrlib.C File Reference}
+\label{usrlib.C}\index{usrlib.C@{usrlib.C}}
+{\tt \#include $<$iostream.h$>$}\par
+{\tt \#include $<$sea\_\-decl.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include "usrlib.h"}\par
+{\tt \#include $<$malloc.h$>$}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf usr\-Err} (char $\ast$place,int err)
+\item 
+void {\bf warning} (char $\ast$place,int err)
+\item 
+void$\ast$$\ast$ {\bf alloc\-Array2} (int xsize,int ysize,int item\-Size)
+\item 
+void {\bf free\-Array2} (int xsize,void $\ast$$\ast$to\-Free)
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf usr\-Err\-Codes} [$\,$]
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{usrlib.C_a2}
+\index{usrlib.C@{usrlib.C}!allocArray2@{allocArray2}}
+\index{allocArray2@{allocArray2}!usrlib.C@{usrlib.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void $\ast$$\ast$ alloc\-Array2 (int {\em xsize}, int {\em ysize}, int {\em item\-Size})}\hfill
+
+
+
+Definition at line 60 of file usrlib.C.\small\begin{verbatim}00063 {
+00064   void  **array;
+00065 
+00066   if( (array = (void**)calloc(xsize,sizeof(void*))) ==NULL)
+00067     usrErr("allocArray2",ENOTMEM);
+00068   
+00069   void **colPtr=array;
+00070   for(int i=0;i<xsize;i++,colPtr++)
+00071   {
+00072     if( (*colPtr = calloc(ysize,itemSize)) ==NULL)
+00073       usrErr("allocArray2",ENOTMEM);
+00074   }
+00075   return array ;
+00076 
+00077 }
+\end{verbatim}\normalsize 
+\label{usrlib.C_a3}
+\index{usrlib.C@{usrlib.C}!freeArray2@{freeArray2}}
+\index{freeArray2@{freeArray2}!usrlib.C@{usrlib.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void free\-Array2 (int {\em xsize}, void $\ast$$\ast$ {\em to\-Free})}\hfill
+
+
+
+Definition at line 80 of file usrlib.C.\small\begin{verbatim}00083 {
+00084   void **array=toFree;
+00085 
+00086   for(int i=0;i<xsize;i++,toFree++)
+00087   {
+00088 #ifdef sparc
+00089     free((char *)*toFree);
+00090 #else
+00091     free(*toFree);
+00092 #endif
+00093   }
+00094 #ifdef sparc
+00095   free((char *)array);
+00096 #else
+00097   free(array);
+00098 #endif
+00099 
+00100 }
+\end{verbatim}\normalsize 
+\label{usrlib.C_a0}
+\index{usrlib.C@{usrlib.C}!usrErr@{usrErr}}
+\index{usrErr@{usrErr}!usrlib.C@{usrlib.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void usr\-Err (char $\ast$ {\em place}, int {\em err})}\hfill
+
+
+
+Definition at line 40 of file usrlib.C.\small\begin{verbatim}00044 {
+00045   warning(place,err);
+00046   sdfexit(1);
+00047 }
+\end{verbatim}\normalsize 
+\label{usrlib.C_a1}
+\index{usrlib.C@{usrlib.C}!warning@{warning}}
+\index{warning@{warning}!usrlib.C@{usrlib.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void warning (char $\ast$ {\em place}, int {\em err})}\hfill
+
+
+
+Definition at line 50 of file usrlib.C.\small\begin{verbatim}00054 {
+00055   cerr << "\n" << place << " : " << usrErrCodes[err] << " !\n";
+00056 
+00057 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Variable Documentation}
+\label{usrlib.C_a4}
+\index{usrlib.C@{usrlib.C}!usrErrCodes@{usrErrCodes}}
+\index{usrErrCodes@{usrErrCodes}!usrlib.C@{usrlib.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ usr\-Err\-Codes[$\,$]}\hfill
+
+{\bf Initializer:}\small\begin{verbatim}{
+    "",
+    "Operating System Dummy",
+    "C++ System Dummy",
+    "Not enough memory",
+    "Wrong parameter",
+    "Input data error",
+    "File not found",
+    "Unknown error",
+    "Can not write data",
+    "Can not do task",
+    "Index out of range"
+}\end{verbatim}\normalsize 
+
+
+Definition at line 24 of file usrlib.C.

@@ -1,0 +1,159 @@
+\subsection{Package  Class Reference}
+\label{Package}\index{Package@{Package}}
+{\tt \#include $<$package.h$>$}
+
+Inheritance diagram for Package:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{6cm}
+\epsfbox{class_package.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Package} ()
+\item 
+virtual {\bf $\sim$Package} ()
+\item 
+virtual void {\bf add} ( {\bf Item}\& ) = 0
+\item 
+virtual void {\bf pick\-Out} ( const {\bf Item}\&, int = 0 ) = 0
+\item 
+virtual int {\bf has\-Item} ( const {\bf Item}\& ) const
+\item 
+virtual {\bf Item}\& {\bf find\-Item} ( const {\bf Item}\& ) const
+\item 
+virtual {\bf Box\-Iterator}\& {\bf init\-Iterator} () const = 0
+\item 
+void {\bf remove} ( const {\bf Item}\& o )
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const = 0
+\item 
+virtual char$\ast$ {\bf my\-Name} () const = 0
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Package_a0}
+\index{Package@{Package}!Package@{Package}}
+\index{Package@{Package}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Package::Package ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 32 of file package.h.\small\begin{verbatim}00032 {}
+\end{verbatim}\normalsize 
+\label{Package_a1}
+\index{Package@{Package}!~Package@{$\sim$Package}}
+\index{~Package@{$\sim$Package}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Package::$\sim$Package ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Definition at line 34 of file package.h.\small\begin{verbatim}00034 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Package_a2}
+\index{Package@{Package}!add@{add}}
+\index{add@{add}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual void Package::add ({\bf Item} \& {\em to\-Add})\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a3})}, {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a6})}, and {\bf List} {\rm (p.\,\pageref{List_a3})}.\label{Package_a5}
+\index{Package@{Package}!findItem@{findItem}}
+\index{findItem@{findItem}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Package::find\-Item (const {\bf Item} \& {\em test\-Item}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 22 of file package.C.
+
+Referenced by {\bf has\-Item}(), {\bf Plcm::may\-Be\-Joined}(), and {\bf operator \&}().\small\begin{verbatim}00023 {
+00024   BoxIterator& boxIterator = initIterator();
+00025   
+00026   while( int(boxIterator) != 0 )
+00027   {
+00028     Item& listItem = boxIterator++;
+00029     
+00030     if ( listItem == testItem )
+00031     {
+00032       delete (void*)&boxIterator;
+00033       return listItem;
+00034     }
+00035   } 
+00036   delete (void*)&boxIterator;
+00037   return NOITEM;
+00038 }
+\end{verbatim}\normalsize 
+\label{Package_a4}
+\index{Package@{Package}!hasItem@{hasItem}}
+\index{hasItem@{hasItem}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Package::has\-Item (const {\bf Item} \& {\em test\-Item}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 41 of file package.C.
+
+Referenced by {\bf Lay\-Map::add\-Critical\-Points}(), and {\bf operator$|$=}().\small\begin{verbatim}00042 {
+00043   return findItem( testItem ) != NOITEM;
+00044 }
+\end{verbatim}\normalsize 
+\label{Package_a6}
+\index{Package@{Package}!initIterator@{initIterator}}
+\index{initIterator@{initIterator}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Box\-Iterator}\& Package::init\-Iterator () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box} {\rm (p.\,\pageref{Box_a3})}.
+
+Reimplemented in {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a5})}, and {\bf List} {\rm (p.\,\pageref{List_a8})}.
+
+Referenced by {\bf find\-Item}().\label{Package_a9}
+\index{Package@{Package}!myName@{myName}}
+\index{myName@{myName}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual char$\ast$ Package::my\-Name () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box} {\rm (p.\,\pageref{Box_a5})}.
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a6})}, {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a11})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a3})}, {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a3})}, {\bf List} {\rm (p.\,\pageref{List_a7})}, {\bf Pattern} {\rm (p.\,\pageref{Pattern_a3})}, and {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a3})}.\label{Package_a8}
+\index{Package@{Package}!myNo@{myNo}}
+\index{myNo@{myNo}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf class\-Type} Package::my\-No () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box} {\rm (p.\,\pageref{Box_a4})}.
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a5})}, {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a10})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a2})}, {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a2})}, {\bf List} {\rm (p.\,\pageref{List_a6})}, {\bf Pattern} {\rm (p.\,\pageref{Pattern_a2})}, and {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a2})}.\label{Package_a3}
+\index{Package@{Package}!pickOut@{pickOut}}
+\index{pickOut@{pickOut}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual void Package::pick\-Out (const {\bf Item} \& {\em to\-Detach}, int {\em delete\-Item\-Too} = 0)\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a9})}, and {\bf List} {\rm (p.\,\pageref{List_a4})}.
+
+Referenced by {\bf remove}(), {\bf List::remove}(), and {\bf Base\-Array::remove}().\label{Package_a7}
+\index{Package@{Package}!remove@{remove}}
+\index{remove@{remove}!Package@{Package}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Package::remove (const {\bf Item} \& {\em l})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Reimplemented in {\bf List} {\rm (p.\,\pageref{List_a5})}.
+
+Definition at line 44 of file package.h.\small\begin{verbatim}00044 { pickOut( o, 1 ); }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf package.h}\item 
+{\bf package.C}\end{CompactItemize}

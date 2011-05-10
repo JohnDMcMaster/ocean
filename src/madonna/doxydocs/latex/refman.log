@@ -1,0 +1,723 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 1999.9.25)  3 OCT 2000 09:15
+**refman.tex
+(refman.tex
+LaTeX2e <1998/12/01> patch level 1
+Babel <v3.6x> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 1999/01/07 v1.4a Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 1999/01/07 v1.4a Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/misc/a4wide.sty
+Package: a4wide 1994/08/30
+
+(/usr/share/texmf/tex/latex/ntgclass/a4.sty
+Package: a4 1999/03/03 v1.2f A4 based page layout
+))
+(/usr/share/texmf/tex/latex/base/makeidx.sty
+Package: makeidx 1998/08/17 v1.0k Standard LaTeX package
+)
+(/usr/share/texmf/tex/latex/fancyhdr/fancyhdr.sty
+\headwidth=\dimen103
+)
+(/usr/share/texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1999/02/16 v1.0l Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+\epsfxsize=\dimen106
+\epsfysize=\dimen107
+)
+(/usr/share/texmf/tex/latex/misc/float.sty
+Package: float 1999/05/29 v1.2d Float enhancements (AL)
+\c@float@type=\count87
+\float@box=\box26
+\@floatcapt=\box27
+) (doxygen.sty
+Package: doxygen 
+
+(/usr/share/texmf/tex/latex/tools/calc.sty
+Package: calc 1998/07/07 v4.1b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count88
+\calc@Bcount=\count89
+\calc@Adimen=\dimen108
+\calc@Bdimen=\dimen109
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 49.
+LaTeX Info: Redefining \addtolength on input line 50.
+\calc@denominator=\count90
+)
+(/usr/share/texmf/tex/latex/tools/array.sty
+Package: array 1998/05/13 v2.3m Tabular extension package (FMi)
+\col@sep=\dimen110
+\extrarowheight=\dimen111
+\NC@list=\toks15
+\extratabsurround=\skip45
+\backup@length=\skip46
+)
+\tmplength=\skip47
+)
+\@indexfile=\write3
+\openout3 = `refman.idx'.
+
+
+Writing index file refman.idx
+(refman.aux)
+\openout1 = `refman.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+ [1
+
+] (refman.toc)
+\tf@toc=\write4
+\openout4 = `refman.toc'.
+
+ (hierarchy.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
+
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1998/03/27 v2.5g Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <7> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 22.
+ [1] [2]) (annotated.tex [3]
+[4]) (files.tex [5] [6] [7]) (class__equivlist.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 8.
+ [8])
+(class__global_routing.tex) (class__imagedesc.tex [9] [10]) (class__mir.tex)
+(class__mirror.tex [11]) (class__netcostinfo.tex [12]) (class__netstate.tex
+[13]) (class__partcell.tex [14]) (class__partition.tex [15] [16])
+(class__partlist.tex [17]) (class__pivot.tex [18]) (class__plazglaf.tex
+[19]) (class__pnet.tex [20]) (class__powerline.tex [21])
+(class__routing_channel.tex) (class__routing_info.tex) (class__sectorlist.tex
+[22]) (class__slice_info.tex [23]) (class__totalp.tex [24] [25])
+(class_array.tex
+File: class_array.eps Graphic file (type eps)
+ <class_array.eps> [26] [27]) (class_arrayiterator.tex [28]
+File: class_arrayiterator.eps Graphic file (type eps)
+
+<class_arrayiterator.eps> [29] [30]) (class_basearray.tex
+File: class_basearray.eps Graphic file (type eps)
+
+<class_basearray.eps> [31] [32] [33]
+Underfull \hbox (badness 8170) in paragraph at lines 204--204
+[]\OT1/cmr/m/n/10 Referenced by \OT1/cmr/bx/n/10 Array-Iterator::get\OT1/cmr/m/
+n/10 (), \OT1/cmr/bx/n/10 Array-Iterator::operator Item &\OT1/cmr/m/n/10 (), \O
+T1/cmr/bx/n/10 Array-
+ []
+
+[34] [35] [36]) (class_box.tex
+File: class_box.eps Graphic file (type eps)
+ <class_box.eps> [37] [38] [39] [40] [41])
+(class_boxiterator.tex
+File: class_boxiterator.eps Graphic file (type eps)
+ <class_boxiterator.eps> [42]) (class_clst.tex
+File: class_clst.eps Graphic file (type eps)
+
+<class_clst.eps> [43] [44] [45]) (class_cluster.tex
+File: class_cluster.eps Graphic file (type eps)
+ <class_cluster.eps>
+[46] [47] [48]) (class_connectinfo.tex
+File: class_connectinfo.eps Graphic file (type eps)
+ <class_connectinfo.eps> [49] [50])
+(class_cricandidate.tex
+File: class_cricandidate.eps Graphic file (type eps)
+ <class_cricandidate.eps> [51]) (class_crinet.tex
+File: class_crinet.eps Graphic file (type eps)
+
+<class_crinet.eps> [52] [53]) (class_cripoint.tex
+File: class_cripoint.eps Graphic file (type eps)
+ <class_cripoint.eps> [54]
+Overfull \hbox (57.75815pt too wide) in paragraph at lines 128--128
+[]\OT1/cmtt/m/n/9 00090     os << "CriPoint(x=" << x << ",y="<< y << ",l=" << (
+int)layer << ",net=" << (int)net <<  ")";[]  
+ []
+
+[55] [56]) (class_distinfo.tex
+File: class_distinfo.eps Graphic file (type eps)
+ <class_distinfo.eps> [57]) (class_divtable.tex
+File: class_divtable.eps Graphic file (type eps)
+
+<class_divtable.eps> [58]
+Overfull \hbox (19.95859pt too wide) in paragraph at lines 100--100
+[]\OT1/cmtt/m/n/9 00025     cerr << "\n WARNING : Cannot find file " << fileNam
+e << " or " << fileName2 << "\n";[]  
+ []
+
+[59] [60]) (class_dummy.tex
+File: class_dummy.eps Graphic file (type eps)
+ <class_dummy.eps> [61]) (class_expansiongrid.tex
+[62] [63] [64] [65] [66] [67] [68] [69] [70]
+Underfull \hbox (badness 1552) in paragraph at lines 531--532
+ \OT1/cmr/bx/n/10 4.34.2.17 int expansion-Grid::round-Wires-To-Cells (int \OT1/
+cmr/bx/it/10 channel-Direction\OT1/cmr/bx/n/10 , int \OT1/cmr/bx/it/10 n[]-
+ []
+
+[71] [72] [73]) (class_expansiongridedge.tex
+File: class_expansiongridedge.eps Graphic file (type eps)
+ <class_expansiongridedge.eps>
+[74] [75] [76]) (class_expansiongridterminal.tex
+File: class_expansiongridterminal.eps Graphic file (type eps)
+
+<class_expansiongridterminal.eps> [77]) (class_expansiongridvertex.tex
+File: class_expansiongridvertex.eps Graphic file (type eps)
+
+<class_expansiongridvertex.eps> [78]
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
+ \OT1/cmr/bx/n/10 4.37.1.1 expansion-Grid-Vertex::expansion-Grid-Vertex (CIR-CU
+ITPTR \OT1/cmr/bx/it/10 par-ti-tion\OT1/cmr/bx/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
+ \OT1/cmr/bx/n/10 4.37.2.2 expansion-Grid-Vertex$\OMS/cmsy/m/n/10 ^^C$ \OT1/cmr
+/bx/n/10 expansion-Grid-Vertex::neighbor (point-Of-
+ []
+
+[79]) (class_globnet.tex
+File: class_globnet.eps Graphic file (type eps)
+ <class_globnet.eps> [80] [81]) (class_globterm.tex
+File: class_globterm.eps Graphic file (type eps)
+
+<class_globterm.eps> [82]) (class_graphedge.tex
+File: class_graphedge.eps Graphic file (type eps)
+ <class_graphedge.eps>)
+(class_graphterminal.tex
+File: class_graphterminal.eps Graphic file (type eps)
+ <class_graphterminal.eps> [83]) (class_graphvertex.tex
+File: class_graphvertex.eps Graphic file (type eps)
+<class_graphvertex.eps>) (class_imagemap.tex
+File: class_imagemap.eps Graphic file (type eps)
+ <class_imagemap.eps> [84] [85]
+[86] [87] [88] [89] [90]) (class_item.tex
+File: class_item.eps Graphic file (type eps)
+ <class_item.eps> [91] [92] [93])
+(class_laymap.tex [94] [95] [96] [97] [98] [99] [100] [101] [102] [103]
+[104] [105]) (class_layoutmaptype.tex [106]) (class_list.tex
+File: class_list.eps Graphic file (type eps)
+ <class_list.eps>
+[107]
+Underfull \hbox (badness 10000) in paragraph at lines 85--85
+[]\OT1/cmr/m/n/10 Referenced by \OT1/cmr/bx/n/10 Lay-Map::add-Critical-Points\O
+T1/cmr/m/n/10 (), \OT1/cmr/bx/n/10 Image-Map::add-Feeds\OT1/cmr/m/n/10 (), \OT1
+/cmr/bx/n/10 Image-
+ []
+
+[108]
+Underfull \hbox (badness 1067) in paragraph at lines 148--149
+ \OT1/cmr/bx/n/10 4.47.2.6 void List::pick-Out (const Item & \OT1/cmr/bx/it/10 
+to-Detach\OT1/cmr/bx/n/10 , int \OT1/cmr/bx/it/10 delete-Item-Too \OT1/cmr/bx/n
+/10 = 0)
+ []
+
+[109]) (class_listelement.tex [110]) (class_listiterator.tex
+File: class_listiterator.eps Graphic file (type eps)
+
+<class_listiterator.eps> [111] [112] [113]) (class_matrixgrid.tex [114]
+[115]) (class_matrixint.tex
+File: class_matrixint.eps Graphic file (type eps)
+ <class_matrixint.eps> [116]
+Underfull \hbox (badness 2409) in paragraph at lines 93--94
+ \OT1/cmr/bx/n/10 4.51.2.1 void matrix-Int::create-And-Initialize (int \OT1/cmr
+/bx/it/10 di-men-sion1\OT1/cmr/bx/n/10 , int \OT1/cmr/bx/it/10 di-men-sion2\OT1
+/cmr/bx/n/10 )
+ []
+
+[117] [118]) (class_package.tex
+File: class_package.eps Graphic file (type eps)
+ <class_package.eps> [119] [120] [121])
+(class_parserinterface.tex [122] [123] [124] [125] [126]) (class_pattern.tex
+File: class_pattern.eps Graphic file (type eps)
+
+<class_pattern.eps> [127] [128] [129] [130] [131] [132] [133] [134] [135]
+[136]) (class_plane.tex [137] [138] [139]) (class_planecell.tex
+File: class_planecell.eps Graphic file (type eps)
+
+<class_planecell.eps> [140]) (class_plcm.tex
+Underfull \hbox (badness 1430) in paragraph at lines 8--10
+ \OT1/cmr/m/n/10 im-Map, char $\OMS/cmsy/m/n/10 ^^C$\OT1/cmr/m/n/10 o-Name=NULL
+, CIR-CUIT $\OMS/cmsy/m/n/10 ^^C$\OT1/cmr/m/n/10 read-Data=NULL, \OT1/cmr/bx/n/
+10 GLOBAL[]-ROUTING
+ []
+
+
+Underfull \hbox (badness 2932) in paragraph at lines 8--10
+ \OMS/cmsy/m/n/10 ^^C$\OT1/cmr/m/n/10 g[]-rout=NULL, \OT1/cmr/bx/n/10 Boolean s
+licing-Layout\OT1/cmr/m/n/10 =false, \OT1/cmr/bx/n/10 Boolean \OT1/cmr/m/n/10 d
+o-Transparency-Ana=false,
+ []
+
+[141] [142] [143] [144] [145] [146]
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 428--428
+[]\OT1/cmtt/m/n/9 00119             cout << "\n         " << (savSize-actSize) 
+<< "  column[s] deleted." << endl;[]  
+ []
+
+
+Overfull \hbox (10.5087pt too wide) in paragraph at lines 428--428
+[]\OT1/cmtt/m/n/9 00124             cout << "\n         " << (savSize-actSize) 
+<< "  row[s] deleted." << endl;[]  
+ []
+
+[147] [148] [149] [150] [151] [152] [153] [154]
+Underfull \hbox (badness 3884) in paragraph at lines 881--882
+ \OT1/cmr/bx/n/10 4.57.2.15 void Plcm::make-Windows (CIR-CUIT $\OMS/cmsy/m/n/10
+ ^^C$ \OT1/cmr/bx/it/10 c\OT1/cmr/bx/n/10 , Boolean \OT1/cmr/bx/it/10 mc \OT1/c
+mr/bx/n/10 = false)
+ []
+
+[155] [156]
+Overfull \hbox (15.23364pt too wide) in paragraph at lines 1147--1147
+[]\OT1/cmtt/m/n/9 00384     if(strstr(layPtr->name,"Tmp_Cell_") == NULL ) // th
+is layouts are generraly ignored[]  
+ []
+
+[157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167] [168]
+[169] [170] [171]) (class_point.tex [172]
+File: class_point.eps Graphic file (type eps)
+ <class_point.eps> [173] [174])
+(class_protarea.tex
+File: class_protarea.eps Graphic file (type eps)
+ <class_protarea.eps> [175]) (class_sdfset.tex
+File: class_sdfset.eps Graphic file (type eps)
+
+<class_sdfset.eps> [176]) (class_sdfsetelmt.tex
+File: class_sdfsetelmt.eps Graphic file (type eps)
+ <class_sdfsetelmt.eps>)
+(class_transparency.tex [177] [178] [179]) (class_treevertex.tex
+File: class_treevertex.eps Graphic file (type eps)
+
+<class_treevertex.eps> [180]) (class_window.tex
+File: class_window.eps Graphic file (type eps)
+ <class_window.eps> [181]
+[182]) (array.C.tex) (array.h.tex) (basearr.C.tex) (basearr.h.tex [183])
+(basedefs.h.tex [184]) (box.C.tex) (box.h.tex [185]) (clst.C.tex) (clst.h.tex)
+(cluster.C.tex) (cluster.h.tex) (clusterPerm.C.tex [186] [187] [188] [189])
+(compact.C.tex) (cost.h.tex [190]
+Overfull \hbox (14.66417pt too wide) in paragraph at lines 92--93
+ \OT1/cmr/bx/n/10 5.14.1.7 #de-fine New-Netstate(p) ((p)=(NETSTATEPTR)mnew(size
+of(NETSTATE)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+
+ []
+
+) (cri.C.tex [191] [192]) (cri.h.tex) (cricand.h.tex) (debug.C.tex [193]
+[194]
+Overfull \hbox (5.78375pt too wide) in paragraph at lines 98--98
+[]\OT1/cmtt/m/n/9 00047 fprintf(stderr,"\n(Pivot (%1d %1d) (%1d %1d)",pivot->x,
+pivot->y,pivot->lx,pivot->ly);[]  
+ []
+
+) (divTable.C.tex) (divTable.h.tex) (findrect.C.tex [195] [196] [197]
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+  
+ []
+
+[198] [199] [200]
+Overfull \hbox (15.23364pt too wide) in paragraph at lines 492--492
+[]\OT1/cmtt/m/n/9 00146       gridPointsToCoreCells(targetGridPoints[expandable
+Direction],expandableDirection);[]  
+ []
+
+
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 492--492
+[]\OT1/cmtt/m/n/9 00155       targetCoreCells[HOR] / MAX(1.0, gridPointsToCoreC
+ells((int)stats[BBX_MEAN_X],HOR));[]  
+ []
+
+
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 492--492
+[]\OT1/cmtt/m/n/9 00157       targetCoreCells[VER] / MAX(1.0, gridPointsToCoreC
+ells((int)stats[BBX_MEAN_Y],VER));[]  
+ []
+
+[201] [202] [203] [204]
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 624--624
+[]\OT1/cmtt/m/n/9 00286    requestedGridPoints[HOR] = MAX(1,coreCellsToGridPoin
+ts(requestedGridPoints[HOR],HOR));[]  
+ []
+
+
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 624--624
+[]\OT1/cmtt/m/n/9 00289    requestedGridPoints[VER] = MAX(1,coreCellsToGridPoin
+ts(requestedGridPoints[VER],VER));[]  
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 631.
+
+Overfull \hbox (59.23053pt too wide) in paragraph at lines 631--632
+ \OT1/cmr/bx/n/10 5.21.4.1 int core-Cell-Overlap[$ $] = \OMS/cmsy/b/n/10 f\OT1/
+cmr/bx/n/10 NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\OMS/cmsy/b/n/10 g
+ []
+
+
+Overfull \hbox (39.62648pt too wide) in paragraph at lines 638--639
+ \OT1/cmr/bx/n/10 5.21.4.2 int core-Cell-Size[$ $] = \OMS/cmsy/b/n/10 f\OT1/cmr
+/bx/n/10 NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\OMS/cmsy/b/n/10 g
+ []
+
+[205]) (genpart.h.tex [206]
+Overfull \hbox (10.05171pt too wide) in paragraph at lines 129--130
+ \OT1/cmr/bx/n/10 5.22.1.7 #de-fine New-Partcell(p) ((p)=(PARTCELLPTR)mnew(size
+of(PARTCELL)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
+
+ []
+
+
+Overfull \hbox (25.61412pt too wide) in paragraph at lines 136--137
+ \OT1/cmr/bx/n/10 5.22.1.8 #de-fine New-Partition(p) ((p)=(PARTITIONPTR)mnew(si
+zeof(PARTITION)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+
+Overfull \hbox (0.62257pt too wide) in paragraph at lines 143--144
+ \OT1/cmr/bx/n/10 5.22.1.9 #de-fine New-Partlist(p) ((p)=(PARTLISTPTR)mnew(size
+of(PARTLIST)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+[207]) (globRoute.C.tex [208] [209]) (globRoute.h.tex [210]
+Underfull \hbox (badness 10000) in paragraph at lines 54--54
+  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
+  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+  
+ []
+
+[211]) (im.h.tex [212] [213]
+Overfull \hbox (38.85837pt too wide) in paragraph at lines 164--164
+[]\OT1/cmtt/m/n/9 00056         "drawmirroraxis: too many mirror axis defined, 
+ignore all but first %1d\n",numaxis);[]  
+ []
+
+[214] [215] [216] [217] [218]
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 438--438
+[]\OT1/cmtt/m/n/9 00014    { /* cannot initialize compile time without knowing 
+symbolic constants (write time) */[]  
+ []
+
+[219]
+Overfull \hbox (5.78375pt too wide) in paragraph at lines 527--527
+[]\OT1/cmtt/m/n/9 00047 fprintf(stderr,"\n(Pivot (%1d %1d) (%1d %1d)",pivot->x,
+pivot->y,pivot->lx,pivot->ly);[]  
+ []
+
+[220]) (image.h.tex [221]
+Overfull \hbox (21.22661pt too wide) in paragraph at lines 107--108
+ \OT1/cmr/bx/n/10 5.26.1.5 #de-fine New-Equivlist(p) ((p)=(EQUIVLISTPTR)mnew(si
+zeof(EQUIVLIST)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
+Overfull \hbox (43.52512pt too wide) in paragraph at lines 116--117
+ \OT1/cmr/bx/n/10 5.26.1.6 #de-fine New-Imagedesc(p) ((p)=(IMAGEDESCPTR)mnew(si
+zeof(IMAGEDESC)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
+
+ []
+
+
+Overfull \hbox (42.51126pt too wide) in paragraph at lines 132--133
+ \OT1/cmr/bx/n/10 5.26.1.8 #de-fine New-Sectorlist(p) ((p)=(SECTORLISTPTR)mnew(
+sizeof(SECTORLIST)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
+
+ []
+
+[222]) (imageMap.C.tex) (imageMap.h.tex [223]) (initimagedsc.C.tex [224]
+Overfull \hbox (38.85837pt too wide) in paragraph at lines 121--121
+[]\OT1/cmtt/m/n/9 00056         "drawmirroraxis: too many mirror axis defined, 
+ignore all but first %1d\n",numaxis);[]  
+ []
+
+[225] [226] [227] [228]) (item.C.tex [229]) (item.h.tex [230]) (layMap.C.tex)
+(layMap.h.tex) (list.C.tex) (list.h.tex [231]) (lstelem.h.tex) (madonna.C.tex
+[232] [233] [234] [235]) (main.C.tex [236] [237] [238]
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+ \OT1/cmr/bx/n/10 5.38.2.2 int check-That-Circuit-Looks-Reasonable (CIR-CUITPTR
+ \OT1/cmr/bx/it/10 the-cir-cuit\OT1/cmr/bx/n/10 )
+ []
+
+
+Overfull \hbox (1.0588pt too wide) in paragraph at lines 251--251
+[]\OT1/cmtt/m/n/9 00649    fprintf(stderr,"costmincut: cannot compute cost for 
+%1d partitions!\n",numparts);[]  
+ []
+
+[239] [240] [241] [242] [243] [244] [245]
+Overfull \hbox (48.30826pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00405    if(sdfreadallcir(SDFCIRNETLIST+SDFCIRSTAT, circuit_n
+ame, function_name, library_name)==NIL)[]  
+ []
+
+
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00407       fprintf(stdout,"\nERROR: apparently your cell \"%
+s(%s(%s))\" is out to lunch...\n",[]  
+ []
+
+[246]
+Overfull \hbox (1.0588pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00459    totaltime1=tmsbuf.tms_utime+tmsbuf.tms_stime+tmsbuf.
+tms_cutime+tmsbuf.tms_cstime;[]  
+ []
+
+
+Overfull \hbox (1.0588pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00469    totaltime2=tmsbuf.tms_utime+tmsbuf.tms_stime+tmsbuf.
+tms_cutime+tmsbuf.tms_cstime;[]  
+ []
+
+
+Overfull \hbox (5.78375pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00476       printstatisticsinstatusfield(thecircuit->layout,s
+econds/PRECISION,highnumpart);[]  
+ []
+
+
+Overfull \hbox (15.23364pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00487    if (madonnamakepartition && !madonnamakeminiplaza &&
+ madonnapartitionedcircuit!=NIL)[]  
+ []
+
+[247]
+Overfull \hbox (1.0588pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/9 00490           madonnapartitionedcircuit->name,madonnapartit
+ionedcircuit->function->name,[]  
+ []
+
+[248] [249] [250] [251] [252]) (matrixGrid.C.tex) (matrixGrid.h.tex [253])
+(matrixInt.C.tex) (matrixInt.h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+  
+ []
+
+) (mtx.C.tex [254] [255]
+Overfull \hbox (24.68353pt too wide) in paragraph at lines 122--122
+[]\OT1/cmtt/m/n/9 00014    { /* cannot initialize compile time without knowing 
+symbolic constants (write time) */[]  
+ []
+
+) (myfree.C.tex [256]) (package.C.tex) (package.h.tex) (parserIf.C.tex)
+(parserIf.h.tex [257]) (part.h.tex
+Underfull \hbox (badness 3503) in paragraph at lines 16--18
+ []\OT1/cmr/m/n/10 int \OT1/cmr/bx/n/10 gain-net-state \OT1/cmr/m/n/10 (\OT1/cm
+r/bx/n/10 NET-STATEPTR \OT1/cmr/m/n/10 net-state,int to[]-area,int from[]-area,
+ \OT1/cmr/bx/n/10 CFUNC
+ []
+
+[258] [259]
+Underfull \hbox (badness 1590) in paragraph at lines 178--179
+ \OT1/cmr/bx/n/10 5.49.1.13 NET-STATEPTR do-move[]-and[]-copy[]-netstate (NET-S
+TATEPTR \OT1/cmr/bx/it/10 old-net-
+ []
+
+
+Underfull \hbox (badness 1286) in paragraph at lines 242--243
+ \OT1/cmr/bx/n/10 5.49.1.25 void keep[]-track[]-of[]-bbx[]-after[]-decr (int $\
+OMS/cmsy/m/n/10 ^^C$\OT1/cmr/bx/n/10 , int $\OMS/cmsy/m/n/10 ^^C$\OT1/cmr/bx/n/
+10 , int \OT1/cmr/bx/it/10 from[]-bar\OT1/cmr/bx/n/10 , int $\OMS/cmsy/m/n/10 ^
+^C$
+ []
+
+[260]
+Underfull \hbox (badness 2205) in paragraph at lines 262--263
+ \OT1/cmr/bx/n/10 5.49.1.29 void madonna[]- (TO-TALPPTR $\OMS/cmsy/m/n/10 ^^C$ 
+\OT1/cmr/bx/it/10 to-tal\OT1/cmr/bx/n/10 , CIR-CUITPTR \OT1/cmr/bx/it/10 cir-cu
+it\OT1/cmr/bx/n/10 , int
+ []
+
+[261]) (pattern.C.tex [262]) (pattern.h.tex) (phil.C.tex [263]
+Underfull \hbox (badness 1622) in paragraph at lines 71--71
+[]\OT1/cmr/m/n/10 Referenced by \OT1/cmr/bx/n/10 core-Cells-To-Grid-Points\OT1/
+cmr/m/n/10 (), \OT1/cmr/bx/n/10 expansion-Grid::expansion-Grid\OT1/cmr/m/n/10 (
+), and \OT1/cmr/bx/n/10 grid-
+ []
+
+[264] [265] [266]) (phil.h.tex [267] [268]
+Underfull \hbox (badness 10000) in paragraph at lines 182--182
+  
+ []
+
+[269]
+Underfull \hbox (badness 10000) in paragraph at lines 205--205
+  
+ []
+
+[270]) (phil_glob.h.tex [271] [272] [273]) (plane.C.tex) (plane.h.tex)
+(plaza.h.tex [274]
+Underfull \hbox (badness 1776) in paragraph at lines 70--73
+[]\OT1/cmr/m/n/10 Referenced by \OT1/cmr/bx/n/10 compute-Bbx-Statistics\OT1/cmr
+/m/n/10 (), \OT1/cmr/bx/n/10 find-rect-an-gle-and-cost-func-tions\OT1/cmr/m/n/1
+0 (), and \OT1/cmr/bx/n/10 think-
+ []
+
+
+Overfull \hbox (13.6072pt too wide) in paragraph at lines 80--81
+ \OT1/cmr/bx/n/10 5.57.1.5 #de-fine New-Plazglaf(p) ((p)=(PLAZGLAFPTR)mnew(size
+of(PLAZGLAF)))[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
+
+ []
+
+) (plcm.C.tex [275]) (plcm.h.tex [276]
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+  
+ []
+
+) (plcminit.C.tex) (point.C.tex) (point.h.tex [277]) (protArea.C.tex)
+(protArea.h.tex) (routing.h.tex [278]) (sea.h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+  
+ []
+
+) (stuff.C.tex [279]) (thedate.C.tex [280]) (usrlib.C.tex [281] [282])
+(usrlib.h.tex [283] [284] [285]
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
+\OT1/cmr/bx/n/10 Transp\OT1/cmr/m/n/10 (), \OT1/cmr/bx/n/10 Plcm::create-Plane\
+OT1/cmr/m/n/10 (), \OT1/cmr/bx/n/10 Plcm::do-Placement\OT1/cmr/m/n/10 (), \OT1/
+cmr/bx/n/10 Plcm::do-Transp-Analysis\OT1/cmr/m/n/10 (),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
+\OT1/cmr/bx/n/10 One-Cell\OT1/cmr/m/n/10 (), \OT1/cmr/bx/n/10 Plcm::placement\O
+T1/cmr/m/n/10 (), \OT1/cmr/bx/n/10 Plcm::prepare\OT1/cmr/m/n/10 (), \OT1/cmr/bx
+/n/10 Parser-Interface::process-Feeds\OT1/cmr/m/n/10 (),
+ []
+
+) (window.C.tex) (window.h.tex) (refman.ind [286] [287
+
+] [288] [289] [290]
+[291] [292] [293] [294]
+Underfull \hbox (badness 10000) in paragraph at lines 967--968
+[]|  \OT1/cmr/m/n/10 MAX-I-MUM[]-NUMBER[]-OF[]-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--970
+[]|  \OT1/cmr/m/n/10 MEAN[]-CELLS[]-PER[]-AREA[]-IF[]-
+ []
+
+[295] [296] [297] [298] [299] [300]
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1576
+[]|  \OT1/cmr/m/n/10 ac-cept-Can-di-da-teEvenIfNeg-a-tive-G-ain,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1602--1603
+[]|  \OT1/cmr/m/n/10 maxNum-berOf-Clus-ter-Per-mu-ta-tions,
+ []
+
+[301]
+Underfull \hbox (badness 10000) in paragraph at lines 1698--1699
+[]\OT1/cmr/m/n/10 MAXIMUM[]-NUMBER[]-OF[]-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1716--1717
+[]\OT1/cmr/m/n/10 MEAN[]-CELLS[]-PER[]-AREA[]-IF[]-
+ []
+
+[302] [303] [304] [305] [306] [307] [308] [309] [310] [311] [312] [313]
+[314
+
+]) (refman.aux) ) 
+Here is how much of TeX's memory you used:
+ 2386 strings out of 10898
+ 29641 string characters out of 96881
+ 86856 words of memory out of 263001
+ 5015 multiletter control sequences out of 10000+0
+ 6972 words of font info for 26 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 35i,15n,40p,956b,1184s stack positions out of 300i,100n,500p,50000b,4000s
+
+Output written on refman.dvi (315 pages, 705440 bytes).

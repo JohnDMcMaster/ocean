@@ -1,0 +1,110 @@
+.TH Item 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Item \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <item.h>\fR
+.PP
+Inherited by \fBBox\fR, \fBCriNet\fR, \fBDummy\fR\fC [private]\fR, and \fBPoint\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBItem\fR ()"
+.br
+.ti -1c
+.RI "\fBItem\fR ( Item& )"
+.br
+.ti -1c
+.RI "virtual \fB~Item\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const Item& ) const = 0"
+.br
+.ti -1c
+.RI "void* \fBoperator new\fR ( size_t s )"
+.br
+.ti -1c
+.RI "void \fBoperator delete\fR (void* s)"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const = 0"
+.br
+.in -1c
+.SS Static Public Attributes
+
+.in +1c
+.ti -1c
+.RI "Item* \fBNOTHING\fR = (Item *)&\fBtheDummyItem\fR"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "ostream& \fBoperator<<\fR ( ostream&, const Item& )"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Item::Item ()
+.PP
+Definition at line 21 of file item.C.
+.SS Item::Item (Item &)\fC [inline]\fR
+.PP
+Definition at line 37 of file item.h.
+.SS Item::~Item ()\fC [virtual]\fR
+.PP
+Definition at line 29 of file item.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS virtual int Item::isEqual (const Item & o) const\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBBaseArray\fR, \fBBox\fR, \fBCluster\fR, \fBCriNet\fR, \fBCriPoint\fR, \fBDummy\fR, \fBPattern\fR, and \fBPoint\fR.
+.PP
+Referenced by \fBoperator==\fR().
+.SS virtual char* Item::myName () const\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBBox\fR, \fBClst\fR, \fBCluster\fR, \fBCriCandidate\fR, \fBCriNet\fR, \fBCriPoint\fR, \fBDivTable\fR, \fBDummy\fR, \fBImageMap\fR, \fBList\fR, \fBPackage\fR, \fBPattern\fR, \fBPlaneCell\fR, \fBPoint\fR, \fBProtArea\fR, and \fBWindow\fR.
+.SS virtual \fBclassType\fR Item::myNo () const\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBBox\fR, \fBClst\fR, \fBCluster\fR, \fBCriCandidate\fR, \fBCriNet\fR, \fBCriPoint\fR, \fBDivTable\fR, \fBDummy\fR, \fBImageMap\fR, \fBList\fR, \fBPackage\fR, \fBPattern\fR, \fBPlaneCell\fR, \fBPoint\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+Referenced by \fBoperator==\fR().
+.SS void Item::operator delete (void * toFree)
+.PP
+Reimplemented in \fBDummy\fR.
+.PP
+Definition at line 60 of file item.C.
+.SS void * Item::operator new (size_t s)
+.PP
+Definition at line 34 of file item.C.
+.SS virtual void Item::print (ostream & os) const\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBBox\fR, \fBClst\fR, \fBCriNet\fR, \fBCriPoint\fR, \fBDummy\fR, and \fBPoint\fR.
+.PP
+Referenced by \fBoperator<<\fR(), and \fBBaseArray::printContentsOn\fR().
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS ostream& operator<< (ostream & out, const Item & anItem)\fC [friend]\fR
+.PP
+Definition at line 84 of file item.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS Item * Item::NOTHING = (Item *)&\fBtheDummyItem\fR\fC [static]\fR
+.PP
+Definition at line 49 of file item.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

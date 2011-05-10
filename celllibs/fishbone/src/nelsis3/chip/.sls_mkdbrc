@@ -1,0 +1,7 @@
+# This is the file '.sls_mkdbrc'   12-1992
+# It is the startup file for sls_mkdb (= csls). This file was put here
+# by mkopr. You can customize by editing this file.
+EXTERN_OBLIGATORY_ON
+FORBID_FIRST_CAPITAL_ON
+RUN_CPP_ON
+CPP_OPTIONS: -I.

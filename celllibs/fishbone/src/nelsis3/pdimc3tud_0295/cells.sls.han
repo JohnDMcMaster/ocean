@@ -1,0 +1,854 @@
+
+/******************************************************************************
+ *
+ * @(#) cells.sls 1.4	Thu Feb 23 1995
+ *
+ * This file is automatically created by ldm2sls from source file
+ * 'cells.ldm 1.4 Feb. 23, 1995'
+ * and contains the circuit description of the cells of library 'pdimc3tud'
+ *
+ ******************************************************************************/
+
+network an02d1 (terminal A1, A2, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, 10);
+    penh w=29.6u l=1.6u (A1, 10, vdd);
+    cap 16.24325f (A1, vss);
+    cap 33.62304f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, vss);
+    penh w=29.6u l=1.6u (A2, 10, vdd);
+    cap 15.69586f (A2, vss);
+    nenh w=23.2u l=1.6u (10, Z, vss);
+    penh w=29.6u l=1.6u (10, Z, vdd);
+    cap 168.7597f (10, vss);
+    cap 133.7273f (Z, vss);
+    cap 250.2782f (vdd, vss);
+}
+
+network an03d1 (terminal A1, A2, A3, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, 15);
+    penh w=29.6u l=1.6u (A1, 15, vdd);
+    cap 15.69586f (A1, vss);
+    cap 33.62304f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, 10);
+    penh w=29.6u l=1.6u (A2, 15, vdd);
+    cap 16.76581f (A2, vss);
+    cap 33.62304f (10, vss);
+    nenh w=23.2u l=1.6u (A3, 10, vss);
+    penh w=29.6u l=1.6u (A3, 15, vdd);
+    cap 15.69586f (A3, vss);
+    nenh w=23.2u l=1.6u (15, Z, vss);
+    penh w=29.6u l=1.6u (15, Z, vdd);
+    cap 297.6676f (15, vss);
+    cap 133.7273f (Z, vss);
+    cap 226.6676f (vdd, vss);
+}
+
+network an04d1 (terminal A1, A2, A3, A4, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, 20);
+    penh w=29.6u l=1.6u (A1, 20, vdd);
+    cap 16.24325f (A1, vss);
+    cap 33.62304f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, 10);
+    penh w=29.6u l=1.6u (A2, 20, vdd);
+    cap 15.69586f (A2, vss);
+    cap 33.62304f (10, vss);
+    nenh w=23.2u l=1.6u (A3, 10, 15);
+    penh w=29.6u l=1.6u (A3, 20, vdd);
+    cap 16.76581f (A3, vss);
+    cap 33.62304f (15, vss);
+    nenh w=23.2u l=1.6u (A4, 15, vss);
+    penh w=29.6u l=1.6u (A4, 20, vdd);
+    cap 15.69586f (A4, vss);
+    nenh w=23.2u l=1.6u (20, Z, vss);
+    penh w=29.6u l=1.6u (20, Z, vdd);
+    cap 271.194f (20, vss);
+    cap 133.7273f (Z, vss);
+    cap 355.6113f (vdd, vss);
+}
+
+network ao01d1 (terminal A1, A2, B1, B2, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, ZN);
+    penh w=29.6u l=1.6u (A1, ZN, 19);
+    cap 15.69586f (A1, vss);
+    cap 33.62304f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, vss);
+    penh w=29.6u l=1.6u (A2, ZN, 19);
+    cap 16.21842f (A2, vss);
+    nenh w=23.2u l=1.6u (B1, 14, vss);
+    penh w=29.6u l=1.6u (B1, 19, vdd);
+    cap 17.28837f (B1, vss);
+    cap 33.62304f (14, vss);
+    nenh w=23.2u l=1.6u (B2, 14, ZN);
+    penh w=29.6u l=1.6u (B2, 19, vdd);
+    cap 17.28837f (B2, vss);
+    cap 199.158f (ZN, vss);
+    cap 324.9517f (19, vss);
+    cap 128.3765f (vdd, vss);
+}
+
+network ao04d1 (terminal A1, A2, B, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, vss);
+    penh w=29.6u l=1.6u (A1, 10, vdd);
+    cap 16.24325f (A1, vss);
+    cap 32.1792f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, ZN);
+    penh w=29.6u l=1.6u (A2, 10, vdd);
+    cap 16.24325f (A2, vss);
+    nenh w=23.2u l=1.6u (B, ZN, vss);
+    cap 222.3894f (10, vss);
+    penh w=29.6u l=1.6u (B, 10, ZN);
+    cap 15.1733f (B, vss);
+    cap 137.5091f (ZN, vss);
+    cap 123.547f (vdd, vss);
+}
+
+network ao05d1 (terminal A1, A2, B, C, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, vss);
+    penh w=29.6u l=1.6u (A1, 10, vdd);
+    cap 16.24325f (A1, vss);
+    cap 32.1792f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, ZN);
+    penh w=29.6u l=1.6u (A2, 10, vdd);
+    cap 16.24325f (A2, vss);
+    nenh w=23.2u l=1.6u (B, ZN, vss);
+    cap 222.3894f (10, vss);
+    penh w=29.6u l=1.6u (B, 10, 15);
+    cap 15.1733f (B, vss);
+    nenh w=23.2u l=1.6u (C, ZN, vss);
+    cap 92.544f (15, vss);
+    penh w=29.6u l=1.6u (C, 15, ZN);
+    cap 16.24325f (C, vss);
+    cap 174.8524f (ZN, vss);
+    cap 126.9326f (vdd, vss);
+}
+
+network dfctnb (terminal D, CP, CDN, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (38, D, 23);
+    cap 196.1638f (D, vss);
+    penh w=29.6u l=1.6u (CP, D, 23);
+    nenh w=23.2u l=1.6u (CP, 9, 23);
+    penh w=29.6u l=1.6u (38, 10, 23);
+    cap 37.68384f (9, vss);
+    nenh w=23.2u l=1.6u (33, 9, vss);
+    cap 97.77792f (10, vss);
+    penh w=29.6u l=1.6u (33, 10, vdd);
+    nenh w=23.2u l=1.6u (CP, 38, vss);
+    penh w=29.6u l=1.6u (CP, 38, vdd);
+    nenh w=23.2u l=1.6u (23, 28, vss);
+    penh w=29.6u l=1.6u (23, 33, vdd);
+    cap 183.2488f (23, vss);
+    cap 35.96928f (28, vss);
+    nenh w=23.2u l=1.6u (CDN, 28, 33);
+    penh w=29.6u l=1.6u (CDN, 33, vdd);
+    nenh w=23.2u l=1.6u (CP, 33, QN);
+    cap 290.2119f (33, vss);
+    penh w=29.6u l=1.6u (38, 33, QN);
+    nenh w=23.2u l=1.6u (38, 43, QN);
+    cap 201.7173f (38, vss);
+    penh w=29.6u l=1.6u (CP, 53, QN);
+    cap 96.06726f (CP, vss);
+    cap 33.35232f (43, vss);
+    nenh w=23.2u l=1.6u (CDN, 43, 48);
+    penh w=29.6u l=1.6u (CDN, 53, vdd);
+    cap 44.18969f (CDN, vss);
+    cap 34.79616f (48, vss);
+    nenh w=23.2u l=1.6u (Q, 48, vss);
+    penh w=29.6u l=1.6u (Q, 53, vdd);
+    cap 196.8371f (53, vss);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 185.6853f (QN, vss);
+    cap 161.9647f (Q, vss);
+    cap 478.7418f (vdd, vss);
+}
+
+network dfntnb (terminal D, CP, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (33, D, 23);
+    cap 196.1638f (D, vss);
+    penh w=29.6u l=1.6u (CP, D, 23);
+    nenh w=23.2u l=1.6u (CP, 9, 23);
+    penh w=29.6u l=1.6u (33, 10, 23);
+    cap 37.68384f (9, vss);
+    nenh w=23.2u l=1.6u (28, 9, vss);
+    cap 97.77792f (10, vss);
+    penh w=29.6u l=1.6u (28, 10, vdd);
+    nenh w=23.2u l=1.6u (CP, 33, vss);
+    penh w=29.6u l=1.6u (CP, 33, vdd);
+    nenh w=23.2u l=1.6u (23, 28, vss);
+    penh w=29.6u l=1.6u (23, 28, vdd);
+    cap 184.3187f (23, vss);
+    nenh w=23.2u l=1.6u (CP, 28, QN);
+    cap 189.9714f (28, vss);
+    penh w=29.6u l=1.6u (33, 28, QN);
+    nenh w=23.2u l=1.6u (33, 38, QN);
+    cap 199.2283f (33, vss);
+    penh w=29.6u l=1.6u (CP, 39, QN);
+    cap 91.88064f (CP, vss);
+    cap 34.79616f (38, vss);
+    nenh w=23.2u l=1.6u (Q, 38, vss);
+    cap 93.98784f (39, vss);
+    penh w=29.6u l=1.6u (Q, 39, vdd);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 180.2665f (QN, vss);
+    cap 160.752f (Q, vss);
+    cap 361.4285f (vdd, vss);
+}
+
+network in01d1 (terminal I, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    cap 16.79064f (I, vss);
+    cap 133.7273f (ZN, vss);
+    cap 143.772f (vdd, vss);
+}
+
+network in01d2 (terminal I, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    cap 33.1393f (I, vss);
+    cap 137.8991f (ZN, vss);
+    cap 244.1255f (vdd, vss);
+}
+
+network in01d3 (terminal I, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    cap 51.62785f (I, vss);
+    cap 269.8614f (ZN, vss);
+    cap 249.1051f (vdd, vss);
+}
+
+network in01d4 (terminal I, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    nenh w=23.2u l=1.6u (I, ZN, vss);
+    penh w=29.6u l=1.6u (I, ZN, vdd);
+    cap 67.97651f (I, vss);
+    cap 274.0332f (ZN, vss);
+    cap 349.4586f (vdd, vss);
+}
+
+network it01d1 (terminal I, OE, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (OE, 5, vss);
+    penh w=29.6u l=1.6u (OE, 5, vdd);
+    nenh w=23.2u l=1.6u (OE, 10, vss);
+    cap 27.12514f (OE, vss);
+    penh w=29.6u l=1.6u (5, 11, vdd);
+    cap 188.0958f (5, vss);
+    cap 33.35232f (10, vss);
+    nenh w=23.2u l=1.6u (I, 10, ZN);
+    cap 92.544f (11, vss);
+    penh w=29.6u l=1.6u (I, 11, ZN);
+    cap 15.72069f (I, vss);
+    cap 133.7273f (ZN, vss);
+    cap 124.7201f (vdd, vss);
+}
+
+network it02d1 (terminal I, OEN, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (OEN, 5, vss);
+    penh w=29.6u l=1.6u (OEN, 5, vdd);
+    nenh w=23.2u l=1.6u (5, 10, vss);
+    cap 188.0828f (5, vss);
+    penh w=29.6u l=1.6u (OEN, 11, vdd);
+    cap 27.09914f (OEN, vss);
+    cap 32.1792f (10, vss);
+    nenh w=23.2u l=1.6u (I, 10, ZN);
+    cap 93.71712f (11, vss);
+    penh w=29.6u l=1.6u (I, 11, ZN);
+    cap 15.72069f (I, vss);
+    cap 133.7273f (ZN, vss);
+    cap 126.8061f (vdd, vss);
+}
+
+network lacfnb (terminal D, EN, CDN, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (19, D, 24);
+    cap 192.6997f (D, vss);
+    penh w=29.6u l=1.6u (EN, D, 24);
+    nenh w=23.2u l=1.6u (EN, 9, 24);
+    penh w=29.6u l=1.6u (19, 10, 24);
+    cap 34.79616f (9, vss);
+    nenh w=23.2u l=1.6u (QN, 9, vss);
+    cap 96.87552f (10, vss);
+    penh w=29.6u l=1.6u (QN, 10, vdd);
+    nenh w=23.2u l=1.6u (EN, 19, vss);
+    penh w=29.6u l=1.6u (EN, 19, vdd);
+    cap 44.40469f (EN, vss);
+    cap 172.7471f (19, vss);
+    nenh w=23.2u l=1.6u (24, 29, QN);
+    penh w=29.6u l=1.6u (24, QN, vdd);
+    cap 184.3586f (24, vss);
+    cap 33.62304f (29, vss);
+    nenh w=23.2u l=1.6u (CDN, 29, vss);
+    penh w=29.6u l=1.6u (CDN, QN, vdd);
+    cap 15.69586f (CDN, vss);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 183.7515f (QN, vss);
+    cap 133.7273f (Q, vss);
+    cap 353.4701f (vdd, vss);
+}
+
+network lactnb (terminal D, E, CDN, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (E, D, 24);
+    cap 192.6997f (D, vss);
+    penh w=29.6u l=1.6u (19, D, 24);
+    nenh w=23.2u l=1.6u (19, 9, 24);
+    penh w=29.6u l=1.6u (E, 10, 24);
+    cap 34.79616f (9, vss);
+    nenh w=23.2u l=1.6u (QN, 9, vss);
+    cap 96.87552f (10, vss);
+    penh w=29.6u l=1.6u (QN, 10, vdd);
+    nenh w=23.2u l=1.6u (E, 19, vss);
+    penh w=29.6u l=1.6u (E, 19, vdd);
+    cap 45.60151f (E, vss);
+    cap 171.9295f (19, vss);
+    nenh w=23.2u l=1.6u (24, 29, QN);
+    penh w=29.6u l=1.6u (24, QN, vdd);
+    cap 184.4061f (24, vss);
+    cap 33.62304f (29, vss);
+    nenh w=23.2u l=1.6u (CDN, 29, vss);
+    penh w=29.6u l=1.6u (CDN, QN, vdd);
+    cap 15.69586f (CDN, vss);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 183.7515f (QN, vss);
+    cap 133.7273f (Q, vss);
+    cap 353.4701f (vdd, vss);
+}
+
+network mfctnb (terminal DA, DB, CP, SA, CDN, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (SA, 21, vss);
+    penh w=29.6u l=1.6u (SA, 21, vdd);
+    nenh w=23.2u l=1.6u (21, 9, vss);
+    penh w=29.6u l=1.6u (SA, 10, vdd);
+    cap 33.62304f (9, vss);
+    nenh w=23.2u l=1.6u (DB, 9, 26);
+    cap 96.6048f (10, vss);
+    penh w=29.6u l=1.6u (DB, 10, 26);
+    cap 18.25157f (DB, vss);
+    nenh w=23.2u l=1.6u (DA, 19, 26);
+    penh w=29.6u l=1.6u (DA, 20, 26);
+    cap 18.22674f (DA, vss);
+    cap 35.06688f (19, vss);
+    nenh w=23.2u l=1.6u (SA, 19, vss);
+    cap 56.97694f (SA, vss);
+    cap 99.22176f (20, vss);
+    penh w=29.6u l=1.6u (21, 20, vdd);
+    cap 213.2495f (21, vss);
+    nenh w=23.2u l=1.6u (26, 31, vss);
+    penh w=29.6u l=1.6u (26, 31, vdd);
+    cap 165.2871f (26, vss);
+    nenh w=23.2u l=1.6u (69, 31, 54);
+    cap 156.5094f (31, vss);
+    penh w=29.6u l=1.6u (CP, 31, 54);
+    nenh w=23.2u l=1.6u (CP, 40, 54);
+    penh w=29.6u l=1.6u (69, 41, 54);
+    cap 37.68384f (40, vss);
+    nenh w=23.2u l=1.6u (64, 40, vss);
+    cap 97.77792f (41, vss);
+    penh w=29.6u l=1.6u (64, 41, vdd);
+    nenh w=23.2u l=1.6u (CP, 69, vss);
+    penh w=29.6u l=1.6u (CP, 69, vdd);
+    nenh w=23.2u l=1.6u (54, 59, vss);
+    penh w=29.6u l=1.6u (54, 64, vdd);
+    cap 183.2488f (54, vss);
+    cap 35.96928f (59, vss);
+    nenh w=23.2u l=1.6u (CDN, 59, 64);
+    penh w=29.6u l=1.6u (CDN, 64, vdd);
+    nenh w=23.2u l=1.6u (CP, 64, QN);
+    cap 290.2119f (64, vss);
+    penh w=29.6u l=1.6u (69, 64, QN);
+    nenh w=23.2u l=1.6u (69, 74, QN);
+    cap 201.7173f (69, vss);
+    penh w=29.6u l=1.6u (CP, 84, QN);
+    cap 96.06726f (CP, vss);
+    cap 33.35232f (74, vss);
+    nenh w=23.2u l=1.6u (CDN, 74, 79);
+    penh w=29.6u l=1.6u (CDN, 84, vdd);
+    cap 44.18969f (CDN, vss);
+    cap 34.79616f (79, vss);
+    nenh w=23.2u l=1.6u (Q, 79, vss);
+    penh w=29.6u l=1.6u (Q, 84, vdd);
+    cap 196.8371f (84, vss);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 185.6853f (QN, vss);
+    cap 161.9647f (Q, vss);
+    cap 703.499f (vdd, vss);
+}
+
+network mfntnb (terminal DA, DB, CP, SA, QN, Q, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (SA, 21, vss);
+    penh w=29.6u l=1.6u (SA, 21, vdd);
+    nenh w=23.2u l=1.6u (21, 9, vss);
+    penh w=29.6u l=1.6u (SA, 10, vdd);
+    cap 33.62304f (9, vss);
+    nenh w=23.2u l=1.6u (DB, 9, 26);
+    cap 96.6048f (10, vss);
+    penh w=29.6u l=1.6u (DB, 10, 26);
+    cap 18.25157f (DB, vss);
+    nenh w=23.2u l=1.6u (DA, 19, 26);
+    penh w=29.6u l=1.6u (DA, 20, 26);
+    cap 18.22674f (DA, vss);
+    cap 35.06688f (19, vss);
+    nenh w=23.2u l=1.6u (SA, 19, vss);
+    cap 56.97694f (SA, vss);
+    cap 99.22176f (20, vss);
+    penh w=29.6u l=1.6u (21, 20, vdd);
+    cap 213.2495f (21, vss);
+    nenh w=23.2u l=1.6u (26, 31, vss);
+    penh w=29.6u l=1.6u (26, 31, vdd);
+    cap 165.2871f (26, vss);
+    nenh w=23.2u l=1.6u (Z, 31, 54);
+    cap 156.5094f (31, vss);
+    penh w=29.6u l=1.6u (CP, 31, 54);
+    nenh w=23.2u l=1.6u (CP, 40, 54);
+    penh w=29.6u l=1.6u (Z, 41, 54);
+    cap 37.68384f (40, vss);
+    nenh w=23.2u l=1.6u (59, 40, vss);
+    cap 97.77792f (41, vss);
+    penh w=29.6u l=1.6u (59, 41, vdd);
+    nenh w=23.2u l=1.6u (CP, Z, vss);
+    penh w=29.6u l=1.6u (CP, Z, vdd);
+    nenh w=23.2u l=1.6u (54, 59, vss);
+    penh w=29.6u l=1.6u (54, 59, vdd);
+    cap 184.3187f (54, vss);
+    nenh w=23.2u l=1.6u (CP, 59, QN);
+    cap 189.9714f (59, vss);
+    penh w=29.6u l=1.6u (Z, 59, QN);
+    nenh w=23.2u l=1.6u (Z, 68, QN);
+    cap 199.2283f (Z, vss);
+    penh w=29.6u l=1.6u (CP, 69, QN);
+    cap 91.88064f (CP, vss);
+    cap 34.79616f (68, vss);
+    nenh w=23.2u l=1.6u (Q, 68, vss);
+    cap 93.98784f (69, vss);
+    penh w=29.6u l=1.6u (Q, 69, vdd);
+    nenh w=23.2u l=1.6u (QN, Q, vss);
+    penh w=29.6u l=1.6u (QN, Q, vdd);
+    cap 180.2665f (QN, vss);
+    cap 160.752f (Q, vss);
+    cap 586.1857f (vdd, vss);
+}
+
+network mx21d1 (terminal I0, I1, S, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (S, 21, vss);
+    penh w=29.6u l=1.6u (S, 21, vdd);
+    nenh w=23.2u l=1.6u (21, 9, vss);
+    penh w=29.6u l=1.6u (S, 10, vdd);
+    cap 33.62304f (9, vss);
+    nenh w=23.2u l=1.6u (I0, 9, 26);
+    cap 96.6048f (10, vss);
+    penh w=29.6u l=1.6u (I0, 10, 26);
+    cap 18.25157f (I0, vss);
+    nenh w=23.2u l=1.6u (I1, 19, 26);
+    penh w=29.6u l=1.6u (I1, 20, 26);
+    cap 18.22674f (I1, vss);
+    cap 35.06688f (19, vss);
+    nenh w=23.2u l=1.6u (S, 19, vss);
+    cap 56.97694f (S, vss);
+    cap 99.22176f (20, vss);
+    penh w=29.6u l=1.6u (21, 20, vdd);
+    cap 213.2495f (21, vss);
+    nenh w=23.2u l=1.6u (26, Z, vss);
+    penh w=29.6u l=1.6u (26, Z, vdd);
+    cap 165.2871f (26, vss);
+    cap 133.7273f (Z, vss);
+    cap 239.5856f (vdd, vss);
+}
+
+network nd02d1 (terminal A1, A2, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, vss);
+    penh w=29.6u l=1.6u (A1, ZN, vdd);
+    cap 16.79064f (A1, vss);
+    cap 32.1792f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, ZN);
+    penh w=29.6u l=1.6u (A2, ZN, vdd);
+    cap 15.1733f (A2, vss);
+    cap 137.5091f (ZN, vss);
+    cap 245.5693f (vdd, vss);
+}
+
+network nd03d1 (terminal A1, A2, A3, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, vss);
+    penh w=29.6u l=1.6u (A1, ZN, vdd);
+    cap 16.79064f (A1, vss);
+    cap 32.1792f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, 10);
+    penh w=29.6u l=1.6u (A2, ZN, vdd);
+    cap 15.1733f (A2, vss);
+    cap 32.1792f (10, vss);
+    nenh w=23.2u l=1.6u (A3, 10, ZN);
+    penh w=29.6u l=1.6u (A3, ZN, vdd);
+    cap 16.24325f (A3, vss);
+    cap 235.2172f (ZN, vss);
+    cap 249.1051f (vdd, vss);
+}
+
+network nd04d1 (terminal A1, A2, A3, A4, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, vss);
+    penh w=29.6u l=1.6u (A1, ZN, vdd);
+    cap 16.79064f (A1, vss);
+    cap 32.1792f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, 10);
+    penh w=29.6u l=1.6u (A2, ZN, vdd);
+    cap 15.1733f (A2, vss);
+    cap 32.1792f (10, vss);
+    nenh w=23.2u l=1.6u (A3, 10, 15);
+    penh w=29.6u l=1.6u (A3, ZN, vdd);
+    cap 16.24325f (A3, vss);
+    cap 32.1792f (15, vss);
+    nenh w=23.2u l=1.6u (A4, 15, ZN);
+    penh w=29.6u l=1.6u (A4, ZN, vdd);
+    cap 15.1733f (A4, vss);
+    cap 236.0105f (ZN, vss);
+    cap 350.9024f (vdd, vss);
+}
+
+network ni01d1 (terminal I, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, 5, vss);
+    penh w=29.6u l=1.6u (I, 5, vdd);
+    cap 15.69586f (I, vss);
+    nenh w=23.2u l=1.6u (5, Z, vss);
+    penh w=29.6u l=1.6u (5, Z, vdd);
+    cap 195.2333f (5, vss);
+    cap 133.7273f (Z, vss);
+    cap 121.3345f (vdd, vss);
+}
+
+network ni01d2 (terminal I, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, 9, vss);
+    penh w=29.6u l=1.6u (I, 9, vdd);
+    cap 15.69586f (I, vss);
+    nenh w=23.2u l=1.6u (9, Z, vss);
+    penh w=29.6u l=1.6u (9, Z, vdd);
+    nenh w=23.2u l=1.6u (9, Z, vss);
+    penh w=29.6u l=1.6u (9, Z, vdd);
+    cap 211.582f (9, vss);
+    cap 137.8991f (Z, vss);
+    cap 221.6881f (vdd, vss);
+}
+
+network ni01d3 (terminal I, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, 13, vss);
+    penh w=29.6u l=1.6u (I, 13, vdd);
+    cap 15.69586f (I, vss);
+    nenh w=23.2u l=1.6u (13, Z, vss);
+    penh w=29.6u l=1.6u (13, Z, vdd);
+    nenh w=23.2u l=1.6u (13, Z, vss);
+    penh w=29.6u l=1.6u (13, Z, vdd);
+    nenh w=23.2u l=1.6u (13, Z, vss);
+    penh w=29.6u l=1.6u (13, Z, vdd);
+    cap 230.0706f (13, vss);
+    cap 269.8614f (Z, vss);
+    cap 226.6676f (vdd, vss);
+}
+
+network ni01d4 (terminal I, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (I, 17, vss);
+    penh w=29.6u l=1.6u (I, 17, vdd);
+    cap 15.69586f (I, vss);
+    nenh w=23.2u l=1.6u (17, Z, vss);
+    penh w=29.6u l=1.6u (17, Z, vdd);
+    nenh w=23.2u l=1.6u (17, Z, vss);
+    penh w=29.6u l=1.6u (17, Z, vdd);
+    nenh w=23.2u l=1.6u (17, Z, vss);
+    penh w=29.6u l=1.6u (17, Z, vdd);
+    nenh w=23.2u l=1.6u (17, Z, vss);
+    penh w=29.6u l=1.6u (17, Z, vdd);
+    cap 246.4192f (17, vss);
+    cap 274.0332f (Z, vss);
+    cap 327.0211f (vdd, vss);
+}
+
+network nr02d1 (terminal A1, A2, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, ZN, vss);
+    penh w=29.6u l=1.6u (A1, 5, vdd);
+    cap 16.79064f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, ZN, vss);
+    cap 92.544f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, ZN);
+    cap 15.1733f (A2, vss);
+    cap 140.4975f (ZN, vss);
+    cap 147.1576f (vdd, vss);
+}
+
+network nr03d1 (terminal A1, A2, A3, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, ZN, vss);
+    penh w=29.6u l=1.6u (A1, 5, vdd);
+    cap 16.79064f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, ZN, vss);
+    cap 92.544f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, 10);
+    cap 15.1733f (A2, vss);
+    nenh w=23.2u l=1.6u (A3, ZN, vss);
+    cap 92.544f (10, vss);
+    penh w=29.6u l=1.6u (A3, 10, ZN);
+    cap 16.24325f (A3, vss);
+    cap 177.8409f (ZN, vss);
+    cap 150.5432f (vdd, vss);
+}
+
+network nr04d1 (terminal A1, A2, A3, A4, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, ZN, vss);
+    penh w=29.6u l=1.6u (A1, 5, vdd);
+    cap 16.79064f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, ZN, vss);
+    cap 92.544f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, 10);
+    cap 15.1733f (A2, vss);
+    nenh w=23.2u l=1.6u (A3, ZN, vss);
+    cap 92.544f (10, vss);
+    penh w=29.6u l=1.6u (A3, 10, 15);
+    cap 16.24325f (A3, vss);
+    nenh w=23.2u l=1.6u (A4, ZN, vss);
+    cap 92.544f (15, vss);
+    penh w=29.6u l=1.6u (A4, 15, ZN);
+    cap 15.1733f (A4, vss);
+    cap 178.6342f (ZN, vss);
+    cap 153.9288f (vdd, vss);
+}
+
+network nt01d1 (terminal I, OE, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (OE, 5, vss);
+    penh w=29.6u l=1.6u (OE, 5, vdd);
+    nenh w=23.2u l=1.6u (OE, 10, vss);
+    cap 27.12514f (OE, vss);
+    penh w=29.6u l=1.6u (5, 11, vdd);
+    cap 188.0958f (5, vss);
+    cap 33.35232f (10, vss);
+    nenh w=23.2u l=1.6u (24, 10, Z);
+    cap 96.6048f (11, vss);
+    penh w=29.6u l=1.6u (24, 11, Z);
+    cap 135.1711f (Z, vss);
+    nenh w=23.2u l=1.6u (I, 24, vss);
+    penh w=29.6u l=1.6u (I, 24, vdd);
+    cap 15.69586f (I, vss);
+    cap 166.5167f (24, vss);
+    cap 240.3303f (vdd, vss);
+}
+
+network nt02d1 (terminal I, OEN, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (OEN, 5, vss);
+    penh w=29.6u l=1.6u (OEN, 5, vdd);
+    nenh w=23.2u l=1.6u (5, 10, vss);
+    cap 188.0828f (5, vss);
+    penh w=29.6u l=1.6u (OEN, 11, vdd);
+    cap 27.09914f (OEN, vss);
+    cap 32.1792f (10, vss);
+    nenh w=23.2u l=1.6u (24, 10, Z);
+    cap 97.77792f (11, vss);
+    penh w=29.6u l=1.6u (24, 11, Z);
+    cap 135.1711f (Z, vss);
+    nenh w=23.2u l=1.6u (I, 24, vss);
+    penh w=29.6u l=1.6u (I, 24, vdd);
+    cap 15.69586f (I, vss);
+    cap 166.5167f (24, vss);
+    cap 242.4162f (vdd, vss);
+}
+
+network oa01d1 (terminal A1, A2, B1, B2, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 19, vss);
+    penh w=29.6u l=1.6u (A1, 5, ZN);
+    cap 15.69586f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 19, vss);
+    cap 93.98784f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, vdd);
+    cap 16.76581f (A2, vss);
+    nenh w=23.2u l=1.6u (B1, 19, ZN);
+    penh w=29.6u l=1.6u (B1, 14, vdd);
+    cap 16.76581f (B1, vss);
+    nenh w=23.2u l=1.6u (B2, 19, ZN);
+    cap 93.98784f (14, vss);
+    penh w=29.6u l=1.6u (B2, 14, ZN);
+    cap 16.21842f (B2, vss);
+    cap 125.1878f (19, vss);
+    cap 272.8156f (ZN, vss);
+    cap 126.9326f (vdd, vss);
+}
+
+network oa04d1 (terminal A1, A2, B, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 10, vss);
+    penh w=29.6u l=1.6u (A1, 5, vdd);
+    cap 16.24325f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 10, vss);
+    cap 92.544f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, ZN);
+    cap 16.24325f (A2, vss);
+    cap 84.43424f (10, vss);
+    nenh w=23.2u l=1.6u (B, 10, ZN);
+    penh w=29.6u l=1.6u (B, ZN, vdd);
+    cap 15.1733f (B, vss);
+    cap 137.5091f (ZN, vss);
+    cap 248.9549f (vdd, vss);
+}
+
+network oa05d1 (terminal A1, A2, B, C, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 10, vss);
+    penh w=29.6u l=1.6u (A1, 5, vdd);
+    cap 16.24325f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 10, vss);
+    cap 92.544f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, ZN);
+    cap 16.24325f (A2, vss);
+    cap 84.43424f (10, vss);
+    nenh w=23.2u l=1.6u (B, 10, 15);
+    penh w=29.6u l=1.6u (B, ZN, vdd);
+    cap 15.1733f (B, vss);
+    cap 32.1792f (15, vss);
+    nenh w=23.2u l=1.6u (C, 15, ZN);
+    penh w=29.6u l=1.6u (C, ZN, vdd);
+    cap 16.24325f (C, vss);
+    cap 235.2172f (ZN, vss);
+    cap 252.4907f (vdd, vss);
+}
+
+network or02d1 (terminal A1, A2, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 10, vss);
+    penh w=29.6u l=1.6u (A1, 5, 10);
+    cap 16.24325f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 10, vss);
+    cap 93.98784f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, vdd);
+    cap 15.69586f (A2, vss);
+    nenh w=23.2u l=1.6u (10, Z, vss);
+    penh w=29.6u l=1.6u (10, Z, vdd);
+    cap 185.9853f (10, vss);
+    cap 133.7273f (Z, vss);
+    cap 124.7201f (vdd, vss);
+}
+
+network or03d1 (terminal A1, A2, A3, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 15, vss);
+    penh w=29.6u l=1.6u (A1, 5, 15);
+    cap 15.69586f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 15, vss);
+    cap 93.98784f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, 10);
+    cap 16.76581f (A2, vss);
+    nenh w=23.2u l=1.6u (A3, 15, vss);
+    cap 93.98784f (10, vss);
+    penh w=29.6u l=1.6u (A3, 10, vdd);
+    cap 15.69586f (A3, vss);
+    nenh w=23.2u l=1.6u (15, Z, vss);
+    penh w=29.6u l=1.6u (15, Z, vdd);
+    cap 237.3028f (15, vss);
+    cap 133.7273f (Z, vss);
+    cap 128.1057f (vdd, vss);
+}
+
+network or04d1 (terminal A1, A2, A3, A4, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 20, vss);
+    penh w=29.6u l=1.6u (A1, 5, 20);
+    cap 16.24325f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, 20, vss);
+    cap 93.98784f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, 10);
+    cap 15.69586f (A2, vss);
+    nenh w=23.2u l=1.6u (A3, 20, vss);
+    cap 93.98784f (10, vss);
+    penh w=29.6u l=1.6u (A3, 10, 15);
+    cap 16.76581f (A3, vss);
+    nenh w=23.2u l=1.6u (A4, 20, vss);
+    cap 93.98784f (15, vss);
+    penh w=29.6u l=1.6u (A4, 15, vdd);
+    cap 15.69586f (A4, vss);
+    nenh w=23.2u l=1.6u (20, Z, vss);
+    penh w=29.6u l=1.6u (20, Z, vdd);
+    cap 228.0548f (20, vss);
+    cap 133.7273f (Z, vss);
+    cap 131.4913f (vdd, vss);
+}
+
+network xn02d1 (terminal A1, A2, ZN, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 5, 10);
+    penh w=29.6u l=1.6u (A1, 10, vdd);
+    cap 35.06688f (5, vss);
+    nenh w=23.2u l=1.6u (A2, 5, vss);
+    penh w=29.6u l=1.6u (A2, 10, vdd);
+    nenh w=23.2u l=1.6u (10, 24, vss);
+    penh w=29.6u l=1.6u (10, ZN, vdd);
+    cap 171.6858f (10, vss);
+    nenh w=23.2u l=1.6u (A1, ZN, 24);
+    penh w=29.6u l=1.6u (A1, 19, ZN);
+    cap 42.66659f (A1, vss);
+    nenh w=23.2u l=1.6u (A2, ZN, 24);
+    cap 95.43168f (19, vss);
+    penh w=29.6u l=1.6u (A2, 19, vdd);
+    cap 42.66776f (A2, vss);
+    cap 142.7532f (ZN, vss);
+    cap 73.88896f (24, vss);
+    cap 358.2465f (vdd, vss);
+}
+
+network xo02d1 (terminal A1, A2, Z, vss, vdd)
+{
+    nenh w=23.2u l=1.6u (A1, 10, vss);
+    penh w=29.6u l=1.6u (A1, 5, 10);
+    nenh w=23.2u l=1.6u (A2, 10, vss);
+    cap 93.98784f (5, vss);
+    penh w=29.6u l=1.6u (A2, 5, vdd);
+    nenh w=23.2u l=1.6u (10, Z, vss);
+    penh w=29.6u l=1.6u (10, 24, vdd);
+    cap 188.2608f (10, vss);
+    nenh w=23.2u l=1.6u (A1, 19, Z);
+    penh w=29.6u l=1.6u (A1, Z, 24);
+    cap 41.62264f (A1, vss);
+    cap 35.06688f (19, vss);
+    nenh w=23.2u l=1.6u (A2, 19, vss);
+    penh w=29.6u l=1.6u (A2, Z, 24);
+    cap 42.64176f (A2, vss);
+    cap 144.1971f (Z, vss);
+    cap 197.7395f (24, vss);
+    cap 136.1868f (vdd, vss);
+}
+

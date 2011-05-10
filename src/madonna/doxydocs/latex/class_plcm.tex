@@ -1,0 +1,1953 @@
+\subsection{Plcm  Class Reference}
+\label{Plcm}\index{Plcm@{Plcm}}
+{\tt \#include $<$plcm.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Plcm} (char $\ast$c\-Name, char $\ast$f\-Name, char $\ast$l\-Name, {\bf IMAGEDESC}$\ast$ image\-Desc,{\bf Image\-Map}$\ast$ im\-Map, char $\ast$o\-Name=NULL, CIRCUIT $\ast$read\-Data=NULL, {\bf GLOBAL\_\-ROUTING} $\ast$g\_\-rout=NULL, {\bf Boolean} {\bf slicing\-Layout}=false, {\bf Boolean} do\-Transparency\-Ana=false, {\bf Boolean} verbose=false, {\bf Boolean} {\bf rand\_\-points}=true, int {\bf set\_\-srand}=0 ,int {\bf macro\-Min\-Size}=MAXINT)
+\item 
+{\bf $\sim$Plcm} ()
+\item 
+void {\bf read} (void)
+\item 
+void {\bf prepare} (void)
+\item 
+void {\bf create\-Plane} (int hor,int ver )
+\item 
+int {\bf placement} (void)
+\item 
+void {\bf set\-Bbx} (void)
+\item 
+void {\bf recover} (void)
+\item 
+void {\bf compaction} (void )
+\item 
+void {\bf write} (CIRCUIT $\ast$to\-Attach\-To=NULL,{\bf Boolean} do\-Write=true)
+\item 
+void {\bf do\-Transp\-Analysis} (void)
+\item 
+void {\bf add\-Free\-Net} (char $\ast$name)
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf read\-Commands} ( void )
+\item 
+void {\bf clear\-Flags} ( CIRCUIT $\ast$ )
+\item 
+double {\bf read\-Layouts} ( CIRCUIT $\ast$)
+\item 
+{\bf List}$\ast$ {\bf trans\-List} (LAYOUT $\ast$,{\bf IMAGEDESC} $\ast$)
+\item 
+void {\bf block\-Channels} ({\bf Window}$\ast$,int,int)
+\item 
+void {\bf make\-Windows} ( CIRCUIT $\ast$c,{\bf Boolean} mc=false)
+\item 
+void {\bf free\-Flag\-Item1} ( CIRCUIT $\ast$)
+\item 
+void {\bf free\-Flag\-Item2} ( CIRCUIT $\ast$)
+\item 
+int {\bf do\-Placement} ( CIRCUIT$\ast$ c,{\bf Boolean} f=false )
+\item 
+int {\bf place\-Group} (CIRINST $\ast$,{\bf Window} \&)
+\item 
+{\bf Boolean} {\bf try\-This\-Cluster} (CIRINST $\ast$,{\bf Cluster} \&, {\bf Prot\-Area}\& pa)
+\item 
+{\bf Pattern}\& {\bf try\-This\-Cell\-Here} (LAYOUT $\ast$,{\bf Cluster} \&,{\bf Prot\-Area}\& )
+\item 
+void {\bf place\-One\-Cell} (CIRINST $\ast$,LAYOUT $\ast$,{\bf Pattern} \&, {\bf Cluster} \&,{\bf Prot\-Area}\& )
+\item 
+CIRINSTPTR {\bf sort\-Group} (CIRINST $\ast$)
+\item 
+SLICE$\ast$ {\bf find\-Slice} (CIRINST$\ast$ ci\-Ptr)
+\item 
+void {\bf remove\-Empty\-Slices} (void)
+\item 
+{\bf Boolean} {\bf compact\-Side} ({\bf compact\-Type} which\-Dir,int x,int y)
+\item 
+{\bf Boolean} {\bf is\-Empty} (int ,int ,{\bf compact\-Type} )
+\item 
+{\bf Boolean} {\bf no\-Conflicts} (int ,int ,{\bf compact\-Type})
+\item 
+void {\bf delete\-Pos} (int ,{\bf compact\-Type} )
+\item 
+{\bf Boolean} {\bf size\-Ok} (int,int)
+\item 
+{\bf Boolean} {\bf may\-Be\-Joined} ({\bf List} \&,{\bf List} \&,{\bf compact\-Type} )
+\item 
+void {\bf move\-Cell} (LAYINST $\ast$li\-Ptr,{\bf compact\-Type} dir,int pos,int offset)
+\item 
+int$\ast$ {\bf calc\-Transp} (SLICE$\ast$ the\-Slice)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf circuit\-Name}
+\item 
+char$\ast$ {\bf layout\-Name}
+\item 
+char$\ast$ {\bf function\-Name}
+\item 
+char$\ast$ {\bf library\-Name}
+\item 
+CIRCUIT$\ast$ {\bf given\-Circuit}
+\item 
+LAYOUT$\ast$ {\bf layout\-To\-Build}
+\item 
+LAYINST$\ast$$\ast$ {\bf lay\-Instances\-List}
+\item 
+int {\bf set\_\-srand}
+\item 
+{\bf Boolean} {\bf random\_\-points}
+\item 
+double {\bf total\-Area}
+\item 
+int {\bf macro\-Min\-Size}
+\item 
+{\bf IMAGEDESC}\& {\bf this\-Image}
+\item 
+{\bf Plane}$\ast$ {\bf plane}
+\item 
+{\bf Image\-Map}$\ast$ {\bf image\-Map}
+\item 
+{\bf Array} {\bf free\-Nets}
+\item 
+{\bf Boolean} {\bf verbose\-Mode}
+\item 
+CIRCUIT$\ast$ {\bf from\-Partitioner}
+\item 
+{\bf GLOBAL\_\-ROUTING}$\ast$ {\bf glob\-Routing}
+\item 
+{\bf Boolean} {\bf slicing\-Layout}
+\item 
+int {\bf slices\-In\-Hor}
+\item 
+int {\bf slices\-In\-Ver}
+\item 
+{\bf Boolean} {\bf do\-Trans\-Ana}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Plcm_a0}
+\index{Plcm@{Plcm}!Plcm@{Plcm}}
+\index{Plcm@{Plcm}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Plcm::Plcm (char $\ast$ {\em c\-Name}, char $\ast$ {\em f\-Name}, char $\ast$ {\em l\-Name}, {\bf IMAGEDESC} $\ast$ {\em image\-Desc}, {\bf Image\-Map} $\ast$ {\em im\-Map}, char $\ast$ {\em o\-Name} = NULL, CIRCUIT $\ast$ {\em partitioned} = NULL, {\bf GLOBAL\_\-ROUTING} $\ast$ {\em g\_\-rout} = NULL, {\bf Boolean} {\em sl} = false, {\bf Boolean} {\em da} = false, {\bf Boolean} {\em v} = false, {\bf Boolean} {\em p} = true, int {\em sr} = 0, int {\em mm} = MAXINT)}\hfill
+
+
+
+Definition at line 33 of file plcm.C.\small\begin{verbatim}00041 :thisImage(*imageDesc),
+00042                                    imageMap(imMap),
+00043                        globRouting(g_rout),
+00044                        slicingLayout(sl),
+00045                        doTransAna(da),
+00046                        freeNets(5,0,5),
+00047                        random_points(p),
+00048                                        set_srand(sr),
+00049                        macroMinSize(mm)
+00050 //
+00051 // Constructor :
+00052 // Assumes that database is already opened.
+00053 //
+00054 {
+00055 
+00056   srand(int( set_srand > 0 ? set_srand : getpid()));
+00057 
+00058 
+00059   
+00060   if(slicingLayout && doTransAna)
+00061     random_points=false;
+00062 
+00063 
+00064   if (doTransAna )
+00065     globRouting=NULL;
+00066 
+00067   
+00068   circuitName=cs(cName);
+00069   functionName=cs(fName);
+00070   libraryName=cs(lName);
+00071 
+00072   if(oName == NULL)
+00073     layoutName=cs(cName);
+00074   else
+00075     layoutName=cs(oName);
+00076 
+00077   verboseMode=v;
+00078   fromPartitioner=partitioned;
+00079   layInstancesList=NULL;
+00080   
+00081 
+00082   plane=NULL;                    // for future checking if "read" and "prepare"
+00083                                  // were called
+00084 
+00085 
+00086                                    // defining default "free" nets names
+00087 
+00088   freeNets.add( *new CriNet(cs("vdd")));
+00089   freeNets.add( *new CriNet(cs("vss")));
+00090   freeNets.add( *new CriNet(cs("gnd")));
+00091   freeNets.add( *new CriNet(cs("power")));
+00092   freeNets.add( *new CriNet(cs("Vdd")));
+00093   freeNets.add( *new CriNet(cs("Vdd")));
+00094 
+00095 
+00096 
+00097 
+00098 }
+\end{verbatim}\normalsize 
+\label{Plcm_a1}
+\index{Plcm@{Plcm}!~Plcm@{$\sim$Plcm}}
+\index{~Plcm@{$\sim$Plcm}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Plcm::$\sim$Plcm (void)}\hfill
+
+
+
+Definition at line 249 of file plcm.C.\small\begin{verbatim}00253 {
+00254 
+00255 //  freeFlagItem(givenCircuit);
+00256 
+00257   delete( plane );
+00258 
+00259 
+00260 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Plcm_a11}
+\index{Plcm@{Plcm}!addFreeNet@{addFreeNet}}
+\index{addFreeNet@{addFreeNet}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::add\-Free\-Net (char $\ast$ {\em name})}\hfill
+
+\label{Plcm_c4}
+\index{Plcm@{Plcm}!blockChannels@{blockChannels}}
+\index{blockChannels@{blockChannels}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::block\-Channels ({\bf Window} $\ast$, int, int)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c23}
+\index{Plcm@{Plcm}!calcTransp@{calcTransp}}
+\index{calcTransp@{calcTransp}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ Plcm::calc\-Transp (SLICE $\ast$ {\em the\-Slice})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 1045 of file plcm.C.\small\begin{verbatim}01053 {
+01054                 // slice size in grid points
+01055 
+01056   SLICE_INFO* sliceInfo = (SLICE_INFO*)theSlice->flag.p;
+01057   int sliceWidth=sliceInfo->width*thisImage.size[HOR],
+01058       sliceHeight=sliceInfo->height*thisImage.size[VER],
+01059       cXstart=sliceInfo->cX,
+01060       cYstart=sliceInfo->cY;
+01061 
+01062                 // first let\'s allocate the array
+01063 
+01064   int *theArray= new int [thisImage.numlayers];
+01065 
+01066                 // ... and temporary arrays
+01067 
+01068   Transparency* trTable= new Transparency[thisImage.numlayers];
+01069 
+01070   for(int i=0;i<thisImage.numlayers;i++)
+01071     trTable[i]=Transparency(sliceWidth,sliceHeight);
+01072 
+01073   if(trTable == NULL || theArray==NULL)
+01074     usrErr("Plcm",ENOTMEM);
+01075 
+01076 
+01077                 // now filling-in these
+01078                 // structures.
+01079 
+01080   for(LAYINST* liPtr=theSlice->chld.layinst;liPtr!=NULL;liPtr=liPtr->next)
+01081   {
+01082     List& listRef=(List&)(*liPtr->layout->flag.p);
+01083     ListIterator lIter(listRef);
+01084     Pattern& patRef=(Pattern&)(Item&)lIter;
+01085                 // the first one contains transMaps;
+01086     
+01087     Transparency *tranMaps=patRef.getTranMaps();
+01088     
+01089     if(tranMaps==NULL)
+01090       usrErr("Plcm::calcTransp",EUNKNOW);
+01091 
+01092 
+01093     int newCx,newCy;
+01094                 // find the new left bottom bottom corner of 
+01095                 // the cell
+01096 
+01097     patRef.findNewLeftBottom(liPtr->layout->bbx[HOR],liPtr->layout->bbx[VER],
+01098                  liPtr->mtx,newCx,newCy);
+01099 
+01100                 // now for every layer
+01101 
+01102     for(int l=0;l<thisImage.numlayers;l++)
+01103     {
+01104       Transparency* tranMap=&tranMaps[l];
+01105 
+01106                 // now a small detail - the cell could be 
+01107                 // placed upside down or even mirrored -
+01108                 // this may require some transformations
+01109 
+01110       Transparency* transformedMap = tranMap->transform(liPtr->mtx);
+01111 
+01112     
+01113       int offset;
+01114 
+01115       transGridType* destPtr,*end,*srcPtr;
+01116       
+01117       if(thisImage.routeorient[l]==HOR)
+01118       {
+01119     offset=newCy-(cYstart*thisImage.size[VER]); 
+01120     destPtr=trTable[l].verGridMap+offset;
+01121     if(offset+transformedMap->sizeVer < trTable[l].sizeVer)
+01122       end=destPtr+transformedMap->sizeVer;
+01123     else
+01124       end=trTable[l].verGridMap+trTable[l].sizeVer;
+01125     if(offset < 0)      // cell is partially located below 
+01126     {           // the slice
+01127       destPtr=trTable[l].verGridMap;
+01128       srcPtr=transformedMap->verGridMap-offset;
+01129     }
+01130     else
+01131       srcPtr=transformedMap->verGridMap;
+01132       }
+01133       else
+01134       {
+01135     offset=newCx-(cXstart*thisImage.size[HOR]); 
+01136     destPtr=trTable[l].horGridMap+offset;
+01137     if(offset+transformedMap->sizeHor < trTable[l].sizeHor)
+01138       end=destPtr+transformedMap->sizeHor;
+01139     else
+01140       end=trTable[l].horGridMap+trTable[l].sizeHor;
+01141     if (offset<0)
+01142     {
+01143       destPtr=trTable[l].horGridMap;
+01144       srcPtr=transformedMap->horGridMap-offset;
+01145     }
+01146     else
+01147       srcPtr=transformedMap->horGridMap;
+01148     
+01149       }
+01150                 // now let\'s do logical and-ing
+01151 
+01152       for(;destPtr<end;destPtr++,srcPtr++)
+01153     *destPtr|=*srcPtr;
+01154 
+01155       delete transformedMap;
+01156     }
+01157   }
+01158 
+01159                 // now let's fill in the output array
+01160 
+01161   for(int lay=0;lay<thisImage.numlayers;lay++)
+01162   {
+01163     Transparency &tPtr=trTable[lay];
+01164 
+01165     theArray[lay]=tPtr.freeTracks(thisImage.routeorient[lay]);
+01166 
+01167   }
+01168   delete trTable;
+01169 
+01170 
+01171 
+01172   return theArray;
+01173 
+01174 }
+\end{verbatim}\normalsize 
+\label{Plcm_c1}
+\index{Plcm@{Plcm}!clearFlags@{clearFlags}}
+\index{clearFlags@{clearFlags}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::clear\-Flags (CIRCUIT $\ast$)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c16}
+\index{Plcm@{Plcm}!compactSide@{compactSide}}
+\index{compactSide@{compactSide}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::compact\-Side ({\bf compact\-Type} {\em which\-Dir}, int {\em ccx}, int {\em ccy})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 67 of file compact.C.\small\begin{verbatim}00072 {
+00073   int actSize,savSize,otherSize,end;
+00074 
+00075   if(whichDir == HorizC)
+00076   {
+00077     otherSize=ccy;
+00078     actSize=end=ccx;
+00079   }
+00080   else
+00081   {
+00082     otherSize=ccx;
+00083     actSize=end=ccy;
+00084   }
+00085 
+00086   int  mid,
+00087        pos1=0,npos1=0,
+00088        pos2=end-1,npos2=end-1;
+00089 
+00090   savSize=actSize;
+00091   mid=end/2;
+00092   end--;
+00093 
+00094   for( ;pos1 < mid && pos2 >= mid;pos1++,pos2--,npos2--) 
+00095   {
+00096     if (isEmpty(pos1,otherSize,whichDir) && 
+00097     (pos1==0 || noConflicts(pos1,otherSize,whichDir) ) )
+00098     {
+00099       actSize--;
+00100       deletePos(npos1,whichDir);
+00101       npos2--;
+00102     }
+00103     else
+00104       npos1++;
+00105 
+00106     if (isEmpty(pos2,otherSize,whichDir) &&
+00107     (pos2== end || noConflicts(pos2,otherSize,whichDir) ) )
+00108     {
+00109       actSize--;
+00110       deletePos(npos2,whichDir); 
+00111     }
+00112     
+00113     if (sizeOk(actSize,otherSize) )    // further compaction not required
+00114       break;
+00115   }
+00116   if (savSize-actSize >0)
+00117     if(whichDir==HorizC)
+00118     {
+00119             cout << "\n         " << (savSize-actSize) << "  column[s] deleted." << endl;
+00120       layoutToBuild->bbx[HOR]=actSize*thisImage.size[HOR]+thisImage.overlap[HOR];
+00121     }
+00122     else
+00123     {
+00124             cout << "\n         " << (savSize-actSize) << "  row[s] deleted." << endl;
+00125       layoutToBuild->bbx[VER]=actSize*thisImage.size[VER]+thisImage.overlap[VER];;
+00126     }
+00127   return(sizeOk(actSize,otherSize));
+00128 
+00129 }
+\end{verbatim}\normalsize 
+\label{Plcm_a8}
+\index{Plcm@{Plcm}!compaction@{compaction}}
+\index{compaction@{compaction}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::compaction (void)}\hfill
+
+
+
+Definition at line 18 of file compact.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00025 {
+00026 
+00027   compactType  dir1,dir2;
+00028 
+00029   int ccx=layoutToBuild->bbx[HOR]/thisImage.size[HOR],
+00030       ccy=layoutToBuild->bbx[VER]/thisImage.size[VER];
+00031   
+00032 
+00033 
+00034 
+00035   if (sizeOk(ccy,ccx))
+00036   {
+00037     cout << "\n       No compaction necessary.\n" << endl; 
+00038     return;
+00039   }
+00040 
+00041 
+00042   if( layoutToBuild->bbx[HOR]  > layoutToBuild->bbx[VER])
+00043   {
+00044     dir1=HorizC;
+00045     dir2=VertC;
+00046   }
+00047   else
+00048   {
+00049     dir1=VertC;
+00050     dir2=HorizC;
+00051   }  
+00052   
+00053 
+00054   if( ! compactSide(dir1,ccx,ccy) )
+00055     compactSide(dir2,ccx,ccy);
+00056 
+00057   double area= layoutToBuild->bbx[HOR] *
+00058                layoutToBuild->bbx[VER];     
+00059 
+00060 
+00061   cout << "\n         Magnification coefficient obtained :" << 
+00062            area / totalArea << endl << endl;
+00063 
+00064 }
+\end{verbatim}\normalsize 
+\label{Plcm_a4}
+\index{Plcm@{Plcm}!createPlane@{createPlane}}
+\index{createPlane@{createPlane}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::create\-Plane (int {\em hor}, int {\em ver})}\hfill
+
+
+
+Definition at line 904 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00908 {
+00909 
+00910 
+00911                 // first adjust sizes to be multiplication
+00912                 // of basic cell
+00913 
+00914   if(hor % thisImage.size[HOR] != 0)
+00915   {
+00916     hor=(hor / thisImage.size[HOR] +1) *
+00917                              thisImage.size[HOR];
+00918   }
+00919   if(ver % thisImage.size[VER] != 0)
+00920   {
+00921     ver=(ver / thisImage.size[VER] +1) *
+00922                              thisImage.size[VER];
+00923   }
+00924                 // this is the size of our chip
+00925                 // as adjusted by partitioner
+00926 
+00927   int  clustersInHor = hor / thisImage.size[HOR] ;
+00928   int  clustersInVer = ver / thisImage.size[VER] ;
+00929 
+00930   clearFlags(givenCircuit);
+00931                                          // clean two kinds of flags - used for
+00932                      // windows and ones used for marking 
+00933                      // placed cells
+00934 
+00935   Cluster cls = Cluster(0,0,thisImage.size[HOR],thisImage.size[VER]);
+00936 
+00937   if (globRouting != NULL)  // we have to reserve some space for 
+00938                 // routing channels
+00939   {
+00940     Window tempW(cls,clustersInHor,clustersInVer);
+00941 
+00942     int c,r,w,h,i;
+00943     
+00944     tempW.getDiv(givenCircuit->name,&c,&r,&w,&h);
+00945     for(i=0;i<c-1;i++)
+00946       clustersInHor+=globRouting->vertical_channels[i].ncells;
+00947     for(i=0;i<r-1;i++)
+00948       clustersInVer+=globRouting->horizontal_channels[i].ncells;
+00949   }
+00950 
+00951 
+00952   Window  *bigWindow =  new Window(cls,clustersInHor,clustersInVer);
+00953 
+00954   givenCircuit->flag.p=(char*)bigWindow; 
+00955 
+00956 
+00957   plane = new Plane(clustersInVer,clustersInHor);
+00958 
+00959 
+00960 
+00961 
+00962   makeWindows(givenCircuit,Boolean(globRouting!=NULL)); 
+00963                                 // true - means add channels
+00964 
+00965                 // and check if this is a cleaned layout
+00966                 // (all layout instances removed)
+00967   if(layInstancesList != NULL)
+00968     usrErr("Plcm",EUNKNOW);
+00969 
+00970                 // that\'s all, I suppose ...
+00971 
+00972    
+00973 }
+\end{verbatim}\normalsize 
+\label{Plcm_c19}
+\index{Plcm@{Plcm}!deletePos@{deletePos}}
+\index{deletePos@{deletePos}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::delete\-Pos (int {\em pos}, {\bf compact\-Type} {\em dir})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 181 of file compact.C.\small\begin{verbatim}00185 {
+00186   int offset;
+00187 
+00188   if(dir == HorizC)
+00189     offset=thisImage.size[HOR];    
+00190   else
+00191     offset=thisImage.size[VER];    
+00192   
+00193   if(slicingLayout)
+00194   {
+00195     int i,j;
+00196     SLICE* slvPtr,*slhPtr;
+00197 
+00198     for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+00199     slvPtr!=NULL && i<slicesInHor;i++,slvPtr=slvPtr->next)
+00200       for(j=0,slhPtr=slvPtr->chld.slice;
+00201           slhPtr!=NULL && j<slicesInVer;j++,slhPtr=slhPtr->next)
+00202       {
+00203                 // we let\'s find out if this one has to 
+00204                 // be updated
+00205 
+00206     SLICE_INFO* tdPtr=(SLICE_INFO*)slhPtr->flag.p;
+00207     
+00208     if (tdPtr->layerTrans != NULL)
+00209       cerr << "Warning : Compact - you shouldn't do compactions after \n"
+00210            << "          transparency analysis ! " << endl;
+00211 
+00212     if(dir == HorizC)
+00213     {
+00214       if(tdPtr->cX + tdPtr->width >= pos)         
+00215         for(LAYINSTPTR lPtr=slhPtr->chld.layinst;lPtr != NULL;lPtr=lPtr->next)
+00216           moveCell(lPtr,dir,pos,offset);
+00217 
+00218       if(tdPtr->cX <= pos && tdPtr->cX+tdPtr->width > pos)
+00219         tdPtr->width--; // only shrink it
+00220       if(tdPtr->cX > pos)   // only shift
+00221         tdPtr->cX--;
+00222     }
+00223     else
+00224     {
+00225       if (tdPtr->cY + tdPtr->height >= pos)
+00226         for(LAYINSTPTR lPtr=slhPtr->chld.layinst;lPtr != NULL;lPtr=lPtr->next)
+00227           moveCell(lPtr,dir,pos,offset);
+00228       if(tdPtr->cY <= pos && tdPtr->cY+tdPtr->height > pos)
+00229         tdPtr->height--;    // only shrink it
+00230 
+00231       if(tdPtr->cY > pos)   // only shift
+00232         tdPtr->cY--;
+00233     }
+00234       }
+00235   }
+00236   else
+00237     for(LAYINST *liPtr=*layInstancesList;liPtr!=NULL;liPtr=liPtr->next)
+00238       moveCell(liPtr,dir,pos,offset);
+00239 
+00240 }
+\end{verbatim}\normalsize 
+\label{Plcm_c8}
+\index{Plcm@{Plcm}!doPlacement@{doPlacement}}
+\index{doPlacement@{doPlacement}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::do\-Placement (CIRCUIT $\ast$ {\em circuit\-Ptr}, {\bf Boolean} {\em first} = false)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 263 of file plcm.C.
+
+Referenced by {\bf placement}().\small\begin{verbatim}00267 {
+00268   if (circuitPtr->cirinst == NULL )
+00269     return 0;                        // empty partition - nothing
+00270                                     // to do
+00271   if( circuitPtr->cirinst->circuit == NULL)
+00272     usrErr("Plcm::doPlacement",EUNKNOW);
+00273 
+00274   if(circuitPtr->cirinst->circuit->status  != NULL &&
+00275      (strstr(circuitPtr->cirinst->circuit->status->program,"mad_prim")!=NULL ||
+00276      strstr(circuitPtr->cirinst->circuit->status->program,"libprim")!=NULL) )
+00277   {
+00278                                 // this circuit has only libprim children
+00279                                 // so we can start placement
+00280 
+00281                                 // but ...
+00282                 // before we start placing let\'s better sort the
+00283                 // elements so that biggest one will come first
+00284 
+00285     circuitPtr->cirinst=sortGroup(circuitPtr->cirinst);
+00286 
+00287     if (! slicingLayout)
+00288       layInstancesList=&layoutToBuild->slice->chld.layinst;
+00289       
+00290     if (placeGroup(circuitPtr->cirinst,*(Window *)circuitPtr->flag.p))
+00291       return 1;
+00292 
+00293   }
+00294   else
+00295   {
+00296     CIRINST *ciPtr;
+00297 
+00298     if(first && slicingLayout)  // we have to set slice info
+00299     {                       // for each of slices
+00300       SLICE *thisSlice;
+00301       
+00302       for(ciPtr=circuitPtr->cirinst;ciPtr!=NULL;ciPtr=ciPtr->next)
+00303       {
+00304     
+00305     thisSlice=findSlice(ciPtr);
+00306                 // also we have to store slice info
+00307                 // in the flag field of the slice
+00308     
+00309     SLICE_INFO *tr_data = new SLICE_INFO;
+00310     Window *wPtr=(Window*)ciPtr->circuit->flag.p;
+00311     tr_data->cX=wPtr->cX;
+00312     tr_data->cY=wPtr->cY;
+00313     tr_data->width=wPtr->width;
+00314     tr_data->height=wPtr->high;
+00315     tr_data->layerTrans=NULL;
+00316     thisSlice->flag.p=(char*)tr_data;
+00317       }
+00318     }
+00319 
+00320 
+00321     for(ciPtr=circuitPtr->cirinst;ciPtr!=NULL;ciPtr=ciPtr->next)
+00322     {
+00323       if (first && slicingLayout)
+00324       {
+00325     SLICE *sPtr = findSlice(ciPtr);
+00326     layInstancesList=&sPtr->chld.layinst;
+00327       }
+00328       else
+00329     if(first)
+00330       layInstancesList=&layoutToBuild->slice->chld.layinst;
+00331       if ( doPlacement(ciPtr->circuit) )
+00332     return 1;
+00333 
+00334     }
+00335   }
+00336 #ifdef SLICE_DEBUG
+00337 
+00338   if (first)
+00339   {
+00340     SLICE *slvPtr,*slhPtr;
+00341 
+00342     for(slvPtr=layoutToBuild->slice->chld.slice;
+00343     slvPtr!=NULL ;slvPtr=slvPtr->next)
+00344       for(slhPtr=slvPtr->chld.slice;
+00345       slhPtr!=NULL ;slhPtr=slhPtr->next)
+00346       {
+00347     SLICE_INFO* siPtr=(SLICE_INFO*)slhPtr->flag.p;
+00348     cout << "Slice, ord " << slhPtr->ordination << " ("
+00349          << siPtr->cX << "," << siPtr->cY << ")" << endl;
+00350     for(LAYINST* liPtr=slhPtr->chld.layinst;liPtr!=NULL;liPtr=liPtr->next)
+00351       cout << liPtr->name << ",";
+00352     cout << endl;
+00353       }
+00354 
+00355     
+00356   }
+00357 #endif
+00358   return 0;
+00359 }
+\end{verbatim}\normalsize 
+\label{Plcm_a10}
+\index{Plcm@{Plcm}!doTranspAnalysis@{doTranspAnalysis}}
+\index{doTranspAnalysis@{doTranspAnalysis}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::do\-Transp\-Analysis (void)}\hfill
+
+
+
+Definition at line 1177 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}01180 {
+01181   int i,j;
+01182 
+01183   if(!slicingLayout)
+01184     usrErr("Plcm::doTranspAnalysis",EUNKNOW);
+01185     SLICE* slvPtr,*slhPtr;
+01186 
+01187     for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+01188     slvPtr!=NULL && i<slicesInHor;i++,slvPtr=slvPtr->next)
+01189       for(j=0,slhPtr=slvPtr->chld.slice;
+01190           slhPtr!=NULL && j<slicesInVer;j++,slhPtr=slhPtr->next)
+01191       {
+01192     SLICE_INFO* tdPtr=(SLICE_INFO*)slhPtr->flag.p;
+01193     tdPtr->layerTrans=calcTransp(slhPtr);
+01194 
+01195 #ifdef TRANS_DEBUG 
+01196 
+01197         cout << "(" << tdPtr->cX << ","
+01198          << tdPtr->cY << ","
+01199          << tdPtr->width << ","
+01200          << tdPtr->height << ")";
+01201     
+01202     for(int k=0;k<thisImage.numlayers;k++)
+01203       cout << "[" << tdPtr->layerTrans[k] << "]";
+01204     cout << endl;
+01205 #endif
+01206 
+01207       }
+01208   
+01209 }
+\end{verbatim}\normalsize 
+\label{Plcm_c14}
+\index{Plcm@{Plcm}!findSlice@{findSlice}}
+\index{findSlice@{findSlice}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}SLICE $\ast$ Plcm::find\-Slice (CIRINST $\ast$ {\em ci\-Ptr})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 1212 of file plcm.C.\small\begin{verbatim}01215 {
+01216   int     partNo = atoi(ciPtr->name) - 1 ;
+01217   int     x,y;
+01218   x = partNo % slicesInHor; // row & column no. (from 0)
+01219   y = partNo / slicesInHor;
+01220     
+01221                 // now we have to find the right slice
+01222                 // layinst pointer
+01223   SLICE* slvPtr,*slhPtr;
+01224   int i,j;
+01225   
+01226   for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+01227       slvPtr!=NULL && i<x;i++,slvPtr=slvPtr->next);
+01228   for(j=0,slhPtr=slvPtr->chld.slice;
+01229       slhPtr!=NULL && j<y;j++,slhPtr=slhPtr->next);
+01230                 // now shlPtr points to the right slice
+01231     
+01232     
+01233   return slhPtr;
+01234 
+01235 }
+\end{verbatim}\normalsize 
+\label{Plcm_c6}
+\index{Plcm@{Plcm}!freeFlagItem1@{freeFlagItem1}}
+\index{freeFlagItem1@{freeFlagItem1}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::free\-Flag\-Item1 (CIRCUIT $\ast$ {\em c\-Ptr})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 742 of file plcm.C.\small\begin{verbatim}00744 :
+00745 // -Pattern's attached to each libprim layout
+00746 {
+00747   if( cPtr->status != NULL &&
+00748       (strstr(cPtr->status->program,"mad_prim")!= NULL ||
+00749        strstr(cPtr->status->program,"libprim")!= NULL) &&
+00750       cPtr->layout != NULL )
+00751   {
+00752     for(LAYOUT *lPtr=cPtr->layout;lPtr!=NULL;lPtr=lPtr->next)
+00753       if(strstr(lPtr->name,"Tmp_Cell_")==NULL ) // don't consider 
+00754                                             // nelsis's tmp cells
+00755       {
+00756 
+00757     delete (List*)lPtr->flag.p;
+00758       }
+00759     cPtr->layout->flag.p=NULL;             // to be sure that we will
+00760                                            // not free the same thing
+00761                                            // twice
+00762 
+00763     return;
+00764   }
+00765   for(CIRINST *ciPtr=cPtr->cirinst;ciPtr!=NULL;ciPtr=ciPtr->next)
+00766   {
+00767     freeFlagItem1(ciPtr->circuit);
+00768   }
+00769 
+00770 
+00771 }// Plcm::freeFlagItem1  //
+
+\end{verbatim}\normalsize 
+\label{Plcm_c7}
+\index{Plcm@{Plcm}!freeFlagItem2@{freeFlagItem2}}
+\index{freeFlagItem2@{freeFlagItem2}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::free\-Flag\-Item2 (CIRCUIT $\ast$ {\em c\-Ptr})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 774 of file plcm.C.\small\begin{verbatim}00776 :
+00777 // -Window's attached to each circuit with has cirinst of libprim type
+00778 {
+00779   delete (Window*)cPtr->flag.p;
+00780 
+00781   if( cPtr->cirinst==NULL || 
+00782       (cPtr->cirinst->circuit->status != NULL &&
+00783        (strstr(cPtr->cirinst->circuit->status->program,"mad_prim")!=NULL ||
+00784     strstr(cPtr->cirinst->circuit->status->program,"libprim")!=NULL ))  ) 
+00785   {
+00786     return;     // this window wasn\'t devided
+00787   }
+00788   for(CIRINST *ciPtr=cPtr->cirinst;ciPtr!=NULL;ciPtr=ciPtr->next)
+00789   {
+00790     freeFlagItem2(ciPtr->circuit);
+00791   }
+00792 
+00793 
+00794 }// Plcm::freeFlagItem2  //
+
+\end{verbatim}\normalsize 
+\label{Plcm_c17}
+\index{Plcm@{Plcm}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::is\-Empty (int {\em pos}, int {\em len}, {\bf compact\-Type} {\em dir})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 132 of file compact.C.\small\begin{verbatim}00136 {
+00137   clusterMapType  cell;
+00138   for(int i=0;i<len;i++)
+00139   {
+00140     if(dir == HorizC)
+00141       cell=plane->getPattern(pos,i);   // checking column 
+00142     else
+00143       cell=plane->getPattern(i,pos);   // checking row
+00144     if (cell != 0)
+00145       return false;
+00146   }
+00147   return true;
+00148 
+00149 }
+\end{verbatim}\normalsize 
+\label{Plcm_c5}
+\index{Plcm@{Plcm}!makeWindows@{makeWindows}}
+\index{makeWindows@{makeWindows}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::make\-Windows (CIRCUIT $\ast$ {\em c}, {\bf Boolean} {\em mc} = false)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c21}
+\index{Plcm@{Plcm}!mayBeJoined@{mayBeJoined}}
+\index{mayBeJoined@{mayBeJoined}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::may\-Be\-Joined ({\bf List} \& {\em l1}, {\bf List} \& {\em l2}, {\bf compact\-Type} {\em dir})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 264 of file compact.C.\small\begin{verbatim}00267 {
+00268   int max;
+00269 
+00270   if(dir == HorizC)
+00271     max=thisImage.size[HOR]-1;
+00272   else
+00273     max=thisImage.size[VER]-1;    
+00274   
+00275   
+00276   if ( l2.getItemsInBox())
+00277   {  
+00278     ListIterator crIter(l2);
+00279     
+00280     for(;(Item&)crIter != NOITEM;crIter++)
+00281     {
+00282       CriPoint &trRef = (CriPoint&)(Item&)crIter;
+00283       if ( dir==HorizC && trRef.x == 0 || dir == VertC && trRef.y == 0)
+00284       {
+00285     CriPoint tmp=trRef;
+00286     
+00287     if(dir == HorizC)
+00288       tmp.x = max;
+00289     else
+00290       tmp.y = max;
+00291     
+00292     CriPoint &foundRef = (CriPoint&)l1.findItem(tmp);
+00293     if ( foundRef != NOITEM )
+00294     {
+00295       if (trRef.net == 1 || foundRef.net == 1 || trRef.net != foundRef.net )
+00296         
+00297         // .net == 0 means constrained net
+00298         return true;
+00299     }
+00300       }
+00301     }
+00302   }
+00303   return false;
+00304 
+00305 }
+\end{verbatim}\normalsize 
+\label{Plcm_c22}
+\index{Plcm@{Plcm}!moveCell@{moveCell}}
+\index{moveCell@{moveCell}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::move\-Cell (LAYINST $\ast$ {\em li\-Ptr}, {\bf compact\-Type} {\em dir}, int {\em pos}, int {\em offset})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 309 of file compact.C.\small\begin{verbatim}00312 {
+00313   int aPos;
+00314 
+00315   if(dir == HorizC)
+00316     aPos = liPtr->flag.s[0];
+00317   else
+00318     aPos = liPtr->flag.s[1];
+00319   
+00320   if ( aPos > pos )  //  lets move it
+00321   {
+00322     if(dir == HorizC)
+00323     {
+00324       liPtr->flag.s[0]--;   
+00325       liPtr->mtx[B1]-=offset;   
+00326     }
+00327     else
+00328     {
+00329       liPtr->flag.s[1]--;
+00330       liPtr->mtx[B2]-=offset;   
+00331     }
+00332   }
+00333 }
+\end{verbatim}\normalsize 
+\label{Plcm_c18}
+\index{Plcm@{Plcm}!noConflicts@{noConflicts}}
+\index{noConflicts@{noConflicts}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::no\-Conflicts (int {\em pos}, int {\em len}, {\bf compact\-Type} {\em dir})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 152 of file compact.C.\small\begin{verbatim}00156 {
+00157   int x=pos-1,
+00158       y=pos+1;
+00159 
+00160   for(int i=0;i<len;i++)
+00161   {
+00162     if(dir == HorizC)
+00163     {
+00164       List &list1 = plane->getCriticals(x,i);
+00165       List &list2 = plane->getCriticals(y,i);
+00166       if ( mayBeJoined(list1,list2,dir) )
+00167     return false;
+00168     }
+00169     else
+00170     {
+00171       List &list1 = plane->getCriticals(i,x);
+00172       List &list2 = plane->getCriticals(i,y);
+00173       if ( mayBeJoined(list1,list2,dir) )
+00174     return false;
+00175     }
+00176   }
+00177   return true;
+00178 
+00179 }
+\end{verbatim}\normalsize 
+\label{Plcm_c9}
+\index{Plcm@{Plcm}!placeGroup@{placeGroup}}
+\index{placeGroup@{placeGroup}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::place\-Group (CIRINST $\ast$ {\em c\-Inst\-List}, {\bf Window} \& {\em window\-Ref})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 363 of file plcm.C.\small\begin{verbatim}00368 {
+00369   int width=windowRef.width,
+00370       high=windowRef.high,
+00371       x=windowRef.cX,
+00372       y=windowRef.cY;
+00373 
+00374   int clustersInWindow=width*high,
+00375       tooBigCellInGroup=0;
+00376   CIRINST *ciPtr;
+00377                 // first lets find if we don't have a huge element in
+00378                 // this group
+00379 
+00380   for(ciPtr=cInstList;ciPtr!=NULL;ciPtr=ciPtr->next)
+00381   {
+00382     LAYOUT *layPtr=ciPtr->circuit->layout;
+00383 
+00384     if(strstr(layPtr->name,"Tmp_Cell_") == NULL ) // this layouts are generraly ignored
+00385     {
+00386       List& listRef=(List&)(*layPtr->flag.p);
+00387       ListIterator lIter(listRef);
+00388       Pattern& patRef=(Pattern&)(Item&)lIter;
+00389 
+00390       if(patRef.getItemsInBox() > 0.25*clustersInWindow || patRef.isMacro())
+00391       {
+00392     tooBigCellInGroup=1;
+00393     break;
+00394       }
+00395       
+00396     }
+00397   }
+00398 
+00399   if (verboseMode)
+00400   {
+00401     cout << "Placing group inside window (" << x << "," << y << "," << x+width
+00402          << "," << y+high << ")" << endl;
+00403   }
+00404 
+00405   if(random_points && ! tooBigCellInGroup)
+00406   {
+00407     int security=0;
+00408 
+00409     for(;security < width*high; security++)
+00410     {
+00411       int i = x+(rand()%width),
+00412       j = y+(rand()%high);
+00413 
+00414       Cluster cluster(i,j,thisImage.size[HOR],thisImage.size[VER]);
+00415 
+00416       if (tryThisCluster(cInstList,cluster,(ProtArea&)NOITEM)) return 0;
+00417       // all cells placed
+00418       // end of job here
+00419     }
+00420   }
+00421   // if still there's something to place or random placement disabled
+00422 
+00423   // because it may happen that there's no place for all elements from
+00424   // this group in current window after trying it, surrounding area is also
+00425   // tried (going through all rings of one window width around).
+00426 
+00427   int outerX1=x,
+00428       outerY1=y,
+00429       innerX1=windowRef.cX+width,
+00430       innerY1=windowRef.cY+high,
+00431       outerX2=innerX1,
+00432       outerY2=innerY1,
+00433       innerX2=x,
+00434       innerY2=y,
+00435       xMax = plane->cols*thisImage.size[HOR],
+00436       yMax = plane->rows*thisImage.size[VER];
+00437 
+00438 
+00439 
+00440 
+00441   for(int c=0;innerX1 > 0 || innerX2 < xMax || innerY1 > 0 || innerY2 < yMax;
+00442                   c++,innerX1-=width,outerX1-=width,
+00443                   innerX2+=width,outerX2+=width,
+00444                   innerY1-=high,outerY1-=high,
+00445                   innerY2+=high,outerY2+=high)
+00446   {
+00447     if(c == 1 && verboseMode)
+00448     {
+00449       cerr << "\n There's too few place in "
+00450        << "window at (" << x << "," << y << ") for this group of elements "
+00451        << "\n searching in the surroundings for place for cell[s]:\n";
+00452 
+00453       for(ciPtr=cInstList;ciPtr!=NULL;ciPtr=ciPtr->next)
+00454       {
+00455   if ( ciPtr->flag.l == 0 )
+00456     cerr << "  " << ciPtr->name << endl;
+00457       }
+00458 
+00459     }
+00460 
+00461     int i,j,
+00462         iStart=outerX1,
+00463         jStart=outerY1;
+00464     if(iStart < 0)
+00465       iStart=0;
+00466     if(jStart < 0)
+00467       jStart=0;
+00468 
+00469     Cluster  lbc(iStart,jStart,thisImage.size[HOR],
+00470          thisImage.size[VER]);
+00471     ProtArea  pa(lbc);
+00472                 // this is a so called "protected area"
+00473                 // here you should try to place anymore
+00474 
+00475     for(i=iStart;i<outerX2 && i < xMax;i++)
+00476       for(j=jStart;j<outerY2 && j< yMax;j++)
+00477   if((i>= outerX1 && i < innerX1 || i >= innerX2 && i < outerX2 ||
+00478      j >= outerY1 && j < innerY1 || j >= innerY2 && j < outerY2 ) &&
+00479      ! pa.is(i,j))      // do try this cluster if it's not within
+00480                 // protected area
+00481   {
+00482     Cluster cluster(i,j,thisImage.size[HOR],thisImage.size[VER]);
+00483 
+00484     if (tryThisCluster(cInstList,cluster,pa))
+00485     {
+00486       if (c >=1 && verboseMode)
+00487         cerr << "\n  ====== SUCCESS ! ===== " << endl;
+00488       return 0; // all cells placed
+00489                     //  end of job here
+00490     }
+00491 
+00492   }
+00493 
+00494 
+00495   }
+00496 
+00497   for(ciPtr=cInstList;ciPtr!=NULL;ciPtr=ciPtr->next)
+00498   {
+00499     if ( ciPtr->flag.l == 0 )
+00500     {
+00501       cerr << " Can't place cell :";
+00502       cerr << ciPtr->name << "  ";
+00503       cerr << "in window at (" << x << "," << y << ")"<< endl;
+00504     }
+00505   }
+00506 
+00507 //  cerr << "\n SORRY, apparently the magnification coefficient is too small. \n";
+00508 //  cerr << " Try to run program once again or change coefficient. \n";
+00509 
+00510   cerr << "\n Apparently the magnification coefficient is too small. \n";
+00511   cerr << " Let's try to run the algorithm for bigger magn. coefficient. \n";
+00512 
+00513   return 1;
+00514 
+00515 }
+\end{verbatim}\normalsize 
+\label{Plcm_c12}
+\index{Plcm@{Plcm}!placeOneCell@{placeOneCell}}
+\index{placeOneCell@{placeOneCell}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::place\-One\-Cell (CIRINST $\ast$ {\em ci\-Ptr}, LAYOUT $\ast$ {\em l\-Ptr}, {\bf Pattern} \& {\em pat\-Ref}, {\bf Cluster} \& {\em here}, {\bf Prot\-Area} \& {\em pa})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 623 of file plcm.C.\small\begin{verbatim}00629 {
+00630   int  x = here.cX,
+00631        y = here.cY,
+00632        minx=x,
+00633        miny=y;
+00634 
+00635                 // first we have to find out what is the real
+00636                 // offset
+00637 
+00638                 // now marking placement plane
+00639 
+00640   if(!patRef.isMacro())     // ordinary cell
+00641   {
+00642     for(ListIterator cluIter(patRef);(Item&)cluIter != NOITEM;cluIter++)
+00643     {
+00644       Clst &cluRef = (Clst&)(Item&)cluIter;
+00645       
+00646       plane->mark(x+cluRef.cX,y+cluRef.cY,cluRef.pattern,cluRef.criticalPoints);
+00647       
+00648       if (minx > x+cluRef.cX)
+00649     minx=x+cluRef.cX;
+00650       if (miny > y+cluRef.cY)
+00651     miny=y+cluRef.cY;
+00652     }
+00653   }
+00654   else              // that's a macro
+00655   {
+00656     if(verboseMode)
+00657       cout << "Placing " << ciPtr->name << " as a macro." << endl;
+00658 
+00659     clusterMapType  pat=0;
+00660     pat=~pat;           // this sets all our bits to 1
+00661     List  em;
+00662     for(int i=0;i<patRef.getHor();i++)
+00663       for(int j=0;j<patRef.getVer();j++)
+00664     plane->mark(x+i,y+j,pat,em);    
+00665     pa.update(x+patRef.getHor(),y+patRef.getVer()); // the highest point
+00666   }
+00667     
+00668                             // now we should  add new layout
+00669                             // instance
+00670   LAYINST *liPtr;
+00671 
+00672   if (NewLayinst(liPtr)== NULL)
+00673     usrErr("Plcm::placeOneCell",ENOTMEM);
+00674 
+00675   liPtr->name=cs(ciPtr->name);
+00676   liPtr->layout=lPtr;
+00677 
+00678   liPtr->flag.s[0]=minx;       // needed during compaction
+00679   liPtr->flag.s[1]=miny;
+00680 
+00681   memcpy(liPtr->mtx,(short*)patRef,6*sizeof(short));
+00682 
+00683                 // this offset is composed of three parts:
+00684                 // 1. real coeficient for transformation
+00685                 // 2. offset to move it back to (0,0) after trans.
+00686                 // 3. offset within placement plane
+00687 
+00688 //  liPtr->mtx[B1]+=here.x-coX;
+00689 //  liPtr->mtx[B2]+=here.y-coY;
+00690 
+00691   liPtr->mtx[B1]+=here.x;
+00692   liPtr->mtx[B2]+=here.y;
+00693   Boolean placed=false;
+00694     SLICE* slvPtr,*slhPtr;
+00695     int i,j;
+00696 
+00697   if(slicingLayout )// we have to find out which slice it
+00698   {             // actually is..
+00699     
+00700     for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+00701     slvPtr!=NULL && i<slicesInHor;i++,slvPtr=slvPtr->next)
+00702       for(j=0,slhPtr=slvPtr->chld.slice;
+00703           slhPtr!=NULL && j<slicesInVer;j++,slhPtr=slhPtr->next)
+00704       {
+00705     SLICE_INFO* siPtr=(SLICE_INFO*)slhPtr->flag.p;
+00706     if(siPtr->cX <= here.cX && here.cX <siPtr->cX+siPtr->width &&
+00707        siPtr->cY <= here.cY && here.cY <siPtr->cY+siPtr->height )
+00708     {
+00709       liPtr->next=slhPtr->chld.layinst;
+00710       slhPtr->chld.layinst=liPtr;
+00711       placed=true;
+00712       break;
+00713     }
+00714       }
+00715     if(!placed)         // this may happen when we have 
+00716     {               // channels (windows are smaller)
+00717       liPtr->next=*layInstancesList;
+00718       *layInstancesList=liPtr; 
+00719     }
+00720   }
+00721   else
+00722   {
+00723     liPtr->next=*layInstancesList;
+00724     *layInstancesList=liPtr; 
+00725   }
+00726 
+00727 
+00728   liPtr->layout->linkcnt++;
+00729 
+00730   if(verboseMode)
+00731   {
+00732     cout << "Cell : " << ciPtr->name << " placed.\n";
+00733   }
+00734                             // now we only have to mark this one
+00735                             // as already placed
+00736   ciPtr->flag.l=1;
+00737 
+00738 
+00739 }
+\end{verbatim}\normalsize 
+\label{Plcm_a5}
+\index{Plcm@{Plcm}!placement@{placement}}
+\index{placement@{placement}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::placement (void)\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 55 of file plcm.h.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00056 { if (plane==NULL)
+00057                      usrErr("Plcm::placement",EINPDAT);
+00058                        return doPlacement(givenCircuit,true);}
+\end{verbatim}\normalsize 
+\label{Plcm_a3}
+\index{Plcm@{Plcm}!prepare@{prepare}}
+\index{prepare@{prepare}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::prepare (void)}\hfill
+
+
+
+Definition at line 134 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00137 {
+00138   if (imageMap == NULL)
+00139     usrErr("Plcm::prepare",EINPDAT);
+00140                                    // number of sectors in cluster can not
+00141                                    // be greater then number of bits in
+00142                                    // data of type clusterMapType
+00143   if(thisImage.numsector > 8* sizeof(clusterMapType) )
+00144     usrErr("Plcm::Plcm",ETASKIMP);
+00145                                    // if this occurs you should change typedef
+00146                                    // definition for clusterMapType to data
+00147                                    // of bigger size
+00148 
+00149   clearFlags(givenCircuit);
+00150 
+00151   totalArea = readLayouts(givenCircuit);  // also in each circuit->flag.l
+00152                                           // leaves number of children
+00153 
+00154 
+00155 
+00156                                    // now create empty layout for our circuit
+00157 
+00158   if (NewLayout(layoutToBuild)==NULL)
+00159     usrErr("Plcd",ENOTMEM);
+00160 
+00161   layoutToBuild->name=layoutName;
+00162   layoutToBuild->layport=NULL;
+00163   layoutToBuild->bbx[HOR]=0;    // we don\'t know yet
+00164   layoutToBuild->bbx[VER]=0;
+00165   layoutToBuild->off[HOR]=0;
+00166   layoutToBuild->off[VER]=0;
+00167   layoutToBuild->wire = NULL;
+00168 
+00169   layoutToBuild->linkcnt=1;
+00170 
+00171   if (NewStatus(layoutToBuild->status)==NULL)
+00172     usrErr("Plcd",ENOTMEM);
+00173                 // only temporary - just to find out
+00174                 // slicing configuration
+00175 
+00176 
+00177   time(&layoutToBuild->status->timestamp);
+00178   layoutToBuild->status->author=cs("Madonna");
+00179   layoutToBuild->status->program=cs("phil");
+00180   layoutToBuild->next=NULL;
+00181 
+00182   SLICE *slPtr;
+00183 
+00184   if ((slPtr=NewSlice(layoutToBuild->slice))==NULL)
+00185     usrErr("Plcd",ENOTMEM);
+00186 
+00187   if (slicingLayout)
+00188   {
+00189     Cluster tmpcls = Cluster(0,0,thisImage.size[HOR],thisImage.size[VER]);
+00190     Window  tmpWindow(tmpcls,100,100);
+00191     int tmpInt;
+00192 
+00193     tmpWindow.getDiv(givenCircuit->name,&slicesInHor,&slicesInVer,&tmpInt,&tmpInt);
+00194 
+00195 
+00196 
+00197 
+00198                 // here building 2-level slicing structure
+00199 
+00200     slPtr->ordination=VERTICAL;    
+00201     slPtr->chld_type=SLICE_CHLD;
+00202     slPtr->chld.slice=NULL; // only this one will be used
+00203     slPtr->next=NULL;
+00204     
+00205     for(int i=0;i<slicesInHor;i++)
+00206     {
+00207       SLICE *slvPtr;
+00208       if (NewSlice(slvPtr)==NULL)
+00209     usrErr("Plcd",ENOTMEM);
+00210                 // vertical slices 
+00211 
+00212       slvPtr->ordination=HORIZONTAL; // orietation is horizontal
+00213       slvPtr->chld_type=SLICE_CHLD;
+00214       slvPtr->chld.slice=NULL;
+00215       slvPtr->next=slPtr->chld.slice;
+00216       slPtr->chld.slice=slvPtr;
+00217 
+00218                 // now horizontal slices
+00219 
+00220       for(int j=0;j<slicesInVer;j++)
+00221       {
+00222     SLICE *slhPtr;
+00223     if (NewSlice(slhPtr)==NULL)
+00224       usrErr("Plcd",ENOTMEM);
+00225     slhPtr->ordination=CHAOS; // these are CHAOS already
+00226     slhPtr->chld_type=LAYINST_CHLD;
+00227     slhPtr->chld.layinst=NULL; // here we\'ll later attach lay instances
+00228 
+00229     slhPtr->next=slvPtr->chld.slice;
+00230     slvPtr->chld.slice=slhPtr;
+00231     
+00232       }
+00233     }
+00234   }
+00235   else
+00236   {
+00237     slPtr->ordination=CHAOS;
+00238     slPtr->chld_type=LAYINST_CHLD;
+00239     slPtr->next=NULL;
+00240     slPtr->chld.layinst=NULL;
+00241     layInstancesList=NULL;
+00242   }
+00243 
+00244 
+00245 
+00246 }
+\end{verbatim}\normalsize 
+\label{Plcm_a2}
+\index{Plcm@{Plcm}!read@{read}}
+\index{read@{read}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::read (void)}\hfill
+
+
+
+Definition at line 100 of file plcm.C.\small\begin{verbatim}00104 {
+00105   if (fromPartitioner == NULL)
+00106   {
+00107     if (sdfreadallcir( SDFCIRALL ,cs(circuitName),cs(functionName),
+00108           cs(libraryName)) == 0)
+00109       usrErr("Plcm::Plcm",EINPDAT);
+00110 
+00111     givenCircuit = thiscir;
+00112 
+00113   }
+00114   else
+00115     givenCircuit = fromPartitioner;
+00116 
+00117                 // that's non partitioned circuit...
+00118                 // don't do slicing.
+00119 
+00120   if(givenCircuit->cirinst->circuit->status != NULL &&
+00121      (strstr(givenCircuit->cirinst->circuit->status->program,
+00122        "mad_prim")!=NULL ||
+00123       strstr(givenCircuit->cirinst->circuit->status->program,
+00124        "libprim")!=NULL ))
+00125   {
+00126     slicingLayout=false;
+00127     globRouting=NULL;
+00128     doTransAna=false;
+00129   }
+00130 
+00131 }
+\end{verbatim}\normalsize 
+\label{Plcm_c0}
+\index{Plcm@{Plcm}!readCommands@{readCommands}}
+\index{readCommands@{readCommands}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::read\-Commands (void)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c2}
+\index{Plcm@{Plcm}!readLayouts@{readLayouts}}
+\index{readLayouts@{readLayouts}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double Plcm::read\-Layouts (CIRCUIT $\ast$)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_a7}
+\index{Plcm@{Plcm}!recover@{recover}}
+\index{recover@{recover}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::recover (void)}\hfill
+
+
+
+Definition at line 976 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00980 {
+00981   int i,j;
+00982 
+00983   if(slicingLayout)
+00984   {
+00985     SLICE* slvPtr,*slhPtr;
+00986 
+00987     for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+00988     slvPtr!=NULL && i<slicesInHor;i++,slvPtr=slvPtr->next)
+00989       for(j=0,slhPtr=slvPtr->chld.slice;
+00990           slhPtr!=NULL && j<slicesInVer;j++,slhPtr=slhPtr->next)
+00991       {
+00992     for(LAYINSTPTR lPtr=slhPtr->chld.layinst;lPtr != NULL;)
+00993     {
+00994       LAYINSTPTR tmp=lPtr;
+00995       
+00996       lPtr=lPtr->next;
+00997       FreeLayinst(tmp);     // and get rid of it
+00998     }
+00999     slhPtr->chld.layinst=NULL;
+01000 
+01001                 // also delete SLICE_INFO structures
+01002 
+01003     SLICE_INFO* tdPtr=(SLICE_INFO*)slhPtr->flag.p;
+01004     delete tdPtr->layerTrans;
+01005     delete tdPtr;
+01006     slhPtr->flag.p=NULL;
+01007       }
+01008   }
+01009   else
+01010   {
+01011     for(LAYINSTPTR lPtr=*layInstancesList;lPtr != NULL;)
+01012     {
+01013       LAYINSTPTR tmp=lPtr;
+01014       
+01015       lPtr=lPtr->next;
+01016       FreeLayinst(tmp);     // and get rid of it
+01017     }
+01018     *layInstancesList=NULL;
+01019   }
+01020   layInstancesList=NULL;
+01021 
+01022   delete plane;
+01023 
+01024   freeFlagItem2(givenCircuit);  // Let\'s remove only windows
+01025   
+01026 }
+\end{verbatim}\normalsize 
+\label{Plcm_c15}
+\index{Plcm@{Plcm}!removeEmptySlices@{removeEmptySlices}}
+\index{removeEmptySlices@{removeEmptySlices}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::remove\-Empty\-Slices (void)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 1238 of file plcm.C.\small\begin{verbatim}01241 {
+01242   if(slicingLayout)
+01243   {
+01244     SLICE* slvPtr,*slhPtr,*prevPtr,*prevVPtr;;
+01245     int i,j;
+01246 
+01247     prevVPtr=layoutToBuild->slice;
+01248 
+01249     for(i=0,slvPtr=layoutToBuild->slice->chld.slice;
+01250     slvPtr!=NULL && i<slicesInHor;i++)
+01251     {
+01252       prevPtr=slvPtr;
+01253       for(j=0,slhPtr=slvPtr->chld.slice;
+01254           slhPtr!=NULL && j<slicesInVer;j++)
+01255       {
+01256     if(slhPtr->chld.layinst==NULL) // we have to unlink that one
+01257     {
+01258       if(prevPtr==slvPtr)
+01259         slvPtr->chld.slice=slhPtr->next;
+01260       else
+01261         prevPtr->next=slhPtr->next;
+01262       SLICE *tmp=slhPtr;
+01263       slhPtr=slhPtr->next;
+01264 
+01265       SLICE_INFO* tdPtr=(SLICE_INFO*)tmp->flag.p;
+01266       if (doTransAna)
+01267         delete tdPtr->layerTrans;
+01268       delete tdPtr;
+01269       FreeSlice(tmp);
+01270     }
+01271     else
+01272     {
+01273       prevPtr=slhPtr;
+01274       slhPtr=slhPtr->next;
+01275 
+01276     }
+01277       }             // it may also happen that we
+01278                 // remove all vertical subslices
+01279       if(slvPtr->chld.slice==NULL)
+01280       {             // unplug this vertical slice
+01281                 // because it\'s empty
+01282     
+01283     if(prevVPtr==layoutToBuild->slice)
+01284       layoutToBuild->slice->chld.slice=slvPtr->next;
+01285     else
+01286       prevVPtr->next=slvPtr->next;
+01287     SLICE *vTmp=slvPtr;
+01288     slvPtr=slvPtr->next;
+01289     
+01290     FreeSlice(vTmp);
+01291       }
+01292       else
+01293       {
+01294     prevVPtr=slvPtr;
+01295     slvPtr=slvPtr->next;    
+01296       }
+01297 
+01298 
+01299     }
+01300   }
+01301 }
+\end{verbatim}\normalsize 
+\label{Plcm_a6}
+\index{Plcm@{Plcm}!setBbx@{setBbx}}
+\index{setBbx@{setBbx}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::set\-Bbx (void)}\hfill
+
+
+
+Definition at line 1030 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}01033 {
+01034   int x,y;
+01035   
+01036   plane->getEffSize(x,y);
+01037   
+01038   layoutToBuild->bbx[HOR]=x*thisImage.size[HOR]+thisImage.overlap[HOR]; 
+01039   layoutToBuild->bbx[VER]=y*thisImage.size[VER]+thisImage.overlap[VER];
+01040   
+01041 }
+\end{verbatim}\normalsize 
+\label{Plcm_c20}
+\index{Plcm@{Plcm}!sizeOk@{sizeOk}}
+\index{sizeOk@{sizeOk}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::size\-Ok (int, int)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 243 of file compact.C.\small\begin{verbatim}00246 {
+00247 //   double x=a*thisImage.size[HOR];
+00248 //   double y=b*thisImage.size[VER];
+00249 //   double act=x*y;
+00250 // 
+00251 //   if ( act == 0 )
+00252 //     return true;
+00253 // 
+00254 //   if ( (act - totalArea*magnification )/act < 0.05)
+00255 //     return true;
+00256 //   else
+00257 
+00258     return false; 
+00259 
+00260 }
+\end{verbatim}\normalsize 
+\label{Plcm_c13}
+\index{Plcm@{Plcm}!sortGroup@{sortGroup}}
+\index{sortGroup@{sortGroup}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRINSTPTR Plcm::sort\-Group (CIRINST $\ast$)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c3}
+\index{Plcm@{Plcm}!transList@{transList}}
+\index{transList@{transList}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$\ast$ Plcm::trans\-List (LAYOUT $\ast$, {\bf IMAGEDESC} $\ast$)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+\label{Plcm_c11}
+\index{Plcm@{Plcm}!tryThisCellHere@{tryThisCellHere}}
+\index{tryThisCellHere@{tryThisCellHere}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Pattern} \& Plcm::try\-This\-Cell\-Here (LAYOUT $\ast$ {\em l\-Ptr}, {\bf Cluster} \& {\em here}, {\bf Prot\-Area} \& {\em pa})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 555 of file plcm.C.\small\begin{verbatim}00561 {
+00562   List &patListRef=(List&)(*lPtr->flag.p);
+00563   int x = here.cX,
+00564       y = here.cY;
+00565 
+00566 
+00567   for(ListIterator patIter(patListRef);(Item&)patIter != NOITEM;patIter++)
+00568   {
+00569     Pattern &patternRef = (Pattern&)(Item&)patIter;
+00570 
+00571     if(!patternRef.isMacro())
+00572     {
+00573       ListIterator cluIter(patternRef);
+00574       
+00575       for(;(Item&)cluIter != NOITEM;cluIter++)
+00576       {
+00577     Clst &cluRef = (Clst&)(Item&)cluIter;
+00578     
+00579     
+00580         /* I have changed clusterMapType(cluRef) into cluRef.pattern
+00581            because it appeared that the first one did not always return
+00582            the correct value when gcc is used.  AvG 17081999 */
+00583 
+00584     if ( cluRef.pattern & plane->getPattern(x+cluRef.cX,y+cluRef.cY) )
+00585                                     // if even one of sectors
+00586                                     // is already accupied then
+00587                                     // we must try another pattern
+00588       break;
+00589     List &criList= plane->getCriticals(x+cluRef.cX,y+cluRef.cY);
+00590     
+00591     if ( criList != NOITEM &&   criList & cluRef )
+00592                                     // also compares lists of critical
+00593                                     // points. For details  look
+00594                                     // operator & (List&,List&)
+00595       break;
+00596       }
+00597       if ((Item&)cluIter == NOITEM )   // no sectors in common at all- success!
+00598     return patternRef;
+00599       
+00600     }
+00601     else            // is a macro
+00602     {
+00603 
+00604       Boolean failed=false;
+00605       for(int i=0;i<patternRef.getHor();i++)
+00606     for(int j=0;j<patternRef.getVer();j++)
+00607       if (plane->getPattern(x+i,y+j)!=0) // it's occupied
+00608       {
+00609         failed=true;
+00610         pa.update(x+i,y+j);
+00611         break;
+00612       }
+00613       if(!failed)
+00614     return patternRef;
+00615     }
+00616   }
+00617   return (Pattern&)NOITEM;  // Placement of this cell in this cluster
+00618                               // impossible
+00619 
+00620 }
+\end{verbatim}\normalsize 
+\label{Plcm_c10}
+\index{Plcm@{Plcm}!tryThisCluster@{tryThisCluster}}
+\index{tryThisCluster@{tryThisCluster}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::try\-This\-Cluster (CIRINST $\ast$ {\em ci\-Ptr}, {\bf Cluster} \& {\em here}, {\bf Prot\-Area} \& {\em pa})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 519 of file plcm.C.\small\begin{verbatim}00524 {
+00525   Boolean successFlag = true;
+00526   
+00527   for(;ciPtr != NULL;ciPtr=ciPtr->next)
+00528     if(ciPtr->flag.l == 0)         //still not placed
+00529     {
+00530       for(LAYOUT *lPtr=ciPtr->circuit->layout;lPtr!=NULL;lPtr=lPtr->next)
+00531       {
+00532     if(strstr(lPtr->name,"Tmp_Cell_")==NULL ) // don't consider 
+00533                           // nelsis's tmp cells
+00534     {
+00535       Pattern& good=tryThisCellHere(lPtr,here,pa);
+00536       
+00537       if(good != NOITEM)      // we can place this cell here
+00538       {
+00539         placeOneCell(ciPtr,lPtr,good,here,pa);
+00540         break;          // only one layout should be selected
+00541       }
+00542       else
+00543         successFlag = false;    // to indicate that at least one cell still
+00544       // not placed
+00545       
+00546     }
+00547       }
+00548       
+00549     }
+00550   return successFlag;
+00551   
+00552 }
+\end{verbatim}\normalsize 
+\label{Plcm_a9}
+\index{Plcm@{Plcm}!write@{write}}
+\index{write@{write}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plcm::write (CIRCUIT $\ast$ {\em cir\-Ptr} = NULL, {\bf Boolean} {\em do\-Write} = true)}\hfill
+
+
+
+Definition at line 797 of file plcm.C.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00800 : artificial created by partitioner
+00801 // called name_p and normal circuit name .We have to attach our new layout
+00802 // to this second one.
+00803 // If we're in "in core partitioning" then cirPtr must contains ptr
+00804 // to the real circuit to which we have to attach this new layout.
+00805 //
+00806 {
+00807   if(slicingLayout)
+00808     removeEmptySlices();
+00809 
+00810   
+00811   // now we must change circuit name to indicate that it is already
+00812   // not partitioned
+00813 
+00814   if(fromPartitioner == NULL)
+00815   {
+00816     char *sPtr=strdup(givenCircuit->name);
+00817 
+00818     char *tokenPtr = strstr(sPtr,"_p");
+00819 
+00820     if (tokenPtr == NULL)
+00821     {
+00822       cerr << "\nWas it the right kind of circuit ? " << endl;
+00823       usrErr("Plcm::write",EUNKNOW);
+00824     }
+00825     *tokenPtr='\0';   // truncating last _p characters
+00826 
+00827     sPtr=cs(sPtr);
+00828 
+00829     if (sdfreadallcir( SDFCIRSTAT ,sPtr,cs(functionName),
+00830           cs(libraryName)) == 0)
+00831       usrErr("Plcm::write",EUNKNOW);
+00832 
+00833     thiscir->layout=layoutToBuild;
+00834     layoutToBuild->circuit=thiscir;
+00835 
+00836     if(doWrite)
+00837       sdfwritelay(SDFLAYALL,layoutToBuild);
+00838 
+00839   }
+00840   else
+00841   {
+00842     cirPtr->layout=layoutToBuild;
+00843     layoutToBuild->circuit=cirPtr;
+00844 
+00845     if(doWrite)
+00846       sdfwritelay(SDFLAYALL,layoutToBuild);
+00847 
+00848   }
+00849 
+00850 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Plcm_o0}
+\index{Plcm@{Plcm}!circuitName@{circuitName}}
+\index{circuitName@{circuitName}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Plcm::circuit\-Name\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 118 of file plcm.h.\label{Plcm_o21}
+\index{Plcm@{Plcm}!doTransAna@{doTransAna}}
+\index{doTransAna@{doTransAna}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::do\-Trans\-Ana\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 149 of file plcm.h.\label{Plcm_o14}
+\index{Plcm@{Plcm}!freeNets@{freeNets}}
+\index{freeNets@{freeNets}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Array} Plcm::free\-Nets\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 138 of file plcm.h.\label{Plcm_o16}
+\index{Plcm@{Plcm}!fromPartitioner@{fromPartitioner}}
+\index{fromPartitioner@{fromPartitioner}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUIT $\ast$ Plcm::from\-Partitioner\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 141 of file plcm.h.\label{Plcm_o2}
+\index{Plcm@{Plcm}!functionName@{functionName}}
+\index{functionName@{functionName}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Plcm::function\-Name\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 120 of file plcm.h.\label{Plcm_o4}
+\index{Plcm@{Plcm}!givenCircuit@{givenCircuit}}
+\index{givenCircuit@{givenCircuit}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUIT $\ast$ Plcm::given\-Circuit\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 123 of file plcm.h.\label{Plcm_o17}
+\index{Plcm@{Plcm}!globRouting@{globRouting}}
+\index{globRouting@{globRouting}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf GLOBAL\_\-ROUTING} $\ast$ Plcm::glob\-Routing\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 142 of file plcm.h.\label{Plcm_o13}
+\index{Plcm@{Plcm}!imageMap@{imageMap}}
+\index{imageMap@{imageMap}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Image\-Map} $\ast$ Plcm::image\-Map\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 137 of file plcm.h.\label{Plcm_o6}
+\index{Plcm@{Plcm}!layInstancesList@{layInstancesList}}
+\index{layInstancesList@{layInstancesList}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LAYINST $\ast$$\ast$ Plcm::lay\-Instances\-List\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 125 of file plcm.h.\label{Plcm_o1}
+\index{Plcm@{Plcm}!layoutName@{layoutName}}
+\index{layoutName@{layoutName}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Plcm::layout\-Name\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 119 of file plcm.h.\label{Plcm_o5}
+\index{Plcm@{Plcm}!layoutToBuild@{layoutToBuild}}
+\index{layoutToBuild@{layoutToBuild}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LAYOUT $\ast$ Plcm::layout\-To\-Build\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 124 of file plcm.h.\label{Plcm_o3}
+\index{Plcm@{Plcm}!libraryName@{libraryName}}
+\index{libraryName@{libraryName}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Plcm::library\-Name\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 121 of file plcm.h.\label{Plcm_o10}
+\index{Plcm@{Plcm}!macroMinSize@{macroMinSize}}
+\index{macroMinSize@{macroMinSize}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::macro\-Min\-Size\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 130 of file plcm.h.\label{Plcm_o12}
+\index{Plcm@{Plcm}!plane@{plane}}
+\index{plane@{plane}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} $\ast$ Plcm::plane\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 134 of file plcm.h.\label{Plcm_o8}
+\index{Plcm@{Plcm}!random_points@{random\_\-points}}
+\index{random_points@{random\_\-points}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::random\_\-points\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 128 of file plcm.h.\label{Plcm_o7}
+\index{Plcm@{Plcm}!set_srand@{set\_\-srand}}
+\index{set_srand@{set\_\-srand}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::set\_\-srand\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 127 of file plcm.h.\label{Plcm_o19}
+\index{Plcm@{Plcm}!slicesInHor@{slicesInHor}}
+\index{slicesInHor@{slicesInHor}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::slices\-In\-Hor\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 145 of file plcm.h.\label{Plcm_o20}
+\index{Plcm@{Plcm}!slicesInVer@{slicesInVer}}
+\index{slicesInVer@{slicesInVer}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plcm::slices\-In\-Ver\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 146 of file plcm.h.\label{Plcm_o18}
+\index{Plcm@{Plcm}!slicingLayout@{slicingLayout}}
+\index{slicingLayout@{slicingLayout}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::slicing\-Layout\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 144 of file plcm.h.\label{Plcm_o11}
+\index{Plcm@{Plcm}!thisImage@{thisImage}}
+\index{thisImage@{thisImage}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} \& Plcm::this\-Image\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 132 of file plcm.h.\label{Plcm_o9}
+\index{Plcm@{Plcm}!totalArea@{totalArea}}
+\index{totalArea@{totalArea}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double Plcm::total\-Area\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 129 of file plcm.h.\label{Plcm_o15}
+\index{Plcm@{Plcm}!verboseMode@{verboseMode}}
+\index{verboseMode@{verboseMode}!Plcm@{Plcm}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plcm::verbose\-Mode\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 140 of file plcm.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf plcm.h}\item 
+{\bf compact.C}\item 
+{\bf plcm.C}\end{CompactItemize}

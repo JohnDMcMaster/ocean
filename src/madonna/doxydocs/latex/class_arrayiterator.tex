@@ -1,0 +1,176 @@
+\subsection{Array\-Iterator  Class Reference}
+\label{ArrayIterator}\index{ArrayIterator@{Array\-Iterator}}
+{\tt \#include $<$basearr.h$>$}
+
+Inheritance diagram for Array\-Iterator:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_arrayiterator.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Array\-Iterator} ( const {\bf Base\-Array}\& )
+\item 
+virtual {\bf $\sim$Array\-Iterator} ()
+\item 
+virtual {\bf operator int} ()
+\item 
+virtual {\bf operator Item \&} ()
+\item 
+virtual {\bf Item}\& {\bf get} ()
+\item 
+virtual {\bf Item}\& {\bf operator++} (int)
+\item 
+virtual void {\bf restart} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf current\-Index}
+\item 
+const {\bf Base\-Array}\& {\bf being\-Iterated}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ArrayIterator_a0}
+\index{ArrayIterator@{Array\-Iterator}!ArrayIterator@{ArrayIterator}}
+\index{ArrayIterator@{ArrayIterator}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array\-Iterator::Array\-Iterator (const {\bf Base\-Array} \& {\em to\-Iterate})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 94 of file basearr.h.\small\begin{verbatim}00094 :
+00095   beingIterated( toIterate ), currentIndex( toIterate.bottombound )
+00096 {
+00097 }
+
+\end{verbatim}\normalsize 
+\label{ArrayIterator_a1}
+\index{ArrayIterator@{Array\-Iterator}!~ArrayIterator@{$\sim$ArrayIterator}}
+\index{~ArrayIterator@{$\sim$ArrayIterator}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array\-Iterator::$\sim$Array\-Iterator ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 210 of file basearr.C.\small\begin{verbatim}00211 {
+00212 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{ArrayIterator_a4}
+\index{ArrayIterator@{Array\-Iterator}!get@{get}}
+\index{get@{get}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Array\-Iterator::get ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a4})}.
+
+Definition at line 233 of file basearr.C.\small\begin{verbatim}00234 {
+00235   if ( currentIndex <= beingIterated.topbound )
+00236   {
+00237     return ( (Item&)( beingIterated.itemAt( currentIndex ) ) );
+00238   }
+00239   else
+00240   {
+00241     return NOITEM;
+00242   }
+00243 }
+\end{verbatim}\normalsize 
+\label{ArrayIterator_a3}
+\index{ArrayIterator@{Array\-Iterator}!operator Item &@{operator Item \&}}
+\index{operator Item &@{operator Item \&}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array\-Iterator::operator {\bf Item} \& ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a3})}.
+
+Definition at line 221 of file basearr.C.\small\begin{verbatim}00222 {
+00223   if ( currentIndex <= beingIterated.topbound )
+00224   {
+00225     return ( (Item&)( beingIterated.itemAt( currentIndex ) ) );
+00226   }
+00227   else 
+00228   {
+00229     return NOITEM;
+00230   }
+00231 }
+\end{verbatim}\normalsize 
+\label{ArrayIterator_a2}
+\index{ArrayIterator@{Array\-Iterator}!operator int@{operator int}}
+\index{operator int@{operator int}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array\-Iterator::operator int ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a2})}.
+
+Definition at line 215 of file basearr.C.\small\begin{verbatim}00216 {
+00217   return currentIndex <= beingIterated.topbound;
+00218 }
+\end{verbatim}\normalsize 
+\label{ArrayIterator_a5}
+\index{ArrayIterator@{Array\-Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Array\-Iterator::operator++ (int)\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a5})}.
+
+Definition at line 252 of file basearr.C.\small\begin{verbatim}00253 {
+00254   if ( currentIndex <= beingIterated.topbound )
+00255   {
+00256     currentIndex++;
+00257     return ( (Item&)( beingIterated.itemAt( currentIndex - 1 ) ) );
+00258     
+00259   }
+00260   else 
+00261   {
+00262     return NOITEM;
+00263   }
+00264   
+00265 }
+\end{verbatim}\normalsize 
+\label{ArrayIterator_a6}
+\index{ArrayIterator@{Array\-Iterator}!restart@{restart}}
+\index{restart@{restart}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Array\-Iterator::restart ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a6})}.
+
+Definition at line 246 of file basearr.C.\small\begin{verbatim}00247 {
+00248   currentIndex = beingIterated.bottombound;
+00249 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{ArrayIterator_o1}
+\index{ArrayIterator@{Array\-Iterator}!beingIterated@{beingIterated}}
+\index{beingIterated@{beingIterated}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const {\bf Base\-Array} \& Array\-Iterator::being\-Iterated\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 90 of file basearr.h.\label{ArrayIterator_o0}
+\index{ArrayIterator@{Array\-Iterator}!currentIndex@{currentIndex}}
+\index{currentIndex@{currentIndex}!ArrayIterator@{Array\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Array\-Iterator::current\-Index\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 89 of file basearr.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf basearr.h}\item 
+{\bf basearr.C}\end{CompactItemize}

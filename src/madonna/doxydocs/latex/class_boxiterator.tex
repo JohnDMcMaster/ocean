@@ -1,0 +1,106 @@
+\subsection{Box\-Iterator  Class Reference}
+\label{BoxIterator}\index{BoxIterator@{Box\-Iterator}}
+{\tt \#include $<$box.h$>$}
+
+Inheritance diagram for Box\-Iterator:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_boxiterator.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Box\-Iterator} ()
+\item 
+virtual {\bf $\sim$Box\-Iterator} ()
+\item 
+virtual {\bf operator int} ()
+\item 
+virtual {\bf operator Item \&} ()
+\item 
+virtual {\bf Item}\& {\bf get} ()
+\item 
+virtual {\bf Item}\& {\bf operator++} (int) = 0
+\item 
+virtual void {\bf restart} () = 0
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{BoxIterator_a0}
+\index{BoxIterator@{Box\-Iterator}!BoxIterator@{BoxIterator}}
+\index{BoxIterator@{BoxIterator}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Box\-Iterator::Box\-Iterator ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 64 of file box.h.\small\begin{verbatim}00064 {}
+\end{verbatim}\normalsize 
+\label{BoxIterator_a1}
+\index{BoxIterator@{Box\-Iterator}!~BoxIterator@{$\sim$BoxIterator}}
+\index{~BoxIterator@{$\sim$BoxIterator}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Box\-Iterator::$\sim$Box\-Iterator ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 103 of file box.C.\small\begin{verbatim}00104 {
+00105 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{BoxIterator_a4}
+\index{BoxIterator@{Box\-Iterator}!get@{get}}
+\index{get@{get}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Box\-Iterator::get ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array\-Iterator} {\rm (p.\,\pageref{ArrayIterator_a4})}, and {\bf List\-Iterator} {\rm (p.\,\pageref{ListIterator_a4})}.
+
+Definition at line 69 of file box.h.\small\begin{verbatim}00069 {return NOITEM;}
+\end{verbatim}\normalsize 
+\label{BoxIterator_a3}
+\index{BoxIterator@{Box\-Iterator}!operator Item &@{operator Item \&}}
+\index{operator Item &@{operator Item \&}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Box\-Iterator::operator {\bf Item} \& ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array\-Iterator} {\rm (p.\,\pageref{ArrayIterator_a3})}, and {\bf List\-Iterator} {\rm (p.\,\pageref{ListIterator_a3})}.
+
+Definition at line 68 of file box.h.\small\begin{verbatim}00068 {return NOITEM;}
+\end{verbatim}\normalsize 
+\label{BoxIterator_a2}
+\index{BoxIterator@{Box\-Iterator}!operator int@{operator int}}
+\index{operator int@{operator int}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Box\-Iterator::operator int ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array\-Iterator} {\rm (p.\,\pageref{ArrayIterator_a2})}, and {\bf List\-Iterator} {\rm (p.\,\pageref{ListIterator_a2})}.
+
+Definition at line 67 of file box.h.\small\begin{verbatim}00067 {return 0;}
+\end{verbatim}\normalsize 
+\label{BoxIterator_a5}
+\index{BoxIterator@{Box\-Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Item}\& Box\-Iterator::operator++ (int)\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array\-Iterator} {\rm (p.\,\pageref{ArrayIterator_a5})}, and {\bf List\-Iterator} {\rm (p.\,\pageref{ListIterator_a5})}.\label{BoxIterator_a6}
+\index{BoxIterator@{Box\-Iterator}!restart@{restart}}
+\index{restart@{restart}!BoxIterator@{Box\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual void Box\-Iterator::restart ()\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array\-Iterator} {\rm (p.\,\pageref{ArrayIterator_a6})}, and {\bf List\-Iterator} {\rm (p.\,\pageref{ListIterator_a6})}.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf box.h}\item 
+{\bf box.C}\end{CompactItemize}

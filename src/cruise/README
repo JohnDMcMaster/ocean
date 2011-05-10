@@ -1,0 +1,51 @@
+
+CRUISE - INSTALLATION NOTES:
+---------------------------
+
+
+You can compile this program only if you've installed Interviews graphic
+library version 3.1. It probably works also with earlier versions but it
+hasn't been tested.
+
+You probably have to make small changes in the Makefile to set c++ compiler's
+type you use and define some system paths. This version of Makefile is mend for
+Gnu g++ v.2.3.3 and HP hppa1.1 (hppa1.0) machine. You
+also may want to change a path to the place where Interviews are installed on
+your system. Default is /usr/local/interviews .
+
+
+Certainly before you start you have to define several system variables as it is
+usually done with other Ocean applications. The only extension is CPU variable
+which should be defined to the same name as has been used when compiling
+Interviews. Use gnumake. 
+
+
+To compile and install type :
+
+gnumake -f Makefile install
+
+If you want to customize the appearance of the windows add following
+definitions to your .Xdefaults file:
+
+cruise*foreground:      black
+cruise*background:      white
+cruise*message*foreground:      green
+cruise*message*background:      black
+cruise*radio*foreground:      green
+cruise*radio*background:      black
+cruise*button*foreground:      green
+cruise*button*background:      black
+cruise*check*foreground:      green
+cruise*check*background:      black
+cruise*scroller*foreground:      black
+cruise*scroller*background:      green
+cruise*mover*foreground:      black
+cruise*mover*background:      red
+cruise*strEditor*foreground: black
+cruise*strEditor*background: green
+cruise*font:	*-helvetica-bold-r-*-140-*
+cruise*browser*font:  *-courier-bold-r-*-120-*
+ 
+
+Enjoy.
+

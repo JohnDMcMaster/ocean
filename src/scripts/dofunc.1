@@ -1,0 +1,29 @@
+\" @(#)dofunc.1 1.2 Delft University of Technology 09/11/91
+.TH DOFUNC 1ICD "1/6/90"
+.UC 4
+.SH NAME
+dofunc \- front end for func_mkdb that enables symbolic debugging of the
+functional description.
+.SH SYNOPSIS
+dofunc [-C cc_arguments] [-hvsl] func-unit-name[.fun]
+.SH DESCRIPTION
+This front end for the nelsis tool \fIfunc_mkdb\fP allows debugging of the sls
+executable without the bloody #line statements that \fIfunc_mkdb\fP generates.
+Most debuggers become confused with the #line's...
+
+laat .c files staan. (meer opties: -k -p om compatibel te zijn...)
+.SH OPTIONS
+.nf
+   -C ccargs   Pass the cc-arguments to the C compiler.
+   -l	       just call func_mkdb, do not remove #line statements
+               (that's a lower case "ell").
+   -v	       be verbose about the actions taken.
+   -s	       be silent (this is the default).
+   -h	       Print a help form, then exit
+.SH EXAMPLE
+dofunc -CI../include icache.fun
+.SH SEE ALSO
+func_mkdb(1ICD), mksls(1ICD).
+.SH AUTHOR
+Paul Stravers.  Please send bug reports and suggestions to
+nelsis-r4-bugs@donau.et.tudelft.nl

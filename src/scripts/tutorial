@@ -1,0 +1,83 @@
+#!/bin/csh -f
+#
+# SccsId = @(#)tutorial 1.6 12/17/92 Delft University of Technology
+#
+# 'tutorial': creates a tutorial project directory.
+# usage: tutorial <tutorialname>
+#
+# Patrick Groeneveld 12-1992
+#
+#
+#
+
+# path to OP library
+if ($?ICDPATH) then
+   set CACD="$ICDPATH"
+else
+   set CACD="/usr/cacd"
+endif
+set FISHLIB="$CACD/celllibs/fishbone"
+set OPLIB=$FISHLIB/oplib11_92
+set PRIMLIB=$FISHLIB/primitives
+
+# command line checking...
+if( $1 == "" ) then
+   echo "Error: no project name specified"
+   echo "Usage: $0 <project name>"
+   exit 1
+endif
+if( $2 != "" ) then
+   echo "Warning: '$0' takes only one argument."
+   echo "         Anything after $1 was ignored."
+endif
+
+# template directory which is copied
+set TEMPLATE=$FISHLIB/tutorials/$1
+
+set proj=$1
+
+# start with some checking
+if(! -r $OPLIB) then
+   echo "Error: OP library '$OPLIB' cannot be accessed."
+   echo "Hint:  Check whether donau:/usr4 is properly mounted."
+   echo "$0 : program aborted"
+   exit 1
+endif
+if(! -r $PRIMLIB) then
+   echo "Error: primitive library '$PRIMLIB' cannot be accessed."
+   echo "Hint:  Check whether donau:/usr4 is properly mounted."
+   echo "$0 : program aborted"
+   exit 1
+endif
+if(! -r $TEMPLATE) then
+   echo "Error: OP template directory '$TEMPLATE' cannot be accessed."
+   echo "Hint:  Check whether donau:/usr4 is properly mounted."
+   echo "$0 : program aborted"
+   exit 1
+endif
+if(! -w `pwd`) then
+   echo "Error: Cannot create project '$1' You have no write permissions."
+   echo "Hint:  Check your write permissions of `pwd`. Are you in the"
+   echo "       right directory? Is the directory yours?"
+   echo "$0 : program aborted"
+   exit 1
+endif
+if( -d $proj) then
+   echo "Error: Cannot create project '$proj'. A directory called '$proj'"
+   echo "       already exists. Remove it before retrying."
+   echo "$0 : program aborted"
+   exit 1
+endif
+if( -f $proj) then
+   echo "Error: Cannot create project '$proj'. A file called '$proj'"
+   echo "already exists. Remove it before retrying."
+   echo "$0 : program aborted"
+   exit 1
+endif
+
+echo "Making fishbone tutorial project directory '$proj' "
+# copy the template
+/bin/cp -r $TEMPLATE $proj
+# and install the liks for process
+cd $proj/seadif
+ln -s $CACD/lib/process/fishbone/image.seadif .

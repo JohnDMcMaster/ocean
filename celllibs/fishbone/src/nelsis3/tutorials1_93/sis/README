@@ -1,0 +1,39 @@
+This tutorial contains examples on using the SIS logic synthesis with ocean.
+Two examples are provided:
+
+    hotel.kiss2    Hotel tutorial example, with 1 button input
+    three.kiss2    Hotel turorial example with three buttons input
+
+To facilitate easy use of SIS with OCEAN, the program 'kissis' performing
+this entire FSM synthesis trajectory for you. The format of the input table is
+simple. It basically declares the number inputs and outputs, and state
+transition conditions. The file hotel.kiss2 contains the hotel example
+of the 'hotel' tutorial, but now described in SIS format. 
+
+now just type:
+
+   /users/neuzeltje % kissis hotel
+
+to synthesize the entire hotel circuit.
+
+The inputs and outputs are numbered: 
+
+    IN_0 is the button input
+    IN_1 is the freeze signal
+    OUT_0 is the lamp output
+    R is the reset for the flip-flops
+
+To avoid problems with undefined flipflop states in SLS, the program kiss2cir
+instructs SIS to use the resettable flip-flop dfr11. The reset-signals of the
+flip-flops are automatically connected to the terminal 'R' of hotel. In this
+way you can force the FSM to a known state at the beginning of the simulation.
+
+As next step you generate the layout using Madonna and Trout. This process --
+from table all the way dows to a sea-of-gates layout -- is a remarkably fast
+and produces high-quality results!
+
+
+The circuit 'three' is essentially the same, except that is has three inputs
+instead of one.
+
+Patrick Groeneveld 4-1993

@@ -1,0 +1,195 @@
+.TH genpart.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genpart.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include "cost.h"\fR
+.br
+\fC#include "routing.h"\fR
+.br
+\fC#include <sealib.h>\fR
+.br
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fB_NETCOSTINFO\fR"
+.br
+.ti -1c
+.RI "struct \fB_PARTCELL\fR"
+.br
+.ti -1c
+.RI "struct \fB_PARTITION\fR"
+.br
+.ti -1c
+.RI "struct \fB_PARTLIST\fR"
+.br
+.ti -1c
+.RI "struct \fB_PNET\fR"
+.br
+.ti -1c
+.RI "struct \fB_TOTALP\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAXNETCOSTFUNCTIONS\fR  30"
+.br
+.ti -1c
+.RI "#define \fBNewPartcell\fR(p)   ((p)=(\fBPARTCELLPTR\fR)mnew(sizeof(\fBPARTCELL\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewPartlist\fR(p)   ((p)=(\fBPARTLISTPTR\fR)mnew(sizeof(\fBPARTLIST\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewPartition\fR(p)   ((p)=(\fBPARTITIONPTR\fR)mnew(sizeof(\fBPARTITION\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewPnet\fR(p)   ((p)=(\fBPNETPTR\fR)mnew(sizeof(\fBPNET\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewTotalp\fR(p)   ((p)=(\fBTOTALPPTR\fR)mnew(sizeof(\fBTOTALP\fR)))"
+.br
+.ti -1c
+.RI "#define \fBFreePartcell\fR(p)   mfree((char **)(p),sizeof(\fBPARTCELL\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreePartlist\fR(p)   mfree((char **)(p),sizeof(\fBPARTLIST\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreePartition\fR(p)   mfree((char **)(p),sizeof(\fBPARTITION\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreePnet\fR(p)   mfree((char **)(p),sizeof(\fBPNET\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreeTotalp\fR(p)   mfree((char **)(p),sizeof(\fBTOTALP\fR))"
+.br
+.in -1c
+.SS Typedefs
+
+.in +1c
+.ti -1c
+.RI "typedef int (* \fBCFUNC\fR )(int,...)"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTCELL\fR
+ \fBPARTCELL\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTCELL\fR* \fBPARTCELLPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTLIST\fR
+ \fBPARTLIST\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTLIST\fR* \fBPARTLISTPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTITION\fR
+ \fBPARTITION\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PARTITION\fR* \fBPARTITIONPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PNET\fR
+ \fBPNET\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PNET\fR* \fBPNETPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_TOTALP\fR
+ \fBTOTALP\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_TOTALP\fR* \fBTOTALPPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_NETCOSTINFO\fR
+ \fBNETCOSTINFO\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_NETCOSTINFO\fR* \fBNETCOSTINFOPTR\fR"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define FreePartcell(p)  mfree((char **)(p),sizeof(\fBPARTCELL\fR))
+.PP
+Definition at line 112 of file genpart.h.
+.SS #define FreePartition(p)  mfree((char **)(p),sizeof(\fBPARTITION\fR))
+.PP
+Definition at line 114 of file genpart.h.
+.SS #define FreePartlist(p)  mfree((char **)(p),sizeof(\fBPARTLIST\fR))
+.PP
+Definition at line 113 of file genpart.h.
+.SS #define FreePnet(p)  mfree((char **)(p),sizeof(\fBPNET\fR))
+.PP
+Definition at line 115 of file genpart.h.
+.SS #define FreeTotalp(p)  mfree((char **)(p),sizeof(\fBTOTALP\fR))
+.PP
+Definition at line 116 of file genpart.h.
+.SS #define MAXNETCOSTFUNCTIONS  30
+.PP
+Definition at line 103 of file genpart.h.
+.SS #define NewPartcell(p)  ((p)=(\fBPARTCELLPTR\fR)mnew(sizeof(\fBPARTCELL\fR)))
+.PP
+Definition at line 105 of file genpart.h.
+.SS #define NewPartition(p)  ((p)=(\fBPARTITIONPTR\fR)mnew(sizeof(\fBPARTITION\fR)))
+.PP
+Definition at line 107 of file genpart.h.
+.SS #define NewPartlist(p)  ((p)=(\fBPARTLISTPTR\fR)mnew(sizeof(\fBPARTLIST\fR)))
+.PP
+Definition at line 106 of file genpart.h.
+.SS #define NewPnet(p)  ((p)=(\fBPNETPTR\fR)mnew(sizeof(\fBPNET\fR)))
+.PP
+Definition at line 108 of file genpart.h.
+.SS #define NewTotalp(p)  ((p)=(\fBTOTALPPTR\fR)mnew(sizeof(\fBTOTALP\fR)))
+.PP
+Definition at line 109 of file genpart.h.
+.SH TYPEDEF DOCUMENTATION
+.PP 
+.SS typedef int (* CFUNC)(int,...)
+.PP
+Definition at line 13 of file genpart.h.
+.SS typedef struct \fB_NETCOSTINFO\fR
+ NETCOSTINFO
+.PP
+.SS typedef struct \fB_NETCOSTINFO\fR* NETCOSTINFOPTR
+.PP
+.SS typedef struct \fB_PARTCELL\fR
+ PARTCELL
+.PP
+.SS typedef struct \fB_PARTCELL\fR* PARTCELLPTR
+.PP
+.SS typedef struct \fB_PARTITION\fR
+ PARTITION
+.PP
+.SS typedef struct \fB_PARTITION\fR* PARTITIONPTR
+.PP
+.SS typedef struct \fB_PARTLIST\fR
+ PARTLIST
+.PP
+.SS typedef struct \fB_PARTLIST\fR* PARTLISTPTR
+.PP
+.SS typedef struct \fB_PNET\fR
+ PNET
+.PP
+.SS typedef struct \fB_PNET\fR* PNETPTR
+.PP
+.SS typedef struct \fB_TOTALP\fR
+ TOTALP
+.PP
+.SS typedef struct \fB_TOTALP\fR* TOTALPPTR
+.PP
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

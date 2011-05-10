@@ -1,0 +1,69 @@
+.TH phil_glob.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+phil_glob.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include "image.h"\fR
+.br
+\fC#include "routing.h"\fR
+.br
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fB_SLICE_INFO\fR"
+.br
+.in -1c
+.SS Typedefs
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_SLICE_INFO\fR \fBSLICE_INFO\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_SLICE_INFO\fR \fBSLICE_INFO_TYPE\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_SLICE_INFO\fR* \fBSLICE_INFOPTR\fR"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "int \fBphil\fR (char *cName,char *fName,char *lName,char *oName, double magn, CIRCUIT *fromPartitioner,CIRCUIT *realCircuit=NULL, \fBGLOBAL_ROUTING\fR *g_rout=NULL)"
+.br
+.ti -1c
+.RI "void \fBreadImageFile\fR ()"
+.br
+.ti -1c
+.RI "\fBIMAGEDESC\fR* \fBgetImageDesc\fR ()"
+.br
+.in -1c
+.SH TYPEDEF DOCUMENTATION
+.PP 
+.SS typedef struct \fB_SLICE_INFO\fR SLICE_INFO
+.PP
+.SS typedef struct \fB_SLICE_INFO\fR* SLICE_INFOPTR
+.PP
+.SS typedef struct \fB_SLICE_INFO\fR SLICE_INFO_TYPE
+.PP
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS \fBIMAGEDESC\fR * getImageDesc (void)
+.PP
+Definition at line 160 of file phil.C.
+.SS int phil (char * cName, char * fName, char * lName, char * oName, double magn, CIRCUIT * fromPartitioner, CIRCUIT * realCircuit = NULL, \fBGLOBAL_ROUTING\fR * glob_rout = NULL)
+.PP
+Definition at line 45 of file phil.C.
+.PP
+Referenced by \fBmadonna\fR().
+.SS void readImageFile (void)
+.PP
+Definition at line 150 of file phil.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,441 @@
+:: use cldm without -o
+:: project = /usr1/ocean/celllibs/gatearray/primitives
+:: process = gatearray
+:: lambda = 1
+:: extraction of all cells
+ms obasis
+box od 156 168 76 82
+box od 0 12 76 82
+box od 37 131 13 27
+box od 55 113 -3 3
+box od 29 139 60 85
+box dp 49 137 3 37
+box dp 49 119 -9 3
+box dp 31 49 3 37
+box ps 0 5 87 172
+box ps 0 5 9 71
+box ps 121 131 101 172
+box ps 93 103 101 172
+box ps 65 75 101 172
+box ps 107 117 87 172
+box ps 79 89 87 172
+box ps 51 61 87 172
+box ps 37 47 101 172
+box ps 23 33 101 172
+box ps 9 19 101 172
+box ps 163 168 87 172
+box ps 149 159 101 172
+box ps 135 145 101 172
+box ps 163 168 9 71
+box ps 124 137 48 52
+box ps 124 137 52 58
+box ps 124 128 58 59
+box ps 121 131 87 97
+box ps 110 137 34 40
+box ps 110 137 40 44
+box ps 141 145 -18 97
+box ps 135 141 87 97
+box ps 149 159 87 97
+box ps 149 159 9 71
+box ps 149 153 71 87
+box ps 149 153 -8 9
+box ps 9 15 9 71
+box ps 9 15 87 97
+box ps 15 19 -18 97
+box ps 23 27 -8 87
+box ps 23 33 87 97
+box ps 37 47 87 97
+box ps 43 47 68 87
+box ps 43 47 64 68
+box ps 121 125 64 68
+box ps 121 125 68 87
+box ps 65 69 87 97
+box ps 69 73 58 87
+box ps 69 75 87 97
+box ps 93 95 87 97
+box ps 95 99 58 87
+box ps 95 103 87 97
+box ps 62 69 48 58
+box ps 69 82 48 58
+box ps 86 95 48 58
+box ps 95 106 48 58
+box ps 62 82 34 44
+box ps 72 76 -4 34
+box ps 86 106 34 44
+box ps 92 96 -4 34
+box ps 110 120 44 57
+box ps 112 116 10 34
+box ps 31 44 48 52
+box ps 31 44 52 58
+box ps 40 44 58 59
+box ps 48 58 44 57
+box ps 31 58 40 44
+box ps 31 58 34 40
+box ps 52 56 10 34
+box ps 163 168 -93 -8
+box ps 0 5 -93 -8
+box ps 79 89 -93 -9
+box ps 121 131 -18 -11
+box ps 121 131 -11 -8
+box ps 121 125 -8 -5
+box ps 121 125 -5 -1
+box ps 93 103 -18 -17
+box ps 93 103 -17 -11
+box ps 93 103 -11 -8
+box ps 93 97 -8 -7
+box ps 92 97 -6 -5
+box ps 65 75 -18 -17
+box ps 65 75 -17 -11
+box ps 65 75 -11 -8
+box ps 71 75 -8 -7
+box ps 71 76 -6 -5
+box ps 37 47 -18 -11
+box ps 37 47 -11 -8
+box ps 43 47 -8 -5
+box ps 43 47 -5 -1
+box ps 135 141 -18 -8
+box ps 23 33 -18 -8
+box ps 149 159 -18 -8
+box ps 9 15 -18 -8
+box ps 149 159 -93 -22
+box ps 135 145 -93 -22
+box ps 121 131 -93 -22
+box ps 93 103 -93 -22
+box ps 65 75 -93 -22
+box ps 107 117 -93 -8
+box ps 51 61 -93 -8
+box ps 37 47 -93 -22
+box ps 23 33 -93 -22
+box ps 9 19 -93 -22
+box sn 152 168 72 86
+box sn 166 168 90 172
+box sn 166 168 12 68
+box sn 0 16 72 86
+box sn 0 2 90 172
+box sn 0 2 12 68
+box sn 33 135 5 37
+box sn 152 156 90 94
+box sn 138 142 90 94
+box sn 124 128 90 94
+box sn 152 156 104 172
+box sn 138 142 104 172
+box sn 124 128 104 172
+box sn 96 100 104 172
+box sn 68 72 104 172
+box sn 110 114 90 172
+box sn 82 86 90 172
+box sn 54 58 90 172
+box sn 96 100 90 94
+box sn 68 72 90 94
+box sn 40 44 90 94
+box sn 26 30 90 94
+box sn 12 16 90 94
+box sn 40 44 104 172
+box sn 26 30 104 172
+box sn 12 16 104 172
+box sn 152 156 12 68
+box sn 127 134 51 55
+box sn 113 135 37 41
+box sn 113 117 37 55
+box sn 89 103 37 41
+box sn 89 103 51 55
+box sn 65 79 51 55
+box sn 65 79 37 41
+box sn 51 55 37 55
+box sn 33 55 37 41
+box sn 34 41 51 55
+box sn 12 16 12 68
+box sn 166 168 -93 -11
+box sn 0 2 -93 -11
+box sn 152 156 -15 -11
+box sn 138 142 -15 -11
+box sn 124 128 -15 -11
+box sn 152 156 -93 -25
+box sn 138 142 -93 -25
+box sn 124 128 -93 -25
+box sn 96 100 -15 -11
+box sn 68 72 -15 -11
+box sn 96 100 -93 -25
+box sn 68 72 -93 -25
+box sn 40 44 -93 -25
+box sn 26 30 -93 -25
+box sn 12 16 -93 -25
+box sn 40 44 -15 -11
+box sn 26 30 -15 -11
+box sn 12 16 -15 -11
+box sn 110 114 -93 -11
+box sn 82 86 -93 -11
+box sn 54 58 -93 -11
+box co 158 168 77 81
+box co 0 10 77 81
+box in 0 168 77 83
+box in 0 168 -4 4
+poly od 41 9 127 9 131 13 37 13 41 9
+poly od 37 27 131 27 127 31 41 31 37 27
+poly ps 124 59 128 59 128 61 122 61 124 59
+poly ps 122 61 128 61 127 62 121 62 122 61
+poly ps 41 62 47 62 47 64 43 64 41 62
+poly ps 121 62 127 62 125 64 121 64 121 62
+poly ps 110 57 120 57 119 58 110 58 110 57
+poly ps 112 8 118 8 116 10 112 10 112 8
+poly ps 112 6 120 6 118 8 112 8 112 6
+poly ps 115 5 121 5 120 6 114 6 115 5
+poly ps 119 1 125 1 121 5 115 5 119 1
+poly ps 121 -1 125 -1 125 1 119 1 121 -1
+poly ps 40 59 44 59 46 61 40 61 40 59
+poly ps 40 61 46 61 47 62 41 62 40 61
+poly ps 48 57 58 57 58 58 49 58 48 57
+poly ps 50 8 56 8 56 10 52 10 50 8
+poly ps 48 6 56 6 56 8 50 8 48 6
+poly ps 47 5 53 5 54 6 48 6 47 5
+poly ps 43 1 49 1 53 5 47 5 43 1
+poly ps 43 -1 47 -1 49 1 43 1 43 -1
+poly ps 79 -9 89 -9 88 -8 80 -8 79 -9
+poly ps 93 -7 97 -7 97 -6 92 -6 93 -7
+poly ps 92 -5 97 -5 96 -4 92 -4 92 -5
+poly ps 71 -7 75 -7 76 -6 71 -6 71 -7
+poly ps 71 -5 76 -5 76 -4 72 -4 71 -5
+poly in 152 75 168 75 168 77 150 77 152 75
+poly in 0 75 16 75 18 77 0 77 0 75
+me
+ms basis
+mc obasis
+me
+ms a_grid
+mc basis
+me
+ms res
+term in 11 17 104 110 n
+term in 39 45 129 135 p
+box co 12 16 105 109
+box co 40 44 105 109
+box co 54 58 105 109
+box co 82 86 105 109
+box co 12 16 117 121
+box co 40 44 117 121
+box co 54 58 117 121
+box co 82 86 117 121
+box co 12 16 130 134
+box co 40 44 130 134
+box co 54 58 130 134
+box co 68 72 130 134
+box co 12 16 144 148
+box co 40 44 144 148
+box co 54 58 144 148
+box co 68 72 144 148
+box co 12 16 157 161
+box co 40 44 157 161
+box co 54 58 157 161
+box co 82 86 157 161
+box in 11 17 104 110
+box in 39 45 104 110
+box in 53 59 104 110
+box in 81 87 104 110
+box in 11 17 116 122
+box in 39 45 116 122
+box in 53 59 116 122
+box in 81 87 116 122
+box in 11 17 129 135
+box in 39 45 129 135
+box in 53 59 129 135
+box in 67 73 129 135
+box in 11 17 143 149
+box in 39 45 143 149
+box in 53 59 143 149
+box in 67 73 143 149
+box in 11 17 156 162
+box in 39 45 156 162
+box in 53 59 156 162
+box in 81 87 156 162
+box in 11 87 104 110
+box in 11 87 116 122
+box in 39 73 129 135
+box in 39 73 143 149
+box in 11 87 156 162
+box in 11 17 104 162
+box in 25 31 104 122
+box in 39 45 104 122
+box in 39 45 129 149
+box in 53 59 104 122
+box in 53 59 129 149
+box in 67 73 104 122
+box in 67 73 129 149
+box in 81 87 104 162
+box in 11 87 104 122
+box in 39 73 129 149
+mc <IMAGE> a_grid
+me
+ms Error_Marker
+box bb 11 17 3 9
+me
+ms Via_ps_in
+box co 1 5 1 5
+box in 0 6 0 6
+me
+ms Nenh
+term in 53 59 104 110 d
+term in 39 45 104 110 s
+term in 39 45 129 135 g
+box co 12 16 105 109
+box co 40 44 105 109
+box co 54 58 105 109
+box co 40 44 117 121
+box co 54 58 117 121
+box co 40 44 130 134
+box co 68 72 130 134
+box co 40 44 144 148
+box co 68 72 144 148
+box in 11 17 104 110
+box in 39 45 104 110
+box in 53 59 104 110
+box in 39 45 116 122
+box in 53 59 116 122
+box in 39 45 129 135
+box in 67 73 129 135
+box in 39 45 143 149
+box in 67 73 143 149
+box in 11 45 104 110
+box in 53 73 143 149
+box in 39 45 104 122
+box in 39 45 129 149
+box in 53 59 104 149
+box in 67 73 90 135
+me
+ms Penh
+term in 53 59 156 162 d
+term in 39 45 156 162 s
+term in 39 45 129 135 g
+box co 40 44 130 134
+box co 68 72 130 134
+box co 40 44 144 148
+box co 68 72 144 148
+box co 12 16 157 161
+box co 40 44 157 161
+box co 54 58 157 161
+box in 39 45 129 135
+box in 67 73 129 135
+box in 39 45 143 149
+box in 67 73 143 149
+box in 11 17 156 162
+box in 39 45 156 162
+box in 53 59 156 162
+box in 53 73 129 135
+box in 11 45 156 162
+box in 39 45 129 149
+box in 53 59 129 162
+box in 67 73 143 176
+me
+ms cap
+term in 11 17 104 110 n
+term in 39 45 129 135 p
+box co 12 16 105 109
+box co 40 44 105 109
+box co 54 58 105 109
+box co 82 86 105 109
+box co 12 16 117 121
+box co 40 44 117 121
+box co 54 58 117 121
+box co 82 86 117 121
+box co 12 16 130 134
+box co 40 44 130 134
+box co 54 58 130 134
+box co 68 72 130 134
+box co 12 16 144 148
+box co 40 44 144 148
+box co 54 58 144 148
+box co 68 72 144 148
+box co 12 16 157 161
+box co 40 44 157 161
+box co 54 58 157 161
+box co 82 86 157 161
+box in 11 17 104 110
+box in 39 45 104 110
+box in 53 59 104 110
+box in 81 87 104 110
+box in 11 17 116 122
+box in 39 45 116 122
+box in 53 59 116 122
+box in 81 87 116 122
+box in 11 17 129 135
+box in 39 45 129 135
+box in 53 59 129 135
+box in 67 73 129 135
+box in 11 17 143 149
+box in 39 45 143 149
+box in 53 59 143 149
+box in 67 73 143 149
+box in 11 17 156 162
+box in 39 45 156 162
+box in 53 59 156 162
+box in 81 87 156 162
+box in 11 87 104 110
+box in 11 87 116 122
+box in 39 73 129 135
+box in 39 73 143 149
+box in 11 87 156 162
+box in 11 17 104 162
+box in 25 31 104 122
+box in 39 45 104 122
+box in 39 45 129 149
+box in 53 59 104 122
+box in 53 59 129 149
+box in 67 73 104 122
+box in 67 73 129 149
+box in 81 87 104 162
+box in 11 87 104 122
+box in 39 73 129 149
+me
+ms nenh
+term in 53 59 104 110 d
+term in 39 45 104 110 s
+term in 39 45 129 135 g
+box co 12 16 105 109
+box co 40 44 105 109
+box co 54 58 105 109
+box co 40 44 117 121
+box co 54 58 117 121
+box co 40 44 130 134
+box co 68 72 130 134
+box co 40 44 144 148
+box co 68 72 144 148
+box in 11 17 104 110
+box in 39 45 104 110
+box in 53 59 104 110
+box in 39 45 116 122
+box in 53 59 116 122
+box in 39 45 129 135
+box in 67 73 129 135
+box in 39 45 143 149
+box in 67 73 143 149
+box in 11 45 104 110
+box in 53 73 143 149
+box in 39 45 104 122
+box in 39 45 129 149
+box in 53 59 104 149
+box in 67 73 90 135
+me
+ms penh
+term in 53 59 156 162 d
+term in 39 45 156 162 s
+term in 39 45 129 135 g
+box co 40 44 130 134
+box co 68 72 130 134
+box co 40 44 144 148
+box co 68 72 144 148
+box co 12 16 157 161
+box co 40 44 157 161
+box co 54 58 157 161
+box in 39 45 129 135
+box in 67 73 129 135
+box in 39 45 143 149
+box in 67 73 143 149
+box in 11 17 156 162
+box in 39 45 156 162
+box in 53 59 156 162
+box in 53 73 129 135
+box in 11 45 156 162
+box in 39 45 129 149
+box in 53 59 129 162
+box in 67 73 143 176
+me
+:: eof

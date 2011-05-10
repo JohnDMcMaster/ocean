@@ -1,0 +1,51 @@
+#!/bin/csh -f
+#
+# Install unt definitions ( schematic symbols for Scherzo schematic editor) in current
+# project directory.
+#
+# Usage: install_unt  <unt_file>
+#
+# Author: I. Karkowski
+#
+# @(#)install_unt_nelsis3	1.2
+#
+if ( $#argv < 1 ) then
+     echo "Usage: `basename $0`  <unt_file>"
+     exit 1
+endif
+
+if ( ! -r $1 ) then
+   echo "Cannot access input file $1 ! Quitting..."
+   echo "Directory: `pwd`"
+   exit 1
+endif
+
+if ( ! -e "circuit" ) then
+   echo "Cannot access circuit directory! Quitting..."
+   echo "Tip: Are you sure that you are in Nelsis project directory?"
+   exit 1
+endif 
+
+echo "Processing schematic symbols from file $1."
+
+foreach cir (circuit/*)
+	    		# only circuits are interesting to us
+			# we skip all these impcell etc. files...		    
+	if ( -d $cir ) then
+
+	   set cellname = `basename $cir`
+			# find its definition line
+	   cat $1 | sed -n -e "/^${cellname} .*/p" > tmp$$file
+	   set size = `wc tmp$$file| sed "s/^ *\([0-9]\) .*/\1/"`
+	   if ( $size == 0) then
+	      echo "Warning: Could not find schematic symbol for cell ${cellname}"
+	   else
+	      echo -n "."
+	      echo "###ScherzoUnitsFile###" > ${cir}/unt
+	      cat tmp$$file >> ${cir}/unt
+	   endif
+	   rm tmp$$file
+	endif
+end
+echo ""
+echo "Done."

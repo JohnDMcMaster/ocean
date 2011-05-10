@@ -1,0 +1,80 @@
+.TH CriNet 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CriNet \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cri.h>\fR
+.PP
+Inherits \fBItem\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBCriNet\fR (char *n )"
+.br
+.ti -1c
+.RI "\fB~CriNet\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& o) const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& o) const"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "char* \fBname\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS CriNet::CriNet (char * n)
+.PP
+Definition at line 72 of file cri.h.
+.SS CriNet::~CriNet ()\fC [inline]\fR
+.PP
+Definition at line 75 of file cri.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int CriNet::isEqual (const \fBItem\fR & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 81 of file cri.h.
+.SS char * CriNet::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 78 of file cri.h.
+.SS \fBclassType\fR CriNet::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 77 of file cri.h.
+.SS void CriNet::print (ostream & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 79 of file cri.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS char * CriNet::name
+.PP
+Definition at line 86 of file cri.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

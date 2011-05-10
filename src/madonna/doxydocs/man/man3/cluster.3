@@ -1,0 +1,108 @@
+.TH Cluster 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Cluster \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cluster.h>\fR
+.PP
+Inherits \fBPoint\fR.
+.PP
+Inherited by \fBClst\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fB~Cluster\fR ()"
+.br
+.ti -1c
+.RI "\fBCluster\fR (int gX,int gY,int hor,int ver)"
+.br
+.ti -1c
+.RI "\fBCluster\fR (int gx,int gy,int hor,int ver,int **stamp)"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& o) const"
+.br
+.ti -1c
+.RI "\fBoperator clusterMapType\fR ()"
+.br
+.ti -1c
+.RI "Cluster& \fBoperator|=\fR (Cluster &other)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "int \fBcX\fR"
+.br
+.ti -1c
+.RI "int \fBcY\fR"
+.br
+.ti -1c
+.RI "\fBclusterMapType\fR \fBpattern\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Cluster::~Cluster ()\fC [inline]\fR
+.PP
+Definition at line 24 of file cluster.h.
+.SS Cluster::Cluster (int gx, int gy, int hor, int ver)\fC [inline]\fR
+.PP
+Definition at line 53 of file cluster.h.
+.SS Cluster::Cluster (int gx, int gy, int hor, int ver, int ** stamp)
+.PP
+Definition at line 12 of file cluster.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int Cluster::isEqual (const \fBItem\fR & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Definition at line 33 of file cluster.h.
+.SS char * Cluster::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Reimplemented in \fBClst\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+Definition at line 32 of file cluster.h.
+.SS \fBclassType\fR Cluster::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Reimplemented in \fBClst\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+Definition at line 31 of file cluster.h.
+.SS Cluster::operator \fBclusterMapType\fR ()\fC [inline]\fR
+.PP
+Definition at line 36 of file cluster.h.
+.SS Cluster & Cluster::operator|= (Cluster & other)\fC [inline]\fR
+.PP
+Definition at line 37 of file cluster.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int Cluster::cX
+.PP
+Definition at line 43 of file cluster.h.
+.SS int Cluster::cY
+.PP
+Definition at line 44 of file cluster.h.
+.SS \fBclusterMapType\fR Cluster::pattern
+.PP
+Definition at line 47 of file cluster.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

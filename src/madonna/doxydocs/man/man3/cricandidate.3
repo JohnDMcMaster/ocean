@@ -1,0 +1,64 @@
+.TH CriCandidate 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CriCandidate \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cricand.h>\fR
+.PP
+Inherits \fBCriPoint\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBCriCandidate\fR (int \fBx\fR,int \fBy\fR,\fBlayerType\fR lay,unsigned int k,\fBclusterMapType\fR nb)"
+.br
+.ti -1c
+.RI "\fB~CriCandidate\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBclusterMapType\fR \fBneighbors\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS CriCandidate::CriCandidate (int x, int y, \fBlayerType\fR lay, unsigned int k, \fBclusterMapType\fR nb)
+.PP
+Definition at line 27 of file cricand.h.
+.SS CriCandidate::~CriCandidate ()\fC [inline]\fR
+.PP
+Definition at line 30 of file cricand.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS char * CriCandidate::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCriPoint\fR.
+.PP
+Definition at line 33 of file cricand.h.
+.SS \fBclassType\fR CriCandidate::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCriPoint\fR.
+.PP
+Definition at line 32 of file cricand.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBclusterMapType\fR CriCandidate::neighbors
+.PP
+Definition at line 38 of file cricand.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

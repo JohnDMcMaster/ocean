@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# This program exists to end all nuisance with architecture/operating system
+# combinations. Without options, it returns a string "ARCH_OS". Option -a only
+# returns "ARCH" and option -o only returns "OS".
+
+printusage()
+{
+   echo 'usage: thearch [-a|-o]' 1>&2
+   echo '' 1>&2
+   echo This program exists to end all nuisance with architecture/operating 1>&2
+   echo system combinations. Without options, it returns a string \"ARCH_OS\". 1>&2
+   echo Option -a only returns \"ARCH\" and option -o only returns \"OS\". 1>&2
+   exit 1
+}
+
+if [ -x /bin/getcontext ] ; then
+   # this is an HP...
+   case "`/bin/getcontext`" in
+      *PA-RISC1.1*) architecture=PA-RISC1.1 ;;
+      *HP-PA*)      architecture=HP-PA ;;
+      *HP-MC68*)    architecture=HP-MC680X0 ;;
+      *)	    architecture=unknown ;;
+   esac
+   case "`/bin/uname -a`" in
+      *.10.*)       opsys=10 ;;
+      *.09.*)       opsys=9 ;;
+      *.08.*)       opsys=8 ;;
+      *.*7.*)       opsys=7 ;;
+      *)	    opsys=unknown ;;
+   esac
+elif [ -x /bin/arch ] ; then 
+     # this can be sun or Linux
+   architecture="`/bin/arch`"
+
+   if [ -x /bin/uname ] ; then 
+      case "`/bin/uname -a`" in
+	   *Linux*)         opsys=Linux
+			    architecture=i486 # why? because the binaries have
+					      # this compiled in them!
+			    ;;
+	   *5.*)	    opsys=5 ;;
+	   *)		    opsys=4 ;;
+      esac
+   fi
+elif [ -x /bin/uname ] ; then
+   # maybe HP or Solaris ?
+   case "`/bin/uname -a`" in
+      *HP-UX*.10.*)         architecture=PA-RISC1.1
+                            opsys=10 ;;
+      *HP-UX*.09.*)         architecture=PA-RISC1.1
+                            opsys=9 ;;
+      *HP-UX*.08.*)         architecture=PA-RISC1.1
+                            opsys=8 ;;
+      *)                    architecture="sun4"
+	                    opsys=5 ;;
+   esac
+elif [ -x /usr/bin/uname ] ; then
+	architecture="`/usr/bin/uname -m`"
+	opsys="`/usr/bin/uname -s`"
+else
+   architecture=unknown
+   opsys=unknown
+fi
+
+case "X$1" in
+   X)    echo ${architecture}_${opsys} ;;
+   X-o)  echo $opsys ;;
+   X-a)  echo $architecture ;;
+   X-oa) echo $opsys $architecture ;;
+   X-ao) echo $architecture $opsys;;
+   *)    printusage ;;
+esac

@@ -1,0 +1,102 @@
+.TH Clst 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Clst \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <clst.h>\fR
+.PP
+Inherits \fBCluster\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBClst\fR (int gX,int gY,int hor,int ver)"
+.br
+.ti -1c
+.RI "\fBClst\fR (int gx,int gy,int hor,int ver,int **stamp)"
+.br
+.ti -1c
+.RI "\fBClst\fR (int ,int ,int ,int ,int **,\fBLayMap\fR &,\fBlayerType\fR ,short*, int check = 0)"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "\fBoperator Boolean\fR ()"
+.br
+.ti -1c
+.RI "\fBoperator List &\fR ()"
+.br
+.ti -1c
+.RI "Clst& \fBoperator|=\fR (Clst &other)"
+.br
+.ti -1c
+.RI "int \fBoperator &\fR (Clst &other)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBList\fR \fBcriticalPoints\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Clst::Clst (int gX, int gY, int hor, int ver)
+.PP
+Definition at line 24 of file clst.h.
+.SS Clst::Clst (int gx, int gy, int hor, int ver, int ** stamp)
+.PP
+Definition at line 26 of file clst.h.
+.SS Clst::Clst (int gx, int gy, int hor, int ver, int ** stamp, \fBLayMap\fR & lMap, \fBlayerType\fR lay, short * mtx, int check = 0)
+.PP
+Definition at line 10 of file clst.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS char * Clst::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 34 of file clst.h.
+.SS \fBclassType\fR Clst::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 33 of file clst.h.
+.SS int Clst::operator & (Clst & other)
+.PP
+Definition at line 69 of file clst.C.
+.SS Clst::operator \fBBoolean\fR ()\fC [inline]\fR
+.PP
+Definition at line 37 of file clst.h.
+.SS Clst::operator \fBList\fR & ()\fC [inline]\fR
+.PP
+Definition at line 39 of file clst.h.
+.SS Clst & Clst::operator|= (Clst & other)
+.PP
+Definition at line 54 of file clst.C.
+.SS void Clst::print (ostream & o) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Definition at line 81 of file clst.C.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBList\fR Clst::criticalPoints
+.PP
+Definition at line 47 of file clst.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

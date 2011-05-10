@@ -1,0 +1,161 @@
+\subsection{glob\-Net  Class Reference}
+\label{globNet}\index{globNet@{glob\-Net}}
+{\tt \#include $<$glob\-Route.h$>$}
+
+Inheritance diagram for glob\-Net:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_globnet.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf glob\-Net} (NETPTR n)
+\item 
+const NETPTR {\bf net} ()
+\item 
+int {\bf weight} ()
+\item 
+int {\bf weight} (const int w)
+\item 
+virtual void {\bf print} ()
+\item 
+int {\bf is\-In\-Route} ({\bf expansion\-Grid\-Edge} $\ast$e)
+\item 
+int {\bf is\-In\-Net} ({\bf expansion\-Grid\-Vertex} $\ast$v)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf sdfset} {\bf route}
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+NETPTR {\bf \_\-net}
+\item 
+int {\bf \_\-weight}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{globNet_a0}
+\index{globNet@{glob\-Net}!globNet@{globNet}}
+\index{globNet@{globNet}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}glob\-Net::glob\-Net (NETPTR {\em n})}\hfill
+
+
+
+Definition at line 89 of file glob\-Route.h.\small\begin{verbatim}00089 : sdfset(), sdfsetElmt(), route() {_net = n; _weight = 0;}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{globNet_a6}
+\index{globNet@{glob\-Net}!isInNet@{isInNet}}
+\index{isInNet@{isInNet}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int glob\-Net::is\-In\-Net ({\bf expansion\-Grid\-Vertex} $\ast$ {\em v})}\hfill
+
+
+
+Definition at line 629 of file glob\-Route.C.
+
+Referenced by {\bf expansion\-Grid::print\-Route}().\small\begin{verbatim}00630 {
+00631    sdfsetNextElmtIterator nextVx(this);
+00632    treeVertex *tvx;
+00633    while (tvx = (treeVertex *)nextVx())
+00634       if (tvx->vertex() == v)
+00635      return TRUE;
+00636    return NIL;
+00637 }
+\end{verbatim}\normalsize 
+\label{globNet_a5}
+\index{globNet@{glob\-Net}!isInRoute@{isInRoute}}
+\index{isInRoute@{isInRoute}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int glob\-Net::is\-In\-Route ({\bf expansion\-Grid\-Edge} $\ast$ {\em e})}\hfill
+
+
+
+Definition at line 616 of file glob\-Route.C.
+
+Referenced by {\bf expansion\-Grid::print\-Route}().\small\begin{verbatim}00617 {
+00618    sdfsetNextElmtIterator nextEdge(&route);
+00619    treeEdge *te;
+00620    while (te = (treeEdge *) nextEdge())
+00621       if (te->edge() == e)
+00622      return TRUE;
+00623    return NIL;
+00624 }
+\end{verbatim}\normalsize 
+\label{globNet_a1}
+\index{globNet@{glob\-Net}!net@{net}}
+\index{net@{net}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const NETPTR glob\-Net::net ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 91 of file glob\-Route.h.
+
+Referenced by {\bf expansion\-Grid::route\-Glob\-Nets}().\small\begin{verbatim}00091 {return _net;}
+\end{verbatim}\normalsize 
+\label{globNet_a4}
+\index{globNet@{glob\-Net}!print@{print}}
+\index{print@{print}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void glob\-Net::print ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Definition at line 94 of file glob\-Route.h.\small\begin{verbatim}00094 {cout << "<globNet>";}
+\end{verbatim}\normalsize 
+\label{globNet_a3}
+\index{globNet@{glob\-Net}!weight@{weight}}
+\index{weight@{weight}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int glob\-Net::weight (const int {\em w})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 93 of file glob\-Route.h.\small\begin{verbatim}00093 {return _weight = w;}
+\end{verbatim}\normalsize 
+\label{globNet_a2}
+\index{globNet@{glob\-Net}!weight@{weight}}
+\index{weight@{weight}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int glob\-Net::weight ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 92 of file glob\-Route.h.
+
+Referenced by {\bf expansion\-Grid::print\-Route\-Glob\-Net}(), {\bf expansion\-Grid::route\-Glob\-Net}(), and {\bf expansion\-Grid::route\-Glob\-Nets}().\small\begin{verbatim}00092 {return _weight;}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{globNet_o0}
+\index{globNet@{glob\-Net}!_net@{\_\-net}}
+\index{_net@{\_\-net}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}NETPTR glob\-Net::\_\-net\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 86 of file glob\-Route.h.\label{globNet_o1}
+\index{globNet@{glob\-Net}!_weight@{\_\-weight}}
+\index{_weight@{\_\-weight}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int glob\-Net::\_\-weight\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 87 of file glob\-Route.h.\label{globNet_m0}
+\index{globNet@{glob\-Net}!route@{route}}
+\index{route@{route}!globNet@{glob\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf sdfset} glob\-Net::route}\hfill
+
+
+
+Definition at line 90 of file glob\-Route.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf glob\-Route.h}\item 
+{\bf glob\-Route.C}\end{CompactItemize}

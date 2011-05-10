@@ -1,0 +1,108 @@
+.TH Point 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Point \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <point.h>\fR
+.PP
+Inherits \fBItem\fR.
+.PP
+Inherited by \fBCluster\fR, and \fBCriPoint\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBPoint\fR ()"
+.br
+.ti -1c
+.RI "\fBPoint\fR (int gx,int gy)"
+.br
+.ti -1c
+.RI "\fBPoint\fR (int *pair)"
+.br
+.ti -1c
+.RI "\fB~Point\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& o) const"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "int \fBx\fR"
+.br
+.ti -1c
+.RI "int \fBy\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Point::Point ()\fC [inline]\fR
+.PP
+Definition at line 24 of file point.h.
+.SS Point::Point (int gx, int gy)\fC [inline]\fR
+.PP
+Definition at line 25 of file point.h.
+.SS Point::Point (int * pair)\fC [inline]\fR
+.PP
+Definition at line 26 of file point.h.
+.SS Point::~Point ()\fC [inline]\fR
+.PP
+Definition at line 28 of file point.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int Point::isEqual (const \fBItem\fR & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBCluster\fR, and \fBCriPoint\fR.
+.PP
+Definition at line 33 of file point.h.
+.SS char * Point::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBClst\fR, \fBCluster\fR, \fBCriCandidate\fR, \fBCriPoint\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+Definition at line 31 of file point.h.
+.SS \fBclassType\fR Point::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBClst\fR, \fBCluster\fR, \fBCriCandidate\fR, \fBCriPoint\fR, \fBProtArea\fR, and \fBWindow\fR.
+.PP
+Definition at line 30 of file point.h.
+.SS void Point::print (ostream & os) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBClst\fR, and \fBCriPoint\fR.
+.PP
+Definition at line 11 of file point.C.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int Point::x
+.PP
+Definition at line 37 of file point.h.
+.SS int Point::y
+.PP
+Definition at line 38 of file point.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

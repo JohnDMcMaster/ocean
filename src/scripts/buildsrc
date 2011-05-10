@@ -1,0 +1,1049 @@
+#!/bin/sh
+#
+# SccsId = @(#)buildsrc 1.67 03/13/02 Delft University of Technology
+#
+# buildsrc -- build an OCEAN source tree, then compile and install it.
+#             Type "buildsrc -h" for a description.
+#
+# Bug reports and comments to paul ocean@cas.et.tudelft.nl
+
+##############################################################################
+#		 S T A R T    O F    C O N F I G U R A T I O N               #
+##############################################################################
+
+#
+# The OCEAN programs and libraries that buildsrc knows about...
+#
+KNOWN_PROGRAMS="\
+          libseadif \
+          libocean \
+	  nelsea \
+	  madonna \
+	  makebus \
+	  trout \
+	  seadali \
+	  blif2sls \
+	  scripts \
+	  seedif \
+	  gnarp \
+	  colaps \
+	  esea \
+	  cruise \
+	  scherzo \
+	  layflat \
+	  "
+
+#
+# The OCEAN programs and libraries implied when no -p or -P option given
+#
+DEFAULT_PROGRAMS="\
+          libseadif \
+          libocean \
+	  nelsea \
+	  madonna \
+	  trout \
+	  seadali \
+	  blif2sls \
+	  scripts \
+	  seedif \
+	  gnarp \
+	  colaps \
+	  esea \
+	  "
+
+#
+# this function returns all the source directories that are part of a program.
+# Normally this is only one directory, but some programs (e.g. madonna) consist
+# of several source directories.
+#
+dirsOfProg()
+{
+case "$1" in
+     madonna) DIRSOFPROG="madonna \
+	                  madonna/main \
+	                  madonna/partitioner \
+	                  madonna/lia \
+	                  madonna/phil"
+		;;
+     scherzo) DIRSOFPROG="scherzo \
+		          scherzo/tcl"
+              ;;
+     *)       DIRSOFPROG="$1"
+              ;;
+esac
+}
+
+# The functions named "doMake_*" execute the make scripts with the appropriate
+# MAKE parameters. If a parameter contains white-space characters, it must be
+# enclosed within ESCAPED double quotes, e.g. CC=\"cc -Aa\".
+
+# this function knows about the MAKE parameters for GNU compilers:
+doMakes_gnu()
+{
+LONGCALLS="" ; GCC=gcc ; REGEXCFLAGS="" ; XXOLIBS=""
+case "$MACHINE" in
+   HP*|PA-RISC*|hppa*) ;;
+   sun4_4)             GCC="gcc -fno-builtin" ;;
+   sun4_5)             GCC="gcc -fno-builtin" ; REGEXCFLAGS="-DSTDC_HEADERS"
+                       XXOLIBS="-lnsl -lsocket" ;;
+   *Linux*)            GCC="gcc -ansi" ;;
+esac
+NO_OPTIMIZE="`echo $MODE | sed -e 's/-O//'`"
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   echo ""
+   echo "WARNING: don\'t know how to link statically, because the GNU compiler"
+   echo "         has platform specific options for this. Find out what option"
+   echo "         you need and pass them with the -X flag to buildsrc. For example,"
+   echo "         on a Sun you could try \"buildsrc ... -m gnu -X -Bstatic\"."
+   echo ""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$REGEXCFLAGS $XCF\" CC=\"$GCC\" \
+       YACC=\"bison -y\" LEX=flex \
+       XLYCFLAGS=\"$NO_OPTIMIZE $EXTRACFLAGS\" XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       XLYCFLAGS=\"$LONGCALLS\" YACC=\"bison -y\" LEX=flex CC=\"$GCC\" \
+       CXX=g++ LD=g++ NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH \
+       XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=g++ XOLIBS=\"-lm $XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" LD=g++ XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" XOLIBS=\"$XOL\"\
+       YACC=\"bison -y\" LD=\"$GCC\" LEX=flex
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       CC=\"$GCC -traditional -fno-builtin\" LD=g++ YACC=\"bison -y\" \
+       LEX=flex CXX=g++ NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH \
+       XOLIBS=\"-lm $XOL $XXOLIBS\"
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=g++ XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ XOLIBS=\"$XOL\" \
+       ICDPATH=$ICDPATH 
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" XOLIBS=\"$XOL\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ CC=\"$GCC\" XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" XOLIBS=\"-lm $XOL\" \
+       LD=g++ CXXSPECFLAGS=\"-Dcplusplus_2_1\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=gcc  \
+       LD=g++ XPMLIB=-lXpm TCLTKINCLUDE=-I$OCEAN/include \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       TCLLIBDIR=/usr/ocean/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters on Linux for GNU compilers:
+doMakes_linux()
+{
+LONGCALLS="" ; GCC=gcc
+case "$MACHINE" in
+   HP*|PA-RISC*|hppa*) LONGCALLS="-mlong-calls" ;;
+   sun*)               GCC="gcc -fno-builtin" ;;
+   *Linux*)            GCC="gcc -ansi" ;;
+esac
+NO_OPTIMIZE="`echo $MODE | sed -e 's/-O//'`"
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   SEARCH="-static"
+else
+   SEARCH=""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" YACC=\"bison -y\" LEX=flex \
+       XLYCFLAGS=\"$NO_OPTIMIZE $EXTRACFLAGS\" XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       XLYCFLAGS=\"$LONGCALLS\" YACC=\"bison -y\" LEX=flex CC=\"$GCC\" \
+       CXX=g++ LD=g++ NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=g++ XOLIBS=\"-lm $XOL\" XLDFLAGS=\"$XCF $SEARCH\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" LD=g++ \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\" 
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" XOLIBS=\"$XOL\"\
+       YACC=\"bison -y\" LD=\"$GCC\" LEX=flex
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" \
+       CC=\"$GCC -fno-builtin\" LD=\"g++\" YACC=\"bison -y\" LEX=flex \
+       CXX=g++ NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH  \
+       XLDFLAGS=\"$XCF -L/usr/X11/lib -L/usr/X11R6/lib $SEARCH\" \
+       XOLIBS=\"-lm $XOL\"
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=g++ XOLIBS=\"$XOL\" XLDFLAGS=\"$XCF $SEARCH\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ LD=g++ CC=\"$GCC\" \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=\"$GCC\" XOLIBS=\"-lm $XOL\" \
+       LD=g++ XLDFLAGS=\"$XCF $SEARCH\" CXXSPECFLAGS=\"-Dcplusplus_2_1\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=gcc  \
+       LD=g++ XLDFLAGS=\"$XCF $SEARCH\" XPMLIB= \
+       TCLTKINCLUDE=-I$OCEAN/include \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       TCLLIBDIR=/usr/ocean/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters for compilation on a sun4:
+doMakes_sun4_4()
+{
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   SEARCH="-static"
+else
+   SEARCH=""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLYCFLAGS=$XCF YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       CC=\"gcc -fno-builtin\" XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF -fno-builtin\" \
+       XCXXFLAGS=\"$XCF\" XLYCFLAGS=\"-U__GNUC__ -fno-builtin $XCF\" \
+       XLDFLAGS=\"$XCF $SEARCH\" CC=gcc YACC=\"bison -y\" LEX=flex \
+       NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"-lm $XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc YACC=\"bison -y\"EX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" \
+       XLDFLAGS=\"$XCF $SEARCH\" ICDPATH=$ICDPATH  XOLIBS=\"-lm $XOL\"\
+       CC=cc YACC=\"bison -y\" LEX=flex NELSIS_RELEASE=$NELSIS_RELEASE
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=\"$GCC\" CPU=SUN4 \
+       LD=CC CXXSPECFLAGS=\"+p -pipe -Dcplusplus_2_0\" XOLIBS=\"$XOL\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=gcc  \
+       XLDFLAGS=\"$XCF $SEARCH\" \
+       LD=g++ XPMLIB=-lnsl \
+       TCLTKINCLUDE= \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       LEDAINCLUDE=-I$OCEAN/include \
+       TCLLIBDIR=/usr/ocean/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters for compilation on a sun4:
+doMakes_sun4_5_old()
+{
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   SEARCH="-static"
+else
+   SEARCH=""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLYCFLAGS=$XCF YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       CC=\"gcc -fno-builtin\" XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF -fno-builtin\" \
+       XCXXFLAGS=\"$XCF\" XLYCFLAGS=\"-U__GNUC__ -fno-builtin $XCF\" \
+       XLDFLAGS=\"$XCF $SEARCH\" CC=gcc YACC=\"bison -y\" LEX=flex \
+       NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"-lm $XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" \
+       XLDFLAGS=\"$XCF $SEARCH\" ICDPATH=$ICDPATH  XOLIBS=\"-lm $XOL\"\
+       CC=cc YACC=\"bison -y\" LEX=flex NELSIS_RELEASE=$NELSIS_RELEASE
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=\"$GCC\" CPU=SUN4 \
+       LD=CC CXXSPECFLAGS=\"+p -pipe -Dcplusplus_2_0\" XOLIBS=\"$XOL\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=gcc  \
+       XLDFLAGS=\"$XCF $SEARCH\" \
+       LD=g++ XPMLIB=\"-lXpm -lnsl\" \
+       TCLTKINCLUDE= \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       LEDAINCLUDE=-I$OCEAN/include \
+       TCLLIBDIR=/usr/ocean/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters for compilation on a 
+# sun solaris:
+doMakes_sun4_5()
+{
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   SEARCH="-static"
+else
+   SEARCH=""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLYCFLAGS=$XCF YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       CC=\"gcc -fno-builtin\" XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF -fno-builtin\" \
+       XCXXFLAGS=\"$XCF\" XLYCFLAGS=\"-U__GNUC__ -fno-builtin $XCF\" \
+       XLDFLAGS=\"$XCF $SEARCH\" CC=gcc YACC=\"bison -y\" LEX=flex \
+       NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"-lm $XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" \
+       XLDFLAGS=\"-L/usr/openwin/lib $XCF $SEARCH\" ICDPATH=$ICDPATH  XOLIBS=\"-lm $XOL\"\
+       CC=cc YACC=\"bison -y\" LEX=flex NELSIS_RELEASE=$NELSIS_RELEASE
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=\"$GCC\" CPU=SUN4 \
+       LD=CC CXXSPECFLAGS=\"+p -pipe -Dcplusplus_2_0\" XOLIBS=\"$XOL\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=g++ CC=gcc  \
+       XLDFLAGS=\"$XCF $SEARCH\" \
+       LD=g++ XPMLIB=\"-lXpm -lnsl\" \
+       TCLTKINCLUDE= \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       LEDAINCLUDE=-I$OCEAN/include \
+       TCLLIBDIR=/usr/ocean/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters if our machine is an HP:
+doMakes_hp()
+{
+XCF="-Aa -D_HPUX_SOURCE $MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS -ldld"
+if [ "$ARCHIVE_LINK" = 1 ] ; then
+   SEARCH="+A -Wl,-a,archive_shared"
+else
+   SEARCH=""
+fi
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC YACC=\"yacc\" LEX=flex \
+       XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc CXX=CC YACC=\"yacc\" LEX=flex \
+       XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=cc XCXXFLAGS=\"$XCF\" \
+       XOLIBS=\"$XOL\" \
+       XLYCFLAGS=\"$XCF\" YACC=\"yacc\" LEX=flex XLDFLAGS=\"$XCF $SEARCH\" \
+       NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc YACC=\"yacc\" \
+       LEX=flex XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"-lm $XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc YACC=\"yacc\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" \
+       XLDFLAGS=\"$XCF -L/usr/lib/X11R6 $SEARCH\" XOLIBS=\"-lm $XOL\" CXX=CC \
+       CC=cc YACC=\"yacc\" LEX=flex NELSIS_RELEASE=$NELSIS_RELEASE \
+       ICDPATH=$ICDPATH
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"yacc\" LEX=flex \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLDFLAGS=\"$XCF $SEARCH\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"$XOL\"
+# this cruise thing is a mess, don't worry if you cannot compile it...
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=\"$GCC\" MACHINE=hppa1.1_gcc \
+       LD=CC CXXSPECFLAGS=\"-mpa-risc-1-0 -Dcplusplus_2_1\" \
+       XLDFLAGS=\"$XCF $SEARCH\" XOLIBS=\"-ll -lm $XOL\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=CC MACHINE=PA-RISC1.1_9 \
+       XLDFLAGS=\"$XCF $SEARCH\" \
+       LD=CC XPMLIB=\"-L/usr/local/lib -lXpm\" TCLTKINCLUDE=-I$OCEAN/include \
+       TCLTKLIBS=\"-L$OCEAN/lib/$MACHINE -ltk -ltcl\" \
+       TCLLIBDIR=$OCEAN/lib/tk LEDALIBDIR=$OCEAN/lib/$MACHINE
+}
+
+# this function knows about the MAKE parameters for Apollo SR10.4 using the gcc
+# 2.4.0 compiler
+doMakes_apollo_sr10_4()
+{
+LONGCALLS="" ; GCC="gcc -DAPOLLO_SR10_4" GXX="g++ -DAPOLLO_SR10_4"
+NO_OPTIMIZE="`echo $MODE | sed -e 's/-O//'`"
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+MAKEPROG="/usr/local/gnu/bin/make"
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" YACC=\"bison -y\" LEX=flex \
+       XLYCFLAGS=\"$NO_OPTIMIZE $EXTRACFLAGS\" XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\" \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" YACC=\"bison -y\" LEX=flex
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       XLYCFLAGS=\"$LONGCALLS\" YACC=\"bison -y\" LEX=flex CC=\"$GCC\" \
+       CXX=\"$GXX\" LD=\"$GXX\" NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH \
+       XOLIBS=\"$XOL\"
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=\"$GXX\" XOLIBS=\"$XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\" LD=g++ \
+       XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC -traditional\" \
+       YACC=\"bison -y\" LD=\"$GCC\" LEX=flex XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       CC=\"$GCC -traditional\" CXX=\"$GXX\" YACC=\"bison -y\" LEX=flex \
+       CXX=\"$GXX\" NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH \
+       XOLIBS=\"$XOL\"
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\" YACC=\"bison -y\" \
+       LEX=flex LD=\"$GXX\" XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" LD=\"$GXX\" XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" LD=\"$GXX\" XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" XOLIBS=\"$XOL\" \
+       ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=\"$GCC\" XOLIBS=\"$XOL\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" LD=\"$GXX\" CC=\"$GCC\" \
+       XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=\"$GXX\" CC=\"$GCC\"  \
+       LD=\"$GXX\" CXXSPECFLAGS=\"-Dcplusplus_2_1\" XOLIBS=\"$XOL\"
+}
+
+# this function knows about the MAKE parameters if our machine is unknown:
+doMakes_default()
+{
+XCF="$MODE $EXTRACFLAGS"
+XOL="$EXTRALIBS"
+doMake libseadif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC YACC=\"bison -y\" LEX=flex CC=cc CXX=CC \
+       XOLIBS=\"$XOL\"
+doMake libocean \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC YACC=\"bison -y\" LEX=flex CC=cc CXX=CC \
+       XOLIBS=\"$XOL\"
+doMake nelsea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       XLYCFLAGS=\"$XCF\" YACC=\"bison -y\" LEX=flex CC=cc CXX=CC XOLIBS=\"$XOL\" \
+       NELSIS_RELEASE=$NELSIS_RELEASE ICDPATH=$ICDPATH
+doMake madonna \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc CXX=CC YACC=\"bison -y\" LEX=flex \
+       XOLIBS=\"$XOL\"
+doMake makebus \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XOLIBS=\"$XOL\"
+doMake trout \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc YACC=\"bison -y\" LEX=flex XOLIBS=\"$XOL\"
+doMake seadali \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" XCXXFLAGS=\"$XCF\" XLDFLAGS=\"$XCF\" \
+       CC=cc CXX=CC YACC=\"bison -y\" LEX=flex NELSIS_RELEASE=$NELSIS_RELEASE \
+       ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake blif2sls \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=cc CXX=CC YACC=\"bison -y\" LEX=flex \
+       XOLIBS=\"$XOL\"
+doMake scripts \
+       OCEAN=$OCEAN
+doMake seedif \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XOLIBS=\"$XOL\"
+doMake gnarp \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XOLIBS=\"$XOL\"
+doMake layflat \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC XOLIBS=\"$XOL\" ICDPATH=$ICDPATH
+doMake esea \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CC=CC XLDFLAGS=\"$XCF\" \
+       NELSIS_REL=$NELSIS_RELEASE ICDPATH=$ICDPATH XOLIBS=\"$XOL\"
+doMake colaps \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC LD=CC CC=cc XOLIBS=\"$XOL\"
+doMake cruise \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=\"$GCC\" XOLIBS=\"$XOL\" \
+       LD=CC CXXSPECFLAGS=\"-Dcplusplus_2_0\"
+doMake scherzo \
+       OCEAN=$OCEAN XCFLAGS=\"$XCF\" CXX=CC CC=CC  \
+       XLDFLAGS=\"$XCF $SEARCH\" \
+       LD=CC XPMLIB=-lXpm TCLTKINCLUDE=-I/usr/include \
+       TCLTKLIBS=\"-ltk -ltcl\" \
+       TCLLIBDIR=/usr/local/lib/tk LEDALIBDIR=/usr/local/lib
+
+}
+
+##############################################################################
+#		   E N D    O F    C O N F I G U R A T I O N                 #
+##############################################################################
+
+# next hack to get correct "echo" on bloody Sparc station. I hate Sun.
+PATH=/usr/5bin:$PATH ; export PATH
+
+printHelp()
+{
+echo ""
+echo "buildsrc -- build an OCEAN source tree, then compile and install it."
+echo ""
+echo "DESCRIPTION"
+echo "   This program basically serves 2 purposes. (1) it retrieves the OCEAN"
+echo "   sources from the SCCS database if the -s option is specified, and (2)"
+echo "   it compiles the sources with specific, platform dependent, makefile"
+echo "   parameters if the -c option is specified. The buildsrc program has"
+echo "   built-in knowledge about operating systems and compiler environments."
+echo "   This knowledge is concentrated in small shell functions inside the"
+echo "   buildsrc script. For instance, the shell function doMakes_gnu() contains"
+echo "   all the parameters that the GNU compiler needs to compile OCEAN. Normally,"
+echo "   buildsrc selects a parameter set that is in agreement with the MACHINE"
+echo "   environment variable, but the -m option overrides this."
+echo ""
+echo "CUSTOMIZATION:"
+echo "   If you compile OCEAN on a platform that buildsrc does not know about,"
+echo "   say \"DeepThought\", then edit the buildsrc script as follows. Create"
+echo "   a new function named doMakes_DeepThought() by copying for instance the"
+echo "   function doMakes_default(). Then modify the make parameters so as to"
+echo "   match DeepThought's compiler environment. Then set your MACHINE"
+echo "   environment to DeepThought and call buildsrc."
+echo ""
+echo "OPTIONS:"
+echo "   -s      get the OCEAN sources from SCCS and build a copy in ./src"
+echo "   -f      get the sources from the SCCS database, even if it's not save"
+echo "   -S      show who is editing the SCCS database"
+echo "   -c      compile the source tree in ./src, then install it in the"
+echo "           directories ./include, ./lib, ./bin and ./man"
+echo "   -p<prg> only deal with the sources of program/library <prg>, which"
+echo "           is a comma separated list of programs"
+echo "   -P<prg> deal with all programs _except_ those listed in <prg>. The"
+echo "           options -p and -P are (of course) mutually exclusive"
+echo "   -g      use -g option while compiling so that debugging is possible"
+echo "   -G      use -G option while compiling so that profiling is possible"
+echo "   -m<mak> use the Make parameter set <mak>. Currently recognized: gnu."
+echo "   -M<mch> set the MACHINE environment to <mch>"
+echo "   -3      link with Nelsis Release 3 library (this is the default)"
+echo "   -4      link with Nelsis Release 4 library"
+echo "   -a      use archives while linking, avoid dynamically linked executables"
+echo "   -X<opt> pass the option <opt> to the C and C++ compiler and linker. No"
+echo "           spaces are allowed in <opt>, but you can use -X multiple times"
+echo "   -L<opt> insert <opt> at the end of the linker command line, see examples."
+echo "           Multiple -L options are allowed, but no spaces can occur in <opt>"
+echo "   -i<dir> look for Nelsis tree in <dir>, default is ICDPATH environment"
+echo "   -d<dir> look for OCEAN tree in <dir>, default /usr/ocean"
+echo "   -b<dir> use <dir> as the build directory in stead of \".\""
+echo "   -D<dir> equivalent to \"-d<dir> -b<dir>\""
+echo "   -t<trg> set the make target to <trg> in stead of \"install\""
+echo "   -n      only show, do not actually execute the inferior makes" 
+echo "   -K<opt> pass the option <opt> to the inferior make programs"
+echo "   -h      print this help screen, then exit"
+echo ""
+echo "EXAMPLES:"
+echo "   Compile the OCEAN sources (which must exist under ./src) and install"
+echo "   'm in ./bin, ./lib, ./include and ./man. These dirs are created if they"
+echo "   do not already exist:"
+echo "   % buildsrc -c"
+echo ""
+echo "   Remove all objects, then checkout the sources from the SCCS database,"
+echo "   compile them with debug information preserved and install the results"
+echo "   in ./bin, ./lib and ./include:"
+echo "   % cd ~ocean; buildsrc -ct veryclean; buildsrc -scg -d \`pwd\`"
+echo ""
+echo "   Build a copy of the /usr/ocean source tree in /tmp/ocean:"
+echo "   % mkdir /tmp/ocean; buildsrc -s -d /usr/ocean -b /tmp/ocean"
+echo ""
+echo "   Compile libseadif, do *not* get sources from SCCS database first"
+echo "   and do *not* install the library in ~ocean/lib:"
+echo "   % buildsrc -D ~ocean -p libseadif -ct default"
+echo ""
+echo "   Compile the ocean sources, and link them with a debugging malloc in stead"
+echo "   of the default malloc. This requires that /usr/stuff/debug_malloc/malloc.h"
+echo "   gets included in stead of the default malloc.h; it also requires that"
+echo "   libdbmalloc.a in that directory gets linked with the ocean executables:"
+echo "   % buildsrc -c -X -I/usr/stuff/debug_malloc \\"
+echo "              -L -L/usr/stuff/debug_malloc -L -ldbmalloc"
+echo ""
+}
+
+
+#
+# save the command line of the buildsrc script. On some systems, this gets
+# globbed by the argument of shell functions, that is, some systems have
+# a global $@, while others have local $@ vectors.
+#
+saveArgs()
+{
+ARGV="$@"
+# also save the script name in ARGV_0:
+ARGV_0="$0"
+}
+
+
+#
+# set options and variables to their default value.
+#
+setDefaultOpt()
+{
+FORCE=0			# force SCCS retrievel even if file not checked in
+SHOW_SCCS_INFO=0	# perform "sccs info" if file not checked in
+BUILDSOURCE=0		# retrieve copies of source from SCCS database
+COMPILATION=0		# compile the sources
+DEBUGMODE=-O		# pass option -g or -O to the compiler
+PROFILEMODE=""		# pass option -G to the compiler
+MAKETARGET=install	# makefile target to be executed, eg. "default"
+OCEAN=""		# ocean home containg src subdirectory
+PROGRAMS=""		# list of programs and libraries to be processed
+EXPROGRAMS=""		# list of programs and libraries _not_ to be processed
+BUILDDIR=`pwd`		# target dir for installing ./bin ./lib ./include etc
+NELSIS_RELEASE=3	# nelsis release to link ocean executable with (3 or 4)
+ARCHIVE_LINK=0		# use static (archive) linking of executables
+ICDPATH="${ICDPATH:-}"	# nelsis home, containing subdirs lib and lib/include
+MAKEPROG=make		# name of the make utility, eg. "gnumake"
+NO_MAKE_EXE=0		# do not execute make utility, only print would-be make
+MAKEOPTIONS=""		# options to the make utility, eg. "-n"
+EXTRACFLAGS=""		# extra user-specified flags for C, C++ en linker
+EXTRALIBS=""		# extra user-specified flags for linker, eg. "-lmylib"
+}
+
+#
+# parse the command line and interpret options
+#
+parseOptions()
+{
+set -- `getopt fsScgGht:d:p:b:D:34ai:m:M:X:L:P:K:n $ARGV`
+if [ $? != 0 ] ; then
+   echo "\nType \"buildsrc -h\" for a list of options"
+   exit 1
+fi
+# the variable skipnext is true if an option has an argument
+skipnext=0
+for opt in $* ; do
+    if [ $skipnext = 1 ] ; then
+       # the previous option had an argument, which actually
+       # is now the current $opt. Skip it.
+       skipnext=0
+       shift
+       continue
+    fi
+    case $opt in
+	 -f) FORCE=1;;
+	 -s) BUILDSOURCE=1;;
+	 -S) SHOW_SCCS_INFO=1;;
+	 -c) COMPILATION=1;;
+	 -g) DEBUGMODE=-g;;
+	 -G) PROFILEMODE=-G;;
+	 -d) OCEAN="$2" ; skipnext=1;;
+	 -b) BUILDDIR="$2" ; skipnext=1;;
+	 -D) BUILDDIR="$2"; OCEAN="$2" ; skipnext=1;;
+	 -h) printHelp; exit 0;;
+	 -t) MAKETARGET="$2" ; skipnext=1;;
+	 -p) PROGRAMS="$PROGRAMS `echo $2 | sed 's/,/ /g'`" ; skipnext=1;;
+	 -P) EXPROGRAMS="$EXPROGRAMS `echo $2 | sed 's/,/ /g'`" ; skipnext=1;;
+	 -3) NELSIS_RELEASE=3;;
+	 -4) NELSIS_RELEASE=4;;
+	 -a) ARCHIVE_LINK=1;;
+	 -i) ICDPATH="$2" ; skipnext=1;;
+	 -m) MAKEPARAM="$2" ; skipnext=1;;
+	 -M) MACHINE="$2" ; export MACHINE ; skipnext=1;;
+	 -X) EXTRACFLAGS="$EXTRACFLAGS $2" ; skipnext=1;;
+	 -L) EXTRALIBS="$EXTRALIBS $2" ; skipnext=1;;
+	 -K) MAKEOPTIONS="$MAKEOPTIONS $2" ; skipnext=1;;
+	 -n) NO_MAKE_EXE=1;;
+	 --) shift; break;;
+	 *)  echo ; echo UNKNOWN OPTION \"$opt\" ... ; exit 1
+    esac
+    shift
+done
+if [ $# != 0 ] ; then
+   echo "ERROR: unexpected argument \"$*\"."
+   echo "       Use option -h for help"
+   exit 1
+fi
+if [ "$BUILDSOURCE" != 1 -a "$COMPILATION" != 1 ] ; then
+   echo "use at least one of the options -c or -s ... (option -h for help)"
+   exit 1
+fi
+if [ "$ICDPATH" = "" ] ; then
+   if [ "$NELSIS_RELEASE" = 3 ] ; then
+      ICDPATH=/usr/cacd
+   else
+      ICDPATH=/usr/nelsis
+   fi
+fi
+if [ "$EXPROGRAMS" != "" -a "$PROGRAMS" != "" ] ; then
+   echo "You cannot use the options -P and -p at the same time ..."
+   echo "(option -h for help)"
+   exit 1
+fi
+if [ "$EXPROGRAMS" != "" ] ; then
+   checkExPrograms
+else
+   checkPrograms
+fi
+}
+
+
+#
+# check that the programs mentioned in $PROGRAMS are valid
+#
+checkPrograms()
+{
+if [ "$PROGRAMS" = "" ] ; then
+   PROGRAMS="$DEFAULT_PROGRAMS"
+   return
+fi
+all_right=1
+for prg in $PROGRAMS; do
+    # check that $prg is in the KNOWN_PROGRAMS list:
+    foundprog=0
+    for knownprog in $KNOWN_PROGRAMS; do
+        if [ $knownprog = $prg ] ; then
+	   foundprog=1
+	   break
+	fi
+    done
+    if [ $foundprog = 0 ] ; then
+       echo The program or library \"$prg\" is not known ...
+       all_right=0;
+    fi
+done
+if [ $all_right = 0 ] ; then
+   echo Chooses any of $KNOWN_PROGRAMS
+   exit 1
+fi
+}
+
+#
+# check the list of EXPROGRAMS and set PROGRAMS accordingly
+#
+checkExPrograms()
+{
+PROGRAMS="$DEFAULT_PROGRAMS"
+all_right=1
+for prg in $EXPROGRAMS; do
+    # check that $prg is in the KNOWN_PROGRAMS list:
+    foundprog=0
+    for knownprog in $KNOWN_PROGRAMS; do
+        if [ $knownprog = $prg ] ; then
+	   foundprog=1
+	   break
+	fi
+    done
+    if [ $foundprog = 0 ] ; then
+       echo The program or library \"$prg\" is not known ...
+       all_right=0;
+    else
+       # remove $prg from the PROGRAMS list:
+       TMP_PROGS=""
+       for tmp_p in $PROGRAMS; do
+           if [ $tmp_p != $prg ] ; then
+	      TMP_PROGS="$TMP_PROGS $tmp_p"
+	   fi
+       done
+       PROGRAMS="$TMP_PROGS"
+    fi
+done
+if [ $all_right = 0 ] ; then
+   echo Choose any of $KNOWN_PROGRAMS
+   exit 1
+fi
+}
+
+
+#
+# retrieve sources from SCCS database
+#
+buildSource()
+{
+if [ "$OCEAN" = "" ] ; then
+   OCEAN=/usr/ocean
+fi
+
+SRC=$OCEAN/src
+if [ ! -d $SRC ] ; then
+   echo $SRC does not exists...
+   exit 1
+fi
+
+SOURCEDIRS=""
+for prg in $PROGRAMS; do
+    dirsOfProg $prg
+    SOURCEDIRS="$SOURCEDIRS $DIRSOFPROG"
+done
+
+cannotProceed=0
+for d in $SOURCEDIRS ; do
+    if [ "`sccs tell $SRC/$d`" != "" ] ; then
+       if [ $FORCE = 1 ] ; then
+          echo "Warning: $SRC/$d being edited... (proceed anyway)"
+       else
+          echo "Please checkin $SRC/$d first..."
+          cannotProceed=1
+       fi
+       if [ $SHOW_SCCS_INFO = 1 ] ; then
+          sccs info $SRC/$d
+       fi
+    fi
+done
+if [ "$cannotProceed" = 1 ] ; then
+   echo ""
+   echo "Maybe you want to use the options -f and -S ... (Option -h for help)"
+   exit 1
+fi
+
+if [ ! -d src ] ; then echo mkdir src ; mkdir src; fi
+for d in $SOURCEDIRS ; do
+    if [ ! -d src/$d ] ; then echo mkdir src/$d ; mkdir src/$d; fi
+    echo "(cd src/$d ; sccs get -s $SRC/$d/SCCS)"
+    (cd src/$d ; sccs get -s $SRC/$d/SCCS)
+done
+
+if [ "$cannotProceed" = 1 ] ; then
+   exit 1
+fi
+}
+
+
+#
+# execute a make if $1 is in the PROGRAMS list
+#
+doMake()
+{
+set -- "$@"
+PRG=$1 ; shift
+# check that $PRG is listed in the PROGRAMS. If not, then return immediately
+foundprog=0
+for prg in $PROGRAMS; do
+    if [ "$prg" = "$PRG" ] ; then
+       foundprog=1
+       break
+    fi
+done
+if [ $foundprog = 0 ] ; then
+    return   # PRG not found in PROGRAMS list
+fi
+# if there is an executable gnumake somewhere in PATH, use it:
+for dir in `echo $PATH | tr : ' '`; do
+    if [ -x $dir/gnumake ] ; then
+       MAKEPROG=gnumake
+       break
+    else if [ -x $dir/gmake ] ; then
+       MAKEPROG=gmake
+       break
+    fi
+    fi
+done
+echo "(cd src/$PRG ;" ; echo " $MAKEPROG $MAKEOPTIONS $* $MAKETARGET)"
+# execute the inferior make:
+if [ $NO_MAKE_EXE = 0 ] ; then
+   (cd src/$PRG ; eval "$MAKEPROG $MAKEOPTIONS $* $MAKETARGET") || exit 1
+fi
+}
+
+
+#
+# Create top level directories if necessary, then select a parameter set
+# and call the make utility
+#
+compilation()
+{
+if [ "$MACHINE" = "" ] ; then
+   echo "set your MACHINE environment first ..."
+   exit 1
+fi
+MODE="${DEBUGMODE} ${PROFILEMODE}"
+OCEAN=`pwd`
+if [ ! -d $OCEAN/src ] ; then
+   echo "I don't see a source directory $OCEAN/src ..."
+   exit 1
+fi
+if [ ! -d include ] ; then echo mkdir include; mkdir include; fi
+if [ ! -d man ] ; then echo mkdir man; mkdir man; fi
+if [ ! -d man/man1 ] ; then echo mkdir man/man1; mkdir man/man1; fi
+if [ ! -d man/man2 ] ; then echo mkdir man/man2; mkdir man/man2; fi
+if [ ! -d man/man3 ] ; then echo mkdir man/man3; mkdir man/man3; fi
+if [ ! -d man/man4 ] ; then echo mkdir man/man4; mkdir man/man4; fi
+if [ ! -d bin ] ; then echo mkdir bin; mkdir bin; fi
+if [ ! -d bin/$MACHINE ] ; then echo mkdir bin/$MACHINE; mkdir bin/$MACHINE; fi
+if [ ! -d bin/$MACHINE/nelsis$NELSIS_RELEASE ] ; then
+   echo mkdir bin/$MACHINE/nelsis$NELSIS_RELEASE;
+   mkdir bin/$MACHINE/nelsis$NELSIS_RELEASE;
+fi
+if [ ! -d lib ] ; then echo mkdir lib; mkdir lib; fi
+if [ ! -d lib/$MACHINE ] ; then echo mkdir lib/$MACHINE; mkdir lib/$MACHINE; fi
+if [ "$MAKEPARAM" != "" ] ; then
+   doMakes_$MAKEPARAM
+else
+   # check that we really have a shell function named doMakes_$MACHINE
+   # (note: this breaks if ARGV_0 is not an absolute path. Is it always?)
+   our_function=`fgrep doMakes_$MACHINE $ARGV_0`
+   if [ "$our_function" != "" ] ; then
+      doMakes_$MACHINE
+   else
+      case "$MACHINE" in
+        sun4_4)          doMakes_sun4_4;;
+        sun4_5)          doMakes_sun4_5;;
+        HP*|PA-RISC*)    doMakes_hp;;
+        *Linux*)	 doMakes_linux;;
+        apollo*)	 doMakes_apollo_sr10_4;;
+        *) echo
+           echo ----------------------------------------------------------------
+           echo I have no built-in MAKE parameters for your machine
+           echo \"$MACHINE\".  You probably want to add these parameters to the
+           echo script $ARGV_0 \(type buildsrc -h
+           echo for a short instruction on how to do this\).
+	   echo For the time being, I will try a set of default parameters...
+	   echo ----------------------------------------------------------------
+	   doMakes_default;;
+      esac
+   fi
+fi
+}
+
+
+##############################################################################
+#				    M A I N                                  #
+##############################################################################
+
+saveArgs "$@"
+setDefaultOpt
+parseOptions
+
+cd $BUILDDIR
+
+if [ "$BUILDSOURCE" = 1 ] ; then buildSource; fi
+if [ "$COMPILATION" = 1 ] ; then compilation; fi
+
+exit 0
+##############################################################################

@@ -1,0 +1,284 @@
+\subsection{phil.C File Reference}
+\label{phil.C}\index{phil.C@{phil.C}}
+{\tt \#include $<$iostream.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include "plcm.h"}\par
+{\tt \#include "parser\-If.h"}\par
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf INC\_\-FACT}\ 1.3
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf phil} (char $\ast$c\-Name,char $\ast$f\-Name,char $\ast$l\-Name,char $\ast$o\-Name,double , CIRCUIT $\ast$from\-Partitioner, CIRCUIT $\ast$real\-Circuit, {\bf GLOBAL\_\-ROUTING} $\ast$glob\_\-rout)
+\item 
+void {\bf read\-Image\-File} ( void )
+\item 
+{\bf IMAGEDESC}$\ast$ {\bf get\-Image\-Desc} ( void )
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+{\bf Plcm}$\ast$ {\bf plcm}
+\item 
+{\bf Parser\-Interface} {\bf par\-Int}
+\item 
+int {\bf phil\_\-verbose} = 0
+\item 
+int {\bf rand\_\-points} = 1
+\item 
+int {\bf do\-Compresion} = 1
+\item 
+int {\bf set\_\-srand} = 0
+\item 
+int {\bf macro\-Min\-Size} = 100
+\item 
+int {\bf slicing\-Layout} = 1
+\item 
+int {\bf do\-Tran\-Ana} = -1
+\item 
+int {\bf make\-Channels} = 0
+\item 
+int {\bf requested\-Grid\-Points} [$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}
+\item 
+int {\bf expandable\-Direction} = NOTINITIALIZED
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{phil.C_a0}
+\index{phil.C@{phil.C}!INC_FACT@{INC\_\-FACT}}
+\index{INC_FACT@{INC\_\-FACT}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define INC\_\-FACT\ 1.3}\hfill
+
+
+
+Definition at line 32 of file phil.C.
+
+\subsubsection{Function Documentation}
+\label{phil.C_a3}
+\index{phil.C@{phil.C}!getImageDesc@{getImageDesc}}
+\index{getImageDesc@{getImageDesc}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} $\ast$ get\-Image\-Desc (void)}\hfill
+
+
+
+Definition at line 160 of file phil.C.
+
+Referenced by {\bf core\-Cells\-To\-Grid\-Points}(), {\bf expansion\-Grid::expansion\-Grid}(), and {\bf grid\-Points\-To\-Core\-Cells}().\small\begin{verbatim}00163 {
+00164   return parInt.getImageDesc();
+00165 
+00166 }
+\end{verbatim}\normalsize 
+\label{phil.C_a1}
+\index{phil.C@{phil.C}!phil@{phil}}
+\index{phil@{phil}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int phil (char $\ast$ {\em c\-Name}, char $\ast$ {\em f\-Name}, char $\ast$ {\em l\-Name}, char $\ast$ {\em o\-Name}, double {\em magn}, CIRCUIT $\ast$ {\em from\-Partitioner}, CIRCUIT $\ast$ {\em real\-Circuit} = NULL, {\bf GLOBAL\_\-ROUTING} $\ast$ {\em glob\_\-rout} = NULL)}\hfill
+
+
+
+Definition at line 45 of file phil.C.\small\begin{verbatim}00049 {
+00050     
+00051     cout << "\n------ Detailed placement of (" << oName << "(" << cName 
+00052          << "(" << fName << "(" << lName << "))))...\n";
+00053     
+00054     if(doTranAna<0)
+00055       doTranAna=0;
+00056 
+00057     if( doTranAna==1)
+00058     {
+00059       slicingLayout=1;
+00060       doTranAna=1;
+00061       rand_points=1;
+00062     }
+00063 
+00064     
+00065     plcm = new Plcm(cName,fName,lName,
+00066                      parInt.getImageDesc(),
+00067              parInt.getImageMap(),
+00068              oName,
+00069              fromPartitioner,
+00070              (makeChannels==1?glob_rout:NULL),
+00071              Boolean(slicingLayout),
+00072              Boolean(doTranAna),
+00073                      Boolean(phil_verbose),
+00074                      Boolean(rand_points),set_srand,macroMinSize);
+00075 
+00076     cout << "------ Reading input data" << endl;
+00077     
+00078     plcm-> read();    
+00079     
+00080     cout << "------ Creating temporary data structures" << endl;
+00081     
+00082     plcm->prepare();
+00083     
+00084     int done;
+00085 
+00086     do
+00087     {
+00088       cout << "------ Placement plane size : [" << requestedGridPoints[HOR] << ":" 
+00089       << requestedGridPoints[VER] << "]" << endl;
+00090 
+00091       plcm->createPlane(requestedGridPoints[HOR],requestedGridPoints[VER]);
+00092 
+00093       cout << "------ Doing placement " << endl;
+00094 
+00095       done = ! plcm->placement();
+00096 
+00097       if(!done)         // will have to increase the size of the placement
+00098       {             // plane
+00099 
+00100     if(expandableDirection == HOR)
+00101         requestedGridPoints[HOR]=int(INC_FACT*requestedGridPoints[HOR]);
+00102       else
+00103         requestedGridPoints[VER]=int(INC_FACT*requestedGridPoints[VER]);        
+00104     plcm->recover();
+00105       }
+00106     }while(!done);
+00107 
+00108                 // one small detail - let\'s properly set 
+00109                 // the bounding box (it may be smaller than
+00110                 // placement plane size)
+00111 
+00112     plcm->setBbx();
+00113 
+00114   
+00115 
+00116     if(doCompresion>0)
+00117     {
+00118       cout << "------ Compacting  " << endl;    
+00119       plcm->compaction();
+00120 
+00121     }
+00122 
+00123     if(doTranAna)
+00124     {
+00125       cout << "------ Transparencies Analysis. " << endl;
+00126       plcm->doTranspAnalysis();
+00127     }
+00128 
+00129 
+00130 
+00131 #ifdef __MSDOS__
+00132     fclose(stdprn);
+00133     fclose(stdaux);
+00134 #endif
+00135 //    if(!doTranAna)        // it\'\' be passed to the global router
+00136     if (1)
+00137     {               // so don\'t write it yet.
+00138       cout << "------ Writing created layout to database" << endl;
+00139       plcm->write(realCircuit);
+00140     }
+00141     else
+00142       plcm->write(realCircuit,false); // false == do not write
+00143 
+00144     delete plcm;
+00145     
+00146     return 0;
+00147 }
+\end{verbatim}\normalsize 
+\label{phil.C_a2}
+\index{phil.C@{phil.C}!readImageFile@{readImageFile}}
+\index{readImageFile@{readImageFile}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void read\-Image\-File (void)}\hfill
+
+
+
+Definition at line 150 of file phil.C.
+
+Referenced by {\bf madonna}().\small\begin{verbatim}00153 {
+00154   parInt.read();
+00155 
+00156 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Variable Documentation}
+\label{phil.C_a8}
+\index{phil.C@{phil.C}!doCompresion@{doCompresion}}
+\index{doCompresion@{doCompresion}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int do\-Compresion = 1}\hfill
+
+
+
+Definition at line 20 of file phil.C.\label{phil.C_a12}
+\index{phil.C@{phil.C}!doTranAna@{doTranAna}}
+\index{doTranAna@{doTranAna}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int do\-Tran\-Ana = -1}\hfill
+
+
+
+Definition at line 25 of file phil.C.\label{phil.C_a15}
+\index{phil.C@{phil.C}!expandableDirection@{expandableDirection}}
+\index{expandableDirection@{expandableDirection}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expandable\-Direction = NOTINITIALIZED}\hfill
+
+
+
+Definition at line 30 of file phil.C.\label{phil.C_a10}
+\index{phil.C@{phil.C}!macroMinSize@{macroMinSize}}
+\index{macroMinSize@{macroMinSize}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int macro\-Min\-Size = 100}\hfill
+
+
+
+Definition at line 22 of file phil.C.\label{phil.C_a13}
+\index{phil.C@{phil.C}!makeChannels@{makeChannels}}
+\index{makeChannels@{makeChannels}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int make\-Channels = 0}\hfill
+
+
+
+Definition at line 26 of file phil.C.\label{phil.C_a5}
+\index{phil.C@{phil.C}!parInt@{parInt}}
+\index{parInt@{parInt}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Parser\-Interface} par\-Int}\hfill
+
+
+
+Definition at line 15 of file phil.C.\label{phil.C_a6}
+\index{phil.C@{phil.C}!phil_verbose@{phil\_\-verbose}}
+\index{phil_verbose@{phil\_\-verbose}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int phil\_\-verbose = 0}\hfill
+
+
+
+Definition at line 18 of file phil.C.\label{phil.C_a4}
+\index{phil.C@{phil.C}!plcm@{plcm}}
+\index{plcm@{plcm}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Plcm} $\ast$ plcm}\hfill
+
+
+
+Definition at line 14 of file phil.C.\label{phil.C_a7}
+\index{phil.C@{phil.C}!rand_points@{rand\_\-points}}
+\index{rand_points@{rand\_\-points}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int rand\_\-points = 1}\hfill
+
+
+
+Definition at line 19 of file phil.C.\label{phil.C_a14}
+\index{phil.C@{phil.C}!requestedGridPoints@{requestedGridPoints}}
+\index{requestedGridPoints@{requestedGridPoints}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int requested\-Grid\-Points[$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}}\hfill
+
+
+
+Definition at line 28 of file phil.C.\label{phil.C_a9}
+\index{phil.C@{phil.C}!set_srand@{set\_\-srand}}
+\index{set_srand@{set\_\-srand}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int set\_\-srand = 0}\hfill
+
+
+
+Definition at line 21 of file phil.C.\label{phil.C_a11}
+\index{phil.C@{phil.C}!slicingLayout@{slicingLayout}}
+\index{slicingLayout@{slicingLayout}!phil.C@{phil.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int slicing\-Layout = 1}\hfill
+
+
+
+Definition at line 24 of file phil.C.

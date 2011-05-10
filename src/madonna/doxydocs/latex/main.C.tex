@@ -1,0 +1,1141 @@
+\subsection{main.C File Reference}
+\label{main.C}\index{main.C@{main.C}}
+{\tt \#include $<$stdio.h$>$}\par
+{\tt \#include $<$stream.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$sys/types.h$>$}\par
+{\tt \#include $<$sys/times.h$>$}\par
+{\tt \#include $<$unistd.h$>$}\par
+{\tt \#include $<$new.h$>$}\par
+{\tt \#include $<$sea.h$>$}\par
+{\tt \#include $<$genpart.h$>$}\par
+{\tt \#include "sdferrors.h"}\par
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf PRECISION}\ 10
+\item 
+\#define {\bf INITIAL\_\-TEMPERATURE}\ 0.50
+\item 
+\#define {\bf INITIAL\_\-COOLING}\ 0.99
+\item 
+\#define {\bf NOTINITIALIZED}\ -1
+\item 
+\#define {\bf MAXSTR}\ 300
+\item 
+\#define {\bf SDFWRITEALLMASK}\ 0x8000
+\item 
+\#define {\bf MAXSTR}\ 300
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+CIRCUITPTR {\bf madonna} (CIRCUIT $\ast$)
+\item 
+void {\bf mark\-Childs} (CIRCUIT$\ast$)
+\item 
+void {\bf my\_\-new\_\-handler} (void)
+\item 
+void {\bf part\-Write\-All\-Cir} (long ,CIRCUITPTR )
+\item 
+void {\bf part\-Write\-All\-Cir\_\-1} (CIRCUITPTR )
+\item 
+void {\bf part\-Write\-All\-Cir\_\-2} (long,CIRCUITPTR )
+\item 
+int {\bf check\-That\-Circuit\-Looks\-Reasonable} (CIRCUITPTR)
+\item 
+void {\bf printstatisticsinstatusfield} (LAYOUT$\ast$,int,int)
+\item 
+int {\bf main} (int argc,char $\ast$argv[$\,$])
+\item 
+int {\bf costmincut} (int netdistr[$\,$],int numparts)
+\item 
+void {\bf printpartstat} ({\bf TOTALPPTR} total)
+\item 
+char$\ast$ {\bf bname} (char $\ast$s)
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+int {\bf requested\-Grid\-Points} [3] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}
+\item 
+int {\bf expandable\-Direction} = NOTINITIALIZED
+\item 
+char$\ast$ {\bf thedate} = THEDATE
+\item 
+char $\ast$ {\bf thehost} = THEHOST
+\item 
+char$\ast$ {\bf madonna\_\-version} = "3.2"
+\item 
+int {\bf dont\-Check\-Child\-Ports}
+\item 
+int {\bf highnumpart} = 16
+\item 
+int {\bf stopquotient} = 100
+\item 
+int {\bf processid}
+\item 
+int {\bf madonnamakeminiplaza} = TRUE
+\item 
+int {\bf madonnamakepartition} = TRUE
+\item 
+int {\bf permutate\-Clusters\-At\-Exit} = TRUE
+\item 
+int {\bf max\-Number\-Of\-Cluster\-Permutations} = 2
+\item 
+int {\bf madonna\-Allow\-Random\-Moves} = NIL
+\item 
+int {\bf accept\-Candidate\-Even\-If\-Negative\-Gain} = NIL
+\item 
+int {\bf set\_\-srand} = 0
+\item 
+int {\bf phil\_\-verbose} = 0
+\item 
+int {\bf rand\_\-points} = 1
+\item 
+int {\bf do\-Compresion} = 1
+\item 
+double {\bf extraplaza} = 1.0
+\item 
+int {\bf macro\-Min\-Size} = 100
+\item 
+int {\bf slicing\-Layout} = 1
+\item 
+int {\bf do\-Tran\-Ana} = -1
+\item 
+int {\bf make\-Channels} = 0
+\item 
+char$\ast$ {\bf circuit\_\-name} = NIL
+\item 
+char $\ast$ {\bf function\_\-name} = NIL
+\item 
+char $\ast$ {\bf library\_\-name} = NIL
+\item 
+char $\ast$ {\bf layoutname} = NIL
+\item 
+STRING {\bf Route\-Ascii\-File} = NIL
+\item 
+double {\bf initial\_\-temperature} = INITIAL\_\-TEMPERATURE
+\item 
+double {\bf initial\_\-cooling} = INITIAL\_\-COOLING
+\item 
+filebuf {\bf Route\-Ascii\-Stream\-Buf}
+\item 
+char {\bf strng} [1+MAXSTR]
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{main.C_a2}
+\index{main.C@{main.C}!INITIAL_COOLING@{INITIAL\_\-COOLING}}
+\index{INITIAL_COOLING@{INITIAL\_\-COOLING}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define INITIAL\_\-COOLING\ 0.99}\hfill
+
+
+
+Definition at line 26 of file main.C.\label{main.C_a1}
+\index{main.C@{main.C}!INITIAL_TEMPERATURE@{INITIAL\_\-TEMPERATURE}}
+\index{INITIAL_TEMPERATURE@{INITIAL\_\-TEMPERATURE}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define INITIAL\_\-TEMPERATURE\ 0.50}\hfill
+
+
+
+Definition at line 25 of file main.C.\label{main.C_a6}
+\index{main.C@{main.C}!MAXSTR@{MAXSTR}}
+\index{MAXSTR@{MAXSTR}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAXSTR\ 300}\hfill
+
+
+
+Definition at line 615 of file main.C.\label{main.C_a4}
+\index{main.C@{main.C}!MAXSTR@{MAXSTR}}
+\index{MAXSTR@{MAXSTR}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAXSTR\ 300}\hfill
+
+
+
+Definition at line 615 of file main.C.\label{main.C_a3}
+\index{main.C@{main.C}!NOTINITIALIZED@{NOTINITIALIZED}}
+\index{NOTINITIALIZED@{NOTINITIALIZED}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define NOTINITIALIZED\ -1}\hfill
+
+
+
+Definition at line 43 of file main.C.\label{main.C_a0}
+\index{main.C@{main.C}!PRECISION@{PRECISION}}
+\index{PRECISION@{PRECISION}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define PRECISION\ 10}\hfill
+
+
+
+Definition at line 24 of file main.C.\label{main.C_a5}
+\index{main.C@{main.C}!SDFWRITEALLMASK@{SDFWRITEALLMASK}}
+\index{SDFWRITEALLMASK@{SDFWRITEALLMASK}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define SDFWRITEALLMASK\ 0x8000}\hfill
+
+
+
+Definition at line 573 of file main.C.
+
+\subsubsection{Function Documentation}
+\label{main.C_a18}
+\index{main.C@{main.C}!bname@{bname}}
+\index{bname@{bname}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ bname (char $\ast$ {\em s})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 670 of file main.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00671 {
+00672 char *p = strrchr(s,'/');
+00673 if (p)
+00674    return p+1;
+00675 else
+00676    return s;
+00677 }
+\end{verbatim}\normalsize 
+\label{main.C_a13}
+\index{main.C@{main.C}!checkThatCircuitLooksReasonable@{checkThatCircuitLooksReasonable}}
+\index{checkThatCircuitLooksReasonable@{checkThatCircuitLooksReasonable}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int check\-That\-Circuit\-Looks\-Reasonable (CIRCUITPTR {\em thecircuit})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 683 of file main.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00684 {
+00685    int numInst = 0;
+00686    int numTrans = 0;
+00687    STRING nenhStr = cs("nenh");
+00688    STRING penhStr = cs("penh");
+00689    STRING capStr = cs("cap");
+00690    STRING resStr = cs("res");
+00691 
+00692    for (CIRINSTPTR cinst=thecircuit->cirinst; cinst!=NIL; cinst=cinst->next)
+00693    {
+00694       if (cinst->circuit->name == nenhStr || cinst->circuit->name == penhStr ||
+00695       cinst->circuit->name == capStr || cinst->circuit->name == resStr)
+00696      numTrans += 1;
+00697       numInst += 1;
+00698    }
+00699    fs(nenhStr);
+00700    fs(penhStr);
+00701    fs(capStr);
+00702    fs(resStr);
+00703    if (double(numTrans)/numInst > 0.5)
+00704       return NIL;       // too much transistors...
+00705    return TRUE;  
+00706 }
+\end{verbatim}\normalsize 
+\label{main.C_a16}
+\index{main.C@{main.C}!costmincut@{costmincut}}
+\index{costmincut@{costmincut}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int costmincut (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+
+
+Definition at line 643 of file main.C.\small\begin{verbatim}00644 {
+00645 int cost=0;
+00646 
+00647 if (numparts!=2)
+00648    {
+00649    fprintf(stderr,"costmincut: cannot compute cost for %1d partitions!\n",numparts);
+00650    dumpcore();
+00651    }
+00652 if (netdistr[0]>0 && netdistr[1]>0)
+00653    cost=1;
+00654 return(cost);
+00655 }
+\end{verbatim}\normalsize 
+\label{main.C_a7}
+\index{main.C@{main.C}!madonna@{madonna}}
+\index{madonna@{madonna}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUITPTR madonna (CIRCUIT $\ast$ {\em circuit})}\hfill
+
+
+
+Definition at line 76 of file madonna.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00077 {
+00078    TOTALPPTR    total=NIL;
+00079    FUNCTIONPTR  savethisfun=thisfun;
+00080    CIRCUITPTR   savethiscir=thiscir,thecircuit,bestcircuit;
+00081    LAYOUTPTR    savethislay=thislay;
+00082    LIBRARYPTR   savethislib=thislib;
+00083    
+00084    initnetcostinfo();
+00085 
+00086    readImageFile();         // Here we call the parser to read all 
+00087                                     // the stuff about image
+00088    
+00089    printNetlistStatistics(circuit);
+00090 
+00091    if (madonnamakepartition)
+00092    {
+00093       madonna_(&total,circuit,1);
+00094 
+00095 #ifdef __MSDOS__
+00096       cerr << "\nAvailable memory: " << coreleft() << "\n\n";
+00097 #endif
+00098 
+00099       bestcircuit=(total ? total->bestpart : NIL);
+00100    }
+00101    else
+00102       bestcircuit=NIL;
+00103 
+00104    if (total==NIL || total->bestpart==NIL)
+00105       thecircuit=circuit;
+00106    else
+00107       thecircuit=total->bestpart;
+00108    if (madonnamakeminiplaza )
+00109    {
+00110 
+00111       if(! madonnamakepartition )
+00112       {
+00113      phil(circuit_name,function_name,library_name,
+00114           layoutname,extraplaza,NULL,NULL,NULL);
+00115       }
+00116       else
+00117       {
+00118      if (total != NIL && total->nx >= 1 && total->ny >= 1)
+00119      {
+00120         // ...and now for the global routing:
+00121         expansionGrid globgrid(total); // create global grid and globl nets
+00122         globgrid.routeGlobNets();      // route the nets
+00123 
+00124         phil(circuit_name,function_name,library_name,layoutname,
+00125          extraplaza,thecircuit,savethiscir,total->routing);
+00126      }
+00127      else
+00128      {
+00129         // nothing to do for the global router ...
+00130         phil(circuit_name,function_name,library_name,layoutname,
+00131          extraplaza,thecircuit,savethiscir,NIL);
+00132      }
+00133       }
+00134 #ifdef __MSDOS__
+00135       cerr << "\nAvailable memory: " << coreleft() << "\n\n";
+00136 #endif
+00137    }
+00138    thislay=savethislay; thiscir=savethiscir;
+00139    thisfun=savethisfun; thislib=savethislib;
+00140    
+00141    return bestcircuit;
+00142 }
+\end{verbatim}\normalsize 
+\label{main.C_a15}
+\index{main.C@{main.C}!main@{main}}
+\index{main@{main}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, char $\ast$ {\em argv}[$\,$])}\hfill
+
+
+
+Definition at line 114 of file main.C.\small\begin{verbatim}00115 {
+00116    
+00117    extern int  optind;
+00118    extern char *optarg;
+00119    int         i,readonlythisthing=NIL,doflattenfirst=NIL,
+00120    doflattenonly=NIL,checkNetlistFirst=TRUE;
+00121    
+00122    CIRCUITPTR  madonnapartitionedcircuit;
+00123    
+00124    CIRCUITPTR  thecircuit;
+00125    
+00126    
+00127 #ifdef __MSDOS__
+00128    
+00129    fnsplit(argv[0],drive,dir,file,ext);
+00130    
+00131 #endif
+00132    
+00133    setvbuf(stdout,NULL,_IOLBF,NULL);
+00134    setvbuf(stderr,NULL,_IOLBF,NULL);
+00135    printf("\nMadonna version %s (compiled %s on \"%s\")\n\n",
+00136       madonna_version,thedate,thehost);
+00137 
+00138    set_new_handler(&my_new_handler); // type message if operator new() fails
+00139 
+00140    /* Parse options */
+00141    while ((i=getopt(argc,argv,
+00142             "l:f:c:S:haAbrtT:viuj:s:d:q:o:mMpP:kLe:x:y:gwW:n:R:C")) != EOF)
+00143    {
+00144       switch (i)
+00145       {
+00146       case 'h':   /* print help */
+00147      fprintf(stdout,"usage: %s [..options..] [circuit_name]\n",
+00148 #ifdef __MSDOS__
+00149          file
+00150 #else
+00151          argv[0]
+00152 #endif
+00153          );
+00154      printf
+00155         ("options:\n"
+00156          "-x<size> preferred width of the placement in gridpoints\n"
+00157          "-y<size> preferred heigth of the placement in gridpoints\n"
+00158          "-e<dir>  where <dir> is either 'x' or 'y': direction to grow\n"
+00159          "-c<name> the circuit name\n"
+00160          "-f<name> the function name\n"
+00161          "-l<name> the library name\n"
+00162          "-o<layoutname> name of output (default Madonna/Prince)\n"
+00163          "-p do not exhaustively permutate the partitions at exit\n"
+00164          "-P<num> permutate at most <num> times the partitions\n"
+00165          "-S<size> set minimal \"huge\" cell size, default 100 b.c.\n"
+00166          "-M never treat cells as \"huge\" \n"
+00167          "-q set stop quotient (default 100)\n"
+00168          "-v debugging mode for detailed placement\n"
+00169          "-a not random point selection in detailed placement\n"
+00170          "-b do not do compaction after detailed placement\n"
+00171          "-j<number> positive value to initialize random generator\n"
+00172          "-g do not check that at most 50%% of the instances are transistors\n"
+00173          "-R<fname> set file name for ascii dump of global routes\n"
+00174          "-L create flat layout instead of slicing structure\n" 
+00175          "-T<num> num==0 don't do transparency analysis,num==1 do it.\n"  
+00176          "-C allocate place for channels before placement (default off).\n"
+00177          "-w allow random moves\n"
+00178          "-W<temp> start with <temp> percent random moves (def=%1.2f)\n"
+00179          "-d<numparts> don't partition beyond numparts\n"
+00180          "-r only read circuit, then exit\n"
+00181          "-m do not make miniplaza\n"
+00182          "-n<cool> multiply <temp> by <cool> after each random move (def=%1.2f)\n"
+00183          "-s<size> set initial plaza magnification, default is 2.0\n"
+00184          "-t flatten before partitioning\n"
+00185          "-u only  flatten circuit, no partitioning.\n"
+00186          "-k do not lock the Seadif database while running madonna\n",
+00187          (float)initial_temperature,(float)initial_cooling);
+00188      exit(0);
+00189      break;
+00190       case 'c':   /* circuit name */
+00191      circuit_name = cs(optarg);
+00192      break;
+00193       case 'f':   /* function name */
+00194      function_name = cs(optarg);
+00195      break;
+00196       case 'j':   /* random gen seed*/
+00197      set_srand = atoi(optarg);
+00198      break;
+00199       case 'a':   /* detailed placement random or sequential */
+00200      rand_points = 0;
+00201      break;
+00202       case 'b':   /* do not do compaction after placement */
+00203      doCompresion = 0;
+00204      break;
+00205       case 'l':   /* library name */
+00206      library_name = cs(optarg);
+00207      break;
+00208       case 'k':
+00209          {extern int sdfmakelockfiles; sdfmakelockfiles=NIL;}
+00210      break;
+00211       case 'r':
+00212      readonlythisthing=TRUE;
+00213      break;
+00214       case 'R': // set file name for ascii dump of global routes
+00215      RouteAsciiFile = cs(optarg);
+00216      break;
+00217       case 'm':
+00218      madonnamakeminiplaza=NIL;
+00219      break;
+00220       case 'p':
+00221      permutateClustersAtExit = NIL;
+00222      break;
+00223       case 'P':
+00224      maxNumberOfClusterPermutations = atoi(optarg);
+00225      break;
+00226       case 'L':
+00227      slicingLayout=0;
+00228      break;
+00229       case 'T':
+00230      doTranAna = atoi(optarg);
+00231      break;
+00232       case 'C':
+00233          makeChannels=1;
+00234      break;
+00235       case 't':
+00236      doflattenfirst=TRUE;
+00237      break;
+00238       case 'v':
+00239      phil_verbose=TRUE;
+00240      break;
+00241       case 'u':
+00242      doflattenonly=TRUE;
+00243      break;
+00244       case 's':
+00245      extraplaza=atof(optarg);
+00246      break;
+00247       case 'S':
+00248      macroMinSize=atoi(optarg);
+00249      break;
+00250       case 'M':
+00251      macroMinSize=MAXINT;
+00252      break;
+00253       case 'q':
+00254      stopquotient=atoi(optarg);
+00255      break;
+00256       case 'd':
+00257      highnumpart=atoi(optarg);
+00258      break;
+00259       case 'o':
+00260      layoutname = cs(optarg);
+00261      break;
+00262       case 'g':
+00263      checkNetlistFirst = NIL;
+00264      break;
+00265       case 'x':   /* requestedGridPoints[HOR]; */
+00266          if ((requestedGridPoints[HOR] = atoi(optarg)) <= 0)
+00267      {
+00268         printf("option '-x' requires a positive integer\n");
+00269         exit(1);
+00270      }
+00271          break;
+00272       case 'y':   /* requestedGridPoints[VER]; */
+00273          if ((requestedGridPoints[VER] = atoi(optarg)) <= 0)
+00274      {
+00275         printf("option '-y' requires a positive integer\n");
+00276         exit(1);
+00277      }
+00278          break;
+00279       case 'e':   /* expandable direction */
+00280      switch (optarg[0])
+00281      {
+00282      case 'x':
+00283      case 'X':
+00284         expandableDirection = HOR;
+00285         break;
+00286      case 'y':
+00287      case 'Y':
+00288         expandableDirection = VER;
+00289         break;
+00290      default:
+00291         cout << "illegal argument to -e option, must be 'x' or 'y'...\n";
+00292         exit(1);
+00293         break;
+00294      }
+00295      break;
+00296       case 'w': /* allow random moves */
+00297      madonnaAllowRandomMoves = TRUE;
+00298      break;
+00299       case 'W': /* starting temperature, must be in range [0..1] */
+00300      madonnaAllowRandomMoves = TRUE;
+00301      initial_temperature = atof(optarg);
+00302      if (initial_temperature < 0.0 || initial_temperature > 1.0)
+00303      {
+00304         fprintf(stderr,"initial temperature must be in range [0..1]\n");
+00305         exit(1);
+00306      }
+00307      break;
+00308       case 'n': /* cooling speed, must be in range [0..1] */
+00309      madonnaAllowRandomMoves = TRUE;
+00310      initial_cooling = atof(optarg);
+00311      if (initial_cooling < 0.0 || initial_cooling > 1.0)
+00312      {
+00313         fprintf(stderr,"initial cooling must be in range [0..1]\n");
+00314         exit(1);
+00315      }
+00316      break;
+00317       case 'A':
+00318      acceptCandidateEvenIfNegativeGain = TRUE;
+00319      break;
+00320       case '?':
+00321      fprintf(stderr,"\nIllegal argument.\n\n");
+00322      exit(1);
+00323      break;
+00324       default:
+00325      break;
+00326       }
+00327    }
+00328    
+00329    initsignals();
+00330 
+00331    if (expandableDirection == NOTINITIALIZED)
+00332    {
+00333       // grow vertically by default...:
+00334       expandableDirection = VER;
+00335    }
+00336 
+00337   
+00338 #if 0
+00339    // only compact the layout if did not ask for a box of a certain size:
+00340    if (requestedGridPoints[HOR] != NOTINITIALIZED &&
+00341        requestedGridPoints[VER] != NOTINITIALIZED )
+00342       doCompresion = 0;
+00343 #endif
+00344 
+00345    if(doTranAna == 1)
+00346    {
+00347      slicingLayout=1;
+00348      rand_points=0;
+00349      makeChannels=0;
+00350    }
+00351 
+00352    if(makeChannels)
+00353      doTranAna=0;
+00354 
+00355    if (circuit_name == NIL)
+00356       if (optind == argc - 1)
+00357      circuit_name = cs(argv[optind]);
+00358       else
+00359       {
+00360      cout << "please specify a circuit name ...\n";
+00361      exit(1);
+00362       }
+00363 
+00364    dontCheckChildPorts = 1;
+00365 
+00366    if (function_name == NIL)
+00367       function_name = cs(circuit_name);
+00368 
+00369    if (library_name == NIL)
+00370    {
+00371       if (sdfgetcwd()==NIL)
+00372       {
+00373      cout << "I cannot figure what's the current working directory...\n";
+00374      exit(1);
+00375       }
+00376       library_name = cs(bname(sdfgetcwd()));
+00377    }
+00378 
+00379    if ((i = sdfopen()) != SDF_NOERROR)
+00380    {
+00381       if (i == SDFERROR_FILELOCK)
+00382       {
+00383      cerr <<
+00384         "ERROR: The seadif database is locked by another program.\n"
+00385         "       Try again later, because only one program at the time\n"
+00386         "       can access it. If you are sure that nobody else is\n"
+00387         "       working on the database, you can remove the lockfiles.\n";
+00388       }
+00389       else
+00390      cerr << "ERROR: cannot open seadif database.\n";
+00391       sdfexit(i);
+00392    }
+00393 
+00394    if (RouteAsciiFile != NIL)
+00395       if (RouteAsciiStreamBuf.open(RouteAsciiFile, output) == 0)
+00396       {
+00397      cerr << "WARNING: cannot open file \"" << RouteAsciiFile
+00398           << "\" to dump global routes on. (ignored)\n\n" << flush;
+00399      RouteAsciiFile = NIL;
+00400       }
+00401 
+00402    fprintf(stdout,"reading circuit \"%s(%s(%s))\" ...",
+00403        circuit_name,function_name,library_name);
+00404    fflush(stdout);
+00405    if(sdfreadallcir(SDFCIRNETLIST+SDFCIRSTAT, circuit_name, function_name, library_name)==NIL)
+00406    {
+00407       fprintf(stdout,"\nERROR: apparently your cell \"%s(%s(%s))\" is out to lunch...\n",
+00408           circuit_name, function_name, library_name);
+00409       sdfexit(1);
+00410    }
+00411    fprintf(stdout,"done\n");
+00412    if (thiscir->cirinst==NIL)
+00413    {
+00414       fprintf(stdout,"\nERROR: no instances found...\n");
+00415       sdfexit(1);
+00416    }
+00417    if (readonlythisthing)
+00418       sdfexit(0);
+00419    thecircuit=thiscir;
+00420    
+00421    if (madonnamakepartition)
+00422       markChilds(thiscir);
+00423    
+00424    if (doflattenfirst || doflattenonly)
+00425       sdfflatcir(thecircuit);
+00426    if (doflattenonly)
+00427    {
+00428       /* append "_f" to circuit name */
+00429       char tmpstr[MAXSTR+1];
+00430       strncpy(tmpstr,thecircuit->name,MAXSTR); strncat(tmpstr,"_f",MAXSTR);
+00431       fs(thecircuit->name); thecircuit->name=cs(tmpstr);
+00432       sdfwritecir(SDFCIRALL,thecircuit);
+00433       sdfclose();
+00434       sdfexit(0);
+00435    }
+00436 
+00437    if (checkNetlistFirst)
+00438       if (checkThatCircuitLooksReasonable(thecircuit) == NIL)
+00439       {
+00440      fprintf(stdout,
+00441          "ERROR: your netlist contains too much transistors and/or\n"
+00442          "       capacitors to my taste (> 50%%). I assume it is not\n"
+00443          "       your intention to place this circuit. Use -g option\n"
+00444          "       to enforce placement of this strange circuit...\n");
+00445      sdfexit(SDFERROR_MADONNA_FAILED);
+00446       }
+00447 
+00448    time_t     totaltime1,totaltime2;
+00449    int        seconds;
+00450    long       clock_ticks_per_second=100; /* 100 on hp9k835 */
+00451 #ifndef __MSDOS__
+00452    struct tms tmsbuf;
+00453 #else
+00454    time_t tms;
+00455 #endif
+00456    
+00457 #ifndef __MSDOS__
+00458    times(&tmsbuf);
+00459    totaltime1=tmsbuf.tms_utime+tmsbuf.tms_stime+tmsbuf.tms_cutime+tmsbuf.tms_cstime;
+00460 #else
+00461    tms=time(NULL);
+00462 #endif
+00463    
+00464    fprintf(stdout,"\nKissing madonna hello...\n");
+00465    madonnapartitionedcircuit=madonna(thecircuit);
+00466    fprintf(stdout,"Kissing madonna good bye...\n");
+00467 #ifndef __MSDOS__
+00468    times(&tmsbuf);
+00469    totaltime2=tmsbuf.tms_utime+tmsbuf.tms_stime+tmsbuf.tms_cutime+tmsbuf.tms_cstime;
+00470    
+00471    /* clock_ticks_per_second=sysconf(_SC_CLK_TCK);*/
+00472    seconds=int((PRECISION*(totaltime2-totaltime1))/clock_ticks_per_second);
+00473    fprintf(stdout,"\nMadonna took %1d.%1d seconds of your cpu\n",
+00474        seconds/PRECISION,seconds%PRECISION);
+00475    if (madonnamakeminiplaza)
+00476       printstatisticsinstatusfield(thecircuit->layout,seconds/PRECISION,highnumpart);
+00477    
+00478 #else
+00479    seconds=time(NULL)-tms;
+00480    fprintf(stdout,"\nMadonna took %d seconds of your cpu\n",
+00481        seconds);
+00482    if (madonnamakeminiplaza)
+00483       printstatisticsinstatusfield(thecircuit->layout,seconds,highnumpart);
+00484    
+00485 #endif
+00486    
+00487    if (madonnamakepartition && !madonnamakeminiplaza && madonnapartitionedcircuit!=NIL)
+00488    {
+00489       fprintf(stdout,"writing circuit \"%s(%s(%s))\"\n",
+00490           madonnapartitionedcircuit->name,madonnapartitionedcircuit->function->name,
+00491           madonnapartitionedcircuit->function->library->name);
+00492       partWriteAllCir(SDFCIRALL,madonnapartitionedcircuit);
+00493    }
+00494    
+00495    
+00496    /*
+00497       
+00498       if (thecircuit->layout!=NIL)
+00499       {
+00500      if (layoutname!=NIL)
+00501      {
+00502         fs(thecircuit->layout->name);
+00503         thecircuit->layout->name=cs(layoutname);
+00504      }
+00505      fprintf(stdout,"writing layout \"%s(%s(%s(%s)))\"\n",
+00506          thecircuit->layout->name,thecircuit->name,thecircuit->function->name,
+00507          thecircuit->function->library->name);
+00508      sdfwritealllay(SDFLAYALL,thecircuit->layout);
+00509       }
+00510    */
+00511    
+00512    
+00513    sdfclose();
+00514 
+00515    if (RouteAsciiFile != NIL)
+00516       RouteAsciiStreamBuf.close();
+00517      
+00518    exit(SDF_NOERROR);
+00519    return(SDF_NOERROR);
+00520 }
+\end{verbatim}\normalsize 
+\label{main.C_a8}
+\index{main.C@{main.C}!markChilds@{markChilds}}
+\index{markChilds@{markChilds}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mark\-Childs (CIRCUIT $\ast$ {\em c\-Ptr})}\hfill
+
+
+
+Definition at line 523 of file main.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00527 {
+00528   char *keyName=",mad_prim";
+00529   STATUS *stat;
+00530 
+00531   for(CIRINST *ciPtr=cPtr->cirinst;ciPtr != NULL;ciPtr=ciPtr->next)
+00532   {
+00533     CIRCUIT *cur = ciPtr->circuit;
+00534 
+00535     if (cur == NULL)
+00536     {
+00537       fprintf(stderr,
+00538         "\n ill formed circuit instance %s \n, quitting ... \n\n",
+00539         ciPtr->name);
+00540       sdfexit(1);
+00541     }
+00542     if (cur->status == NULL)
+00543     {
+00544       NewStatus(stat);
+00545       cur->status=stat;
+00546       stat->timestamp=0;
+00547       stat->author=cs("Madonna");
+00548       stat->program=cs("");
+00549     }
+00550     if ( strstr(cur->status->program,keyName) ==NULL )
+00551       // we have to append it
+00552     {
+00553       char buf[200];
+00554 
+00555       buf[0]='\0';
+00556       strncat(buf,cur->status->program,200);
+00557       strncat(buf,keyName,200);
+00558       fs(cur->status->program);
+00559       cur->status->program=cs(buf);
+00560     }
+00561 
+00562   }
+00563 }
+\end{verbatim}\normalsize 
+\label{main.C_a9}
+\index{main.C@{main.C}!my_new_handler@{my\_\-new\_\-handler}}
+\index{my_new_handler@{my\_\-new\_\-handler}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void my\_\-new\_\-handler (void)\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 710 of file main.C.\small\begin{verbatim}00711 {
+00712    cerr << "\n"
+00713     << "FATAL: I cannot allocate enough memory." << endl
+00714     << "       Ask your sysop to configure more swap space ..." << endl;
+00715    sdfexit(1);
+00716 }
+\end{verbatim}\normalsize 
+\label{main.C_a10}
+\index{main.C@{main.C}!partWriteAllCir@{partWriteAllCir}}
+\index{partWriteAllCir@{partWriteAllCir}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void part\-Write\-All\-Cir (long {\em what}, CIRCUITPTR {\em cir})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 575 of file main.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00576 {
+00577 partWriteAllCir_1(cir);      /* initialize flag bits */
+00578 partWriteAllCir_2(what,cir);   /* perform the write */
+00579 }
+\end{verbatim}\normalsize 
+\label{main.C_a11}
+\index{main.C@{main.C}!partWriteAllCir_1@{partWriteAllCir\_\-1}}
+\index{partWriteAllCir_1@{partWriteAllCir\_\-1}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void part\-Write\-All\-Cir\_\-1 (CIRCUITPTR {\em cir})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 582 of file main.C.
+
+Referenced by {\bf part\-Write\-All\-Cir}().\small\begin{verbatim}00583 {
+00584 CIRINSTPTR  ci;
+00585 
+00586 if (cir->status!=NIL && issubstring(cir->status->program,"mad_prim"))
+00587    cir->flag.l |= SDFWRITEALLMASK; /* do not write it to database */
+00588 else
+00589    {
+00590    cir->flag.l &= ~SDFWRITEALLMASK; /* clear bit 'written' */
+00591    for (ci=cir->cirinst; ci!=0; ci=ci->next)
+00592       partWriteAllCir_1(ci->circuit);
+00593    }
+00594 }
+\end{verbatim}\normalsize 
+\label{main.C_a12}
+\index{main.C@{main.C}!partWriteAllCir_2@{partWriteAllCir\_\-2}}
+\index{partWriteAllCir_2@{partWriteAllCir\_\-2}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void part\-Write\-All\-Cir\_\-2 (long {\em what}, CIRCUITPTR {\em cir})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 597 of file main.C.
+
+Referenced by {\bf part\-Write\-All\-Cir}().\small\begin{verbatim}00598 {
+00599 CIRINSTPTR ci;
+00600 
+00601 if (cir->flag.l & SDFWRITEALLMASK)
+00602    return;        /* mad_prim or already wrote this one */
+00603 what &= SDFCIRALL;
+00604 if (!sdfwritecir(what,cir))
+00605    err(7,"sdfwriteallcir_2: cannot write circuit");
+00606 cir->flag.l |= SDFWRITEALLMASK;   /* mark as 'written' */
+00607 for (ci=cir->cirinst; ci!=0; ci=ci->next)
+00608    partWriteAllCir_2(what,ci->circuit);
+00609 }
+\end{verbatim}\normalsize 
+\label{main.C_a17}
+\index{main.C@{main.C}!printpartstat@{printpartstat}}
+\index{printpartstat@{printpartstat}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printpartstat ({\bf TOTALPPTR} {\em total})}\hfill
+
+
+
+Definition at line 659 of file main.C.\small\begin{verbatim}00660 {
+00661 fprintf(stdout,"\n(genpart (%s(%s(%s)))",total->topcell->name,
+00662   total->topcell->function->name,total->topcell->function->library->name);
+00663 fprintf(stdout,"\n    (numparts %1d) (strtnetcost %1d) (bestnetcost %1d)",
+00664   total->numparts,total->strtnetcost,total->bestnetcost);
+00665 fprintf(stdout,"\n    (nmoves %1d) (area %1d)",total->nmoves,total->area);
+00666 fprintf(stdout,")\n\n");
+00667 }
+\end{verbatim}\normalsize 
+\label{main.C_a14}
+\index{main.C@{main.C}!printstatisticsinstatusfield@{printstatisticsinstatusfield}}
+\index{printstatisticsinstatusfield@{printstatisticsinstatusfield}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printstatisticsinstatusfield (LAYOUT $\ast$ {\em layout}, int {\em cputime}, int {\em numparts})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 619 of file main.C.
+
+Referenced by {\bf main}().\small\begin{verbatim}00621 {
+00622 STATUSPTR  status;
+00623 
+00624 if (layout==NIL)
+00625    return;
+00626 status=layout->status;
+00627 if (status==NIL)
+00628    {
+00629    NewStatus(status);
+00630    layout->status=status;
+00631    }
+00632 sprintf(strng,"cputime=%1ds,numparts=%1d,pid=%1d",cputime,numparts,processid);
+00633 if (status->program!=NIL)
+00634    { /* already some status information. don't destroy. */
+00635    strncat(strng,"; ",MAXSTR);
+00636    strncat(strng,status->program,MAXSTR);
+00637    fs(status->program);
+00638    }
+00639 status->program=cs(strng);
+00640 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Variable Documentation}
+\label{main.C_a47}
+\index{main.C@{main.C}!RouteAsciiFile@{RouteAsciiFile}}
+\index{RouteAsciiFile@{RouteAsciiFile}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}STRING Route\-Ascii\-File = NIL}\hfill
+
+
+
+Definition at line 103 of file main.C.\label{main.C_a50}
+\index{main.C@{main.C}!RouteAsciiStreamBuf@{RouteAsciiStreamBuf}}
+\index{RouteAsciiStreamBuf@{RouteAsciiStreamBuf}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}filebuf Route\-Ascii\-Stream\-Buf}\hfill
+
+
+
+Definition at line 108 of file main.C.\label{main.C_a33}
+\index{main.C@{main.C}!acceptCandidateEvenIfNegativeGain@{acceptCandidateEvenIfNegativeGain}}
+\index{acceptCandidateEvenIfNegativeGain@{acceptCandidateEvenIfNegativeGain}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int accept\-Candidate\-Even\-If\-Negative\-Gain = NIL}\hfill
+
+
+
+Definition at line 86 of file main.C.\label{main.C_a43}
+\index{main.C@{main.C}!circuit_name@{circuit\_\-name}}
+\index{circuit_name@{circuit\_\-name}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ circuit\_\-name = NIL}\hfill
+
+
+
+Definition at line 98 of file main.C.\label{main.C_a37}
+\index{main.C@{main.C}!doCompresion@{doCompresion}}
+\index{doCompresion@{doCompresion}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int do\-Compresion = 1}\hfill
+
+
+
+Definition at line 90 of file main.C.\label{main.C_a41}
+\index{main.C@{main.C}!doTranAna@{doTranAna}}
+\index{doTranAna@{doTranAna}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int do\-Tran\-Ana = -1}\hfill
+
+
+
+Definition at line 94 of file main.C.\label{main.C_a24}
+\index{main.C@{main.C}!dontCheckChildPorts@{dontCheckChildPorts}}
+\index{dontCheckChildPorts@{dontCheckChildPorts}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int dont\-Check\-Child\-Ports}\hfill
+
+
+
+Definition at line 72 of file main.C.\label{main.C_a20}
+\index{main.C@{main.C}!expandableDirection@{expandableDirection}}
+\index{expandableDirection@{expandableDirection}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expandable\-Direction = NOTINITIALIZED}\hfill
+
+
+
+Definition at line 46 of file main.C.\label{main.C_a38}
+\index{main.C@{main.C}!extraplaza@{extraplaza}}
+\index{extraplaza@{extraplaza}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double extraplaza = 1.0}\hfill
+
+
+
+Definition at line 91 of file main.C.\label{main.C_a44}
+\index{main.C@{main.C}!function_name@{function\_\-name}}
+\index{function_name@{function\_\-name}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ function\_\-name = NIL}\hfill
+
+
+
+Definition at line 99 of file main.C.\label{main.C_a25}
+\index{main.C@{main.C}!highnumpart@{highnumpart}}
+\index{highnumpart@{highnumpart}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int highnumpart = 16}\hfill
+
+
+
+Definition at line 77 of file main.C.\label{main.C_a49}
+\index{main.C@{main.C}!initial_cooling@{initial\_\-cooling}}
+\index{initial_cooling@{initial\_\-cooling}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double initial\_\-cooling = INITIAL\_\-COOLING}\hfill
+
+
+
+Definition at line 106 of file main.C.\label{main.C_a48}
+\index{main.C@{main.C}!initial_temperature@{initial\_\-temperature}}
+\index{initial_temperature@{initial\_\-temperature}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double initial\_\-temperature = INITIAL\_\-TEMPERATURE}\hfill
+
+
+
+Definition at line 105 of file main.C.\label{main.C_a46}
+\index{main.C@{main.C}!layoutname@{layoutname}}
+\index{layoutname@{layoutname}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ layoutname = NIL}\hfill
+
+
+
+Definition at line 101 of file main.C.\label{main.C_a45}
+\index{main.C@{main.C}!library_name@{library\_\-name}}
+\index{library_name@{library\_\-name}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ library\_\-name = NIL}\hfill
+
+
+
+Definition at line 100 of file main.C.\label{main.C_a39}
+\index{main.C@{main.C}!macroMinSize@{macroMinSize}}
+\index{macroMinSize@{macroMinSize}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int macro\-Min\-Size = 100}\hfill
+
+
+
+Definition at line 92 of file main.C.\label{main.C_a32}
+\index{main.C@{main.C}!madonnaAllowRandomMoves@{madonnaAllowRandomMoves}}
+\index{madonnaAllowRandomMoves@{madonnaAllowRandomMoves}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int madonna\-Allow\-Random\-Moves = NIL}\hfill
+
+
+
+Definition at line 85 of file main.C.\label{main.C_a23}
+\index{main.C@{main.C}!madonna_version@{madonna\_\-version}}
+\index{madonna_version@{madonna\_\-version}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ madonna\_\-version = "3.2"}\hfill
+
+
+
+Definition at line 70 of file main.C.\label{main.C_a28}
+\index{main.C@{main.C}!madonnamakeminiplaza@{madonnamakeminiplaza}}
+\index{madonnamakeminiplaza@{madonnamakeminiplaza}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int madonnamakeminiplaza = TRUE}\hfill
+
+
+
+Definition at line 81 of file main.C.\label{main.C_a29}
+\index{main.C@{main.C}!madonnamakepartition@{madonnamakepartition}}
+\index{madonnamakepartition@{madonnamakepartition}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int madonnamakepartition = TRUE}\hfill
+
+
+
+Definition at line 82 of file main.C.\label{main.C_a42}
+\index{main.C@{main.C}!makeChannels@{makeChannels}}
+\index{makeChannels@{makeChannels}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int make\-Channels = 0}\hfill
+
+
+
+Definition at line 95 of file main.C.\label{main.C_a31}
+\index{main.C@{main.C}!maxNumberOfClusterPermutations@{maxNumberOfClusterPermutations}}
+\index{maxNumberOfClusterPermutations@{maxNumberOfClusterPermutations}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int max\-Number\-Of\-Cluster\-Permutations = 2}\hfill
+
+
+
+Definition at line 84 of file main.C.\label{main.C_a30}
+\index{main.C@{main.C}!permutateClustersAtExit@{permutateClustersAtExit}}
+\index{permutateClustersAtExit@{permutateClustersAtExit}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int permutate\-Clusters\-At\-Exit = TRUE}\hfill
+
+
+
+Definition at line 83 of file main.C.\label{main.C_a35}
+\index{main.C@{main.C}!phil_verbose@{phil\_\-verbose}}
+\index{phil_verbose@{phil\_\-verbose}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int phil\_\-verbose = 0}\hfill
+
+
+
+Definition at line 88 of file main.C.\label{main.C_a27}
+\index{main.C@{main.C}!processid@{processid}}
+\index{processid@{processid}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int processid}\hfill
+
+
+
+Definition at line 80 of file main.C.\label{main.C_a36}
+\index{main.C@{main.C}!rand_points@{rand\_\-points}}
+\index{rand_points@{rand\_\-points}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int rand\_\-points = 1}\hfill
+
+
+
+Definition at line 89 of file main.C.\label{main.C_a19}
+\index{main.C@{main.C}!requestedGridPoints@{requestedGridPoints}}
+\index{requestedGridPoints@{requestedGridPoints}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int requested\-Grid\-Points[$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}}\hfill
+
+
+
+Definition at line 45 of file main.C.\label{main.C_a34}
+\index{main.C@{main.C}!set_srand@{set\_\-srand}}
+\index{set_srand@{set\_\-srand}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int set\_\-srand = 0}\hfill
+
+
+
+Definition at line 87 of file main.C.\label{main.C_a40}
+\index{main.C@{main.C}!slicingLayout@{slicingLayout}}
+\index{slicingLayout@{slicingLayout}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int slicing\-Layout = 1}\hfill
+
+
+
+Definition at line 93 of file main.C.\label{main.C_a26}
+\index{main.C@{main.C}!stopquotient@{stopquotient}}
+\index{stopquotient@{stopquotient}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int stopquotient = 100}\hfill
+
+
+
+Definition at line 78 of file main.C.\label{main.C_a51}
+\index{main.C@{main.C}!strng@{strng}}
+\index{strng@{strng}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char strng[1+MAXSTR]\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 617 of file main.C.\label{main.C_a21}
+\index{main.C@{main.C}!thedate@{thedate}}
+\index{thedate@{thedate}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ thedate = THEDATE}\hfill
+
+
+
+Definition at line 69 of file main.C.\label{main.C_a22}
+\index{main.C@{main.C}!thehost@{thehost}}
+\index{thehost@{thehost}!main.C@{main.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ thehost = THEHOST}\hfill
+
+
+
+Definition at line 69 of file main.C.

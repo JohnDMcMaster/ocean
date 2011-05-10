@@ -1,0 +1,127 @@
+.TH usrlib.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+usrlib.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBINLINE\fR"
+.br
+.ti -1c
+.RI "#define \fBNO_ERROR\fR  0"
+.br
+.ti -1c
+.RI "#define \fBEDOS\fR  1"
+.br
+.ti -1c
+.RI "#define \fBESYS\fR  2"
+.br
+.ti -1c
+.RI "#define \fBENOTMEM\fR  3"
+.br
+.ti -1c
+.RI "#define \fBEWRCFG\fR  4"
+.br
+.ti -1c
+.RI "#define \fBEINPDAT\fR  5"
+.br
+.ti -1c
+.RI "#define \fBEFNFND\fR  6"
+.br
+.ti -1c
+.RI "#define \fBEUNKNOW\fR  7"
+.br
+.ti -1c
+.RI "#define \fBEWRITE\fR  8"
+.br
+.ti -1c
+.RI "#define \fBETASKIMP\fR  9"
+.br
+.ti -1c
+.RI "#define \fBEINDEX\fR  10"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "void \fBusrErr\fR (char*,int)"
+.br
+.ti -1c
+.RI "void \fBwarning\fR (char*,int)"
+.br
+.ti -1c
+.RI "void** \fBallocArray2\fR (int xsize,int ysize,int itemSize)"
+.br
+.ti -1c
+.RI "void \fBfreeArray2\fR (int xsize,void **toFree)"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define EDOS  1
+.PP
+Definition at line 20 of file usrlib.h.
+.SS #define EFNFND  6
+.PP
+Definition at line 25 of file usrlib.h.
+.SS #define EINDEX  10
+.PP
+Definition at line 29 of file usrlib.h.
+.SS #define EINPDAT  5
+.PP
+Definition at line 24 of file usrlib.h.
+.SS #define ENOTMEM  3
+.PP
+Definition at line 22 of file usrlib.h.
+.SS #define ESYS  2
+.PP
+Definition at line 21 of file usrlib.h.
+.SS #define ETASKIMP  9
+.PP
+Definition at line 28 of file usrlib.h.
+.SS #define EUNKNOW  7
+.PP
+Definition at line 26 of file usrlib.h.
+.SS #define EWRCFG  4
+.PP
+Definition at line 23 of file usrlib.h.
+.SS #define EWRITE  8
+.PP
+Definition at line 27 of file usrlib.h.
+.SS #define INLINE
+.PP
+Definition at line 14 of file usrlib.h.
+.SS #define NO_ERROR  0
+.PP
+Definition at line 19 of file usrlib.h.
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS void ** allocArray2 (int xsize, int ysize, int itemSize)
+.PP
+Definition at line 60 of file usrlib.C.
+.PP
+Referenced by \fBImageMap::ImageMap\fR().
+.SS void freeArray2 (int xsize, void ** toFree)
+.PP
+Definition at line 80 of file usrlib.C.
+.PP
+Referenced by \fBLayMap::findNetId\fR(), \fBImageMap::~ImageMap\fR(), and \fBLayMap::~LayMap\fR().
+.SS void usrErr (char * place, int err)
+.PP
+Definition at line 40 of file usrlib.C.
+.PP
+Referenced by \fBDivTable::DivTable\fR(), \fBPlane::Plane\fR(), \fBPlcm::createPlane\fR(), \fBPlcm::doTranspAnalysis\fR(), \fBWindow::getDiv\fR(), \fBParserInterface::initImages\fR(), \fBPlcm::placement\fR(), \fBPlcm::prepare\fR(), \fBParserInterface::processFeeds\fR(), \fBPlcm::read\fR(), \fBParserInterface::read\fR(), \fBParserInterface::setRouteOrient\fR(), \fBParserInterface::setTransparency\fR(), and \fBPlcm::write\fR().
+.SS void warning (char * place, int err)
+.PP
+Definition at line 50 of file usrlib.C.
+.PP
+Referenced by \fBImageMap::addFeeds\fR().
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

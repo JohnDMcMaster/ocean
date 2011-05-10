@@ -1,0 +1,200 @@
+\subsection{Cluster  Class Reference}
+\label{Cluster}\index{Cluster@{Cluster}}
+{\tt \#include $<$cluster.h$>$}
+
+Inheritance diagram for Cluster:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_cluster.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$Cluster} ()
+\item 
+{\bf Cluster} (int g\-X,int g\-Y,int hor,int ver)
+\item 
+{\bf Cluster} (int gx,int gy,int hor,int ver,int $\ast$$\ast$stamp)
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& o) const
+\item 
+{\bf operator cluster\-Map\-Type} ()
+\item 
+Cluster\& {\bf operator$|$=} (Cluster \&other)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf c\-X}
+\item 
+int {\bf c\-Y}
+\item 
+{\bf cluster\-Map\-Type} {\bf pattern}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Cluster_a0}
+\index{Cluster@{Cluster}!~Cluster@{$\sim$Cluster}}
+\index{~Cluster@{$\sim$Cluster}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cluster::$\sim$Cluster ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 24 of file cluster.h.\small\begin{verbatim}00024 {}
+\end{verbatim}\normalsize 
+\label{Cluster_a1}
+\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cluster::Cluster (int {\em gx}, int {\em gy}, int {\em hor}, int {\em ver})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 53 of file cluster.h.\small\begin{verbatim}00053 :Point(),
+00054                                                    cX(gx),cY(gy)
+00055 //
+00056 // Constructor : creates empty cluster 
+00057 //               gx,gy - cluster coord.
+00058 //               hor,vert - cluster dimension
+00059 // 
+00060 {
+00061   x=cX * hor;
+00062   y=cY * ver;
+00063   
+00064   pattern=0;
+00065 }
+\end{verbatim}\normalsize 
+\label{Cluster_a2}
+\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cluster::Cluster (int {\em gx}, int {\em gy}, int {\em hor}, int {\em ver}, int $\ast$$\ast$ {\em stamp})}\hfill
+
+
+
+Definition at line 12 of file cluster.C.\small\begin{verbatim}00014 : creates cluster with one marked sector  
+00015 //               gx,gy - point coordinates 
+00016 //               hor,vert - cluster dimension
+00017 //               stamp - image pattern
+00018 //
+00019 {
+00020   cX=gx/hor;
+00021   cY=gy/ver;
+00022 
+00023   if (gx < 0 ) cX--;
+00024   if (gy < 0 ) cY--;
+00025 
+00026   x=gx % hor;
+00027   y=gy % ver;
+00028 
+00029   if (x < 0) x+=hor;
+00030   if (y < 0) y+=ver;
+00031 
+00032   
+00033 
+00034   if ((gx = stamp[x<<1][y<<1]) < 0)
+00035     pattern = 0x01 << (-1-gx);
+00036   else
+00037     pattern=0x00;
+00038   
+00039   x=cX * hor;
+00040   y=cY * ver;
+00041 
+00042 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Cluster_a5}
+\index{Cluster@{Cluster}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Cluster::is\-Equal (const {\bf Item} \& {\em o}) const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Point} {\rm (p.\,\pageref{Point_a7})}.
+
+Definition at line 33 of file cluster.h.\small\begin{verbatim}00034 {return ((Cluster&)o).cX == cX && ((Cluster&)o).cY==cY;}
+\end{verbatim}\normalsize 
+\label{Cluster_a4}
+\index{Cluster@{Cluster}!myName@{myName}}
+\index{myName@{myName}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Cluster::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Point} {\rm (p.\,\pageref{Point_a5})}.
+
+Reimplemented in {\bf Clst} {\rm (p.\,\pageref{Clst_a4})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a3})}, and {\bf Window} {\rm (p.\,\pageref{Window_a3})}.
+
+Definition at line 32 of file cluster.h.\small\begin{verbatim}00032 { return "Cluster"; }
+\end{verbatim}\normalsize 
+\label{Cluster_a3}
+\index{Cluster@{Cluster}!myNo@{myNo}}
+\index{myNo@{myNo}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Cluster::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Point} {\rm (p.\,\pageref{Point_a4})}.
+
+Reimplemented in {\bf Clst} {\rm (p.\,\pageref{Clst_a3})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a2})}, and {\bf Window} {\rm (p.\,\pageref{Window_a2})}.
+
+Definition at line 31 of file cluster.h.\small\begin{verbatim}00031 { return ClusterClass; }
+\end{verbatim}\normalsize 
+\label{Cluster_a6}
+\index{Cluster@{Cluster}!operator clusterMapType@{operator clusterMapType}}
+\index{operator clusterMapType@{operator clusterMapType}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cluster::operator {\bf cluster\-Map\-Type} ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 36 of file cluster.h.\small\begin{verbatim}00036 {return pattern;}
+\end{verbatim}\normalsize 
+\label{Cluster_a7}
+\index{Cluster@{Cluster}!operator\texttt{"|}=@{operator\texttt{"|}=}}
+\index{operator\texttt{"|}=@{operator\texttt{"|}=}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cluster \& Cluster::operator$|$= (Cluster \& {\em other})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 37 of file cluster.h.\small\begin{verbatim}00038 {
+00039                     pattern |= other.pattern;
+00040                     return *this;
+00041                       }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Cluster_m0}
+\index{Cluster@{Cluster}!cX@{cX}}
+\index{cX@{cX}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Cluster::c\-X}\hfill
+
+
+
+Definition at line 43 of file cluster.h.\label{Cluster_m1}
+\index{Cluster@{Cluster}!cY@{cY}}
+\index{cY@{cY}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Cluster::c\-Y}\hfill
+
+
+
+Definition at line 44 of file cluster.h.\label{Cluster_m2}
+\index{Cluster@{Cluster}!pattern@{pattern}}
+\index{pattern@{pattern}!Cluster@{Cluster}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf cluster\-Map\-Type} Cluster::pattern}\hfill
+
+
+
+Definition at line 47 of file cluster.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf cluster.h}\item 
+{\bf cluster.C}\end{CompactItemize}

@@ -1,0 +1,120 @@
+.\" SccsId = @(#)cruise.3 1.1  05/21/93"
+.ll 77
+.hy
+.TH CRUISE 1SDF "THE SEADIF PROGRAMMERS MANUAL"
+.SH NAME
+cruise \- Interviews interface to the OCEAN Sea of Gates Design System.
+
+.SH SYNOPSIS
+
+   cruise [options] 
+
+.SH DESCRIPTION
+
+The program provides a nicer graphical interface to the Seadif database and
+to programs for automatic placement and routing. Because it operates directly on
+the seadif database it is much faster than seadali which has to convert 
+your circuit from and to the Nelsis database each time you request an
+operation. It is also possible to switch it into nelsis mode. 
+
+.SH OPTIONS
+.na
+.nf
+.fi
+.ad
+
+.TP
+\-background      next argument sets the background color
+.TP
+\-bg              same as \-background
+.TP
+\-display         next argument specifies the target workstation display
+.TP
+\-foreground      next argument sets the foreground color
+.TP
+\-fg              same as \-foreground
+.TP
+\-fn              same as \-font
+.TP
+\-font            next argument sets the text font
+.TP
+\-geometry        next argument sets the position and size
+.TP
+\-iconic          starts up the first top\-level interactor in iconic form
+.TP
+\-name            next argument sets the instance name of top interactor
+.TP
+\-reverse         swaps default foreground and background colors
+.TP
+\-rv              same as \-reverse
+.TP
+-synchronous      force synchronous operation with the window system
+.TP
+\-title           next argument sets the top interactor's title bar name
+.TP
+\-xrm             next argument sets an ``attribute: value'' property
+
+.RE
+
+
+The geometry specification has the form ``=WxH+XOFF+YOFF''.  A
+negative XOFF (YOFF) specifies the offset of the interactor's right
+(bottom) edge from the right (bottom) side of the screen.
+
+.SH  RESOURCES
+
+The program understands the following resources: 
+
+.TP
+    message \- texts display
+.TP
+    radio \- radio buttons appearance
+.TP
+    button \-   push buttons appearance
+.TP
+    check  \- check boxes appearance
+.TP
+    scroller \- scrollers appearance
+.TP
+    mover \- movers appearance
+.TP
+    strEditor \- string editors appearance
+.TP
+    browser \- name browser appearance
+
+.RE
+
+For each of these classes foreground, background colors and fonts can be set
+independently in users .Xdefaults file. 
+
+.SH FILES
+
+seadif/cruise.out \- a log file
+
+seadif/madonna.out \- madonna log file
+
+seadif/trout.out \- trout log file
+
+seadif/sealib.sdf \- seadif database file
+
+seadif/sealib.sdx \- seadif database index file   
+
+.SH "EXTERNAL_INFULENCES"
+.TP
+Environment Variables
+
+OCEAN \- root directory of ocean tree.
+
+OCEANPROCESS \- ocean process name.
+
+.SH "AUTHOR"
+Ireneusz Karkowski, Delft University of Technology.  E-mail
+address is ocean@donau.et.tudelft.nl.
+.SH "SEE ALSO"
+
+seadif(3SDF)
+
+
+   
+
+

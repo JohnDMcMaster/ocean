@@ -1,0 +1,62 @@
+.TH matrixGrid 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+matrixGrid \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <matrixGrid.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBmatrixGrid\fR (int dimension1, int dimension2)"
+.br
+.ti -1c
+.RI "\fBmatrixGrid\fR (matrixGrid&)"
+.br
+.ti -1c
+.RI "\fB~matrixGrid\fR ()"
+.br
+.ti -1c
+.RI "\fBexpansionGridVertex\fR** \fBoperator[]\fR (int i)"
+.br
+.ti -1c
+.RI "int \fBdimension1\fR ()"
+.br
+.ti -1c
+.RI "int \fBdimension2\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS matrixGrid::matrixGrid (int dimension1, int dimension2)
+.PP
+Definition at line 10 of file matrixGrid.C.
+.SS matrixGrid::matrixGrid (matrixGrid & orig)
+.PP
+Definition at line 17 of file matrixGrid.C.
+.SS matrixGrid::~matrixGrid ()
+.PP
+Definition at line 26 of file matrixGrid.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int matrixGrid::dimension1 ()\fC [inline]\fR
+.PP
+Definition at line 26 of file matrixGrid.h.
+.PP
+Referenced by \fBexpansionGrid::nwires\fR().
+.SS int matrixGrid::dimension2 ()\fC [inline]\fR
+.PP
+Definition at line 27 of file matrixGrid.h.
+.PP
+Referenced by \fBexpansionGrid::nwires\fR().
+.SS \fBexpansionGridVertex\fR ** matrixGrid::operator[] (int i)\fC [inline]\fR
+.PP
+Definition at line 25 of file matrixGrid.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

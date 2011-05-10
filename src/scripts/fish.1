@@ -1,0 +1,169 @@
+\" @(#)fish.1 1.2 Delft University of Technology 12/05/91 
+.TH FISH 1ICD "30/1/90"
+.UC 4
+.SH NAME
+fish - purify wire patterns on Sea-of-Gates images
+.SH SYNOPSIS
+.B fish
+[\fB-himq\fP] [\fB-o\fP <output_cell>] [\fB-s\fP <image_file>] [\fB-n\fP <image>] [\fB-x\fP <xsize>] [\fB-y\fP <ysize>] <cell_name>
+.SH OPTIONS
+.TP
+.B <cell_name>
+Cell name of layout to be purified.
+.TP
+.B -h
+Help: print list of options.
+.TP
+.B -c
+Print fish version number and compilation date.
+.TP
+.B -i
+Produce output cell without model calls to image.
+.TP
+.B -m
+Do not move unknown instances to grid points.
+.TP
+.B -q
+Quiet mode: nothing is printed (except errors and warnings).
+.TP
+.B -o\ <output_cell>
+Write purified result to specified cell name (default: overwrite input cell).
+.TP
+.B -s\ <image_file>
+Read image description from specified file (Default: read from file 'image.seadif').
+.TP
+.B -n\ <output_cell>
+Use specified cell name as image in output cell (Default: use name in image description file).
+.TP
+.B -x\ <xsize>
+Force horizontal array size to xsize (>= 1).
+.TP
+.B -y\ <ysize>
+Force vertical array size to ysize (>= 1).
+
+.SH DESCRIPTION
+\fIFish\fR is a layout purifier for gate-array and sea_of_gates layout.
+It reads a layout from the database, processes the layout, and writes
+a new enhanced cell back into the database. 
+The basic idea is to allow some design-rule errors during the
+manual design of a gate-array cell. 
+\fIFish\fR corrects these errors and produces a design rule correct result.
+In this way the process 
+of manual design using \fIdali\fR(1ICD) can be speeded up considerably.
+
+\fIFish\fR performs the following:
+
+- Wire segments are rounded to the nearest grid point (legal point)
+of the array and obtain the correct width.
+
+- Vias are aligned on grid points.
+
+- Vias which were entered using a contact hole mask (e.g. the 'cps' a
+and 'cos' in c3tu) are converted into a model-call to the proper
+via pattern. The designer does not have to worry about the type of
+via used.
+
+- The size of the image (the number of repetitions) is adjusted.
+
+- Some warnings for ambiguity, illegal wires, etc. are given.
+
+- Instances are snapped to grid. In this way instances (components) can
+be stamped onto the image, without having to take care of 
+exact alignment.
+
+To perform all this \fIfish\fR needs an image description file. This file
+is called 'image.seadif' and should be present in the project 
+directory. It contains data about the positions of grid points, the
+way in which the image should be repetited, the kind of via which should
+be used, etc.
+Cells containing the basic image and the vias should be available in the 
+database.
+
+.SH EXAMPLE
+Suppose you want to make a cell called 'nand2' in an image in the c3tu
+process.
+
+First make sure that the image cell and the vias are present in the
+database. Import them if necessary. The name of these cells is
+given in the image description file 'image.seadif'.
+
+Before editing it is convenient to have an empty array to indicate the
+transistor and grid positions. The following command will cause
+\fIfish\fR to create an empty array of size 10 x 1 in the cell 'nand2'.
+
+$ fish -x 10 -y 1 -o nand2
+
+Now start editing your cell using \fI(X)dali\fR(1ICD):
+
+$ dali
+
+Read cell 'nand2' and expand it such that the image becomes visible.
+Use the 'visible' menu to turn off some useless masks such as 'nw', 'sn'
+and 'sp'.
+Using the 'append' or 'wire' command in the 'box' menu metal wires can 
+be be added.
+Do not add layout in ps or od, since these layers are fixed
+in a gate-array image. \fIFish\fR will delete rectangles in illegal layers.
+
+Vias can be added in two ways: 
+
+1) By placing specific instances that represent vias.
+In the library via cells are present which are recognized by \fIfish\fR,
+such as 'Via_in_ins'.
+
+2) A easier way is by making a rectangle in the contact hole layer
+at the desired position. The size of the via does not matter, since
+\fIfish\fR will adjust it automatically. For a via between metal1 (in)
+and metal2 (ins) used the 'cos' layer. In some images 'cos' 
+vias may not be placed at some positions. In  the fishbone image,
+for instance, 'cos' vias are not allowed at all poly connections.
+For ad via to the image (to 'cps' or 'od') use any of the following
+layers: 'cps', 'con', 'cop'.
+\fIFish\fR will automatically replace any of these masks by the proper
+pattern. \fIFish\fR will only distinguish between 'cop' and ('cps', 'con',
+'cop'). Remember that 'stacked contacts' are not allowed. 
+
+Terminals may only be placed in a metal layer: in or ins.
+
+If the underlying image should become too small, simply enlarge the
+basic image: press 'arr_par' in the 'instances' menu. Set nx or ny 
+to the new value. Do not change the dx or dy!
+
+When ready write the cell back to the database and quit \fIdali\fR(1ICD). Now
+the big trick can be performed:
+
+$ fish nand2
+
+This command will overwrite the cell 'nand2' by the new purified cell.
+It is also possible to give the new cell a different name (and, with that,
+save the original cell):
+
+$ fish -o nand2_new nand2
+
+This command will write a new cell in 'nand2_new'.
+
+To produce only the metal interconnection pattern of the nand2 use:
+
+$ fish -i nand2
+
+This nand2 can now be used as a 'stamp' for larger cells.
+It can be read as instance in \fIdali\fR(1ICD). You only have to make a rough
+placement of this instance. \fIFish\fR will snap the instance to the nearest grid 
+point. To perform this snapping, \fIfish\fR opens the cell and looks for vias.
+The first via it encounters is used for the snapping. Notice that
+\fIfish\fR assumes that the instances are on grid (that is, fished).
+
+.SH AUTHORS
+Paul Stravers
+.br
+Patrick Groeneveld
+.br
+phone: 015-786240
+
+.SH FILES
+.if n .ta 40
+.if t .ta 3.2i
+.nf
+Technology file:
+proj_dir/image.seadif
+

@@ -1,0 +1,102 @@
+
+This file is maintained by: Arjan van Genderen
+                            e-mail: arjan@cas.et.tudelft.nl
+
+Sep. 22, 1999
+-------------
+
+Features compared to earlier distributions:
+  
+   - Seadali now also runs when it can allocate only a 
+     reduced set of colors. (In the past, this caused
+     that seadali could not be used at all on some
+     screens.)
+   - The maximum length of cell, instance, terminal 
+     and net names has been increased from 14 to 256.
+   - Net names are now used by trout to create labels
+     in the layout.  As a result, the extracted circuit
+     will have the same net (node) names as the original
+     circuit.
+   - Introduced an installation script 'ocean_install'.
+
+Source code of this new OCEAN distribution is currently
+not available.   The old OCEAN distribution is available 
+from ftp://cas.et.tudelft.nl/pub/ocean.old.
+
+
+Dec. 3, 1999
+------------
+
+Source code for compiling the cacd and OCEAN trees is now 
+also available.  See the file COMPILATION.
+
+Installation script was renamed oceanInstall.
+
+
+Dec. 17, 1999
+-------------
+
+When the "no routing" option was used with trout, labels
+were deleted from the layout.  This has now been fixed.
+
+
+Jan. 5, 2000
+------------
+
+Another bug fix for handling labels during routing.
+
+
+April 14, 2000
+--------------
+
+Fixed the problem that kissis didn't work when 
+$SIS/sis_lib/.[sm]isrc are not available.
+
+
+April 19, 2000
+--------------
+
+Fixed problem with directory names with more than 100 
+characters.
+
+
+June 8, 2000
+------------
+
+Fixed core dump for trout that appeared under Linux.
+
+
+Sep. 12, 2000
+-------------
+
+- Added tools getldm and layflat.
+- Added manual pages of layflat, fish, dofunc, mksls
+
+
+Sep. 27, 2000
+-------------
+
+- Made extension in ICELLS for new cacd release that will use xcontrol 
+  instead of macro and device
+
+
+June 12, 2001
+-------------
+
+- Compiled with new version of cacd software.
+
+
+March 13, 2002
+--------------
+
+- Compiled with new version of cacd software.
+- Bug fix for seadali for deleting terminal in area.
+- Let trout place and route master pins that are not connected to
+  any instance.
+
+
+August 12, 2002
+---------------
+
+- Updated celllibs/fishbone/src/nelsis3/template/sls_prototypes/oplib.ext
+

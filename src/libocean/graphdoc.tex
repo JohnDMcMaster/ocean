@@ -1,0 +1,518 @@
+\documentstyle[a4]{article}
+
+%%%% @(#)graphdoc.tex 1.9 10/31/94 Delft University of Technology
+
+    % Leave some vertical space between paragraphs; No paragraph indent:
+    %\setlength{\parskip}{0.6\baselineskip} \setlength{\parindent}{0cm}
+
+    % When is it allowed to place a figure or a table:
+    \renewcommand{\textfraction}{0.05}     \renewcommand{\topfraction}{0.95}
+    \renewcommand{\bottomfraction}{0.95}
+
+    % input this to enable arbitrary PostScript inclusion with \psfig:
+    \input{psfig}
+
+    % directory where to look for figures:
+    \newcommand{\figdir}{/usr1/ocean/src/libocean/doc}
+
+    % macro \fig inserts a centered figure:
+    \newcommand{\fig}[1]{\centerline{\psfig{figure=\figdir/#1.ps}}}
+
+    % Macro \figopt also inserts a PostScript figure, but this one requires
+    % extra options, as in \figopt{psfile}{heigth=2.1in,width=3.5in}.
+    %          !!!! Do not use spaces in the option list !!!!
+    \newcommand{\figopt}[2]{\centerline{\psfig{figure=\figdir/#1.ps,#2}}}
+
+    \newcommand{\file}[1]{{#1}}
+    \newcommand{\class}[1]{{#1}}
+    \newcommand{\type}[1]{{#1}}
+
+%\psdraft
+
+\begin{document}
+
+\title{\sf Graph --- A set of C++ base classes for hypergraphs}
+\author{\sf Paul Stravers\\ \sf Delft University of Technology}
+\date{\sf 94/10/31}
+\maketitle
+\noindent\makebox[\textwidth]{\hrulefill}
+\tableofcontents
+\vspace*{3ex}
+\noindent\makebox[\textwidth]{\hrulefill}
+\section{Introduction}
+The files \file{graph.h} and \file{graph.C} in the ocean class library define a
+set of base classes that implement a hypergraph. A hypergraph differs from an
+ordinary graph in the number of vertices that can be incident to an edge. In an
+ordinary graph this number is always 2, in a hypergraph any number of vertices
+can be incident to an edge.
+
+In many applications, a vertex is part of more than one graph. As an example,
+consider a digital circuit that we represent as a hypergraph. In this case
+a vertex represents a module in the circuit, and the edges represent the wires
+between the modules (Figure~\ref{f-sr-latch}). At the same time, however, the
+vertices are also part of a hierarchy graph. In Figure~\ref{f-sr-latch} the
+hierarchy graph specifies that the modules {\sl nand1, nand2\/} and {\sl inv\/}
+are all children of the module {\sl sr-latch\/}. The circuit graph specifies
+how these three children connect to each other. To complicate things even more,
+the hierarchy graph is a directed graph but the circuit graph is undirected.
+
+\begin{figure}[hbt]
+\figopt{sr-latch}{width=1.0\textwidth}
+\caption{\label{f-sr-latch}
+A digital circuit represented as a hypergraph. The solid, undirected
+edges represent the wires between the modules. The directed (dashed) edges
+represent the hierarchy relationship.}
+\end{figure}
+
+With the hypergraph base class we can easily implement a graph like the one
+in Figure~\ref{f-sr-latch}. The class allows to include a vertex in as many
+graphs as we need. Edges can be both directed and undirected. There are
+iterator classes that allow us to iterate through the members of a particular
+graph in a systematic way.
+
+\section{How to incorporate hypergraphs in your C++ program}
+To use the hypergraph class library, include the line
+\begin{verbatim}
+  #include <graph.h>
+\end{verbatim}
+in the C++ program source. You must instruct the C++ compiler to search the
+ocean include directory for header files. You also must tell the compiler to
+link your program with the ocean class library {\tt \$MACHINE/libocean.a}. For
+instance, if you are on a Hewlett Packard hp800 computer, the following Unix
+commands are appropriate to compile and link myprog.C:
+\begin{verbatim}
+  % CC -I/usr/ocean/include -c myprog.C
+  % CC -L/usr/ocean/lib/hp800 myprog.o -locean
+\end{verbatim}
+This assumes that the ocean tree starts in {\tt /usr/ocean}. Your system
+administrator may have moved it to another place.
+
+\section{The structure of the graph class}
+A \class{graphDescriptor} is the ``box'' that holds a graph. The only thing a
+\class{graphDescriptor} knows about is a \class{graphElement}. This element is
+the common baseclass for objects from the classes \class{graphVertex} and
+\class{graphEdge}.
+
+You need objects from the class \class{graphTerminal} to ``glue'' a
+\class{graphVertex} to a \class{graphEdge}. Each \class{graphTerminal} has a
+\type{graphTermType} that identifies the type of the edge the vertex connects
+to. For instance, the \class{graphVertex} {\sl sr-latch} in
+Figure~\ref{f-sr-latch} is connected to three edges through three terminals of
+type \type{EdgeToChild}. The vertices {\sl nand1, nand2} and {\sl inv\/} are
+connected to the other side of these same three edges through terminals of type
+\type{EdgeToFather}. Figure~\ref{f-graphglue} shows this in detail.
+
+\begin{figure}[hbt]
+\figopt{graphglue}{width=0.6\textwidth}
+\caption{\label{f-graphglue}
+\class{graphTerminal}s are the ``glue'' between vertices and edges.
+The type of the terminal (\type{graphTermType}) tells the vertex what kind of
+edge it connects to. This figure shows three directed edges (dashed lines) from
+the vertex {\sl sr-latch} to its three children {\sl nand1, nand2} and {\sl
+inv}.}
+\end{figure}
+
+Fortunately, most users of the graph classes never deal with the
+\class{graphTerminal}s directly. Their creation and destruction is taken care
+of automatically by the \class{graphEdge} class. Consequently, most users can
+skip the Sections~\ref{s-terminal} and~\ref{s-terminal-itr} that deal with
+\class{graphTerminal}s ---it is just an implementation detail.
+
+\section{The \class{graphDescriptor}}
+Before you can use graphs you must create a \class{graphDescriptor} object.
+This object can contain objects of type \class{graphElement}, i.e. the vertices
+and the edges. By making a \class{graphDescriptor} the {\em current}
+graph descriptor, all newly created vertices and edges automatically become
+part of this graph. Three methods exist to make a graph current. First is to pass
+the constant {\tt SetCurrentGraph} as the second argument to the constructor.
+The second method is calling the member function {\tt setCurrentGraph()}. The
+third method is calling the member {\tt pushCurrentGraph()}. This function not
+only sets the current graph, but also remembers (on a stack) what the
+``current'' current graph is, so that you can restore to this state by calling
+the function popCurrentGraph().  The public declarations appear below.
+
+{\footnotesize \begin{verbatim}
+  class graphDescriptor
+  {
+  public:
+     graphDescriptor(char *name =NIL, int setCurrent =NIL);
+     ~graphDescriptor();
+     graphDescriptor *addElement(graphElement *);
+     graphDescriptor *removeElement(graphElement *);
+     void setCurrentGraph();    // make this descriptor ``current''
+     void pushCurrentGraph();   // likewise, but undo with popCurrentGraph()
+     void setName(char *);      // associates a string with this descriptor
+     char *getName();           // returns a string associated with descriptor
+     void print();              // print this graph to cout
+  };
+  
+  // These are friend functions of class graphDescriptor:
+  graphDescriptor *getCurrentGraph(); // return the current graph
+  graphDescriptor *popCurrentGraph(); // undo last pushCurrentGraph()
+\end{verbatim}}
+
+\section{The \class{graphElement}}
+The \class{graphElement} is the common base class for the \class{graphVertex}
+and \class{graphEdge} classes. It defines a virtual member function
+{\tt graphelementtype()} that returns the constant GenericGraphElementType. This
+member function is later redefined by \class{graphVertex} to return the
+constant VertexGraphElementType and by \class{graphEdge} to return
+EdgeGraphElementType.
+
+{\footnotesize \begin{verbatim}
+  enum graphElementType
+  {
+     GenericGraphElementType,
+     VertexGraphElementType, EdgeGraphElementType,
+     AllGraphElementTypes
+  };
+
+  class graphElement : public Object
+  {
+  public:
+     graphElement();
+     ~graphElement();
+     virtual void printElement() {cout << "<graphElement>" << flush;};
+     virtual graphElementType graphelementtype() {return GenericGraphElementType;}
+  };
+\end{verbatim}}
+
+\subsection{the \class{graphVertex}}
+The \class{graphVertex} class is derived from \class{graphElement}. It has a
+virtual member function {\tt vertexType()} returning an enum that
+identifies the type of the vertex.  This is useful if we derive several vertex
+classes from \class{graphVertex} and we want to be able to distinguish between.
+The definition of this enum is conditional; we can define our own enum
+\type{graphVertexType} and \#define {\tt GRAPHVERTEXTYPE\_DEFINED} before we
+{\tt \#include <graph.h>}. In this way the member function {\tt
+graphelementtype()} is as versatile as possible.
+
+{\footnotesize \begin{verbatim}
+  #ifndef GRAPHVERTEXTYPE_DEFINED
+  enum graphVertexType {GenericVertex=0};
+  #endif // GRAPHVERTEXTYPE_DEFINED
+
+  class graphVertex : public graphElement
+  {
+  public:
+     graphVertex();
+     ~graphVertex();
+     graphVertex *addToVertex(graphTerminal *newTerm); // init term yourself
+     int hasEdgeTo(graphVertex *V, graphTermType T =GenericEdge);
+     virtual graphVertexType vertexType() { return GenericVertex; }
+     virtual void print();        // print the vertex to cout
+     virtual void printElement(); // this and next from base class graphElement
+     virtual graphElementType graphelementtype() {return VertexGraphElementType;}
+  };
+\end{verbatim}}
+
+The function {\tt addToVertex()} glues a \class{graphTerminal} to the vertex.
+It is the responsibility of the user to initialize this terminal properly (you
+really have to know what you are doing, use with care).  The function {\tt
+hasEdgeTo()} returns {\tt TRUE} if an edge from {\tt this} vertex to V exists.
+Only edges of type T are considered.
+
+\subsection{the \class{graphEdge}}
+The \class{graphEdge} class is also derived from \class{graphElement}. Once
+created, we can connect vertices to an edge using the function {\tt
+addToEdge()} and remove them again using {\tt removeFromEdge()}.
+
+{\footnotesize \begin{verbatim}
+  class graphEdge : public graphElement
+  {
+  protected:
+     virtual graphTerminal *newTerminal() {return new graphTerminal;}
+  public:
+     graphEdge();
+     ~graphEdge();
+     graphEdge     *addToEdge(graphVertex *, graphTermType =GenericEdge,
+                              graphTerminal * =NIL);
+     graphEdge     *addToEdge(graphTerminal *);     // initialize term yourself
+     graphEdge     *removeFromEdge(graphVertex *);
+     graphVertex   *otherSide(graphVertex *thisSide); // if edge has 2 vertices
+     virtual void  print();
+     virtual void  printElement(); // this and next from base class graphElement
+     virtual graphElementType graphelementtype() {return EdgeGraphElementType;}
+  };
+\end{verbatim}}
+
+As explained above, {\tt addToEdge()} needs a new \class{graphTerminal} in
+order to connect a vertex to the edge. There are two ways to provide this
+\class{graphTerminal}. First, we can supply it as an argument to the member
+function {\tt addToEdge()}. Second, if we do not supply the third argument,
+{\tt addToEdge()} calls the virtual protected member {\tt newTerminal()} to
+create a \class{graphTerminal}. Optionally we can redefine it in a derived
+class to create a different kind of terminal.
+
+Note that there are two versions of {\tt addToEdge()}. The second one takes
+only a \class{graphTerminal} as an argument and leaves the correct
+initialization of this terminal to the user. This may sometimes be useful, for
+instance to move a terminal from one edge to another edge
+
+The member function {\tt otherSide()} has only a defined behavior if the
+\class{graphEdge} connects to exactly two vertices. In that case it returns the
+vertex that is not the vertex on thisSide.
+
+The following programming example shows how to create a simple graph consisting
+of two vertices connected by an edge.
+
+{\footnotesize \begin{verbatim}
+  #include <graph.h>
+  graphDescriptor gdesc("example graph",SetCurrentGraph);
+  graphEdge *e = new graphEdge;  // create an edge...
+  // ...and add two vertices to this edge:
+  e->addToEdge(new graphVertex)->addToEdge(new graphVertex);
+\end{verbatim}}
+
+A slightly more complicated example shows how to create a directed edge between
+two vertices:
+
+{\footnotesize \begin{verbatim}
+  #include <graph.h>
+  graphDescriptor gdesc("example graph",SetCurrentGraph);
+  graphEdge *e = new graphEdge;  // create an edge...
+  // ...and add two vertices to this edge:
+  e->addToEdge(new graphVertex,DirectedEdgeOpen)
+   ->addToEdge(new graphVertex,DirectedEdgeClosed);
+\end{verbatim}}
+
+\section{The \class{graphTerminal} and the \type{graphTermType}}
+\label{s-terminal}
+A \class{graphTerminal} ``glues'' a \class{graphVertex} to a \class{graphEdge}.
+Most users will never have to worry about \class{graphTerminal}s, the
+\class{graphEdge} members take care of the terminals automatically. For this
+reason ---and because of laziness--- we do not discuss the \class{graphTerminal} in
+this paper.  Have a look at the files graph.[hC]\ldots
+
+As mentioned above, graph terminals have an associated \type{graphTermType}.
+The enum \type{graphTermType} defines which terminal types are allowed. We can
+redefine this enum and \#define {\tt GRAPHTERMTYPE\_DEFINED} before including {\tt
+<graph.h>} in order to change or enlarge the set of allowable types. The
+default definition of the enum is shown below.
+
+{\footnotesize \begin{verbatim}
+  #ifndef GRAPHTERMTYPE_DEFINED
+  enum graphTermType
+  {
+     GenericEdge=0,
+     EdgeToFather=1, EdgeToSibling=2, EdgeToChild=3,
+     DirectedEdgeOpen=4, DirectedEdgeClosed=5,
+     EdgeType1=11, EdgeType2=12, EdgeType3=13,
+     EdgeType4=14, EdgeType5=15, EdgeType6=16
+  };
+  #endif // GRAPHTERMTYPE_DEFINED
+\end{verbatim}}
+
+Note that alternative definitions of \type{graphTermType} must at least include
+the constant {\tt GenericEdge=0}.
+
+\section{Iterators}
+\label{s-iterators}
+An iterator is an object that returns pointers to other objects in a systematic
+way. For instance, an iterator might return all the vertices that connect to a
+certain edge. Iteration does not destroy or modify the data structure that is
+being iterated.
+
+As the name suggests, an iterator only returns one object of a data structure
+at a time. Repeatedly ``activating'' the iterator returns the succeeding
+objects. All the iterators in the graph class have a similar user interface.
+This interface consists of the two member functions {\tt initialize()} and {\tt
+more()}. There is also an operator {\tt ()} to ``activate'' the iterator.
+\begin{itemize}
+\item
+The member {\tt initialize()} resets the iterator to its initial state. After
+resetting it, the iterator is ready for use. The constructor of an iterator
+always calls the {\tt initialize()} function, and therefore always has the same
+argument list as {\tt initialize()}.
+\item
+The operator {\tt ()} returns the next object from the iterated data structure,
+or NIL if there are no more objects.
+\item
+The member {\tt more()} returns {\tt TRUE} if the next call to the operator
+{\tt ()} would return an object. It returns {\tt NIL} if the next call to the
+operator {\tt ()} would return {\tt NIL}. Thus, {\tt more()} tells you whether
+there is anything left to iterate.
+\end{itemize}
+What happens if the user wants to modify or even delete objects in the data
+structure that is being iterated? The iterators of the graph class library
+contain internal state that at any time points to the next object to be
+returned by the {\tt ()} operator. As a consequence, the only thing that a user
+should never do is deleting or corrupting this ``next'' object. But it {\em is}
+possible to modify or delete any other object, including the object that was
+most recently returned by the {\tt ()} operator.
+
+\subsection{An iterator that returns graph elements}
+One important use of \class{graphElement}s is iterating all the members of a
+graph, for instance with the purpose of initializing a flag or something
+similar. The \class{graphElementIterator} class provides this functionality.
+
+{\footnotesize \begin{verbatim}
+  #ifndef GRAPHELEMENTTYPE_DEFINED
+  enum graphElementType
+  {
+     GenericGraphElementType=0,
+     VertexGraphElementType=1, EdgeGraphElementType=2,
+     AllGraphElementTypes= -1
+  };
+  #endif // GRAPHELEMENTTYPE_DEFINED
+
+  class graphElementIterator
+  {
+  public:
+     graphElementIterator(graphDescriptor *,
+                          graphElementType =AllGraphElementTypes);
+     void initialize(graphDescriptor *,graphElementType =AllGraphElementTypes);
+     graphElement *operator()();               // return the next graph element
+     int more() {return currentelm!=NIL;}      // TRUE if any element left
+  };
+\end{verbatim}}
+
+The following programming example shows how to use the iterator.
+
+{\footnotesize \begin{verbatim}
+  #include <graph.h>
+  graphDescriptor gdesc("example graph", SetCurrentGraph);
+  
+       (...at this place we build a graph...)
+  
+  // Create an iterator that successively returns all the vertices in the graph:
+  graphElementIterator nextElement(&gdesc,VertexGraphElementType);
+  graphElement *e;
+  while (e = nextElement())   // iterate trough the vertices of graph gdesc
+     e->printElement();       // print each vertex in the graph
+\end{verbatim}}
+
+If you omit the second argument of the constructor, the constant
+\type{AllGraphElementTypes} is selected, which means that the operator {\tt ()}
+returns both vertices and edges.
+
+\subsection{Iterators that return vertices}
+The \class{graphVertexNeighborIterator} successively returns the neighbor
+vertices of the vertex it was {\tt initialize()}d with, or of the vertex that
+was passed as an argument to the constructor. You can ``filter'' the neighbors
+by restricting the type of the terminals to something more specific than {\tt
+genericEdge}.
+
+{\footnotesize \begin{verbatim}
+  class graphVertexNeighborIterator
+  {
+  public:
+     graphVertexNeighborIterator(graphVertex *, graphTermType thisSide =GenericEdge,
+                                 graphTermType otherSide =GenericEdge);
+     void initialize(graphVertex *, graphTermType thisSide =GenericEdge,
+                     graphTermType otherSide =GenericEdge);        // reset
+     graphVertex *operator()();              // return the next neighbor vertex
+     int more();                             // TRUE if anything left
+  };
+\end{verbatim}}
+
+Use of this iterator object hides the implementation details of the graph, and
+it helps in writing clean code. The following programming example prints all
+the neighbors of the vertex vx, separated by commas and ended by a newline.
+
+{\footnotesize \begin{verbatim}
+  #include <graph.h>
+  graphVertex *vx = new graphVertex;
+
+       (...at this place we build a graph...)
+
+  graphVertexNeighborIterator nextNeighbor(vx);   // create iterator object
+  graphVertex *v;
+  while (v = nextNeighbor())          // iterate trough the neighbors of vx
+  {
+     v->print();                             // print each neighbor to cout
+     if (nextNeighbor.more())                // is this the last neighbor?
+        cout << ", ";                        // no: print a comma
+     else
+        cout << "\n";                        // yes: print a newline
+  }
+\end{verbatim}}
+
+The \class{graphEdgeVertexIterator} returns all the vertices that are incident
+with (``connected to'') an edge. The public interface looks as follows:
+
+{\footnotesize \begin{verbatim}
+  class graphEdgeVertexIterator
+  {
+  public:
+     graphEdgeVertexIterator(graphEdge *, graphTermType =GenericEdge);
+     void initialize(graphEdge *, graphTermType =GenericEdge);
+     graphVertex *operator()();         // return the next vertex in the edge
+     int more() {return currentterminal!=NIL;} //TRUE if there is anything left
+  };
+\end{verbatim}}
+
+\subsection{Iterators that return edges}
+The \class{graphVertexEdgeIterator} allows us to iterate trough the edges that
+connect to a vertex. In a similar way, the \class{graphVertexCommonEdgeIterator}
+allows to iterate through the edges that are common to two distinct vertices.
+
+{\footnotesize \begin{verbatim}
+  class graphVertexEdgeIterator
+  {
+  public:
+     graphVertexEdgeIterator(graphVertex *, graphTermType =GenericEdge);
+     void initialize(graphVertex *, graphTermType =GenericEdge);     // reset
+     graphEdge *operator()();                         // return the next edge
+     int more() {return currentterminal!=NIL;}       // TRUE if anything left
+  };
+  
+  class graphVertexCommonEdgeIterator
+  {
+  public:
+     graphVertexCommonEdgeIterator(graphVertex *, graphVertex *,
+                                   graphTermType =GenericEdge);
+     void initialize(graphVertex *, graphVertex *,
+                     graphTermType =GenericEdge);
+     graphEdge *operator()();                  // return the next common edge
+     int more() {return currentterminal!=NIL;}       // TRUE if anything left
+  };
+\end{verbatim}}
+
+The following programming example shows how to iterate through all the directed
+edges that point from vx1 to vx2:
+
+{\footnotesize \begin{verbatim}
+  #include <graph.h>
+  graphVertex *vx1 = new graphVertex;
+  graphVertex *vx2 = new graphVertex;
+
+       (...at this place we build a directed graph...)
+
+  graphVertexCommonEdgeIterator nextCmnEdge(vx1,vx2,DirectedEdgeOpen);
+  graphEdge *e;
+  while (e = nextCmnEdge())   // iterate the edges pointing from vx1 to vx2
+     e->print();              // print the common, directed edge
+\end{verbatim}}
+
+\subsection{Iterators that return terminals}
+\label{s-terminal-itr}
+It sometimes is useful to iterate the terminals that belong to a certain
+vertex, or to iterate the terminals that are contained in a certain edge. The
+next two iterators provide this functionality.
+
+{\footnotesize \begin{verbatim}
+  class graphVertexTerminalIterator
+  {
+  public:
+     graphVertexTerminalIterator(graphVertex *, graphTermType =GenericEdge);
+     void initialize(graphVertex *, graphTermType =GenericEdge);
+     graphTerminal *operator()();           // return the next terminal in the vertex
+     int more() {return currentterminal!=NIL;} //TRUE if there is anything left
+  };
+  
+  class graphEdgeTerminalIterator
+  {
+  public:
+     graphEdgeTerminalIterator(graphEdge *, graphTermType =GenericEdge);
+     void initialize(graphEdge *, graphTermType =GenericEdge);
+     graphTerminal *operator()();             // return the next terminal in the edge
+     int more() {return currentterminal!=NIL;} //TRUE if there is anything left
+  };
+\end{verbatim}}
+
+The user can restrict the type of the terminals that the () operator returns to
+one of the \type{graphTermType}s. The type \type{GenericEdge} matches all
+available \type{graphTermType}s.
+
+\end{document}

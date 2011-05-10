@@ -1,0 +1,596 @@
+\subsection{Pattern  Class Reference}
+\label{Pattern}\index{Pattern@{Pattern}}
+{\tt \#include $<$pattern.h$>$}
+
+Inheritance diagram for Pattern:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{5cm}
+\epsfbox{class_pattern.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Pattern} (LAYOUT $\ast$l,{\bf IMAGEDESC} $\ast$i, short $\ast$m,{\bf Lay\-Map}\&,int {\bf do\-Check}=0, int is\-Macro = 0,int {\bf do\-Trans\-Ana}=0)
+\item 
+{\bf $\sim$Pattern} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& o) const
+\item 
+{\bf operator short $\ast$} ()
+\item 
+void {\bf add\-Criticals} ({\bf Lay\-Map} \&l\-Map)
+\item 
+void {\bf remove\-Unnessesery} ({\bf Image\-Map} \&)
+\item 
+int {\bf is\-Macro} () const
+\item 
+int {\bf get\-Hor} () const
+\item 
+int {\bf get\-Ver} () const
+\item 
+{\bf Transparency}$\ast$ {\bf get\-Tran\-Maps} ()
+\item 
+void {\bf find\-New\-Left\-Bottom} (int,int,short$\ast$,int\&,int\&)
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf scan} (short$\ast$,LAYOUT $\ast$,{\bf IMAGEDESC} $\ast$,{\bf Lay\-Map} \&)
+\item 
+void {\bf scan\-Slice} (short$\ast$,SLICE $\ast$,{\bf IMAGEDESC} $\ast$,{\bf Lay\-Map} \&)
+\item 
+void {\bf mark\-Power\-Lines} ({\bf IMAGEDESC}$\ast$ i\-Ptr)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf cellname}
+\item 
+short$\ast$ {\bf matrix}
+\item 
+int {\bf do\-Check}
+\item 
+int {\bf do\-Trans\-Ana}
+\item 
+int {\bf is\-Mac}
+\item 
+int {\bf ver}
+\item 
+int {\bf hor}
+\item 
+{\bf Transparency}$\ast$ {\bf tran\-Maps}
+\item 
+int {\bf no\-Of\-Layers}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Pattern_a0}
+\index{Pattern@{Pattern}!Pattern@{Pattern}}
+\index{Pattern@{Pattern}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Pattern::Pattern (LAYOUT $\ast$ {\em l}, {\bf IMAGEDESC} $\ast$ {\em i}, short $\ast$ {\em m}, {\bf Lay\-Map} \& {\em l\-Map}, int {\em dc} = 0, int {\em im} = 0, int {\em da} = 0)}\hfill
+
+
+
+Definition at line 20 of file pattern.C.\small\begin{verbatim}00024 {
+00025   matrix= new short[6];
+00026   
+00027   for(int j=0;j<6;j++)
+00028     matrix[j]=m[j];
+00029 
+00030   doCheck=dc;
+00031   isMac=im;
+00032   doTransAna=da;
+00033   cellname=l->name;
+00034 
+00035   tranMaps=NULL;
+00036   
+00037   if(isMac)         // hurry! we don't need to do too much..
+00038   {
+00039                 // rounding up
+00040     hor=(l->bbx[HOR]-i->overlap[HOR]+i->size[HOR]-1)/i->size[HOR];
+00041     ver=(l->bbx[VER]-i->overlap[VER]+i->size[VER]-1)/i->size[VER];
+00042   }
+00043   else
+00044   {
+00045                 // first lets determine if we don't have to 
+00046                 // add a special offset to move rotated cell
+00047                 // to the origin (0,0) 
+00048     int coX,coY;
+00049 
+00050     findNewLeftBottom(l->bbx[HOR],l->bbx[VER],matrix,coX,coY);
+00051     
+00052                 // if this difference is more than basic cell
+00053                 // size  move it
+00054     if(abs(coX) > i->size[HOR])
+00055     {
+00056       matrix[B1]-=(coX/i->size[HOR])*i->size[HOR];    
+00057     }
+00058     
+00059     if(abs(coY) > i->size[VER])
+00060     {
+00061       matrix[B2]-=(coY/i->size[VER])*i->size[VER];    
+00062     }
+00063     
+00064     
+00065     
+00066     scan(matrix,l,i,lMap);
+00067   }
+00068 }
+\end{verbatim}\normalsize 
+\label{Pattern_a1}
+\index{Pattern@{Pattern}!~Pattern@{$\sim$Pattern}}
+\index{~Pattern@{$\sim$Pattern}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Pattern::$\sim$Pattern ()}\hfill
+
+
+
+Definition at line 71 of file pattern.C.\small\begin{verbatim}00074 {
+00075   if(tranMaps!=NULL)
+00076     delete tranMaps;
+00077 
+00078   delete matrix;
+00079 
+00080 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Pattern_a6}
+\index{Pattern@{Pattern}!addCriticals@{addCriticals}}
+\index{addCriticals@{addCriticals}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::add\-Criticals ({\bf Lay\-Map} \& {\em l\-Map})}\hfill
+
+
+
+Definition at line 246 of file pattern.C.\small\begin{verbatim}00249 {
+00250   ListIterator cIter(*this);
+00251   int x1=MAXINT,x2=MININT,
+00252       y1=MAXINT,y2=MININT;
+00253 
+00254   for(;(Item&)cIter != NOITEM;cIter++)
+00255   {
+00256     Clst &clstRef = (Clst&)(Item&)cIter;
+00257     
+00258     if (clstRef.cX < x1) 
+00259       x1=clstRef.cX;
+00260     if (clstRef.cX > x2)
+00261       x2=clstRef.cX;
+00262     if (clstRef.cY < y1) 
+00263       y1=clstRef.cY;
+00264     if (clstRef.cY > y2)
+00265       y2=clstRef.cY;
+00266 
+00267   }
+00268   // now x1,x2,y1,y2 contain cluster coordinates of bounding box
+00269 
+00270   int hor=lMap.getHor(),
+00271       ver=lMap.getVer();
+00272     int i,j;
+00273 
+00274     for(i=x1;i<=x2;i++)
+00275         for(j=y1;j<=y2;j++)
+00276     {
+00277       Clst &newClst=*new Clst(i,j,hor,ver);
+00278                                 
+00279                                  // adding critical points from mirror axis
+00280 
+00281 
+00282       
+00283       Clst &oldClst = (Clst&)findItem( newClst );
+00284       
+00285       // to clusters are equal if they have the same bottom
+00286       // left coord.
+00287       
+00288       if(oldClst == NOITEM  )  // first point in this cluster
+00289       {
+00290     lMap.addCriticalPoints(newClst,matrix);
+00291     add(newClst);
+00292       }
+00293       else
+00294       {                           // we must only mark new sector
+00295                               // and add critical points
+00296 
+00297     lMap.addCriticalPoints(oldClst,matrix);
+00298     delete (void*)&newClst;
+00299       }  
+00300       
+00301 
+00302     }
+00303 
+00304 
+00305 }
+\end{verbatim}\normalsize 
+\label{Pattern_a12}
+\index{Pattern@{Pattern}!findNewLeftBottom@{findNewLeftBottom}}
+\index{findNewLeftBottom@{findNewLeftBottom}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::find\-New\-Left\-Bottom (int {\em x}, int {\em y}, short $\ast$ {\em mx}, int \& {\em cx}, int \& {\em cy})}\hfill
+
+
+
+Definition at line 365 of file pattern.C.
+
+Referenced by {\bf Plcm::calc\-Transp}().\small\begin{verbatim}00370 {
+00371   short in[4],out[4];
+00372   
+00373   in[XL]=in[YB]=0;      // left bottom corner
+00374   in[XR]=x;                 // right-top corner
+00375   in[YT]=y;
+00376   
+00377   mtxapplytocrd(out,in,mx);
+00378   
+00379                 // lets find new left-bottom corner
+00380   
+00381   if(out[XL]<out[XR])
+00382     cx=out[XL];
+00383   else
+00384     cx=out[XR];
+00385   
+00386   if(out[YB]<out[YT])
+00387     cy=out[YB];
+00388   else
+00389     cy=out[YT];
+00390   
+00391   
+00392 }
+\end{verbatim}\normalsize 
+\label{Pattern_a9}
+\index{Pattern@{Pattern}!getHor@{getHor}}
+\index{getHor@{getHor}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::get\-Hor () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 66 of file pattern.h.
+
+Referenced by {\bf Plcm::place\-One\-Cell}(), and {\bf Plcm::try\-This\-Cell\-Here}().\small\begin{verbatim}00066 {return hor;}
+\end{verbatim}\normalsize 
+\label{Pattern_a11}
+\index{Pattern@{Pattern}!getTranMaps@{getTranMaps}}
+\index{getTranMaps@{getTranMaps}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Transparency} $\ast$ Pattern::get\-Tran\-Maps ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 68 of file pattern.h.
+
+Referenced by {\bf Plcm::calc\-Transp}().\small\begin{verbatim}00068 {return tranMaps;}
+\end{verbatim}\normalsize 
+\label{Pattern_a10}
+\index{Pattern@{Pattern}!getVer@{getVer}}
+\index{getVer@{getVer}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::get\-Ver () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 67 of file pattern.h.
+
+Referenced by {\bf Plcm::place\-One\-Cell}(), and {\bf Plcm::try\-This\-Cell\-Here}().\small\begin{verbatim}00067 {return ver;}
+\end{verbatim}\normalsize 
+\label{Pattern_a4}
+\index{Pattern@{Pattern}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::is\-Equal (const {\bf Item} \& {\em o}) const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box} {\rm (p.\,\pageref{Box_a6})}.
+
+Definition at line 58 of file pattern.h.\small\begin{verbatim}00059 {return !memcmp(((Pattern&)o).matrix,matrix,6);}
+\end{verbatim}\normalsize 
+\label{Pattern_a8}
+\index{Pattern@{Pattern}!isMacro@{isMacro}}
+\index{isMacro@{isMacro}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::is\-Macro () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 65 of file pattern.h.
+
+Referenced by {\bf Plcm::place\-Group}(), {\bf Plcm::place\-One\-Cell}(), and {\bf Plcm::try\-This\-Cell\-Here}().\small\begin{verbatim}00065 {return isMac;}
+\end{verbatim}\normalsize 
+\label{Pattern_c2}
+\index{Pattern@{Pattern}!markPowerLines@{markPowerLines}}
+\index{markPowerLines@{markPowerLines}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::mark\-Power\-Lines ({\bf IMAGEDESC} $\ast$ {\em i\-Ptr})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 336 of file pattern.C.\small\begin{verbatim}00339 {
+00340   POWERLINE *pPtr=iPtr->powerlines;
+00341 
+00342   for(;pPtr!=NULL;pPtr=pPtr->next)
+00343   {
+00344     Transparency &tRef=tranMaps[pPtr->layer];
+00345 
+00346     if(iPtr->routeorient[pPtr->layer] == HOR)
+00347     {
+00348       for(int i=0;i<tRef.sizeHor;i++)
+00349     tRef.horGridMap[i]=0x1;
+00350 
+00351       for(int j=pPtr->row_or_column;j<tRef.sizeVer;j+=iPtr->size[VER])
+00352     tRef.verGridMap[j]=0x1;
+00353     }
+00354     else
+00355     {
+00356       for(int i=0;i<tRef.sizeVer;i++)
+00357     tRef.verGridMap[i]=0x1;
+00358       for(int j=pPtr->row_or_column;j<tRef.sizeHor;j+=iPtr->size[HOR])
+00359     tRef.horGridMap[j]=0x1;
+00360     }
+00361   }
+00362 }
+\end{verbatim}\normalsize 
+\label{Pattern_a3}
+\index{Pattern@{Pattern}!myName@{myName}}
+\index{myName@{myName}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Pattern::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf List} {\rm (p.\,\pageref{List_a7})}.
+
+Definition at line 57 of file pattern.h.\small\begin{verbatim}00057 { return "Pattern"; }
+\end{verbatim}\normalsize 
+\label{Pattern_a2}
+\index{Pattern@{Pattern}!myNo@{myNo}}
+\index{myNo@{myNo}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Pattern::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf List} {\rm (p.\,\pageref{List_a6})}.
+
+Definition at line 56 of file pattern.h.\small\begin{verbatim}00056 { return PatternClass; }
+\end{verbatim}\normalsize 
+\label{Pattern_a5}
+\index{Pattern@{Pattern}!operator short *@{operator short $\ast$}}
+\index{operator short *@{operator short $\ast$}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Pattern::operator short $\ast$ ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 61 of file pattern.h.\small\begin{verbatim}00061 { return matrix;}
+\end{verbatim}\normalsize 
+\label{Pattern_a7}
+\index{Pattern@{Pattern}!removeUnnessesery@{removeUnnessesery}}
+\index{removeUnnessesery@{removeUnnessesery}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::remove\-Unnessesery ({\bf Image\-Map} \& {\em i\-Map})}\hfill
+
+
+
+Definition at line 308 of file pattern.C.\small\begin{verbatim}00313 {
+00314   ListIterator clstIter( *this);
+00315 
+00316   for(;(Item&)clstIter != NOITEM;clstIter++)
+00317   {
+00318     Clst& clstRef=(Clst&)(Item&)clstIter;
+00319     ListIterator criIter(clstRef.criticalPoints );
+00320 
+00321     for(;(Item&)criIter != NOITEM;criIter++)
+00322     {
+00323       CriPoint &test = (CriPoint&)(Item&)criIter;
+00324       clusterMapType nb=iMap.recognizeNeighbors(test.x,test.y);
+00325       
+00326       if (nb != 0 && (nb & clstRef.pattern)==nb)
+00327       {
+00328     clstRef.criticalPoints.remove(test);
+00329       }
+00330     }
+00331   }
+00332 }
+\end{verbatim}\normalsize 
+\label{Pattern_c0}
+\index{Pattern@{Pattern}!scan@{scan}}
+\index{scan@{scan}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::scan (short $\ast$ {\em mtx}, LAYOUT $\ast$ {\em l\-Ptr}, {\bf IMAGEDESC} $\ast$ {\em i\-Ptr}, {\bf Lay\-Map} \& {\em l\-Map})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 83 of file pattern.C.\small\begin{verbatim}00090 {
+00091   int hor = iPtr->size[HOR],
+00092       ver = iPtr->size[VER],
+00093       **stamp = iPtr->stamp;
+00094 
+00095   if(doTransAna && tranMaps == NULL) // if requested and that's a first
+00096   {                 // call create empty transparency map
+00097     noOfLayers=iPtr->numlayers;
+00098     tranMaps = new Transparency[noOfLayers];
+00099     for(int i=0;i<noOfLayers;i++)
+00100       tranMaps[i]=Transparency(lPtr->bbx[HOR],lPtr->bbx[VER]);
+00101     markPowerLines(iPtr);
+00102   }
+00103 
+00104   for(SLICE *slPtr = lPtr->slice;slPtr != NULL;slPtr=slPtr->next)
+00105     scanSlice(mtx,slPtr,iPtr,lMap);
+00106 
+00107   for(WIRE *wPtr=lPtr->wire;wPtr!= NULL;wPtr=wPtr->next)
+00108   {
+00109     short  out[4];                   // wire after transformation
+00110     layerType layer;
+00111 
+00112     mtxapplytocrd(out,wPtr->crd,mtx);
+00113     if (out[XL] > out[XR])           // after transformation relation between
+00114     {                                // points may change
+00115       int tmp=out[XL];
+00116       out[XL]=out[XR];
+00117       out[XR]=tmp;
+00118     }  
+00119     if (out[YB] > out[YT])
+00120     {
+00121       int tmp=out[YB];
+00122       out[YB]=out[YT];
+00123       out[YT]=tmp;
+00124     }  
+00125 
+00126     layer=recognizeLayer(wPtr->layer);
+00127     
+00128     int x,y;
+00129 
+00130     for(x=out[XL];x<=out[XR];x++)
+00131       for(y=out[YB];y<=out[YT];y++)
+00132       {
+00133     Clst &newClst=*new Clst(x,y,hor,ver,stamp,lMap,layer,matrix,doCheck);
+00134                        // Cluster with critical points list
+00135                        // which come from metal segments on mirror
+00136                        // axis if doCheck == 1
+00137 
+00138     if(doTransAna && wPtr->layer < 100)
+00139     {                       // that's not a via
+00140       Transparency &tm=tranMaps[wPtr->layer-1];
+00141       
+00142       if (y < tm.sizeVer && x <tm.sizeHor)
+00143       {
+00144         tm.verGridMap[y]=0x1;
+00145         tm.horGridMap[x]=0x1;
+00146       }
+00147       else
+00148         cerr << "Warning: is you bounding box right? (cell " 
+00149          << cellname << " )" << endl;
+00150         
+00151     }
+00152 
+00153     Clst &oldClst = (Clst&)findItem( newClst );
+00154     
+00155     // to clusters are equal if they have the same bottom
+00156     // left coord.
+00157     
+00158     if(oldClst == NOITEM  )  // first point in this cluster
+00159       add(newClst);
+00160     else
+00161     {                           // we must only mark new sector
+00162 
+00163       oldClst |= newClst;
+00164       delete (void*)&newClst;
+00165     }  
+00166 
+00167       }
+00168   }
+00169 }
+\end{verbatim}\normalsize 
+\label{Pattern_c1}
+\index{Pattern@{Pattern}!scanSlice@{scanSlice}}
+\index{scanSlice@{scanSlice}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Pattern::scan\-Slice (short $\ast$ {\em mtx}, SLICE $\ast$ {\em sl\-Ptr}, {\bf IMAGEDESC} $\ast$ {\em i\-Ptr}, {\bf Lay\-Map} \& {\em l\-Map})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 172 of file pattern.C.\small\begin{verbatim}00176 {
+00177    if (this == NIL)
+00178    {
+00179       cerr << "Help\n" << flush;
+00180    }
+00181   if(slPtr->chld_type == SLICE_CHLD)
+00182   {
+00183     for(SLICE *cslPtr=slPtr->chld.slice;cslPtr != NULL;cslPtr=cslPtr->next)
+00184       scanSlice(mtx,cslPtr,iPtr,lMap);
+00185   }
+00186   else
+00187   { 
+00188     for(LAYINST *liPtr=slPtr->chld.layinst;liPtr!=NULL;liPtr=liPtr->next)
+00189       if(strstr(liPtr->layout->name,"Tmp_Cell_")==NULL ) // don't consider 
+00190                                                      // nelsis's tmp cells
+00191       {
+00192     short out[6],
+00193           *mtxb=liPtr->mtx;
+00194                 // transformation for this cell is a multiplication
+00195                 // of transfomation of parrent and transformation
+00196                 // of child within parrent
+00197     
+00198     out[A11] = mtx[A11]*mtxb[A11] + mtx[A12]*mtxb[A21];
+00199     out[A12] = mtx[A11]*mtxb[A12] + mtx[A12]*mtxb[A22];
+00200     out[A21] = mtx[A21]*mtxb[A11] + mtx[A22]*mtxb[A21];
+00201     out[A22] = mtx[A21]*mtxb[A12] + mtx[A22]*mtxb[A22];
+00202     out[B1]  = mtx[A11]*mtxb[B1]  + mtx[A12]*mtxb[B2] + mtx[B1];
+00203     out[B2]  = mtx[A21]*mtxb[B1]  + mtx[A22]*mtxb[B2] + mtx[B2];
+00204 
+00205     scan(out,liPtr->layout,iPtr,lMap);  
+00206       }
+00207       else
+00208       {
+00209     cerr << "\n Layouts cannot be build of nelsis's temporary cells\n";
+00210     usrErr("Pattern::scanSlice",EINPDAT);
+00211       }
+00212 
+00213   }
+00214   
+00215 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Pattern_o0}
+\index{Pattern@{Pattern}!cellname@{cellname}}
+\index{cellname@{cellname}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Pattern::cellname\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 76 of file pattern.h.\label{Pattern_o2}
+\index{Pattern@{Pattern}!doCheck@{doCheck}}
+\index{doCheck@{doCheck}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::do\-Check\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 78 of file pattern.h.\label{Pattern_o3}
+\index{Pattern@{Pattern}!doTransAna@{doTransAna}}
+\index{doTransAna@{doTransAna}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::do\-Trans\-Ana\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 79 of file pattern.h.\label{Pattern_o6}
+\index{Pattern@{Pattern}!hor@{hor}}
+\index{hor@{hor}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::hor\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 84 of file pattern.h.\label{Pattern_o4}
+\index{Pattern@{Pattern}!isMac@{isMac}}
+\index{isMac@{isMac}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::is\-Mac\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 81 of file pattern.h.\label{Pattern_o1}
+\index{Pattern@{Pattern}!matrix@{matrix}}
+\index{matrix@{matrix}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ Pattern::matrix\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 77 of file pattern.h.\label{Pattern_o8}
+\index{Pattern@{Pattern}!noOfLayers@{noOfLayers}}
+\index{noOfLayers@{noOfLayers}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::no\-Of\-Layers\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 91 of file pattern.h.\label{Pattern_o7}
+\index{Pattern@{Pattern}!tranMaps@{tranMaps}}
+\index{tranMaps@{tranMaps}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Transparency} $\ast$ Pattern::tran\-Maps\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 90 of file pattern.h.\label{Pattern_o5}
+\index{Pattern@{Pattern}!ver@{ver}}
+\index{ver@{ver}!Pattern@{Pattern}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Pattern::ver\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 83 of file pattern.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf pattern.h}\item 
+{\bf pattern.C}\end{CompactItemize}

@@ -1,0 +1,22 @@
+#	@(#)README 1.2 11/05/92 Delft University of Technology
+#
+******************************************************************************
+
+Compilation for Sparc/SunOs-4.1.1 with GNU gcc-2.1.1:
+=====================================================
+
+The problem here is that the /usr/include tree does not contain any ANSI
+prototypes. In systypes.h I had to add "#define KERNEL" because the non-ANSI
+function declarations in the header files are sometimes #ifdef'd KERNEL. This
+of course is a horrible hack, and I don't think it will help us in many other
+versions of SunOs. What we **really** need from Sun is ANSI-C with ANSI header
+files.
+
+The shell command that does the job is:
+% make OCEAN=/usr/ocean \
+       CC=gcc \
+       XCFLAGS="-fno-builtin -O" \
+       XLYCFLAGS="-U__GNUC__" \
+       install
+
+******************************************************************************

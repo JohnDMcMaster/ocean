@@ -1,0 +1,71 @@
+.TH mtx.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mtx.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sealib.h>\fR
+.br
+\fC#include "sea.h"\fR
+.br
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "short* \fBmtxidentity\fR (void)"
+.br
+.ti -1c
+.RI "void \fBmtxtranslate\fR (short *mtx,int p,int q)"
+.br
+.ti -1c
+.RI "void \fBmtxcopy\fR (short *dstmtx,short *srcmtx)"
+.br
+.ti -1c
+.RI "void \fBmtxapply\fR (int *out,int *in,short *mtx)"
+.br
+.ti -1c
+.RI "void \fBmtxaddvec\fR (short *mtx,int p,int q)"
+.br
+.ti -1c
+.RI "void \fBmtxapplytocrd\fR (short *out,short *in,short *mtx)"
+.br
+.ti -1c
+.RI "short* \fBmtxchain\fR (short *mtxb,short *mtxa)"
+.br
+.in -1c
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS void mtxaddvec (short * mtx, int p, int q)
+.PP
+Definition at line 56 of file mtx.C.
+.PP
+Referenced by \fBmkequivalencelist\fR().
+.SS void mtxapply (int * out, int * in, short * mtx)
+.PP
+Definition at line 49 of file mtx.C.
+.PP
+Referenced by \fBmkequivalencelist\fR().
+.SS void mtxapplytocrd (short * out, short * in, short * mtx)
+.PP
+Definition at line 64 of file mtx.C.
+.PP
+Referenced by \fBPattern::findNewLeftBottom\fR().
+.SS short * mtxchain (short * mtxb, short * mtxa)
+.PP
+Definition at line 78 of file mtx.C.
+.SS void mtxcopy (short * dstmtx, short * srcmtx)
+.PP
+Definition at line 37 of file mtx.C.
+.PP
+Referenced by \fBmkequivalencelist\fR().
+.SS short * mtxidentity (void)
+.PP
+Definition at line 10 of file mtx.C.
+.SS void mtxtranslate (short * mtx, int p, int q)
+.PP
+Definition at line 29 of file mtx.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

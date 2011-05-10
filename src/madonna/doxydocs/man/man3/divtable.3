@@ -1,0 +1,52 @@
+.TH DivTable 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DivTable \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <divTable.h>\fR
+.PP
+Inherits \fBArray\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBDivTable\fR ( char *fileName = "div.tab", char *fileName2="seadif/div.tab" )"
+.br
+.ti -1c
+.RI "\fB~DivTable\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS DivTable::DivTable (char * fileName = "div.tab", char * fileName2 = "seadif/div.tab")
+.PP
+Definition at line 12 of file divTable.C.
+.SS DivTable::~DivTable ()\fC [inline]\fR
+.PP
+Definition at line 27 of file divTable.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS char * DivTable::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBArray\fR.
+.PP
+Definition at line 30 of file divTable.h.
+.SS \fBclassType\fR DivTable::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBArray\fR.
+.PP
+Definition at line 29 of file divTable.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

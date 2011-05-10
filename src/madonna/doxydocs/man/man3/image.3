@@ -1,0 +1,180 @@
+.TH image.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+image.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fB_EQUIVLIST\fR"
+.br
+.ti -1c
+.RI "struct \fB_IMAGEDESC\fR"
+.br
+.ti -1c
+.RI "struct \fB_MIRROR\fR"
+.br
+.ti -1c
+.RI "struct \fB_POWERLINE\fR"
+.br
+.ti -1c
+.RI "struct \fB_SECTORLIST\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBX1\fR  XL"
+.br
+.ti -1c
+.RI "#define \fBX2\fR  XR"
+.br
+.ti -1c
+.RI "#define \fBY1\fR  YB"
+.br
+.ti -1c
+.RI "#define \fBY2\fR  YT"
+.br
+.ti -1c
+.RI "#define \fBNewMirror\fR(p)   ((p)=(\fBMIRRORPTR\fR)mnew(sizeof(\fBMIRROR\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewSectorlist\fR(p)   ((p)=(\fBSECTORLISTPTR\fR)mnew(sizeof(\fBSECTORLIST\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewEquivlist\fR(p)   ((p)=(\fBEQUIVLISTPTR\fR)mnew(sizeof(\fBEQUIVLIST\fR)))"
+.br
+.ti -1c
+.RI "#define \fBNewImagedesc\fR(p)   ((p)=(\fBIMAGEDESCPTR\fR)mnew(sizeof(\fBIMAGEDESC\fR)))"
+.br
+.ti -1c
+.RI "#define \fBFreeMirror\fR(p)   mfree((char **)(p),sizeof(\fBMIRROR\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreeSectorlist\fR(p)   mfree((char **)(p),sizeof(\fBSECTORLIST\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreeEquivlist\fR(p)   mfree((char **)(p),sizeof(\fBEQUIVLIST\fR))"
+.br
+.ti -1c
+.RI "#define \fBFreeImagedesc\fR(p)   mfree((char **)(p),sizeof(\fBIMAGEDESC\fR))"
+.br
+.in -1c
+.SS Typedefs
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_EQUIVLIST\fR
+ \fBEQUIVLIST\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_EQUIVLIST\fR* \fBEQUIVLISTPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_MIRROR\fR
+ \fBMIRROR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_MIRROR\fR* \fBMIRRORPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_SECTORLIST\fR
+ \fBSECTORLIST\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_SECTORLIST\fR* \fBSECTORLISTPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_POWERLINE\fR
+ \fBPOWERLINE\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_POWERLINE\fR * \fBPOWERLINEPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_IMAGEDESC\fR
+ \fBIMAGEDESC\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_IMAGEDESC\fR* \fBIMAGEDESCPTR\fR"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define FreeEquivlist(p)  mfree((char **)(p),sizeof(\fBEQUIVLIST\fR))
+.PP
+Definition at line 78 of file image.h.
+.SS #define FreeImagedesc(p)  mfree((char **)(p),sizeof(\fBIMAGEDESC\fR))
+.PP
+Definition at line 79 of file image.h.
+.SS #define FreeMirror(p)  mfree((char **)(p),sizeof(\fBMIRROR\fR))
+.PP
+Definition at line 76 of file image.h.
+.SS #define FreeSectorlist(p)  mfree((char **)(p),sizeof(\fBSECTORLIST\fR))
+.PP
+Definition at line 77 of file image.h.
+.SS #define NewEquivlist(p)  ((p)=(\fBEQUIVLISTPTR\fR)mnew(sizeof(\fBEQUIVLIST\fR)))
+.PP
+Definition at line 74 of file image.h.
+.PP
+Referenced by \fBmkequivalencelist\fR().
+.SS #define NewImagedesc(p)  ((p)=(\fBIMAGEDESCPTR\fR)mnew(sizeof(\fBIMAGEDESC\fR)))
+.PP
+Definition at line 75 of file image.h.
+.SS #define NewMirror(p)  ((p)=(\fBMIRRORPTR\fR)mnew(sizeof(\fBMIRROR\fR)))
+.PP
+Definition at line 72 of file image.h.
+.PP
+Referenced by \fBreadmirroraxis\fR().
+.SS #define NewSectorlist(p)  ((p)=(\fBSECTORLISTPTR\fR)mnew(sizeof(\fBSECTORLIST\fR)))
+.PP
+Definition at line 73 of file image.h.
+.PP
+Referenced by \fBlabelallsectors\fR().
+.SS #define X1  XL
+.PP
+Definition at line 8 of file image.h.
+.SS #define X2  XR
+.PP
+Definition at line 9 of file image.h.
+.SS #define Y1  YB
+.PP
+Definition at line 10 of file image.h.
+.SS #define Y2  YT
+.PP
+Definition at line 11 of file image.h.
+.SH TYPEDEF DOCUMENTATION
+.PP 
+.SS typedef struct \fB_EQUIVLIST\fR
+ EQUIVLIST
+.PP
+.SS typedef struct \fB_EQUIVLIST\fR* EQUIVLISTPTR
+.PP
+.SS typedef struct \fB_IMAGEDESC\fR
+ IMAGEDESC
+.PP
+.SS typedef struct \fB_IMAGEDESC\fR* IMAGEDESCPTR
+.PP
+.SS typedef struct \fB_MIRROR\fR
+ MIRROR
+.PP
+.SS typedef struct \fB_MIRROR\fR* MIRRORPTR
+.PP
+.SS typedef struct \fB_POWERLINE\fR
+ POWERLINE
+.PP
+.SS typedef struct \fB_POWERLINE\fR * POWERLINEPTR
+.PP
+.SS typedef struct \fB_SECTORLIST\fR
+ SECTORLIST
+.PP
+.SS typedef struct \fB_SECTORLIST\fR* SECTORLISTPTR
+.PP
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

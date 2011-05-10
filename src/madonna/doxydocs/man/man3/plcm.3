@@ -1,0 +1,109 @@
+.TH Plcm 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Plcm \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <plcm.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBPlcm\fR (char *cName, char *fName, char *lName, \fBIMAGEDESC\fR* imageDesc,\fBImageMap\fR* imMap, char *oName=NULL, CIRCUIT *readData=NULL, \fBGLOBAL_ROUTING\fR *g_rout=NULL, \fBBoolean\fR slicingLayout=false, \fBBoolean\fR doTransparencyAna=false, \fBBoolean\fR verbose=false, \fBBoolean\fR \fBrand_points\fR=true, int set_srand=0 ,int macroMinSize=MAXINT)"
+.br
+.ti -1c
+.RI "\fB~Plcm\fR ()"
+.br
+.ti -1c
+.RI "void \fBread\fR (void)"
+.br
+.ti -1c
+.RI "void \fBprepare\fR (void)"
+.br
+.ti -1c
+.RI "void \fBcreatePlane\fR (int hor,int ver )"
+.br
+.ti -1c
+.RI "int \fBplacement\fR (void)"
+.br
+.ti -1c
+.RI "void \fBsetBbx\fR (void)"
+.br
+.ti -1c
+.RI "void \fBrecover\fR (void)"
+.br
+.ti -1c
+.RI "void \fBcompaction\fR (void )"
+.br
+.ti -1c
+.RI "void \fBwrite\fR (CIRCUIT *toAttachTo=NULL,\fBBoolean\fR doWrite=true)"
+.br
+.ti -1c
+.RI "void \fBdoTranspAnalysis\fR (void)"
+.br
+.ti -1c
+.RI "void \fBaddFreeNet\fR (char *name)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Plcm::Plcm (char * cName, char * fName, char * lName, \fBIMAGEDESC\fR * imageDesc, \fBImageMap\fR * imMap, char * oName = NULL, CIRCUIT * partitioned = NULL, \fBGLOBAL_ROUTING\fR * g_rout = NULL, \fBBoolean\fR sl = false, \fBBoolean\fR da = false, \fBBoolean\fR v = false, \fBBoolean\fR p = true, int sr = 0, int mm = MAXINT)
+.PP
+Definition at line 33 of file plcm.C.
+.SS Plcm::~Plcm (void)
+.PP
+Definition at line 249 of file plcm.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void Plcm::addFreeNet (char * name)
+.PP
+.SS void Plcm::compaction (void)
+.PP
+Definition at line 18 of file compact.C.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::createPlane (int hor, int ver)
+.PP
+Definition at line 904 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::doTranspAnalysis (void)
+.PP
+Definition at line 1177 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+.SS int Plcm::placement (void)\fC [inline]\fR
+.PP
+Definition at line 55 of file plcm.h.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::prepare (void)
+.PP
+Definition at line 134 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::read (void)
+.PP
+Definition at line 100 of file plcm.C.
+.SS void Plcm::recover (void)
+.PP
+Definition at line 976 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::setBbx (void)
+.PP
+Definition at line 1030 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+.SS void Plcm::write (CIRCUIT * cirPtr = NULL, \fBBoolean\fR doWrite = true)
+.PP
+Definition at line 797 of file plcm.C.
+.PP
+Referenced by \fBphil\fR().
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

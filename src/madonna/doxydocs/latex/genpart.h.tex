@@ -1,0 +1,236 @@
+\subsection{genpart.h File Reference}
+\label{genpart.h}\index{genpart.h@{genpart.h}}
+{\tt \#include "cost.h"}\par
+{\tt \#include "routing.h"}\par
+{\tt \#include $<$sealib.h$>$}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-NETCOSTINFO}
+\item 
+struct {\bf \_\-PARTCELL}
+\item 
+struct {\bf \_\-PARTITION}
+\item 
+struct {\bf \_\-PARTLIST}
+\item 
+struct {\bf \_\-PNET}
+\item 
+struct {\bf \_\-TOTALP}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf MAXNETCOSTFUNCTIONS}\ 30
+\item 
+\#define {\bf New\-Partcell}(p) \ ((p)=({\bf PARTCELLPTR})mnew(sizeof({\bf PARTCELL})))
+\item 
+\#define {\bf New\-Partlist}(p) \ ((p)=({\bf PARTLISTPTR})mnew(sizeof({\bf PARTLIST})))
+\item 
+\#define {\bf New\-Partition}(p) \ ((p)=({\bf PARTITIONPTR})mnew(sizeof({\bf PARTITION})))
+\item 
+\#define {\bf New\-Pnet}(p) \ ((p)=({\bf PNETPTR})mnew(sizeof({\bf PNET})))
+\item 
+\#define {\bf New\-Totalp}(p) \ ((p)=({\bf TOTALPPTR})mnew(sizeof({\bf TOTALP})))
+\item 
+\#define {\bf Free\-Partcell}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTCELL}))
+\item 
+\#define {\bf Free\-Partlist}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTLIST}))
+\item 
+\#define {\bf Free\-Partition}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTITION}))
+\item 
+\#define {\bf Free\-Pnet}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf PNET}))
+\item 
+\#define {\bf Free\-Totalp}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf TOTALP}))
+\end{CompactItemize}
+\subsubsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef int ($\ast$ {\bf CFUNC} )(int,...)
+\item 
+typedef struct {\bf \_\-PARTCELL}
+ {\bf PARTCELL}
+\item 
+typedef struct {\bf \_\-PARTCELL}$\ast$ {\bf PARTCELLPTR}
+\item 
+typedef struct {\bf \_\-PARTLIST}
+ {\bf PARTLIST}
+\item 
+typedef struct {\bf \_\-PARTLIST}$\ast$ {\bf PARTLISTPTR}
+\item 
+typedef struct {\bf \_\-PARTITION}
+ {\bf PARTITION}
+\item 
+typedef struct {\bf \_\-PARTITION}$\ast$ {\bf PARTITIONPTR}
+\item 
+typedef struct {\bf \_\-PNET}
+ {\bf PNET}
+\item 
+typedef struct {\bf \_\-PNET}$\ast$ {\bf PNETPTR}
+\item 
+typedef struct {\bf \_\-TOTALP}
+ {\bf TOTALP}
+\item 
+typedef struct {\bf \_\-TOTALP}$\ast$ {\bf TOTALPPTR}
+\item 
+typedef struct {\bf \_\-NETCOSTINFO}
+ {\bf NETCOSTINFO}
+\item 
+typedef struct {\bf \_\-NETCOSTINFO}$\ast$ {\bf NETCOSTINFOPTR}
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{genpart.h_a6}
+\index{genpart.h@{genpart.h}!FreePartcell@{FreePartcell}}
+\index{FreePartcell@{FreePartcell}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Partcell(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTCELL}))}\hfill
+
+
+
+Definition at line 112 of file genpart.h.\label{genpart.h_a8}
+\index{genpart.h@{genpart.h}!FreePartition@{FreePartition}}
+\index{FreePartition@{FreePartition}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Partition(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTITION}))}\hfill
+
+
+
+Definition at line 114 of file genpart.h.\label{genpart.h_a7}
+\index{genpart.h@{genpart.h}!FreePartlist@{FreePartlist}}
+\index{FreePartlist@{FreePartlist}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Partlist(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf PARTLIST}))}\hfill
+
+
+
+Definition at line 113 of file genpart.h.\label{genpart.h_a9}
+\index{genpart.h@{genpart.h}!FreePnet@{FreePnet}}
+\index{FreePnet@{FreePnet}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Pnet(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf PNET}))}\hfill
+
+
+
+Definition at line 115 of file genpart.h.\label{genpart.h_a10}
+\index{genpart.h@{genpart.h}!FreeTotalp@{FreeTotalp}}
+\index{FreeTotalp@{FreeTotalp}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Totalp(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf TOTALP}))}\hfill
+
+
+
+Definition at line 116 of file genpart.h.\label{genpart.h_a0}
+\index{genpart.h@{genpart.h}!MAXNETCOSTFUNCTIONS@{MAXNETCOSTFUNCTIONS}}
+\index{MAXNETCOSTFUNCTIONS@{MAXNETCOSTFUNCTIONS}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAXNETCOSTFUNCTIONS\ 30}\hfill
+
+
+
+Definition at line 103 of file genpart.h.\label{genpart.h_a1}
+\index{genpart.h@{genpart.h}!NewPartcell@{NewPartcell}}
+\index{NewPartcell@{NewPartcell}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Partcell(p)\ ((p)=({\bf PARTCELLPTR})mnew(sizeof({\bf PARTCELL})))}\hfill
+
+
+
+Definition at line 105 of file genpart.h.\label{genpart.h_a3}
+\index{genpart.h@{genpart.h}!NewPartition@{NewPartition}}
+\index{NewPartition@{NewPartition}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Partition(p)\ ((p)=({\bf PARTITIONPTR})mnew(sizeof({\bf PARTITION})))}\hfill
+
+
+
+Definition at line 107 of file genpart.h.\label{genpart.h_a2}
+\index{genpart.h@{genpart.h}!NewPartlist@{NewPartlist}}
+\index{NewPartlist@{NewPartlist}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Partlist(p)\ ((p)=({\bf PARTLISTPTR})mnew(sizeof({\bf PARTLIST})))}\hfill
+
+
+
+Definition at line 106 of file genpart.h.\label{genpart.h_a4}
+\index{genpart.h@{genpart.h}!NewPnet@{NewPnet}}
+\index{NewPnet@{NewPnet}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Pnet(p)\ ((p)=({\bf PNETPTR})mnew(sizeof({\bf PNET})))}\hfill
+
+
+
+Definition at line 108 of file genpart.h.\label{genpart.h_a5}
+\index{genpart.h@{genpart.h}!NewTotalp@{NewTotalp}}
+\index{NewTotalp@{NewTotalp}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Totalp(p)\ ((p)=({\bf TOTALPPTR})mnew(sizeof({\bf TOTALP})))}\hfill
+
+
+
+Definition at line 109 of file genpart.h.
+
+\subsubsection{Typedef Documentation}
+\label{genpart.h_a11}
+\index{genpart.h@{genpart.h}!CFUNC@{CFUNC}}
+\index{CFUNC@{CFUNC}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef int ($\ast$ CFUNC)(int,...)}\hfill
+
+
+
+Definition at line 13 of file genpart.h.\label{genpart.h_a22}
+\index{genpart.h@{genpart.h}!NETCOSTINFO@{NETCOSTINFO}}
+\index{NETCOSTINFO@{NETCOSTINFO}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-NETCOSTINFO}
+ NETCOSTINFO}\hfill
+
+\label{genpart.h_a23}
+\index{genpart.h@{genpart.h}!NETCOSTINFOPTR@{NETCOSTINFOPTR}}
+\index{NETCOSTINFOPTR@{NETCOSTINFOPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-NETCOSTINFO}$\ast$ NETCOSTINFOPTR}\hfill
+
+\label{genpart.h_a12}
+\index{genpart.h@{genpart.h}!PARTCELL@{PARTCELL}}
+\index{PARTCELL@{PARTCELL}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTCELL}
+ PARTCELL}\hfill
+
+\label{genpart.h_a13}
+\index{genpart.h@{genpart.h}!PARTCELLPTR@{PARTCELLPTR}}
+\index{PARTCELLPTR@{PARTCELLPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTCELL}$\ast$ PARTCELLPTR}\hfill
+
+\label{genpart.h_a16}
+\index{genpart.h@{genpart.h}!PARTITION@{PARTITION}}
+\index{PARTITION@{PARTITION}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTITION}
+ PARTITION}\hfill
+
+\label{genpart.h_a17}
+\index{genpart.h@{genpart.h}!PARTITIONPTR@{PARTITIONPTR}}
+\index{PARTITIONPTR@{PARTITIONPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTITION}$\ast$ PARTITIONPTR}\hfill
+
+\label{genpart.h_a14}
+\index{genpart.h@{genpart.h}!PARTLIST@{PARTLIST}}
+\index{PARTLIST@{PARTLIST}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTLIST}
+ PARTLIST}\hfill
+
+\label{genpart.h_a15}
+\index{genpart.h@{genpart.h}!PARTLISTPTR@{PARTLISTPTR}}
+\index{PARTLISTPTR@{PARTLISTPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PARTLIST}$\ast$ PARTLISTPTR}\hfill
+
+\label{genpart.h_a18}
+\index{genpart.h@{genpart.h}!PNET@{PNET}}
+\index{PNET@{PNET}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PNET}
+ PNET}\hfill
+
+\label{genpart.h_a19}
+\index{genpart.h@{genpart.h}!PNETPTR@{PNETPTR}}
+\index{PNETPTR@{PNETPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PNET}$\ast$ PNETPTR}\hfill
+
+\label{genpart.h_a20}
+\index{genpart.h@{genpart.h}!TOTALP@{TOTALP}}
+\index{TOTALP@{TOTALP}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-TOTALP}
+ TOTALP}\hfill
+
+\label{genpart.h_a21}
+\index{genpart.h@{genpart.h}!TOTALPPTR@{TOTALPPTR}}
+\index{TOTALPPTR@{TOTALPPTR}!genpart.h@{genpart.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-TOTALP}$\ast$ TOTALPPTR}\hfill
+

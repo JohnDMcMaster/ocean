@@ -1,0 +1,62 @@
+\subsection{stuff.C File Reference}
+\label{stuff.C}\index{stuff.C@{stuff.C}}
+{\tt \#include $<$malloc.h$>$}\par
+{\tt \#include "sea.h"}\par
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf ALIGNMOD}\ 8
+\item 
+\#define {\bf ALIGNBITS}\ (ALIGNMOD-1)
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf balloc} (int size)
+\item 
+void {\bf bfree} (char $\ast$blk)
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{stuff.C_a1}
+\index{stuff.C@{stuff.C}!ALIGNBITS@{ALIGNBITS}}
+\index{ALIGNBITS@{ALIGNBITS}!stuff.C@{stuff.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define ALIGNBITS\ (ALIGNMOD-1)}\hfill
+
+
+
+Definition at line 10 of file stuff.C.\label{stuff.C_a0}
+\index{stuff.C@{stuff.C}!ALIGNMOD@{ALIGNMOD}}
+\index{ALIGNMOD@{ALIGNMOD}!stuff.C@{stuff.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define ALIGNMOD\ 8}\hfill
+
+
+
+Definition at line 9 of file stuff.C.
+
+\subsubsection{Function Documentation}
+\label{stuff.C_a2}
+\index{stuff.C@{stuff.C}!balloc@{balloc}}
+\index{balloc@{balloc}!stuff.C@{stuff.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ balloc (int {\em size})}\hfill
+
+
+
+Definition at line 14 of file stuff.C.
+
+Referenced by {\bf initimagedesc}().\small\begin{verbatim}00015 {
+00016   return((char *)malloc(size));
+00017 }
+\end{verbatim}\normalsize 
+\label{stuff.C_a3}
+\index{stuff.C@{stuff.C}!bfree@{bfree}}
+\index{bfree@{bfree}!stuff.C@{stuff.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void bfree (char $\ast$ {\em blk})}\hfill
+
+
+
+Definition at line 20 of file stuff.C.\small\begin{verbatim}00021 {
+00022   free(blk);
+00023 }
+\end{verbatim}\normalsize 

@@ -1,0 +1,97 @@
+# SccsId="@(#)Makefile.apollo 3.1 (Delft University of Technology) 06/29/90"
+SHELL = /bin/sh
+ICDPATH = /users/cacd
+
+BIN = $(ICDPATH)/bin
+LIB = $(ICDPATH)/lib
+
+LIBINCL = $(LIB)/include
+DMLIB = $(LIB)/libddm.a
+
+LEX = flex
+
+SEALIBDIR = //dutentp/users/ocean/lib
+SEALIBINCL = //dutentp/users/ocean/include
+SEALIB = $(SEALIBDIR)/sealib_apollo.a
+OLIBS = $(SEALIB) -ll
+
+LDFLAGS = 
+
+OCFLAGS = -g -A cpu,3000  # -I//dutentp/users/ocean/sealib/sealib
+
+CFLAGS = $(OCFLAGS) -I$(SEALIBINCL) -I$(LIBINCL) 
+
+TARGET = nelsea
+
+HEADERS = \
+	def.h \
+	typedef.h \
+	grid.h
+
+SOURCES = \
+	alloc.c \
+	error.c \
+	globals.c \
+	grid_globals.c \
+	initialize.c \
+	main.c \
+	makelib.c \
+	mapfile.c \
+	nelsis.c \
+	read_cell.c \
+	read_circuit.c \
+	read_layout.c \
+	read_seadif.c\
+	write_layout.c\
+	write_circuit.c\
+	write_seadif.c
+
+OBJECTS = \
+	alloc.o \
+	error.o \
+	globals.o \
+	grid_globals.o \
+	initialize.o \
+	main.o \
+	makelib.o \
+	mapfile.o \
+	nelsis.o \
+	read_cell.o \
+	read_circuit.o \
+	read_layout.o \
+	read_seadif.o \
+	write_layout.o\
+	write_circuit.o\
+	write_seadif.o
+
+LYSOURCE = \
+	yd.tab.c
+
+LYOBJECT = \
+	yd.tab.o
+
+YSOURCE = image.y
+LSOURCE = image.l
+
+$(TARGET): $(OBJECTS) $(LYOBJECT) setdate
+	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJECTS) $(LYOBJECT) $(DMLIB) $(OLIBS) -o $(TARGET)
+
+setdate:
+	$(CC) $(CFLAGS) -c "-DCURDATE=\"`date`\"" main.c
+
+$(SOURCES): $(HEADERS)
+
+$(LYOBJECT): $(HEADERS) $(YSOURCE)
+
+yd.tab.c : $(YSOURCE) lex.yd.c
+	$(YACC) $(YSOURCE)
+	cat y.tab.c | sed ' /./s/yy/yd/g' | sed ' /./s/ydwrap/yywrap/g' > yd.tab.c
+
+lex.yd.c : $(LSOURCE)
+	$(LEX) $(LSOURCE)
+	cat lex.yy.c | sed '/./s/yy/yd/g' | sed '/./s/ydwrap/yywrap/g' > lex.yd.c
+ 
+clean:
+	rm -f $(OBJECTS) $(TARGET) core
+
+#EOF

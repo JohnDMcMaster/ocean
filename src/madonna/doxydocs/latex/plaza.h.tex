@@ -1,0 +1,119 @@
+\subsection{plaza.h File Reference}
+\label{plaza.h}\index{plaza.h@{plaza.h}}
+{\tt \#include $<$libstruct.h$>$}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-MIR}
+\item 
+struct {\bf \_\-PIVOT}
+\item 
+struct {\bf \_\-PLAZGLAF}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf EDGE}\ 2
+\item 
+\#define {\bf New\-Plazglaf}(p) \ ((p)=({\bf PLAZGLAFPTR})mnew(sizeof({\bf PLAZGLAF})))
+\item 
+\#define {\bf Free\-Plazglaf}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf PLAZGLAF}))
+\item 
+\#define {\bf MAX}(a,b) \ ((a) $>$ (b) ? (a) : (b))
+\item 
+\#define {\bf MIN}(a,b) \ ((a) $<$ (b) ? (a) : (b))
+\end{CompactItemize}
+\subsubsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef struct {\bf \_\-MIR}
+ {\bf MIR}
+\item 
+typedef struct {\bf \_\-MIR}$\ast$ {\bf MIRPTR}
+\item 
+typedef struct {\bf \_\-PLAZGLAF}
+ {\bf PLAZGLAF}
+\item 
+typedef struct {\bf \_\-PLAZGLAF}$\ast$ {\bf PLAZGLAFPTR}
+\item 
+typedef struct {\bf \_\-PIVOT}
+ {\bf PIVOT}
+\item 
+typedef struct {\bf \_\-PIVOT}$\ast$ {\bf PIVOTPTR}
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{plaza.h_a0}
+\index{plaza.h@{plaza.h}!EDGE@{EDGE}}
+\index{EDGE@{EDGE}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define EDGE\ 2}\hfill
+
+
+
+Definition at line 47 of file plaza.h.\label{plaza.h_a2}
+\index{plaza.h@{plaza.h}!FreePlazglaf@{FreePlazglaf}}
+\index{FreePlazglaf@{FreePlazglaf}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Plazglaf(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf PLAZGLAF}))}\hfill
+
+
+
+Definition at line 51 of file plaza.h.\label{plaza.h_a3}
+\index{plaza.h@{plaza.h}!MAX@{MAX}}
+\index{MAX@{MAX}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAX(a, b)\ ((a) $>$ (b) ? (a) : (b))}\hfill
+
+
+
+Definition at line 53 of file plaza.h.
+
+Referenced by {\bf compute\-Bbx\-Statistics}(), {\bf findrectangleandcostfunctions}(), and {\bf think\-About\-Grid\-Size}().\label{plaza.h_a4}
+\index{plaza.h@{plaza.h}!MIN@{MIN}}
+\index{MIN@{MIN}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MIN(a, b)\ ((a) $<$ (b) ? (a) : (b))}\hfill
+
+
+
+Definition at line 54 of file plaza.h.\label{plaza.h_a1}
+\index{plaza.h@{plaza.h}!NewPlazglaf@{NewPlazglaf}}
+\index{NewPlazglaf@{NewPlazglaf}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Plazglaf(p)\ ((p)=({\bf PLAZGLAFPTR})mnew(sizeof({\bf PLAZGLAF})))}\hfill
+
+
+
+Definition at line 50 of file plaza.h.
+
+\subsubsection{Typedef Documentation}
+\label{plaza.h_a5}
+\index{plaza.h@{plaza.h}!MIR@{MIR}}
+\index{MIR@{MIR}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-MIR}
+ MIR}\hfill
+
+\label{plaza.h_a6}
+\index{plaza.h@{plaza.h}!MIRPTR@{MIRPTR}}
+\index{MIRPTR@{MIRPTR}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-MIR}$\ast$ MIRPTR}\hfill
+
+\label{plaza.h_a9}
+\index{plaza.h@{plaza.h}!PIVOT@{PIVOT}}
+\index{PIVOT@{PIVOT}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PIVOT}
+ PIVOT}\hfill
+
+\label{plaza.h_a10}
+\index{plaza.h@{plaza.h}!PIVOTPTR@{PIVOTPTR}}
+\index{PIVOTPTR@{PIVOTPTR}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PIVOT}$\ast$ PIVOTPTR}\hfill
+
+\label{plaza.h_a7}
+\index{plaza.h@{plaza.h}!PLAZGLAF@{PLAZGLAF}}
+\index{PLAZGLAF@{PLAZGLAF}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PLAZGLAF}
+ PLAZGLAF}\hfill
+
+\label{plaza.h_a8}
+\index{plaza.h@{plaza.h}!PLAZGLAFPTR@{PLAZGLAFPTR}}
+\index{PLAZGLAFPTR@{PLAZGLAFPTR}!plaza.h@{plaza.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-PLAZGLAF}$\ast$ PLAZGLAFPTR}\hfill
+

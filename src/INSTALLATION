@@ -1,0 +1,493 @@
+#
+# @(#)INSTALLATION 1.41 12/07/99 Delft University of Technology 
+#
+cat << 'EOF'
+
+			O C E A N   INSTALLATION MANUAL
+			-------------------------------
+			       December 3, 1999
+                      
+
+1. INTRODUCTION
+   ============
+
+OCEAN is a freely-available system that enables you to design CMOS chips in
+the sea-of-gates design style. The sea-of-gates design style aims at three
+goals:
+
+  (1) minimizing the chip design time
+  (2) minimizing the chip fabrication time
+  (3) minimizing the chip cost
+
+Before you can start designing a sea-of-gates chip you have to select a
+master image. This is a prefabricated pattern of transistors that is laid
+out over the entire chip area. The effort of the designer (and the design
+tools) is to interconnect these transistors by metal wires, thus
+implementing the desired functionality of the chip.
+
+In contrast to other sea-of-gates design systems that we know of, OCEAN
+allows you to design your chip in a hierarchical fashion. This has several
+advantages, including the ability to
+
+ (1) easily mix analogue and digital subcomponents on a chip
+ (2) manually optimize parts of the automatically generated layout
+ (3) design critical subcomponents (e.g. RAM) and reuse them
+
+OCEAN has been used extensively at the EE faculty of Delft University of
+Technology, the Netherlands.  Second year students without any previous
+experience in VLSI design were able to design reasonably complex CMOS chips
+with OCEAN.  After processing in the DIMES foundry, many of these student
+chips where successfully tested.
+
+For more information, we recommend that you retrieve the file
+'ocean_docs.tar.gz', which contains a PostScript file describing everything
+about the system.
+
+
+2. AVAILABILITY
+   ============
+
+OCEAN is integrated with the Nelsis (release 3) full-custom chip design
+system.  For best results, do not install OCEAN without installing Nelsis.
+(This will automatically be done when you use the installation script 
+oceanInstall).  Both systems are available for free (in executable form
+and in source code form, under the terms of the GNU General Public License)
+from Delft University of Technology.  You can obtain a copy from the WWW 
+site http://cas.et.tudelft.nl/software/ocean.  Alternatively you can use 
+anonymous-FTP host cas.et.tudelft.nl, directory pub/ocean.  
+
+We try to make sure that the OCEAN distribution archives always contain the
+latest version. We do not work with releases nor release numbers.  Instead,
+you can easily find the compilation date of each archive file in the
+directory 'release_info'.
+
+OCEAN also runs with Nelsis release 4. This Nelsis release offers a very
+advanced version mechanism, a flow manager, graphical representation of the
+chip hierarchy, and many more nifty little things. If you prefer release 4
+over release 3, get it from ftp://ftp.ddtc.dimes.tudelft.nl/pub/nelsis. 
+Note, however, that we do not actively support Nelsis release 4 in 
+combination with OCEAN.
+
+
+3. REQUIRED HARDWARE
+   =================
+
+The directory cas.et.tudelft.nl:pub/ocean contains sources of the OCEAN
+system. It also contains the compiled system for three types of machines:
+
+PA-RISC1.1_10   Hewlett-Packard computers, series 9000/700 (a.k.a. "snake")
+		and 9000/8x7 (the business servers a.k.a. "Nova") running
+                HP-UX 9.0 or higher. 
+
+sun4_5		Sun-4 computers (a.k.a. "Sparc") running SunOS-5.5 or 
+		later.  This version of SunOS is also known as Solaris-5.5.
+
+i486_Linux      PC-compatible with a 386, 486 or Pentium processor running
+		Linux. Linux is a freely available unix operating system for
+		PC's. 
+
+The precompiled installation of OCEAN is statically linked, except Solaris.
+The advantage of this is that you can install it on your system even if you 
+do not have shared libraries for C++ and X11.  The disadvantage is that the
+executables are considerably bigger.  
+
+Please mail any remarks or bug reports to ocean@cas.et.tudelft.nl.
+
+
+4. HOW TO INSTALL
+   ==============
+
+Here we describe how to install the pre-compiled version of OCEAN.  For 
+additionally compiling the system yourself, please read the file COMPILATION.
+
+You do not need root privileges to install OCEAN and Nelsis (release 3).
+Find a place in the file system for Nelsis (about 30 MByte) and for OCEAN
+(about 15 Mbyte).  Let's assume these places are /users/cacd and
+/users/ocean. (If you choose other places, substitute these in what follows
+below.)
+
+First ftp the appropriate files from ftp://cas.et.tudelft.nl/pub/ocean. 
+You need at least the files:
+
+   cacd_<your-machine>_A.tar.gz, 
+   cacd_<your-machine>_B.tar.gz, 
+   cacd_general.tar.gz, 
+   ocean_bin_<your-machine>.tar.gz
+   ocean_celllibs.tar.gz  
+   ocean_docs.tar.gz  
+   oceanInstall
+
+<Your-machine> is 'PA-RISC1.1_10' or 'sun4_5' or 'i486_Linux', depending on
+your hardware. (Yes, even if you have a Pentium or i386 you need the
+i486_Linux binaries.) All files, except the last one, are in compressed (gzip)
+format.  Let's assume that you have put the files in the /tmp directory.
+
+Now one user on the system must have write permission in the directories 
+/users/cacd and /users/ocean.  This user must execute the following commands 
+(we'll assume she is installing on a PA-RISC1.1_10 architecture.  Replace all 
+references to "PA-RISC1.1_10" by "sun4_5" or by "i486_Linux" if you are on one 
+of these types of machines, and replace the paths '/users/cacd', '/users/ocean'
+and '/tmp' by the directories of your own choice):
+
+  [1] mkdir /users/cacd            # if not yet present
+  [2] mkdir /users/ocean           # if not yet present
+  [3] setenv ICDPATH /users/cacd
+  [4] setenv OCEANPATH /users/ocean
+  [5] setenv MACHINE PA-RISC1.1_10
+
+The commands [6a-14a] will install everything. Command [14a] will also compile 
+the cell libraries of OCEAN into the binary format of the Nelsis database.
+It is normal that numerous warnings appear on your screen-- JUST IGNORE ALL 
+ERRORS AND WARNINGS.  If you feel uncertain about the messages, compare them 
+to the file ftp://cas.et.tudelft.nl/pub/ocean/CELLS_mesg which contains a 
+record of the cell library installation messages that we consider normal.
+
+If you are using the C shell (or similar), it is convenient to replace the 
+commands [6a-14a] by commands [6b-7b], since that will also do the job:
+
+  [6a] cd /users/cacd
+  [7a] gzip -dc /tmp/cacd_PA-RISC1.1_10_A.tar.gz | tar xf - 
+  [8a] gzip -dc /tmp/cacd_PA-RISC1.1_10_B.tar.gz | tar xf - 
+  [9a] gzip -dc /tmp/cacd_general.tar.gz | tar xf - 
+  [10a] cd /users/ocean
+  [11a] gzip -dc /tmp/ocean_bin_PA-RISC1.1_10.tar.gz | tar xf - 
+  [12a] gzip -dc /tmp/ocean_celllibs.tar.gz | tar xf - 
+  [13a] gzip -dc /tmp/ocean_docs.tar.gz | tar xf - 
+  [14a] bin/PA-RISC1.1_10/nelsis3/ICELLS
+
+or alternatively,
+
+  [6b] cd /tmp
+  [7b] source oceanInstall
+
+If you are interested in the octagon image and the gatearray image, proceed
+as follows:
+
+  [15] cd /users/ocean
+  [16] setenv OCEANPROCESS octagon
+  [17] bin/PA-RISC1.1_10/nelsis3/ICELLS
+  [18] setenv OCEANPROCESS gatearray
+  [19] bin/PA-RISC1.1_10/nelsis3/ICELLS
+  [20] setenv OCEANPROCESS fishbone
+
+To set your proper print command, you might want to edit the layout print tool
+'playout'. For the first time, this is not absolutely essential, but you'll
+probably need it to print layouts.
+
+  [21] vi /users/ocean/bin/playout
+
+.... and set the proper print and printer queue commands for your system.
+
+The default installation of Nelsis contains a basic version of the layout-
+to-circuit extractor space that can only extract transistors, connectivity
+and ground capacitances.  The full version of space (that, however, requires 
+a license to run it, see http://cas.et.tudelft.nl/space/space_soft.html) 
+can be obtained by also retrieving the file cacd_PA-RISC1.1_10_space.tar.gz 
+and installing the contents of this file in the directory /users/cacd:
+
+  [22] cd /users/cacd
+  [23] gzip -dc /tmp/cacd_PA-RISC1.1_10_space.tar.gz | tar xf -
+
+We ran this installation procedure on several types of machines and it
+appeared to work.  If you experience any problems, *please* let us know.
+Mail to ocean@cas.et.tudelft.nl.
+
+After you have unwrapped everything, the final directory structure of the
+system looks like this:
+
+/users/cacd/..                   
+-- extracted from from archive 'cacd_<your_machine>_[AB].tar.gz':
+            bin               (Nelsis executables)
+            man/..            (Nelsis manual pages)
+-- extracted from from archive 'cacd_general.tar.gz':
+	    lib/process/..    (process description databases)
+	    doc               (Nelsis PostScript manuals)
+            demo/..           (Nelsis examples)
+            slsmodgen/..      (switch-level timing model generator)
+
+/users/ocean/..                  
+-- extracted from from archive 'ocean_bin_<your_machine>.tar.gz':
+            bin/..            (OCEAN executables and scripts)
+-- extracted from from archive 'ocean_celllibs.tar.gz':
+	    celllibs/..       (Sea-of-Gates cell libraries and templates)
+-- extracted from from archive 'ocean_docs.tar.gz':
+	    docs              (PostScript manuals)
+	    man               (on-line manuals)
+
+
+5. HOW TO RUN
+   ==========
+
+Users running OCEAN and Nelsis must have a number of environment variables
+set:
+
+  OCEANPROCESS   to "fishbone" or "octagon" or "gatearray".
+  OCEANPATH      to "/users/ocean" (or whatever the root of the OCEAN 
+		 tree is).
+  ICDPATH        to "/users/cacd" (or whatever the root of the Nelsis 
+		 tree is).
+  MACHINE        to "PA-RISC1.1_10" (or whatever the program `thearch` 
+		 returns as a string. Linux users indicate i486_Linux here,
+		 even if they have a Pentium or 386).
+
+The users also need to add some directories to their search path for
+commands:
+
+  $OCEANPATH/bin/$MACHINE/nelsis3 
+  $OCEANPATH/bin/$MACHINE 
+  $OCEANPATH/bin  
+  . 
+  $ICDPATH/bin 
+
+(If you are using the C shell: these directories will automatically be 
+added to your path if you execute 'source $OCEANPATH/bin/oceanSet').
+
+You can try whether everything was installed properly by trying to
+run the tutorial:
+
+  [1] tutorial sis
+  [2] cd sis
+  [3] csls hotel.sls
+         File hotel.sls:
+         Parsing network: hotel
+  [4] setenv DISPLAY <your_screen>:0
+  [4] simeye hotel
+      (clicking [run] should give simulator results)
+  [5] seadali
+      [database], [place and route], [DO IT]
+      (a routed circuit should appear)
+      [write] as hotel
+  [6] space -c hotel
+  [7] ghoti Hotel
+  [8] simeye Hotel
+      (clicking [run] should give simulator result of extracted circuit)
+
+
+6. THE TOOLS
+   =========
+
+The OCEAN tools operate on their own EDIF-like database called "the seadif
+database". The Nelsis tools operate on the Nelsis database. Both databases
+are part of a Nelsis "design project". Conversion from data in one database
+to the other database happens automatically, and users do not even notice
+that this happens. Sometimes OCEAN tools operate immediately on the Nelsis
+database.
+
+All tools that are available from the distribution are listed below, with a
+one-liner briefly describing each tool. The programs that live in the ocean
+tree document themselves briefly if you pass them the -h option.  For full
+documentation refer to the ocean/docs directory.  The Nelsis tools have real 
+manual pages!  Use "icdman" to view them. The seadif database is also nicely 
+documented in man pages.
+
+**** Executables in ocean/bin/$MACHINE/nelsis3/
+
+ICELLS		 compiles and installs sea-of-gates cell libraries.
+cedif		 compiles EDIF sources into the Nelsis database.
+dofunc		 front-end for the functional simulator "func_mkdb".
+fish		 sea-of-gates layout purifier.
+ghoti		 sea-of-gates extracted circuit purifier.
+mkopr		 creates a new sea-of-gates design project.
+mksls		 constructs a Makefile for updating a Nelsis database.
+nelsea		 Nelsis to seadif and seadif to Nelsis database converter.
+sea		 front-end for calling seadif tools in a Nelsis environment.
+seadali		 interactive tool for layout editing, placing and routing.
+tutorial	 creates a sea-of-gates design project containing a 
+		 tutorial.
+
+**** Executables in ocean/bin/$MACHINE/
+
+esea		 compiles EDIF sources into the seadif database.
+freedif		 removes cells from the seadif database.
+gnarp		 performs various kind of operations on a seadif database.
+madonna		 partitioning-based sea-of-gates placer.
+makebus		 analyses a netlist to extract buses from it.
+seedif		 lists the contents of the seadif database.
+showbus		 shows the buses in a netlist, as found by "makebus".
+trout		 Lee-type over-the-cell sea-of-gates router.
+
+**** Executables in ocean/bin/
+
+INSTALLATION	 prints OCEAN installation instructions on stdout.
+buildsrc	 compiles OCEAN sources with specific "make" parameters.
+dist		 distributes OCEAN executables to shadow trees.
+rmsdflock	 removes (blasts) the locks from a seadif database.
+seatail		 temporarily shows output from a sea-of-gates tool.
+thearch		 prints a value for the MACHINE environment on stdout.
+
+**** Executables in cacd/bin/
+
+addproj		 adds a project to the list of imported projects.
+arrexp		 expands the arrays in an SLS commandfile, used by "simeye".
+ccif		 compiles CIF data format into the Nelsis database.
+cga		 converts GDS-II data format to ASCII.
+cgi		 compiles GDS-II sources into the Nelsis database.
+cig		 converts info from the Nelsis database to GDS-II format.
+clambda		 changes the lambda value of a design project.
+cldm		 compiles LDM (= layout description language) into the 
+		 database.
+csls		 compiles SLS (= circuit description language) into the 
+		 database.
+cspice	 	 compiles a SPICE network description into the database.
+device		 lists the device cells, see also putdevmod.
+dbcat		 lists the contents of cells that are in the Nelsis database.
+dbclean		 removes data from the database that can be regenerated.
+dblist		 lists the contents of the Nelsis database.
+func_mkdb	 creates a functional ("behavioral") simulator.
+getepslay	 converts a layout cell to PostScript suitable for printing.
+impcell		 imports a cell from another project (see also "addproj").
+layflat		 removes all hierarchy from a layout cell.
+macro		 sets or unset a macro status for a layout cell.
+makeboxl	 expands a layout cell linearly to boxes (see "exp").
+makegln		 creates a non-vertical line segment representation (see 
+		 "exp").
+mkpr		 creates a Nelsis project (see "mkopr").
+mplot		 makes a plotfile for a masklayout.
+nspice		 front-end for spice-2 and spice-3, used by "simeye".
+nspice_bs	 pre-processor for spice-2 and spice-3, used by "simeye".
+nspice_pp	 post-processor for spice-2 and spice-3, used by "simeye".
+outgds		 puts GDS II-formatted files on tape.
+putdevmod	 puts a device model description into the circuit database.
+readgds		 reads GDS II-formatted file from tape.
+rmdb		 removes cells from the Nelsis database.
+rmpr		 removes a Nelsis design project.
+setcmap		 manipulates the X-window colormap for Nelsis and OCEAN 
+		 tools.
+simeye		 interactive switch-level and spice simulator for X-windows.
+sls		 switch-level simulator, used by "simeye".
+sls_exp		 pre-processor for "sls".
+sls_mkdb	 compiles SLS source into the database, see "csls".
+space		 layout-to-circuit extractor.
+tecc		 technology compiler for "space".
+xcif		 extracts CIF format from the layout database.
+xcmk		 extracts CIRCUITMASK format (Philips) from the layout 
+		 database.
+xedif		 extracts EDIF format from the circuit database, see "cedif".
+xldm		 extracts LDM format from the layout databse, see "cldm".
+xsls		 extracts SLS format from the circuit database, see "csls".
+xspef		 extracts SPEF format from the circuit database.
+xspf		 extracts SPF format from the circuit database.
+xspice		 extracts SPICE format from the circuit database, see 
+		 "putspice".
+xvhdl		 extracts VHDL format from the circuit database.
+
+
+7. CONTENTS OF THE PUB/OCEAN DIRECTORY
+   ===================================
+
+7.1 The CACD binary distribution
+--------------------------------
+
+You must retrieve one of the hardware dependent trees (in two parts)
+containing the cacd executables:
+
+ ** cacd_PA-RISC1.1_A.tar.gz     (approx 4.1 Mbyte)
+    cacd_PA-RISC1.1_B.tar.gz     (approx 4.5 Mbyte)
+ ** cacd_i486_Linux_A.tar.gz     (approx 3.5 Mbyte)
+    cacd_i486_Linux_B.tar.gz     (approx 4.1 Mbyte)
+ ** cacd_sun4_5_B.tar.gz         (approx 1.6 Mbyte, dynamically linked)
+    cacd_sun4_5_B.tar.gz         (approx 1.7 Mbyte, dynamically linked)
+
+and the hardware independent part containing process information and user
+manuals:
+
+ ** cacd_general.tar.gz          (approx 2.3 Mbyte)
+
+
+7.2 Source code of CACD
+-----------------------
+
+Sources of the binaries in the cacd directory (simeye, space, etc.) are 
+available from
+
+  ** cacd_src.tar.gz              (approx 2.0 Mbyte)
+
+See the file COMPILATION for instructions on how to compile and install the 
+CACD sources.
+
+
+7.3 The OCEAN binary distribution
+---------------------------------
+
+The OCEAN binary directory containing all the sea-of-gates programs.
+Retrieve one of:
+
+ ** ocean_bin_PA-RISC1.1.tar.gz    (approx 2.6 Mbyte)
+ ** ocean_bin_i486_Linux.tar.gz    (approx 2.3 Mbyte)
+ ** ocean_bin_sun4_5.tar.gz        (approx 1.3 Mbyte, dynamically linked)
+
+
+7.4 The OCEAN cell libraries
+----------------------------
+
+We distribute a simple cell library that you can use in your sea-of-gates
+chip.  This archive also contains the cell library "primitives" that
+describes the primitive electric elements (transistors, capacitors, et
+cetera). Some OCEAN tools don't run without it. It also contains the image
+description file "image.seadif" for all supported master images, and it
+contains the tutorial tree.
+
+  ** ocean_celllibs.tar.gz         (approx 0.3 Mbyte)
+
+
+7.5 Full documentation of OCEAN 
+-------------------------------
+
+Documentation for the OCEAN tools and a tutorial, in PostScript form and
+the on-line manual pages.
+
+  ** ocean_docs.tar.gz             (approx 1.0 Mbyte)
+
+
+7.6 Source code of OCEAN
+------------------------
+
+The sources of the OCEAN tools and libraries. This also contains Makefiles
+and a script "src/scripts/buildsrc" that knows about MAKE parameters for HP
+and Sun computers, and PCs running Linux, as well as parameters for a the 
+GNU gcc/bison/flex environment. 
+
+  ** ocean_src.tar.gz             (approx 1.0 Mbyte)
+
+See the file COMPILATION for instructions on how to compile and install the 
+OCEAN sources.
+
+
+7.7 Release information
+-----------------------
+Contains the date-stamps of the tar-files in the distribution
+
+  ** release_info/
+
+
+8. SUPPORTED MASTER IMAGES
+   =======================
+
+The OCEAN tools can handle almost any sea-of-gates master image that you
+can think of. All tools read the information concerning the topological and
+electrical properties of the image from an ascii image description file. If
+you have designed an image of your own, it is usually not more than a few
+hours of work to create an image description file for it.
+
+To illustrate how generic the tools are, the standard OCEAN installation
+comes with three radically different master images named "fishbone",
+"octagon" and "gatearray".
+
+The fishbone master image is the one that we almost exclusively use
+ourselves, because it is reasonably fast (1 ns gatedelay) and our foundry
+DIMES can process the fishbone image in sufficient quantities. It is a 1.6
+micron, 2-metal layer CMOS process. The fishbone master images that we have
+in stock contain about 200,000 transistors.
+
+The octagon master image was designed at Twente University. It allows the
+designer to mirror and rotate her cells in many ways. It uses a 0.8 micron,
+3-metal layer CMOS process. Unfortunately, we do not have the means nor the
+money to process octagon designs.
+
+The gatearray master image is an old fashioned 4 micron, 1-metal layer gate
+array. It uses the gate array concept of predefined wiring channels. We
+sometimes use this image for designs of low complexity, where a high-speed
+operation is not decisive.
+
+
+'EOF'

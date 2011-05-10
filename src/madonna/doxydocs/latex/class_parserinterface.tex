@@ -1,0 +1,364 @@
+\subsection{Parser\-Interface  Class Reference}
+\label{ParserInterface}\index{ParserInterface@{Parser\-Interface}}
+{\tt \#include $<$parser\-If.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Parser\-Interface} ()
+\item 
+{\bf $\sim$Parser\-Interface} ()
+\item 
+void {\bf read} (void)
+\item 
+{\bf Image\-Map}$\ast$ {\bf get\-Image\-Map} (void)
+\item 
+{\bf IMAGEDESC}$\ast$ {\bf get\-Image\-Desc} (void)
+\item 
+void {\bf set\-Dim} (int,int)
+\item 
+void {\bf init\-Images} ()
+\item 
+void {\bf add\-Mirror\-Axis} ({\bf MIRROR} $\ast$)
+\item 
+int {\bf process\-Feeds} ({\bf List}\& f,{\bf layer\-Type} l)
+\item 
+void {\bf add\-Image\-Overlap} (int x, int y)
+\item 
+void {\bf set\-Num\-Layers} (int numlay)
+\item 
+int {\bf num\-Layers} ()
+\item 
+void {\bf set\-Route\-Orient} (int layer, int orient)
+\item 
+void {\bf set\-Transparency} (int layer, int transp)
+\item 
+void {\bf add\-Power\-Line} (int orient, STRING name, int layer, int r\_\-or\_\-c)
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf remove\-Duplicates} ( void )
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf Image\-Map}$\ast$ {\bf image\-Map}
+\item 
+{\bf IMAGEDESC} {\bf this\-Image}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ParserInterface_a0}
+\index{ParserInterface@{Parser\-Interface}!ParserInterface@{ParserInterface}}
+\index{ParserInterface@{ParserInterface}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Parser\-Interface::Parser\-Interface (void)}\hfill
+
+
+
+Definition at line 27 of file parser\-If.C.\small\begin{verbatim}00030 {
+00031   imageMap=NULL;
+00032   thisImage.overlap[HOR] = thisImage.overlap[HOR] = 0;
+00033   thisImage.numlayers = 0;
+00034   thisImage.routeorient = NIL;
+00035   thisImage.estransp = NIL;
+00036   thisImage.powerlines = NIL;
+00037 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a1}
+\index{ParserInterface@{Parser\-Interface}!~ParserInterface@{$\sim$ParserInterface}}
+\index{~ParserInterface@{$\sim$ParserInterface}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Parser\-Interface::$\sim$Parser\-Interface ()}\hfill
+
+
+
+Definition at line 40 of file parser\-If.C.\small\begin{verbatim}00043 {
+00044   if (imageMap != NULL)
+00045      delete imageMap;
+00046   if (thisImage.routeorient != NIL)
+00047      delete thisImage.routeorient;
+00048   if (thisImage.estransp != NIL)
+00049      delete thisImage.estransp;
+00050   // I do not free powerlines because i am too lazy for that ... (leak !!!)
+00051 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{ParserInterface_a9}
+\index{ParserInterface@{Parser\-Interface}!addImageOverlap@{addImageOverlap}}
+\index{addImageOverlap@{addImageOverlap}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::add\-Image\-Overlap (int {\em x}, int {\em y})}\hfill
+
+
+
+Definition at line 131 of file parser\-If.C.\small\begin{verbatim}00134 {
+00135    thisImage.overlap[HOR] = x;
+00136    thisImage.overlap[VER] = y;
+00137 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a7}
+\index{ParserInterface@{Parser\-Interface}!addMirrorAxis@{addMirrorAxis}}
+\index{addMirrorAxis@{addMirrorAxis}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::add\-Mirror\-Axis ({\bf MIRROR} $\ast$ {\em m})}\hfill
+
+
+
+Definition at line 105 of file parser\-If.C.\small\begin{verbatim}00108 {
+00109    m->next=thisImage.mirroraxis;
+00110    thisImage.mirroraxis=m;
+00111    thisImage.numaxis++;
+00112 
+00113 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a14}
+\index{ParserInterface@{Parser\-Interface}!addPowerLine@{addPowerLine}}
+\index{addPowerLine@{addPowerLine}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::add\-Power\-Line (int {\em orient}, STRING {\em name}, int {\em layer}, int {\em r\_\-or\_\-c})}\hfill
+
+\label{ParserInterface_a4}
+\index{ParserInterface@{Parser\-Interface}!getImageDesc@{getImageDesc}}
+\index{getImageDesc@{getImageDesc}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} $\ast$ Parser\-Interface::get\-Image\-Desc (void)\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 29 of file parser\-If.h.
+
+Referenced by {\bf get\-Image\-Desc}(), and {\bf phil}().\small\begin{verbatim}00029 { return &thisImage; }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a3}
+\index{ParserInterface@{Parser\-Interface}!getImageMap@{getImageMap}}
+\index{getImageMap@{getImageMap}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Image\-Map} $\ast$ Parser\-Interface::get\-Image\-Map (void)\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 28 of file parser\-If.h.
+
+Referenced by {\bf phil}().\small\begin{verbatim}00028 { return imageMap;}
+\end{verbatim}\normalsize 
+\label{ParserInterface_a6}
+\index{ParserInterface@{Parser\-Interface}!initImages@{initImages}}
+\index{initImages@{initImages}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::init\-Images (void)}\hfill
+
+
+
+Definition at line 116 of file parser\-If.C.\small\begin{verbatim}00119 {
+00120   initimagedesc(&thisImage);
+00121   
+00122   removeDuplicates();
+00123 
+00124   if( (imageMap = new ImageMap(thisImage.size[HOR],
+00125                    thisImage.size[VER],thisImage.stamp))==NULL)
+00126     usrErr("ParserInterface::ParserInterface",ENOTMEM);
+00127 
+00128 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a11}
+\index{ParserInterface@{Parser\-Interface}!numLayers@{numLayers}}
+\index{numLayers@{numLayers}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Parser\-Interface::num\-Layers ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 38 of file parser\-If.h.\small\begin{verbatim}00038 {return thisImage.numlayers;}
+\end{verbatim}\normalsize 
+\label{ParserInterface_a8}
+\index{ParserInterface@{Parser\-Interface}!processFeeds@{processFeeds}}
+\index{processFeeds@{processFeeds}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Parser\-Interface::process\-Feeds ({\bf List} \& {\em f}, {\bf layer\-Type} {\em l})}\hfill
+
+
+
+Definition at line 140 of file parser\-If.C.\small\begin{verbatim}00143 {
+00144   if( thisImage.size[HOR] == -1)  // input data error : no Size section
+00145     usrErr("ParserInterface::ParserInterface",EINPDAT);
+00146   return imageMap->addFeeds(f,l);
+00147 
+00148 
+00149 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a2}
+\index{ParserInterface@{Parser\-Interface}!read@{read}}
+\index{read@{read}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::read (void)}\hfill
+
+
+
+Definition at line 55 of file parser\-If.C.
+
+Referenced by {\bf read\-Image\-File}().\small\begin{verbatim}00058 {
+00059   thisImage.size[HOR]=-1;          // this for checking during parsing
+00060                                    // if it's everything read
+00061   thisImage.mirroraxis=NULL;
+00062   thisImage.numaxis=0;
+00063   STRING  imagefilename;
+00064 
+00065 
+00066                // Yacc parser reads:
+00067                //           size of image
+00068                //           mirror axis'es (after that calls initimagedesc
+00069                //              and creates ImageMap
+00070                //           all feeds ( CridConnectList )
+00071 
+00072   if ((imagefilename = sdfimagefn()) == NIL)
+00073      usrErr("Plcm::Plcm",EINPDAT);
+00074 
+00075   if (freopen(imagefilename,"r",stdin) == NULL)
+00076     {
+00077        cerr << "Cannot open image description file \""
+00078         << imagefilename << "\"... " << endl;
+00079       usrErr("Plcm::Plcm",EINPDAT);      
+00080     }
+00081 
+00082   cout << "\nReading image description file \""
+00083        << imagefilename << "\"...\n\n" << endl;
+00084   if ( ppparse()  )
+00085     usrErr("ParserInterface::ParserInterface",EINPDAT);
+00086 
+00087   imageMap->clearFeedNo();         // clear field termNo used temporary
+00088                                    // during creating image
+00089 
+00090 
+00091 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_c0}
+\index{ParserInterface@{Parser\-Interface}!removeDuplicates@{removeDuplicates}}
+\index{removeDuplicates@{removeDuplicates}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::remove\-Duplicates (void)\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 153 of file parser\-If.C.\small\begin{verbatim}00156 {
+00157   int sizX=thisImage.size[HOR]*2,
+00158   sizY=thisImage.size[VER]*2;
+00159   MIRROR *prevPtr=NULL;
+00160   
+00161   for(MIRROR *mPtr=thisImage.mirroraxis;mPtr!=NULL;)
+00162   {
+00163     int *axis=mPtr->axis;
+00164     
+00165     if( (axis[X1]==axis[X2] && (axis[X1]==0 || axis[X2]==sizX) ) ||
+00166        (axis[Y1]==axis[Y2] && (axis[Y1]==0 || axis[Y2]==sizY))    )
+00167     {
+00168       // we have also to check if it isn't the only one
+00169       
+00170       short *mtx=mPtr->mtx;
+00171       int cnt=0;
+00172       
+00173       for(MIRROR *tPtr=thisImage.mirroraxis;tPtr!=NULL;tPtr=tPtr->next)
+00174       {
+00175     if(mtx[A11]==tPtr->mtx[A11] && mtx[A12]==tPtr->mtx[A12] &&
+00176            mtx[A21]==tPtr->mtx[A21] && mtx[A22]==tPtr->mtx[A22] )
+00177       cnt++;
+00178       }
+00179       if(cnt > 1)
+00180       {
+00181     if (prevPtr != NULL)
+00182     {
+00183       prevPtr->next=mPtr->next;
+00184       FreeMirror(mPtr);
+00185       mPtr=prevPtr->next;
+00186     }
+00187     else
+00188     {
+00189       prevPtr=mPtr->next;
+00190       FreeMirror(mPtr);
+00191       thisImage.mirroraxis=mPtr=prevPtr;
+00192       prevPtr=NULL;
+00193     }
+00194     
+00195       }
+00196     }
+00197     else
+00198     {
+00199       prevPtr=mPtr;
+00200       mPtr=mPtr->next;
+00201     }
+00202   }
+00203 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a5}
+\index{ParserInterface@{Parser\-Interface}!setDim@{setDim}}
+\index{setDim@{setDim}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::set\-Dim (int {\em x}, int {\em y})}\hfill
+
+
+
+Definition at line 94 of file parser\-If.C.\small\begin{verbatim}00097 {
+00098 
+00099   thisImage.size[HOR]=x;
+00100   thisImage.size[VER]=y;
+00101 
+00102 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a10}
+\index{ParserInterface@{Parser\-Interface}!setNumLayers@{setNumLayers}}
+\index{setNumLayers@{setNumLayers}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::set\-Num\-Layers (int {\em numlay})}\hfill
+
+
+
+Definition at line 207 of file parser\-If.C.\small\begin{verbatim}00208 {
+00209    thisImage.numlayers = numlay;
+00210    // allocate array for wire orientations and estimated transparencies:
+00211    thisImage.routeorient = new int [numlay];
+00212    thisImage.estransp = new int [numlay];
+00213 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a12}
+\index{ParserInterface@{Parser\-Interface}!setRouteOrient@{setRouteOrient}}
+\index{setRouteOrient@{setRouteOrient}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::set\-Route\-Orient (int {\em layer}, int {\em orient})}\hfill
+
+
+
+Definition at line 217 of file parser\-If.C.\small\begin{verbatim}00218 {
+00219    if (layer < 0 || layer >= thisImage.numlayers)
+00220       usrErr("ParserInterface::setRouteOrient",EINPDAT);
+00221    if (orient != HOR && orient != VER)
+00222       usrErr("ParserInterface::setRouteOrient",EINPDAT);
+00223    thisImage.routeorient[layer] = orient;
+00224 }
+\end{verbatim}\normalsize 
+\label{ParserInterface_a13}
+\index{ParserInterface@{Parser\-Interface}!setTransparency@{setTransparency}}
+\index{setTransparency@{setTransparency}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Parser\-Interface::set\-Transparency (int {\em layer}, int {\em transp})}\hfill
+
+
+
+Definition at line 228 of file parser\-If.C.\small\begin{verbatim}00229 {
+00230    if (layer < 0 || layer >= thisImage.numlayers)
+00231       usrErr("ParserInterface::setRouteOrient",EINPDAT);
+00232    if (transp < 0)
+00233       usrErr("ParserInterface::setRouteOrient",EINPDAT);
+00234    thisImage.estransp[layer] = transp;
+00235 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{ParserInterface_o0}
+\index{ParserInterface@{Parser\-Interface}!imageMap@{imageMap}}
+\index{imageMap@{imageMap}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Image\-Map} $\ast$ Parser\-Interface::image\-Map\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 52 of file parser\-If.h.\label{ParserInterface_o1}
+\index{ParserInterface@{Parser\-Interface}!thisImage@{thisImage}}
+\index{thisImage@{thisImage}!ParserInterface@{Parser\-Interface}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} Parser\-Interface::this\-Image\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 53 of file parser\-If.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf parser\-If.h}\item 
+{\bf parser\-If.C}\end{CompactItemize}

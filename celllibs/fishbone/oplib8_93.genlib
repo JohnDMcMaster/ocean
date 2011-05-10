@@ -1,0 +1,67 @@
+# Process  fishbone
+# Lambda   0.2   
+# Made by Patrick Groeneveld and Irek Karkowski
+# sis-genlib description for the libraries of august 1993
+#
+# time units used   1 unit == 1 ns
+# 
+# chip area  used   1 unit == 1/2 of image's basic cell
+#
+# capacitance units : 1 pF == unit of fanout
+#
+#    cell                   pin id        inp. max   rise-delay  fall-delay
+#    name     function            type    load load block fanout block fanout
+GATE iv110 2  Y=!A;         PIN * INV     0.12 3.0  0.19   1.1   0.23   0.8
+GATE no210 3  Y=!(A+B);	    PIN A INV     0.12 2.4  0.34   1.8   0.25   0.8
+			    PIN B INV     0.12 2.4  0.32   1.8   0.22   0.8
+GATE no310 4  Y=!(A+B+C);   PIN A INV     0.12 1.9  0.54   2.4   0.27   0.9
+			    PIN B INV     0.12 1.9  0.53   2.4   0.27   0.9
+			    PIN C INV     0.12 1.9  0.46   2.4   0.24   0.9
+GATE na210 3  Y=!(A*B);	    PIN A INV     0.12 2.9  0.33   1.0   0.29   1.1
+			    PIN B INV     0.12 2.9  0.20   1.0   0.30   1.1
+GATE na310 4  Y=!(A*B*C);   PIN A INV     0.12 2.5  0.37   0.9   0.39   1.4
+			    PIN B INV     0.12 2.5  0.53   0.9   0.27   1.4
+			    PIN C INV     0.12 2.5  0.46   0.9   0.24   1.4
+GATE ex210 7  Y=A*!B+!A*B;  PIN * UNKNOWN 0.24 2.4  0.69   1.4   0.41   1.1
+GATE buf40 6  Y=A;          PIN * NONINV  0.12 12   0.96   0.3   0.84   0.4
+GATE mu111 7  Y=A*!S+B*S;
+                            PIN A NONINV  0.12 3.0  0.50   1.2   0.60   1.0
+			    PIN B NONINV  0.12 3.0  0.50   1.2   0.60   1.0
+			    PIN S UNKNOWN 0.24 3.0  0.60   1.2   0.65   1.0
+GATE mu210 16 Y=A*!S1*!S2+B*S1*!S2+C*!S1*S2+D*S1*S2;
+	      		    PIN A NONINV  0.12 3.0  1.30   1.3   2.10   1.4
+			    PIN B NONINV  0.12 3.0  1.30   1.3   2.10   1.4
+			    PIN C NONINV  0.12 3.0  1.30   1.3   2.10   1.4
+			    PIN D NONINV  0.12 3.0  1.30   1.3   2.10   1.4
+			    PIN S1 UNKNOWN 0.36 3.0 1.30   1.3   2.10   1.4
+			    PIN S2 UNKNOWN 0.24 3.0 1.20   1.3   0.86   1.4
+GATE zero	0	Y=CONST0;
+GATE one	0	Y=CONST1;
+
+# Pure delay
+# LATCH   delay   1   Q=D;
+# PIN D   NONINV 1 999 0.01 0.01 0.01 0.01
+# SEQ Q ANY ASYNCH
+
+#    cell                   pin id        inp. max   rise-delay  fall-delay
+#    name     function            type    load load block fanout block fanout
+# normal flipflop
+# LATCH dfn10 17 Q = D;       PIN D NONINV  0.12 3.0  2.10   1.1   1.90   0.8
+# SEQ Q ANY RISING_EDGE
+# CONTROL                     CLOCK         0.18 3.0  2.10   1.1   1.90   0.8
+# CONSTRAINT                  D                       1.40         0.90
+
+# resettable flipflop
+# LATCH dfr11 21 Q = D*!R;    PIN D NONINV  0.12 3.0  2.10   1.1   1.90   0.8
+#                             PIN R INV     0.12 3.0  2.10   1.1   1.90   0.8
+# SEQ Q ANY RISING_EDGE
+# CONTROL                     CLOCK         0.18 3.0  2.10   1.1   1.90   0.8
+# CONSTRAINT                  D                       1.40         0.90
+# CONSTRAINT                  R                       1.40         0.90
+
+# We use resettable d-flipflop with external reset, but
+# pretend to SIS that it's just a normal flipflop
+LATCH dfr11 21 Q = D;       PIN D NONINV  0.12 3.0  2.10   1.1   1.90   0.8
+SEQ Q ANY RISING_EDGE
+CONTROL                     CLOCK         0.18 3.0  2.10   1.1   1.90   0.8
+CONSTRAINT                  D                       1.40         0.90

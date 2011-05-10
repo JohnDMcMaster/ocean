@@ -1,0 +1,127 @@
+
+# libraries in the global cell library tree.
+#
+# This script assumes that the following have been set by ICELLS:
+#      $BINLIBS   (the full path to the directory containing the
+#                  binary version of the libraries)
+#      $SRCLIBS   (the full path to the directory containing the ascii version
+#                  of the libraries, as well as the template directory)
+#      $LIBSCRIPT (the name of this script)
+#
+##############################################################################
+#
+# First set some parameters ...
+#
+LIB_PRIM=primitives
+LIB_OP=oplib8_92
+##############################################################################
+#
+# Then comes the oplib:
+#
+echo ======= creating project $BINLIBS/$LIB_OP =======
+checkOrCreateProject $BINLIBS/$LIB_OP        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_OP/* $BINLIBS/$LIB_OP || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_OP $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_OP =======
+installCellLibrary $BINLIBS/$LIB_OP
+#
+#
+echo ======= running \"gnarp -CFb $LIB_OP mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_OP/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_OP gnarp -CFb $LIB_OP mkLibprim
+chmod ugo=r $BINLIBS/$LIB_OP/seadif/sealib.sdf      # make library read-only
+#
+#
+LIB_OP=oplib11_92
+##############################################################################
+#
+# Then comes the oplib:
+#
+echo ======= creating project $BINLIBS/$LIB_OP =======
+checkOrCreateProject $BINLIBS/$LIB_OP        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_OP/* $BINLIBS/$LIB_OP || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_OP $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_OP =======
+installCellLibrary $BINLIBS/$LIB_OP
+#
+#
+echo ======= running \"gnarp -CFb $LIB_OP mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_OP/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_OP gnarp -CFb $LIB_OP mkLibprim
+chmod ugo=r $BINLIBS/$LIB_OP/seadif/sealib.sdf      # make library read-only
+#
+#
+LIB_OP=oplib12_92
+##############################################################################
+#
+# Then comes the oplib:
+#
+echo ======= creating project $BINLIBS/$LIB_OP =======
+checkOrCreateProject $BINLIBS/$LIB_OP        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_OP/* $BINLIBS/$LIB_OP || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_OP $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_OP =======
+installCellLibrary $BINLIBS/$LIB_OP
+#
+#
+echo ======= running \"gnarp -CFb $LIB_OP mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_OP/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_OP gnarp -CFb $LIB_OP mkLibprim
+chmod ugo=r $BINLIBS/$LIB_OP/seadif/sealib.sdf      # make library read-only
+#
+#
+LIB_OP=bonding
+##############################################################################
+#
+# Then comes the oplib:
+#
+echo ======= creating project $BINLIBS/$LIB_OP =======
+checkOrCreateProject $BINLIBS/$LIB_OP        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_OP/* $BINLIBS/$LIB_OP || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_OP $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_OP =======
+installCellLibrary $BINLIBS/$LIB_OP
+#
+#
+echo ======= running \"gnarp -CFb $LIB_OP mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_OP/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_OP gnarp -CFb $LIB_OP mkLibprim
+chmod ugo=r $BINLIBS/$LIB_OP/seadif/sealib.sdf      # make library read-only
+#
+#

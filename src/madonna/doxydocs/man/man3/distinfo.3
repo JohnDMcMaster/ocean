@@ -1,0 +1,50 @@
+.TH distInfo 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+distInfo \- 
+.SH SYNOPSIS
+.br
+.PP
+Inherits \fBmatrixInt\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBdistInfo\fR (int nx, int ny)"
+.br
+.ti -1c
+.RI "int \fBoperator()\fR (int pi, int pj)"
+.br
+.ti -1c
+.RI "void \fBexchange\fR (int pi, int pj)"
+.br
+.ti -1c
+.RI "int \fBnumparts\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS distInfo::distInfo (int nx, int ny)
+.PP
+Definition at line 94 of file clusterPerm.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void distInfo::exchange (int pi, int pj)
+.PP
+Definition at line 83 of file clusterPerm.C.
+.PP
+Referenced by \fBapplyPermutation\fR().
+.SS int distInfo::numparts ()\fC [inline]\fR
+.PP
+Definition at line 29 of file clusterPerm.C.
+.PP
+Referenced by \fBgeneratePermutations\fR().
+.SS int distInfo::operator() (int pi, int pj)
+.PP
+Definition at line 72 of file clusterPerm.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,124 @@
+/* * * * * * * * * * * * * * * *
+ *
+ * This is the file 'oplib.ext'.
+ * Contents: The external sls-declarations of all cells
+ *           in all libraries for the OP practicum
+ * Purpose:  To determine the terminal configuration of the
+ *           library cells and to include in your sls-description file.
+ * Created:  aug 11th by Patrick Groeneveld
+ * Modified: sep 6th by Frank de Brouwer
+ *
+ * This file was copied into this project directory by 'mkopr' or
+ * 'mkepr'
+ */
+/*
+ * This is the way it should be:
+ * #include<digilib8_93.ext>
+ * #include<analib8_93.ext>
+ * #include<bonding8_93.ext>
+ * but kissis still doesn't inderstand the concept of including
+ * so we have to include everything here "flat"
+ */
+
+/* * * * * * * * * * * * * * * * 
+ * This is the file 'digilib8_93.ext'.
+ */
+extern network buf40    (terminal A, Y, vss, vdd)
+extern network de211    (terminal A, B, Y0, Y1, Y2, Y3, vss, vdd)
+extern network de310    (terminal A, B, C, Y0, Y1, Y2, Y3, Y4, Y5, Y6, Y7, vss, vdd)
+extern network dfn10    (terminal D, CK, Q, vss, vdd)
+extern network dfr11    (terminal D, R, CK, Q, vss, vdd)
+extern network ex210    (terminal A, B, Y, vss, vdd)
+extern network iv110    (terminal A, Y, vss, vdd)
+extern network mu111    (terminal A, B, S, Y, vss, vdd)
+extern network mu210    (terminal S1, S2, A, B, C, D, Y, vss, vdd)
+extern network na210    (terminal A, B, Y, vss, vdd)
+extern network na310    (terminal A, B, C, Y, vss, vdd)
+extern network no210    (terminal A, B, Y, vss, vdd)
+extern network no310    (terminal A, B, C, Y, vss, vdd)
+/* * * * * * * * * * * * * * * * 
+ * This is the file 'analib8_00.ext'.
+ */
+extern network ln3x3    (terminal g, d, s, vss, vdd)
+extern network lp3x3    (terminal g, d, s, vss, vdd)
+extern network mir_nin  (terminal i, g, vss, vdd)
+extern network mir_nout (terminal i, g, o, vss, vdd)
+extern network mir_pin  (terminal i, g, vss, vdd)
+extern network mir_pout (terminal i, g, o, vss, vdd)
+extern network osc10    (terminal E, F, XI, XO, vss, vdd)
+/* * * * * * * * * * * * * * * * 
+ * This is the file 'bonding8_93.ext'.
+ */
+extern network bond_leer (terminal vss, bf1, bf2, bf3, vdd, bf4, bf5, bf6)
+extern network bond_bar (terminal t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32)
+extern network bondflap8 (terminal bf1, bf2, bf3, bf4, bf5, bf6, bf7, bf8)
+/* * * * * * * * * * * * * * * * 
+ * This is the file 'picolib.ext'.
+ */
+extern network gin1 (terminal A1, F, vss, vdd)
+extern network gin2 (terminal A1, F, vss, vdd)
+extern network gin3 (terminal A1, F, vss, vdd)
+extern network gin4 (terminal A1, F, vss, vdd)
+extern network gin6 (terminal A1, F, vss, vdd)
+extern network gin8 (terminal A1, F, vss, vdd)
+extern network gin12 (terminal A1, F, vss, vdd)
+extern network gb12 (terminal A1, F, vss, vdd)
+extern network gb13 (terminal A1, F, vss, vdd)
+extern network gt00 (terminal D, T, TN, QN, Q, vss, vdd)
+extern network gtl0 (terminal D, T, TN, QN, Q, vss, vdd)
+extern network gtl2 (terminal D, T, TN, SE, RE, QN, Q, vss, vdd)
+extern network gt22 (terminal D, T, TN, SE, RE, QN, Q, vss, vdd)
+extern network gtlrn (terminal D, TN, REN, QN, Q, vss, vdd)
+extern network gtlrp (terminal D, T, REN, QN, Q, vss, vdd)
+extern network gtlsn (terminal D, TN, SE, QN, Q, vss, vdd)
+extern network gtlsp (terminal D, T, SE, QN, Q, vss, vdd)
+extern network gg00 (terminal S, R, TN, QN, Q, vss, vdd)
+extern network ggm0 (terminal S, R, T, QN, Q, vss, vdd)
+extern network ggm2 (terminal S, R, T, SE, RE, QN, Q, vss, vdd)
+extern network ggmr (terminal S, R, T, RE, QN, Q, vss, vdd)
+extern network ggms (terminal S, R, T, SE, QN, Q, vss, vdd)
+extern network ggr0 (terminal S, R, TN, RE, QN, Q, vss, vdd)
+extern network ggrr (terminal S, R, TN, RE, REN, QN, Q, vss, vdd)
+extern network ggs0 (terminal SN, RN, TN, QN, Q, vss, vdd)
+extern network ggs2 (terminal SN, RN, TN, SEN, REN, QN, Q, vss, vdd)
+extern network ggsr (terminal SN, RN, TN, REN, QN, Q, vss, vdd)
+extern network ggss (terminal SN, RN, TN, SEN, QN, Q, vss, vdd)
+extern network gf01 (terminal A1, B1, B2, F, vss, vdd)
+extern network gf02 (terminal A1, B1, B2, B3, F, vss, vdd)
+extern network gf03 (terminal A1, A2, B1, B2, F, vss, vdd)
+extern network gf06 (terminal A1, A2, B1, B2, F, vss, vdd)
+extern network gf15 (terminal A1, B1, C1, C2, F, vss, vdd)
+extern network gf51 (terminal A1, B1, B2, F, vss, vdd)
+extern network gf52 (terminal A1, B1, B2, B3, F, vss, vdd)
+extern network gf53 (terminal A1, A2, B1, B2, F, vss, vdd)
+extern network gf56 (terminal A1, A2, B1, B2, F, vss, vdd)
+extern network gf65 (terminal A1, B1, C1, C2, F, vss, vdd)
+extern network gti1p (terminal I1, EO, Q1, vss, vdd)
+extern network gti2p (terminal I1, I2, EO, Q1, Q2, vss, vdd)
+extern network gti4p (terminal I1, I2, I3, I4, EO, Q1, Q2, Q3, Q4, vss, vdd)
+extern network gti1n (terminal I1, EON, Q1, vss, vdd)
+extern network gti2n (terminal I1, I2, EON, Q1, Q2, vss, vdd)
+extern network gti4n (terminal I1, I2, I3, I4, EON, Q1, Q2, Q3, Q4, vss, vdd)
+extern network gtr0n (terminal D, TN, REN, QN, Q, vss, vdd)
+extern network gtr0p (terminal D, T, REN, QN, Q, vss, vdd)
+extern network gtrrn (terminal D, TN, RE, QN, Q, vss, vdd)
+extern network gtrrp (terminal D, T, RE, QN, Q, vss, vdd)
+extern network gtssn (terminal D, TN, SE, QN, Q, vss, vdd)
+extern network gtssp (terminal D, T, SE, QN, Q, vss, vdd)
+extern network gxnor1 (terminal A, B, F, vss, vdd)
+extern network gxnor2 (terminal A, B, BN, F, vss, vdd)
+extern network gxor1 (terminal A, B, F, vss, vdd)
+extern network gxor2 (terminal A, B, BN, F, vss, vdd)
+extern network gxor3 (terminal A, B, F, vss, vdd)
+extern network gnand2 (terminal A1, A2, F, vss, vdd)
+extern network gnand3 (terminal A1, A2, A3, F, vss, vdd)
+extern network gnand4 (terminal A1, A2, A3, A4, F, vss, vdd)
+extern network gnor2 (terminal A1, A2, F, vss, vdd)
+extern network gnor3 (terminal A1, A2, A3, F, vss, vdd)
+extern network gnor4 (terminal A1, A2, A3, A4, F, vss, vdd)
+extern network gor2 (terminal A1, A2, F, vss, vdd)
+extern network gor3 (terminal A1, A2, A3, F, vss, vdd)
+extern network gand2 (terminal A1, A2, F, vss, vdd)
+extern network gand3 (terminal A1, A2, A3, F, vss, vdd)
+extern network gt0n (terminal D, TN, QN, Q, vss, vdd)
+extern network gt0p (terminal D, T, QN, Q, vss, vdd)

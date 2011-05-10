@@ -1,0 +1,181 @@
+\subsection{phil\_\-glob.h File Reference}
+\label{phil_glob.h}\index{phil_glob.h@{phil\_\-glob.h}}
+{\tt \#include "image.h"}\par
+{\tt \#include "routing.h"}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-SLICE\_\-INFO}
+\end{CompactItemize}
+\subsubsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef struct {\bf \_\-SLICE\_\-INFO} {\bf SLICE\_\-INFO}
+\item 
+typedef struct {\bf \_\-SLICE\_\-INFO} {\bf SLICE\_\-INFO\_\-TYPE}
+\item 
+typedef struct {\bf \_\-SLICE\_\-INFO}$\ast$ {\bf SLICE\_\-INFOPTR}
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf phil} (char $\ast$c\-Name,char $\ast$f\-Name,char $\ast$l\-Name,char $\ast$o\-Name, double magn, CIRCUIT $\ast$from\-Partitioner,CIRCUIT $\ast$real\-Circuit=NULL, {\bf GLOBAL\_\-ROUTING} $\ast$g\_\-rout=NULL)
+\item 
+void {\bf read\-Image\-File} ()
+\item 
+{\bf IMAGEDESC}$\ast$ {\bf get\-Image\-Desc} ()
+\end{CompactItemize}
+
+
+\subsubsection{Typedef Documentation}
+\label{phil_glob.h_a3}
+\index{phil_glob.h@{phil\_\-glob.h}!SLICE_INFO@{SLICE\_\-INFO}}
+\index{SLICE_INFO@{SLICE\_\-INFO}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-SLICE\_\-INFO} SLICE\_\-INFO}\hfill
+
+\label{phil_glob.h_a5}
+\index{phil_glob.h@{phil\_\-glob.h}!SLICE_INFOPTR@{SLICE\_\-INFOPTR}}
+\index{SLICE_INFOPTR@{SLICE\_\-INFOPTR}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-SLICE\_\-INFO}$\ast$ SLICE\_\-INFOPTR}\hfill
+
+\label{phil_glob.h_a4}
+\index{phil_glob.h@{phil\_\-glob.h}!SLICE_INFO_TYPE@{SLICE\_\-INFO\_\-TYPE}}
+\index{SLICE_INFO_TYPE@{SLICE\_\-INFO\_\-TYPE}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-SLICE\_\-INFO} SLICE\_\-INFO\_\-TYPE}\hfill
+
+
+
+\subsubsection{Function Documentation}
+\label{phil_glob.h_a2}
+\index{phil_glob.h@{phil\_\-glob.h}!getImageDesc@{getImageDesc}}
+\index{getImageDesc@{getImageDesc}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} $\ast$ get\-Image\-Desc (void)}\hfill
+
+
+
+Definition at line 160 of file phil.C.\small\begin{verbatim}00163 {
+00164   return parInt.getImageDesc();
+00165 
+00166 }
+\end{verbatim}\normalsize 
+\label{phil_glob.h_a0}
+\index{phil_glob.h@{phil\_\-glob.h}!phil@{phil}}
+\index{phil@{phil}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int phil (char $\ast$ {\em c\-Name}, char $\ast$ {\em f\-Name}, char $\ast$ {\em l\-Name}, char $\ast$ {\em o\-Name}, double {\em magn}, CIRCUIT $\ast$ {\em from\-Partitioner}, CIRCUIT $\ast$ {\em real\-Circuit} = NULL, {\bf GLOBAL\_\-ROUTING} $\ast$ {\em glob\_\-rout} = NULL)}\hfill
+
+
+
+Definition at line 45 of file phil.C.
+
+Referenced by {\bf madonna}().\small\begin{verbatim}00049 {
+00050     
+00051     cout << "\n------ Detailed placement of (" << oName << "(" << cName 
+00052          << "(" << fName << "(" << lName << "))))...\n";
+00053     
+00054     if(doTranAna<0)
+00055       doTranAna=0;
+00056 
+00057     if( doTranAna==1)
+00058     {
+00059       slicingLayout=1;
+00060       doTranAna=1;
+00061       rand_points=1;
+00062     }
+00063 
+00064     
+00065     plcm = new Plcm(cName,fName,lName,
+00066                      parInt.getImageDesc(),
+00067              parInt.getImageMap(),
+00068              oName,
+00069              fromPartitioner,
+00070              (makeChannels==1?glob_rout:NULL),
+00071              Boolean(slicingLayout),
+00072              Boolean(doTranAna),
+00073                      Boolean(phil_verbose),
+00074                      Boolean(rand_points),set_srand,macroMinSize);
+00075 
+00076     cout << "------ Reading input data" << endl;
+00077     
+00078     plcm-> read();    
+00079     
+00080     cout << "------ Creating temporary data structures" << endl;
+00081     
+00082     plcm->prepare();
+00083     
+00084     int done;
+00085 
+00086     do
+00087     {
+00088       cout << "------ Placement plane size : [" << requestedGridPoints[HOR] << ":" 
+00089       << requestedGridPoints[VER] << "]" << endl;
+00090 
+00091       plcm->createPlane(requestedGridPoints[HOR],requestedGridPoints[VER]);
+00092 
+00093       cout << "------ Doing placement " << endl;
+00094 
+00095       done = ! plcm->placement();
+00096 
+00097       if(!done)         // will have to increase the size of the placement
+00098       {             // plane
+00099 
+00100     if(expandableDirection == HOR)
+00101         requestedGridPoints[HOR]=int(INC_FACT*requestedGridPoints[HOR]);
+00102       else
+00103         requestedGridPoints[VER]=int(INC_FACT*requestedGridPoints[VER]);        
+00104     plcm->recover();
+00105       }
+00106     }while(!done);
+00107 
+00108                 // one small detail - let\'s properly set 
+00109                 // the bounding box (it may be smaller than
+00110                 // placement plane size)
+00111 
+00112     plcm->setBbx();
+00113 
+00114   
+00115 
+00116     if(doCompresion>0)
+00117     {
+00118       cout << "------ Compacting  " << endl;    
+00119       plcm->compaction();
+00120 
+00121     }
+00122 
+00123     if(doTranAna)
+00124     {
+00125       cout << "------ Transparencies Analysis. " << endl;
+00126       plcm->doTranspAnalysis();
+00127     }
+00128 
+00129 
+00130 
+00131 #ifdef __MSDOS__
+00132     fclose(stdprn);
+00133     fclose(stdaux);
+00134 #endif
+00135 //    if(!doTranAna)        // it\'\' be passed to the global router
+00136     if (1)
+00137     {               // so don\'t write it yet.
+00138       cout << "------ Writing created layout to database" << endl;
+00139       plcm->write(realCircuit);
+00140     }
+00141     else
+00142       plcm->write(realCircuit,false); // false == do not write
+00143 
+00144     delete plcm;
+00145     
+00146     return 0;
+00147 }
+\end{verbatim}\normalsize 
+\label{phil_glob.h_a1}
+\index{phil_glob.h@{phil\_\-glob.h}!readImageFile@{readImageFile}}
+\index{readImageFile@{readImageFile}!phil_glob.h@{phil\_\-glob.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void read\-Image\-File (void)}\hfill
+
+
+
+Definition at line 150 of file phil.C.\small\begin{verbatim}00153 {
+00154   parInt.read();
+00155 
+00156 }
+\end{verbatim}\normalsize 

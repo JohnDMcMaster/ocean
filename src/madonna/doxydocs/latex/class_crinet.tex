@@ -1,0 +1,114 @@
+\subsection{Cri\-Net  Class Reference}
+\label{CriNet}\index{CriNet@{Cri\-Net}}
+{\tt \#include $<$cri.h$>$}
+
+Inheritance diagram for Cri\-Net:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_crinet.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Cri\-Net} (char $\ast$n )
+\item 
+{\bf $\sim$Cri\-Net} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual void {\bf print} ( ostream\& o) const
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& o) const
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf name}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{CriNet_a0}
+\index{CriNet@{Cri\-Net}!CriNet@{CriNet}}
+\index{CriNet@{CriNet}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cri\-Net::Cri\-Net (char $\ast$ {\em n})}\hfill
+
+
+
+Definition at line 72 of file cri.h.\small\begin{verbatim}00072 :name(n){}
+\end{verbatim}\normalsize 
+\label{CriNet_a1}
+\index{CriNet@{Cri\-Net}!~CriNet@{$\sim$CriNet}}
+\index{~CriNet@{$\sim$CriNet}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cri\-Net::$\sim$Cri\-Net ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 75 of file cri.h.\small\begin{verbatim}00075 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{CriNet_a5}
+\index{CriNet@{Cri\-Net}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Cri\-Net::is\-Equal (const {\bf Item} \& {\em o}) const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a5})}.
+
+Definition at line 81 of file cri.h.\small\begin{verbatim}00082 {return ((CriNet&)o).name == name ;}
+\end{verbatim}\normalsize 
+\label{CriNet_a3}
+\index{CriNet@{Cri\-Net}!myName@{myName}}
+\index{myName@{myName}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Cri\-Net::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a4})}.
+
+Definition at line 78 of file cri.h.\small\begin{verbatim}00078 { return "CriNet"; }
+\end{verbatim}\normalsize 
+\label{CriNet_a2}
+\index{CriNet@{Cri\-Net}!myNo@{myNo}}
+\index{myNo@{myNo}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Cri\-Net::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a3})}.
+
+Definition at line 77 of file cri.h.\small\begin{verbatim}00077 { return CriNetClass; }
+\end{verbatim}\normalsize 
+\label{CriNet_a4}
+\index{CriNet@{Cri\-Net}!print@{print}}
+\index{print@{print}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Cri\-Net::print (ostream \& {\em o}) const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a8})}.
+
+Definition at line 79 of file cri.h.\small\begin{verbatim}00080 { o << "(" << name << ")";}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{CriNet_m0}
+\index{CriNet@{Cri\-Net}!name@{name}}
+\index{name@{name}!CriNet@{Cri\-Net}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Cri\-Net::name}\hfill
+
+
+
+Definition at line 86 of file cri.h.
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf cri.h}\end{CompactItemize}

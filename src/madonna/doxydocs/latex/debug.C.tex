@@ -1,0 +1,118 @@
+\subsection{debug.C File Reference}
+\label{debug.C}\index{debug.C@{debug.C}}
+{\tt \#include $<$sea\_\-func.h$>$}\par
+{\tt \#include $<$sealib.h$>$}\par
+{\tt \#include "image.h"}\par
+{\tt \#include "plaza.h"}\par
+{\tt \#include "im.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf printstamp} ({\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf printequiv} ({\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf printpivot} ({\bf PIVOTPTR} pivot)
+\item 
+void {\bf printchild} ({\bf PIVOTPTR} pivot)
+\item 
+void {\bf printmtx} (short $\ast$mtx)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{debug.C_a3}
+\index{debug.C@{debug.C}!printchild@{printchild}}
+\index{printchild@{printchild}!debug.C@{debug.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printchild ({\bf PIVOTPTR} {\em pivot})}\hfill
+
+
+
+Definition at line 54 of file debug.C.\small\begin{verbatim}00055 {
+00056 PLAZGLAFPTR glaf=pivot->children;
+00057 LAYINSTPTR  li;
+00058 LAYOUTPTR   lay;
+00059 
+00060 fprintf(stderr,"\n (Children");
+00061 for (; glaf!=NIL; glaf=glaf->next)
+00062    {
+00063    lay=glaf->layout;
+00064    fprintf(stderr,"\n  (Layout (%s(%s(%s)))",
+00065      lay->name,lay->circuit->name,lay->circuit->function->name);
+00066    glaf=(PLAZGLAFPTR)lay->flag.p;
+00067    if (glaf->layout!=lay)
+00068       fprintf(stderr," GLAF_LAYOUT");
+00069    for (li=glaf->layinst; li!=NIL; li=(LAYINSTPTR)li->flag.p)
+00070       fprintf(stderr," (%s)",li->name);
+00071    fprintf(stderr,")");
+00072    }
+00073 fprintf(stderr,")");
+00074 }
+\end{verbatim}\normalsize 
+\label{debug.C_a1}
+\index{debug.C@{debug.C}!printequiv@{printequiv}}
+\index{printequiv@{printequiv}!debug.C@{debug.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printequiv ({\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 29 of file debug.C.\small\begin{verbatim}00030 {
+00031 MIRRORPTR      mirrax;
+00032 EQUIVLISTPTR   equiv;
+00033 
+00034 for (mirrax=imagedesc->mirroraxis; mirrax!=NIL; mirrax=mirrax->next)
+00035    {
+00036    fprintf(stderr,"(Mirrax %1d",mirrax->axisid);
+00037    for (equiv=mirrax->equivalence; equiv!=NIL; equiv=equiv->next)
+00038       fprintf(stderr," (%1d %1d)",equiv->a,equiv->b);
+00039    fprintf(stderr,")\n");
+00040    }
+00041 }
+\end{verbatim}\normalsize 
+\label{debug.C_a4}
+\index{debug.C@{debug.C}!printmtx@{printmtx}}
+\index{printmtx@{printmtx}!debug.C@{debug.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printmtx (short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 78 of file debug.C.\small\begin{verbatim}00079 {
+00080 fprintf(stderr,"/ %2d %2d \\   / %2d \\\n",
+00081   (int)mtx[A11],(int)mtx[A12],(int)mtx[B1]);
+00082 fprintf(stderr,"\\ %2d %2d /   \\ %2d /\n",
+00083   (int)mtx[A21],(int)mtx[A22],(int)mtx[B2]);
+00084 }
+\end{verbatim}\normalsize 
+\label{debug.C_a2}
+\index{debug.C@{debug.C}!printpivot@{printpivot}}
+\index{printpivot@{printpivot}!debug.C@{debug.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printpivot ({\bf PIVOTPTR} {\em pivot})}\hfill
+
+
+
+Definition at line 45 of file debug.C.\small\begin{verbatim}00046 {
+00047 fprintf(stderr,"\n(Pivot (%1d %1d) (%1d %1d)",pivot->x,pivot->y,pivot->lx,pivot->ly);
+00048 printchild(pivot);
+00049 fprintf(stderr,")");
+00050 }
+\end{verbatim}\normalsize 
+\label{debug.C_a0}
+\index{debug.C@{debug.C}!printstamp@{printstamp}}
+\index{printstamp@{printstamp}!debug.C@{debug.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printstamp ({\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 13 of file debug.C.\small\begin{verbatim}00014 {
+00015 int x,y,**stamp=imagedesc->stamp;
+00016 
+00017 fprintf(stderr,"\n");
+00018 for (y=(imagedesc->size[VER]<<1)-1; y>=0; --y)
+00019    {
+00020    for (x=0; x<(imagedesc->size[HOR]<<1); ++x)
+00021       fprintf(stderr,"%3d",stamp[x][y]);
+00022    fprintf(stderr,"\n");
+00023    }
+00024 fprintf(stderr,"\n");
+00025 }
+\end{verbatim}\normalsize 

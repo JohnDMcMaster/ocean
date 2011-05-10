@@ -1,0 +1,20 @@
+/* * * * * * * * * * * * * * * * 
+ *
+ * This is the file 'octalib3_93.ext'.
+ * Contents: The external sls-declarations of all cells
+ *           in the library octalib3_93. (version march 1993)
+ * Purpose:  To determine the terminal configuration of the
+ *           library cells and to include in your sls-description file.
+ * Created:  march 1993 by Patrick Groeneveld
+ * Modified: march, added buf20 and dfr11 (Paul Stravers)
+ *
+ * This file was copied into this project directory by 'mkopr'
+ */
+
+extern network buf20    (terminal A, Y, vss, vdd)
+extern network iv110    (terminal A, Y, vss, vdd)
+extern network na210    (terminal A, B, Y, vss, vdd)
+extern network na310    (terminal A, B, C, Y, vss, vdd)
+extern network no210    (terminal A, B, Y, vss, vdd)
+extern network no310    (terminal A, B, C, Y, vss, vdd)
+extern network dfr11    (terminal D, R, CK, Q, QN, vss, vdd)

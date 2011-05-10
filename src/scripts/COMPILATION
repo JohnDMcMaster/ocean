@@ -1,0 +1,59 @@
+#
+# @(#)COMPILATION 1.1 12/03/99 
+#
+cat << 'EOF'
+
+			O C E A N   COMPILATION MANUAL
+			------------------------------
+			       December 3, 1999
+                      
+
+This manual describes how to compile the OCEAN software.  In order to compile
+and install the OCEAN software, please first read the file INSTALLATION, which 
+describes how to install OCEAN in executable form.  The following things are 
+different when not using the pre-compiled executables, but compiling the tools 
+yourself:
+
+You need the following files:
+
+   cacd_src.tar.gz
+   cacd_general.tar.gz
+   ocean_src.tar.gz
+   ocean_celllibs.tar.gz
+   ocean_docs.tar.gz  
+
+Then replace steps [6-14] of the INSTALLATION manual by the following
+commands:
+
+First, unpack and compile the cacd software:
+
+  [6] cd /users/cacd
+  [7] gzip -dc /tmp/cacd_src.tar.gz | tar xf - 
+  [8] gzip -dc /tmp/cacd_general.tar.gz | tar xf - 
+  [9] make basicInstall
+
+If a program fails to compile, fix the problem (compiler options are
+defined in $ICDPATH/CONFIG/M.$ARCHITECTURE), and then type:
+
+  [10] cd /users/cacd
+  [11] make <thefailedprogram>
+
+Second, unpack and compile the OCEAN software:
+
+  [12] cd /users/ocean
+  [13] gzip -dc /tmp/ocean_src.tar.gz | tar xf - 
+  [14] gzip -dc /tmp/ocean_celllibs.tar.gz | tar xf - 
+  [15] gzip -dc /tmp/ocean_docs.tar.gz | tar xf - 
+  [16] sh src/scripts/buildsrc -c
+
+If a program fails to compile, fix the problem (compiler options are
+defined in src/scripts/buildsrc), and then type:
+
+  [17] cd /users/ocean
+  [18] sh bin/buildsrc -cp <thefailedprogram>
+
+Finally, compile the cell libraries:
+
+  [19] bin/$MACHINE/nelsis3/ICELLS
+
+'EOF'

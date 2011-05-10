@@ -1,0 +1,134 @@
+\subsection{mtx.C File Reference}
+\label{mtx.C}\index{mtx.C@{mtx.C}}
+{\tt \#include $<$sealib.h$>$}\par
+{\tt \#include "sea.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+short$\ast$ {\bf mtxidentity} (void)
+\item 
+void {\bf mtxtranslate} (short $\ast$mtx,int p,int q)
+\item 
+void {\bf mtxcopy} (short $\ast$dstmtx,short $\ast$srcmtx)
+\item 
+void {\bf mtxapply} (int $\ast$out,int $\ast$in,short $\ast$mtx)
+\item 
+void {\bf mtxaddvec} (short $\ast$mtx,int p,int q)
+\item 
+void {\bf mtxapplytocrd} (short $\ast$out,short $\ast$in,short $\ast$mtx)
+\item 
+short$\ast$ {\bf mtxchain} (short $\ast$mtxb,short $\ast$mtxa)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{mtx.C_a4}
+\index{mtx.C@{mtx.C}!mtxaddvec@{mtxaddvec}}
+\index{mtxaddvec@{mtxaddvec}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxaddvec (short $\ast$ {\em mtx}, int {\em p}, int {\em q})}\hfill
+
+
+
+Definition at line 56 of file mtx.C.
+
+Referenced by {\bf mkequivalencelist}().\small\begin{verbatim}00057 {
+00058 mtx[B1] += p;
+00059 mtx[B2] += q;
+00060 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a3}
+\index{mtx.C@{mtx.C}!mtxapply@{mtxapply}}
+\index{mtxapply@{mtxapply}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxapply (int $\ast$ {\em out}, int $\ast$ {\em in}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 49 of file mtx.C.
+
+Referenced by {\bf Lay\-Map::add\-Terms}(), and {\bf mkequivalencelist}().\small\begin{verbatim}00050 {
+00051 out[HOR] = mtx[A11]*in[HOR] + mtx[A12]*in[VER] + mtx[B1];
+00052 out[VER] = mtx[A21]*in[HOR] + mtx[A22]*in[VER] + mtx[B2];
+00053 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a5}
+\index{mtx.C@{mtx.C}!mtxapplytocrd@{mtxapplytocrd}}
+\index{mtxapplytocrd@{mtxapplytocrd}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxapplytocrd (short $\ast$ {\em out}, short $\ast$ {\em in}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 64 of file mtx.C.
+
+Referenced by {\bf Lay\-Map::add\-Wires}(), {\bf Pattern::find\-New\-Left\-Bottom}(), and {\bf Pattern::scan}().\small\begin{verbatim}00065 {
+00066 out[XL] = mtx[A11]*in[XL] + mtx[A12]*in[YB] + mtx[B1];
+00067 out[YB] = mtx[A21]*in[XL] + mtx[A22]*in[YB] + mtx[B2];
+00068 out[XR] = mtx[A11]*in[XR] + mtx[A12]*in[YT] + mtx[B1];
+00069 out[YT] = mtx[A21]*in[XR] + mtx[A22]*in[YT] + mtx[B2];
+00070 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a6}
+\index{mtx.C@{mtx.C}!mtxchain@{mtxchain}}
+\index{mtxchain@{mtxchain}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ mtxchain (short $\ast$ {\em mtxb}, short $\ast$ {\em mtxa})}\hfill
+
+
+
+Definition at line 78 of file mtx.C.\small\begin{verbatim}00079 {
+00080 static short out[6];
+00081 out[A11] = mtxb[A11]*mtxa[A11] + mtxb[A12]*mtxa[A21];
+00082 out[A12] = mtxb[A11]*mtxa[A12] + mtxb[A12]*mtxa[A22];
+00083 out[A21] = mtxb[A21]*mtxa[A11] + mtxb[A22]*mtxa[A21];
+00084 out[A22] = mtxb[A21]*mtxa[A12] + mtxb[A22]*mtxa[A22];
+00085 out[B1]  = mtxb[A11]*mtxa[B1]  + mtxb[A12]*mtxa[B2] + mtxb[B1];
+00086 out[B2]  = mtxb[A21]*mtxa[B1]  + mtxb[A22]*mtxa[B2] + mtxb[B2];
+00087 return(out);
+00088 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a2}
+\index{mtx.C@{mtx.C}!mtxcopy@{mtxcopy}}
+\index{mtxcopy@{mtxcopy}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxcopy (short $\ast$ {\em dstmtx}, short $\ast$ {\em srcmtx})}\hfill
+
+
+
+Definition at line 37 of file mtx.C.
+
+Referenced by {\bf mkequivalencelist}().\small\begin{verbatim}00038 {
+00039 dstmtx[A11]=srcmtx[A11];
+00040 dstmtx[A12]=srcmtx[A12];
+00041 dstmtx[A21]=srcmtx[A21];
+00042 dstmtx[A22]=srcmtx[A22];
+00043 dstmtx[B1] =srcmtx[B1];
+00044 dstmtx[B2] =srcmtx[B2];
+00045 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a0}
+\index{mtx.C@{mtx.C}!mtxidentity@{mtxidentity}}
+\index{mtxidentity@{mtxidentity}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ mtxidentity (void)}\hfill
+
+
+
+Definition at line 10 of file mtx.C.\small\begin{verbatim}00011 {
+00012 static short identity[6] = {0,0,0,0,0,0};
+00013 if (identity[A11]==0)
+00014    { /* cannot initialize compile time without knowing symbolic constants (write time) */
+00015    identity[A11]=identity[A22]=1;
+00016    identity[A12]=identity[A21]=0;
+00017    identity[B1]=identity[B2]=0;
+00018    }
+00019 return(identity);
+00020 }
+\end{verbatim}\normalsize 
+\label{mtx.C_a1}
+\index{mtx.C@{mtx.C}!mtxtranslate@{mtxtranslate}}
+\index{mtxtranslate@{mtxtranslate}!mtx.C@{mtx.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxtranslate (short $\ast$ {\em mtx}, int {\em p}, int {\em q})}\hfill
+
+
+
+Definition at line 29 of file mtx.C.\small\begin{verbatim}00030 {
+00031 mtx[B1]+=(p-mtx[A11]*p-mtx[A12]*q);
+00032 mtx[B2]+=(q-mtx[A21]*p-mtx[A22]*q);
+00033 }
+\end{verbatim}\normalsize 

@@ -1,0 +1,76 @@
+.TH Plane 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Plane \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <plane.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBPlane\fR ( int \fBrows\fR,int \fBcols\fR)"
+.br
+.ti -1c
+.RI "\fB~Plane\fR ()"
+.br
+.ti -1c
+.RI "\fBclusterMapType\fR \fBgetPattern\fR (int x,int y)"
+.br
+.ti -1c
+.RI "\fBList\fR& \fBgetCriticals\fR (int x,int y)"
+.br
+.ti -1c
+.RI "void \fBmark\fR (int x,int y,\fBclusterMapType\fR,\fBList\fR &)"
+.br
+.ti -1c
+.RI "void \fBgetEffSize\fR (int& x,int& y)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "int \fBrows\fR"
+.br
+.ti -1c
+.RI "int \fBcols\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Plane::Plane (int r, int c)
+.PP
+Definition at line 17 of file plane.C.
+.SS Plane::~Plane (void)
+.PP
+Definition at line 38 of file plane.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBList\fR & Plane::getCriticals (int x, int y)\fC [inline]\fR
+.PP
+Definition at line 86 of file plane.h.
+.SS void Plane::getEffSize (int & x, int & y)
+.PP
+Definition at line 55 of file plane.C.
+.SS \fBclusterMapType\fR Plane::getPattern (int x, int y)\fC [inline]\fR
+.PP
+Definition at line 71 of file plane.h.
+.SS void Plane::mark (int x, int y, \fBclusterMapType\fR map, \fBList\fR & critListRef)\fC [inline]\fR
+.PP
+Definition at line 99 of file plane.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int Plane::cols
+.PP
+Definition at line 49 of file plane.h.
+.SS int Plane::rows
+.PP
+Definition at line 48 of file plane.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,350 @@
+\subsection{part.h File Reference}
+\label{part.h}\index{part.h@{part.h}}
+{\tt \#include $<$sea\_\-decl.h$>$}\par
+{\tt \#include "genpart.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf init\_\-row\_\-clm\_\-transformation\_\-arrays} ({\bf TOTALPPTR} total)
+\item 
+void {\bf initnetstate} ({\bf NETSTATEPTR} netstate,{\bf CFUNC} $\ast$costfunction)
+\item 
+int {\bf netstatecost} (int, {\bf NETSTATEPTR} netstate)
+\item 
+int {\bf netstatecost2} (int, int xl,int xr,int yb,int yt,int deviation)
+\item 
+int {\bf gainnetstate} ({\bf NETSTATEPTR} netstate,int to\_\-area,int from\_\-area, {\bf CFUNC} $\ast$costfunction)
+\item 
+void {\bf keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr} (int $\ast$,int $\ast$,int from\_\-bar, int $\ast$barlist[$\,$])
+\item 
+void {\bf keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake} (int $\ast$,int $\ast$,int from\_\-bar, int $\ast$barlist[$\,$])
+\item 
+void {\bf keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr} (int $\ast$,int $\ast$,int to\_\-bar,int $\ast$barlist[$\,$])
+\item 
+void {\bf keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake} (int $\ast$,int $\ast$,int to\_\-bar)
+\item 
+{\bf NETSTATEPTR} {\bf domove\_\-and\_\-copy\_\-netstate} ({\bf NETSTATEPTR} oldnetstate, int $\ast$newstatebuf,int to\_\-area,int from\_\-area, {\bf CFUNC} $\ast$costfunction)
+\item 
+int$\ast$ {\bf startofstatebuf} ({\bf NETSTATEPTR} netstate)
+\item 
+int {\bf sizeofstatebuf} ({\bf NETSTATEPTR} netstate)
+\item 
+int {\bf sizeofstatebuf2} ({\bf TOTALPPTR} total)
+\item 
+void {\bf assignstatebuf} ({\bf NETSTATEPTR} netstate,int $\ast$statebuf)
+\item 
+int {\bf dopartitioning} ({\bf TOTALPPTR} total)
+\item 
+void {\bf movecandidateandupdategains} ({\bf PARTLISTPTR} thecandidate,{\bf TOTALPPTR} total)
+\item 
+void {\bf updategains} ({\bf PARTCELLPTR} thecell,int dstparti,int srcparti,{\bf TOTALPPTR} total)
+\item 
+void {\bf updategainsincellsinnet} (NETPTR net,int movdst,int movsrc,{\bf TOTALPPTR} total)
+\item 
+void {\bf rememberthispartitioning} ({\bf TOTALPPTR} total)
+\item 
+void {\bf fixnetlist} (CIRCUITPTR ntop,CIRCUITPTR otop)
+\item 
+void {\bf copycpr} (CIRCUITPTR ntop,NETPTR nnet,CIRPORTREFPTR ocpr,int disappears)
+\item 
+int {\bf netdisappearsinsinglepartition} (NETPTR onet)
+\item 
+int {\bf alreadyhavefun} (STRING fname,LIBRARYPTR lib)
+\item 
+char$\ast$ {\bf balloc} (int size)
+\item 
+void {\bf bfree} (char $\ast$blk)
+\item 
+int {\bf genpart} ({\bf TOTALPPTR} $\ast$totalout,CIRCUITPTR topcell,int nx,int ny, {\bf CFUNC} $\ast$costfunction,int repeat)
+\item 
+int {\bf readlayoutofchildren} (long what,CIRCUITPTR topcell,int expandtobottom)
+\item 
+int {\bf plazareadlayout} (long what,CIRCUITPTR c,int expandtobottom)
+\item 
+int {\bf prefabmakemembersandcandidates} ({\bf TOTALPPTR} total)
+\item 
+int {\bf exitpartitionstructures} ({\bf TOTALPPTR} total)
+\item 
+void {\bf madonna\_\-} ({\bf TOTALPPTR} $\ast$total,CIRCUITPTR circuit, int calldepth)
+\item 
+int {\bf costquad} (int netdistr[$\,$],int numparts)
+\item 
+void {\bf madonnastat} ({\bf TOTALPPTR} total)
+\item 
+int {\bf cost3x3} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf cost4x4} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf cost5x4} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf cost6x4} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf cost8x4} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf cost16x4} (int netdistr[$\,$],int numparts)
+\item 
+int {\bf gencost} (int netdistr[$\,$],register int total,register int hor)
+\item 
+int {\bf initnetcostinfo} (void)
+\item 
+int {\bf make\-Random\-Move} ({\bf TOTALPPTR})
+\item 
+void {\bf update\-Temperature} ({\bf TOTALPPTR})
+\item 
+void {\bf raise\_\-alarm\_\-flag} (int signumber)
+\item 
+void {\bf enable\_\-reset\_\-alarm\_\-flag} (int signumber)
+\item 
+void {\bf initsignals} (void)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{part.h_a22}
+\index{part.h@{part.h}!alreadyhavefun@{alreadyhavefun}}
+\index{alreadyhavefun@{alreadyhavefun}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int alreadyhavefun (STRING {\em fname}, LIBRARYPTR {\em lib})}\hfill
+
+\label{part.h_a13}
+\index{part.h@{part.h}!assignstatebuf@{assignstatebuf}}
+\index{assignstatebuf@{assignstatebuf}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void assignstatebuf ({\bf NETSTATEPTR} {\em netstate}, int $\ast$ {\em statebuf})}\hfill
+
+\label{part.h_a23}
+\index{part.h@{part.h}!balloc@{balloc}}
+\index{balloc@{balloc}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ balloc (int {\em size})}\hfill
+
+
+
+Definition at line 14 of file stuff.C.\small\begin{verbatim}00015 {
+00016   return((char *)malloc(size));
+00017 }
+\end{verbatim}\normalsize 
+\label{part.h_a24}
+\index{part.h@{part.h}!bfree@{bfree}}
+\index{bfree@{bfree}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void bfree (char $\ast$ {\em blk})}\hfill
+
+
+
+Definition at line 20 of file stuff.C.\small\begin{verbatim}00021 {
+00022   free(blk);
+00023 }
+\end{verbatim}\normalsize 
+\label{part.h_a20}
+\index{part.h@{part.h}!copycpr@{copycpr}}
+\index{copycpr@{copycpr}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void copycpr (CIRCUITPTR {\em ntop}, NETPTR {\em nnet}, CIRPORTREFPTR {\em ocpr}, int {\em disappears})}\hfill
+
+\label{part.h_a38}
+\index{part.h@{part.h}!cost16x4@{cost16x4}}
+\index{cost16x4@{cost16x4}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost16x4 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a33}
+\index{part.h@{part.h}!cost3x3@{cost3x3}}
+\index{cost3x3@{cost3x3}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost3x3 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a34}
+\index{part.h@{part.h}!cost4x4@{cost4x4}}
+\index{cost4x4@{cost4x4}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost4x4 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a35}
+\index{part.h@{part.h}!cost5x4@{cost5x4}}
+\index{cost5x4@{cost5x4}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost5x4 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a36}
+\index{part.h@{part.h}!cost6x4@{cost6x4}}
+\index{cost6x4@{cost6x4}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost6x4 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a37}
+\index{part.h@{part.h}!cost8x4@{cost8x4}}
+\index{cost8x4@{cost8x4}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cost8x4 (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a31}
+\index{part.h@{part.h}!costquad@{costquad}}
+\index{costquad@{costquad}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int costquad (int {\em netdistr}[$\,$], int {\em numparts})}\hfill
+
+\label{part.h_a9}
+\index{part.h@{part.h}!domove_and_copy_netstate@{domove\_\-and\_\-copy\_\-netstate}}
+\index{domove_and_copy_netstate@{domove\_\-and\_\-copy\_\-netstate}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf NETSTATEPTR} domove\_\-and\_\-copy\_\-netstate ({\bf NETSTATEPTR} {\em oldnetstate}, int $\ast$ {\em newstatebuf}, int {\em to\_\-area}, int {\em from\_\-area}, {\bf CFUNC} $\ast$ {\em costfunction})}\hfill
+
+\label{part.h_a14}
+\index{part.h@{part.h}!dopartitioning@{dopartitioning}}
+\index{dopartitioning@{dopartitioning}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int dopartitioning ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a44}
+\index{part.h@{part.h}!enable_reset_alarm_flag@{enable\_\-reset\_\-alarm\_\-flag}}
+\index{enable_reset_alarm_flag@{enable\_\-reset\_\-alarm\_\-flag}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void enable\_\-reset\_\-alarm\_\-flag (int {\em signumber})}\hfill
+
+\label{part.h_a29}
+\index{part.h@{part.h}!exitpartitionstructures@{exitpartitionstructures}}
+\index{exitpartitionstructures@{exitpartitionstructures}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int exitpartitionstructures ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a19}
+\index{part.h@{part.h}!fixnetlist@{fixnetlist}}
+\index{fixnetlist@{fixnetlist}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void fixnetlist (CIRCUITPTR {\em ntop}, CIRCUITPTR {\em otop})}\hfill
+
+\label{part.h_a4}
+\index{part.h@{part.h}!gainnetstate@{gainnetstate}}
+\index{gainnetstate@{gainnetstate}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int gainnetstate ({\bf NETSTATEPTR} {\em netstate}, int {\em to\_\-area}, int {\em from\_\-area}, {\bf CFUNC} $\ast$ {\em costfunction})}\hfill
+
+\label{part.h_a39}
+\index{part.h@{part.h}!gencost@{gencost}}
+\index{gencost@{gencost}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int gencost (int {\em netdistr}[$\,$], register int {\em total}, register int {\em hor})}\hfill
+
+\label{part.h_a25}
+\index{part.h@{part.h}!genpart@{genpart}}
+\index{genpart@{genpart}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int genpart ({\bf TOTALPPTR} $\ast$ {\em totalout}, CIRCUITPTR {\em topcell}, int {\em nx}, int {\em ny}, {\bf CFUNC} $\ast$ {\em costfunction}, int {\em repeat})}\hfill
+
+\label{part.h_a0}
+\index{part.h@{part.h}!init_row_clm_transformation_arrays@{init\_\-row\_\-clm\_\-transformation\_\-arrays}}
+\index{init_row_clm_transformation_arrays@{init\_\-row\_\-clm\_\-transformation\_\-arrays}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void init\_\-row\_\-clm\_\-transformation\_\-arrays ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a40}
+\index{part.h@{part.h}!initnetcostinfo@{initnetcostinfo}}
+\index{initnetcostinfo@{initnetcostinfo}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int initnetcostinfo (void)}\hfill
+
+
+
+Referenced by {\bf madonna}().\label{part.h_a1}
+\index{part.h@{part.h}!initnetstate@{initnetstate}}
+\index{initnetstate@{initnetstate}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void initnetstate ({\bf NETSTATEPTR} {\em netstate}, {\bf CFUNC} $\ast$ {\em costfunction})}\hfill
+
+\label{part.h_a45}
+\index{part.h@{part.h}!initsignals@{initsignals}}
+\index{initsignals@{initsignals}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void initsignals (void)}\hfill
+
+
+
+Referenced by {\bf INITIAL\_\-COOLING}(), and {\bf main}().\label{part.h_a5}
+\index{part.h@{part.h}!keep_track_of_bbx_after_decr@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr}}
+\index{keep_track_of_bbx_after_decr@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr (int $\ast$, int $\ast$, int {\em from\_\-bar}, int $\ast$ {\em barlist}[$\,$])}\hfill
+
+\label{part.h_a6}
+\index{part.h@{part.h}!keep_track_of_bbx_after_decr_fake@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake}}
+\index{keep_track_of_bbx_after_decr_fake@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void keep\_\-track\_\-of\_\-bbx\_\-after\_\-decr\_\-fake (int $\ast$, int $\ast$, int {\em from\_\-bar}, int $\ast$ {\em barlist}[$\,$])}\hfill
+
+\label{part.h_a7}
+\index{part.h@{part.h}!keep_track_of_bbx_after_incr@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr}}
+\index{keep_track_of_bbx_after_incr@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr (int $\ast$, int $\ast$, int {\em to\_\-bar}, int $\ast$ {\em barlist}[$\,$])}\hfill
+
+\label{part.h_a8}
+\index{part.h@{part.h}!keep_track_of_bbx_after_incr_fake@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake}}
+\index{keep_track_of_bbx_after_incr_fake@{keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void keep\_\-track\_\-of\_\-bbx\_\-after\_\-incr\_\-fake (int $\ast$, int $\ast$, int {\em to\_\-bar})}\hfill
+
+\label{part.h_a30}
+\index{part.h@{part.h}!madonna_@{madonna\_\-}}
+\index{madonna_@{madonna\_\-}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void madonna\_\- ({\bf TOTALPPTR} $\ast$ {\em total}, CIRCUITPTR {\em circuit}, int {\em calldepth})}\hfill
+
+
+
+Referenced by {\bf madonna}().\label{part.h_a32}
+\index{part.h@{part.h}!madonnastat@{madonnastat}}
+\index{madonnastat@{madonnastat}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void madonnastat ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a41}
+\index{part.h@{part.h}!makeRandomMove@{makeRandomMove}}
+\index{makeRandomMove@{makeRandomMove}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int make\-Random\-Move ({\bf TOTALPPTR})}\hfill
+
+\label{part.h_a15}
+\index{part.h@{part.h}!movecandidateandupdategains@{movecandidateandupdategains}}
+\index{movecandidateandupdategains@{movecandidateandupdategains}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void movecandidateandupdategains ({\bf PARTLISTPTR} {\em thecandidate}, {\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a21}
+\index{part.h@{part.h}!netdisappearsinsinglepartition@{netdisappearsinsinglepartition}}
+\index{netdisappearsinsinglepartition@{netdisappearsinsinglepartition}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int netdisappearsinsinglepartition (NETPTR {\em onet})}\hfill
+
+\label{part.h_a2}
+\index{part.h@{part.h}!netstatecost@{netstatecost}}
+\index{netstatecost@{netstatecost}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int netstatecost (int, {\bf NETSTATEPTR} {\em netstate})}\hfill
+
+\label{part.h_a3}
+\index{part.h@{part.h}!netstatecost2@{netstatecost2}}
+\index{netstatecost2@{netstatecost2}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int netstatecost2 (int, int {\em xl}, int {\em xr}, int {\em yb}, int {\em yt}, int {\em deviation})}\hfill
+
+\label{part.h_a27}
+\index{part.h@{part.h}!plazareadlayout@{plazareadlayout}}
+\index{plazareadlayout@{plazareadlayout}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int plazareadlayout (long {\em what}, CIRCUITPTR {\em c}, int {\em expandtobottom})}\hfill
+
+\label{part.h_a28}
+\index{part.h@{part.h}!prefabmakemembersandcandidates@{prefabmakemembersandcandidates}}
+\index{prefabmakemembersandcandidates@{prefabmakemembersandcandidates}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int prefabmakemembersandcandidates ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a43}
+\index{part.h@{part.h}!raise_alarm_flag@{raise\_\-alarm\_\-flag}}
+\index{raise_alarm_flag@{raise\_\-alarm\_\-flag}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void raise\_\-alarm\_\-flag (int {\em signumber})}\hfill
+
+\label{part.h_a26}
+\index{part.h@{part.h}!readlayoutofchildren@{readlayoutofchildren}}
+\index{readlayoutofchildren@{readlayoutofchildren}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int readlayoutofchildren (long {\em what}, CIRCUITPTR {\em topcell}, int {\em expandtobottom})}\hfill
+
+\label{part.h_a18}
+\index{part.h@{part.h}!rememberthispartitioning@{rememberthispartitioning}}
+\index{rememberthispartitioning@{rememberthispartitioning}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void rememberthispartitioning ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a11}
+\index{part.h@{part.h}!sizeofstatebuf@{sizeofstatebuf}}
+\index{sizeofstatebuf@{sizeofstatebuf}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int sizeofstatebuf ({\bf NETSTATEPTR} {\em netstate})}\hfill
+
+\label{part.h_a12}
+\index{part.h@{part.h}!sizeofstatebuf2@{sizeofstatebuf2}}
+\index{sizeofstatebuf2@{sizeofstatebuf2}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int sizeofstatebuf2 ({\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a10}
+\index{part.h@{part.h}!startofstatebuf@{startofstatebuf}}
+\index{startofstatebuf@{startofstatebuf}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ startofstatebuf ({\bf NETSTATEPTR} {\em netstate})}\hfill
+
+\label{part.h_a42}
+\index{part.h@{part.h}!updateTemperature@{updateTemperature}}
+\index{updateTemperature@{updateTemperature}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void update\-Temperature ({\bf TOTALPPTR})}\hfill
+
+\label{part.h_a16}
+\index{part.h@{part.h}!updategains@{updategains}}
+\index{updategains@{updategains}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void updategains ({\bf PARTCELLPTR} {\em thecell}, int {\em dstparti}, int {\em srcparti}, {\bf TOTALPPTR} {\em total})}\hfill
+
+\label{part.h_a17}
+\index{part.h@{part.h}!updategainsincellsinnet@{updategainsincellsinnet}}
+\index{updategainsincellsinnet@{updategainsincellsinnet}!part.h@{part.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void updategainsincellsinnet (NETPTR {\em net}, int {\em movdst}, int {\em movsrc}, {\bf TOTALPPTR} {\em total})}\hfill
+

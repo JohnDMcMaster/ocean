@@ -1,0 +1,109 @@
+\subsection{glob\-Route.C File Reference}
+\label{globRoute.C}\index{globRoute.C@{glob\-Route.C}}
+{\tt \#include "genpart.h"}\par
+{\tt \#include "glob\-Route.h"}\par
+{\tt \#include "phil\_\-glob.h"}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$malloc.h$>$}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf accept\-Branch} ({\bf sdfset}\& branch, tree\-Edge\-Info\& ste\-Info)
+\item 
+int {\bf check\-This\-Edge\-Side} (tree\-Edge $\ast$te, {\bf expansion\-Grid\-Vertex} $\ast$vx, tree\-Edge\-Info\& ste\-Info)
+\item 
+void {\bf make\-Routing\-Info} ({\bf ROUTING\_\-INFO}\& rinfo, int x, int y)
+\item 
+int {\bf is\-Power\-Or\-Ground\-Net} (NETPTR net)
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+STRING {\bf Route\-Ascii\-File} = NIL
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{globRoute.C_a0}
+\index{globRoute.C@{glob\-Route.C}!acceptBranch@{acceptBranch}}
+\index{acceptBranch@{acceptBranch}!globRoute.C@{glob\-Route.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int accept\-Branch ({\bf sdfset} \& {\em branch}, tree\-Edge\-Info \& {\em ste\-Info})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 328 of file glob\-Route.C.\small\begin{verbatim}00329 {
+00330    sdfsetNextElmtIterator nextBranchEdge(&branch);
+00331    treeEdge *te;
+00332    while (te = (treeEdge *)nextBranchEdge())
+00333    {
+00334       expansionGridVertex *oneSide
+00335      = (expansionGridVertex *) te->edge()->firstTerminal()->thisVertex();
+00336       if (checkThisEdgeSide(te,oneSide,steInfo) == NIL)
+00337      return NIL;
+00338       expansionGridVertex *otherSide
+00339      = (expansionGridVertex *) te->edge()->lastTerminal()->thisVertex();
+00340       if (checkThisEdgeSide(te,otherSide,steInfo) == NIL)
+00341      return NIL;
+00342    }
+00343    return TRUE;         // no reason to deny this branch
+00344 }
+\end{verbatim}\normalsize 
+\label{globRoute.C_a1}
+\index{globRoute.C@{glob\-Route.C}!checkThisEdgeSide@{checkThisEdgeSide}}
+\index{checkThisEdgeSide@{checkThisEdgeSide}!globRoute.C@{glob\-Route.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int check\-This\-Edge\-Side (tree\-Edge $\ast$ {\em te}, {\bf expansion\-Grid\-Vertex} $\ast$ {\em vx}, tree\-Edge\-Info \& {\em ste\-Info})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 350 of file glob\-Route.C.
+
+Referenced by {\bf accept\-Branch}().\small\begin{verbatim}00352 {
+00353    if (vx->type() != PartitionGV)
+00354       return TRUE; // we only worry about connections to partitions
+00355    graphVertexEdgeIterator nextEdge(vx);
+00356    expansionGridEdge *ege;
+00357    while (ege = (expansionGridEdge *) nextEdge())
+00358    {
+00359       if (te->edge() == ege)
+00360      continue;      // this is our own edge
+00361       if (steInfo.search(ege) != NIL)
+00362      return NIL;        // this ege is already incident to VX
+00363    }
+00364    return TRUE;
+00365 }
+\end{verbatim}\normalsize 
+\label{globRoute.C_a3}
+\index{globRoute.C@{glob\-Route.C}!isPowerOrGroundNet@{isPowerOrGroundNet}}
+\index{isPowerOrGroundNet@{isPowerOrGroundNet}!globRoute.C@{glob\-Route.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int is\-Power\-Or\-Ground\-Net (NETPTR {\em net})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 641 of file glob\-Route.C.
+
+Referenced by {\bf expansion\-Grid::build\-Glob\-Nets}().\small\begin{verbatim}00642 {
+00643    if (strncmp(net->name,"vss",3) == 0) return TRUE;
+00644    if (strncmp(net->name,"VSS",3) == 0) return TRUE;
+00645    if (strncmp(net->name,"gnd",3) == 0) return TRUE;
+00646    if (strncmp(net->name,"GND",3) == 0) return TRUE;
+00647    if (strncmp(net->name,"vdd",3) == 0) return TRUE;
+00648    if (strncmp(net->name,"VDD",3) == 0) return TRUE;
+00649    return NIL;
+00650 }
+\end{verbatim}\normalsize 
+\label{globRoute.C_a2}
+\index{globRoute.C@{glob\-Route.C}!makeRoutingInfo@{makeRoutingInfo}}
+\index{makeRoutingInfo@{makeRoutingInfo}!globRoute.C@{glob\-Route.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void make\-Routing\-Info ({\bf ROUTING\_\-INFO} \& {\em rinfo}, int {\em x}, int {\em y})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+\subsubsection{Variable Documentation}
+\label{globRoute.C_a4}
+\index{globRoute.C@{glob\-Route.C}!RouteAsciiFile@{RouteAsciiFile}}
+\index{RouteAsciiFile@{RouteAsciiFile}!globRoute.C@{glob\-Route.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}STRING Route\-Ascii\-File = NIL}\hfill
+
+
+
+Definition at line 12 of file glob\-Route.C.

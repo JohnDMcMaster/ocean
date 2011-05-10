@@ -1,0 +1,755 @@
+\subsection{expansion\-Grid  Class Reference}
+\label{expansionGrid}\index{expansionGrid@{expansion\-Grid}}
+{\tt \#include $<$glob\-Route.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf expansion\-Grid} ({\bf TOTALPPTR} total)
+\item 
+const int {\bf nx} ()
+\item 
+const int {\bf ny} ()
+\item 
+void {\bf instance2xy} (CIRINSTPTR cirinst, int\& x, int\& y)
+\item 
+void {\bf route\-Glob\-Net} ({\bf glob\-Net} $\ast$)
+\item 
+void {\bf route\-Glob\-Nets} ()
+\item 
+void {\bf summarize\-Glob\-Nets} ()
+\item 
+int {\bf nwires} ({\bf point\-Of\-Compass} poc1, {\bf point\-Of\-Compass} poc2, int x, int y, int $\ast$length =NIL)
+\item 
+{\bf expansion\-Grid\-Edge}$\ast$ {\bf find\-Edge} ({\bf expansion\-Grid\-Vertex} $\ast$, {\bf point\-Of\-Compass})
+\item 
+int {\bf round\-Wires\-To\-Cells} (int direction, int n\_\-wires)
+\item 
+void {\bf print\-Route} ({\bf glob\-Net} $\ast$, ostream\& =cout)
+\item 
+void {\bf print\-Routing} (ostream\& =cout)
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf build\-Expansion\-Grid} ()
+\item 
+void {\bf build\-Expansion\-Grid\-Vertices} ()
+\item 
+void {\bf build\-Expansion\-Grid\-Edges} ()
+\item 
+void {\bf make\-Edge} (int x, int y, {\bf edge\-Direction} dir, int weight)
+\item 
+void {\bf build\-Glob\-Nets} ()
+\item 
+void {\bf make\-Routing\-Info} ({\bf ROUTING\_\-INFO}\& rinfo, int x, int y)
+\item 
+void {\bf sum\-Routing\-Info} (int ,int i, {\bf ROUTING\_\-CHANNEL}\& channel\_\-i)
+\item 
+void {\bf print\-Route\-Glob\-Net} ({\bf glob\-Net} $\ast$gnet)
+\item 
+void {\bf print\-Route\-Summary} ()
+\item 
+void {\bf EGerror} (const char $\ast$msg)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+graph\-Descriptor {\bf thegraph}
+\item 
+{\bf sdfset} {\bf theglobnets}
+\item 
+{\bf matrix\-Grid} {\bf thematrix}
+\item 
+{\bf TOTALPPTR} {\bf totalp}
+\item 
+int {\bf heavy\-Weight}
+\item 
+int {\bf light\-Weight\-Horizontal}
+\item 
+int {\bf light\-Weight\-Vertical}
+\item 
+{\bf IMAGEDESC}$\ast$ {\bf image}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{expansionGrid_a0}
+\index{expansionGrid@{expansion\-Grid}!expansionGrid@{expansionGrid}}
+\index{expansionGrid@{expansionGrid}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid::expansion\-Grid ({\bf TOTALPPTR} {\em total})}\hfill
+
+
+
+Definition at line 27 of file glob\-Route.C.\small\begin{verbatim}00027 :
+00028 thegraph("expansion grid", SetCurrentGraph),
+00029 theglobnets(NonOrderedSet, "global nets"),
+00030 thematrix(2*total->nx - 1, 2*total->ny - 1)
+00031 {
+00032    totalp = total;
+00033    heavyWeight = 100;
+00034    lightWeightHorizontal = 1;
+00035    lightWeightVertical = 1;
+00036    image = getImageDesc(); // get stuff from image.seadif
+00037    buildExpansionGrid();
+00038    buildGlobNets();
+00039    cout << "------ " << theglobnets.size() << " nets have to be routed on a "
+00040     << nx() << " x " << ny() << " global grid" << endl;
+00041 }
+
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{expansionGrid_c9}
+\index{expansionGrid@{expansion\-Grid}!EGerror@{EGerror}}
+\index{EGerror@{EGerror}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::EGerror (const char $\ast$ {\em msg})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 379 of file glob\-Route.C.
+
+Referenced by {\bf build\-Expansion\-Grid\-Edges}(), {\bf make\-Edge}(), and {\bf sum\-Routing\-Info}().\small\begin{verbatim}00380 {
+00381    cout << flush;
+00382    cerr << msg;
+00383    abort();
+00384 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c0}
+\index{expansionGrid@{expansion\-Grid}!buildExpansionGrid@{buildExpansionGrid}}
+\index{buildExpansionGrid@{buildExpansionGrid}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::build\-Expansion\-Grid ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 44 of file glob\-Route.C.\small\begin{verbatim}00045 {
+00046    // first create the vertices of the expansion grid:
+00047    buildExpansionGridVertices();
+00048    // now create all the edges between the vertices in the grid:
+00049    buildExpansionGridEdges();
+00050 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c2}
+\index{expansionGrid@{expansion\-Grid}!buildExpansionGridEdges@{buildExpansionGridEdges}}
+\index{buildExpansionGridEdges@{buildExpansionGridEdges}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::build\-Expansion\-Grid\-Edges ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 84 of file glob\-Route.C.
+
+Referenced by {\bf build\-Expansion\-Grid}().\small\begin{verbatim}00085 {
+00086    for (int x = 0; x < nx(); ++x)
+00087       for (int y = 0; y < ny(); ++y)
+00088       {
+00089      // internal consistency check:
+00090      if (thematrix[x][y] == NIL)
+00091         EGerror("FATAL INTERNAL CONSISTENCY: thematrix[][] == NIL");
+00092      switch (thematrix[x][y]->type())
+00093      {
+00094      case PartitionGV:
+00095         makeEdge(x, y, HorizontalEdge, heavyWeight);
+00096         makeEdge(x, y, VerticalEdge, heavyWeight);
+00097         break;
+00098      case HorizontalChannelGV:
+00099         makeEdge(x, y, HorizontalEdge, lightWeightHorizontal);
+00100         makeEdge(x, y, VerticalEdge, heavyWeight);
+00101         break;
+00102      case VerticalChannelGV:
+00103         makeEdge(x, y, HorizontalEdge, heavyWeight);
+00104         makeEdge(x, y, VerticalEdge, lightWeightVertical);
+00105         break;
+00106      case ChannelCrossingGV:
+00107         makeEdge(x, y, HorizontalEdge, lightWeightHorizontal);
+00108         makeEdge(x, y, VerticalEdge, lightWeightVertical);
+00109         break;
+00110      default:
+00111         EGerror("FATAL INTERNAL CONSISTENCY: thematrix[][].type()");
+00112         break;
+00113      }
+00114       }
+00115 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c1}
+\index{expansionGrid@{expansion\-Grid}!buildExpansionGridVertices@{buildExpansionGridVertices}}
+\index{buildExpansionGridVertices@{buildExpansionGridVertices}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::build\-Expansion\-Grid\-Vertices ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 53 of file glob\-Route.C.
+
+Referenced by {\bf build\-Expansion\-Grid}().\small\begin{verbatim}00054 {
+00055    for (CIRINSTPTR ci = totalp->bestpart->cirinst; ci != NIL; ci = ci->next)
+00056    {
+00057       int x, y;
+00058       instance2xy(ci, x, y);    // set x,y to the coordinate in the grid.
+00059       // create an expansionGridVertex that represents the partition, insert it
+00060       // in the matrix:
+00061       expansionGridVertex *egv =
+00062      new expansionGridVertex(ci->circuit, PartitionGV, x, y);
+00063       thematrix[x][y] = egv;
+00064       if ( x+1 < nx() )
+00065       {  // this vertex represents a vertical channel:
+00066      egv = new expansionGridVertex(NIL, VerticalChannelGV, x+1, y);
+00067      thematrix[x+1][y] = egv;
+00068       }
+00069       if ( y+1 < ny() )
+00070       {  // this vertex represents a horizontal channel:
+00071      egv = new expansionGridVertex(NIL, HorizontalChannelGV, x, y+1);
+00072      thematrix[x][y+1] = egv;
+00073       }
+00074       if ( x+1 < nx() && y+1 < ny() )
+00075       {  // this vertex represents a channel crossing:
+00076      egv = new expansionGridVertex(NIL, ChannelCrossingGV, x+1, y+1);
+00077      thematrix[x+1][y+1] = egv;
+00078       }
+00079    }
+00080 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c4}
+\index{expansionGrid@{expansion\-Grid}!buildGlobNets@{buildGlobNets}}
+\index{buildGlobNets@{buildGlobNets}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::build\-Glob\-Nets ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 152 of file glob\-Route.C.\small\begin{verbatim}00153 {
+00154    for (NETPTR net = totalp->bestpart->netlist; net != NIL; net = net->next)
+00155    {
+00156       if (isPowerOrGroundNet(net))
+00157      continue; // not routing power or ground because it is part of image
+00158       globNet *globnet = new globNet(net);
+00159       for (CIRPORTREFPTR cpr = net->terminals; cpr != NIL; cpr = cpr->next)
+00160       {
+00161      if (cpr->cirinst == NIL)
+00162         continue; // not a terminal to an instance
+00163      // which partition represents this instance?
+00164      int x, y;
+00165      instance2xy(cpr->cirinst, x, y);
+00166      // Answer: the gridVertex in thematrix[x][y] ...!
+00167      globTerm *globterm = new globTerm(thematrix[x][y]);
+00168      globnet->add(globterm);
+00169       }
+00170       if (globnet->size() > 1)
+00171      theglobnets.add(globnet); // add this globnet to the set of globl nets
+00172       else
+00173       {  // this globNet is too small to be useful
+00174      globnet->delAll(); // delete all globTerms from the globnet...
+00175      delete globnet;    // ...and get rid of the globNet itself.
+00176       }
+00177    }
+00178 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a8}
+\index{expansionGrid@{expansion\-Grid}!findEdge@{findEdge}}
+\index{findEdge@{findEdge}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Edge} $\ast$ expansion\-Grid::find\-Edge ({\bf expansion\-Grid\-Vertex} $\ast$ {\em v}, {\bf point\-Of\-Compass} {\em poc})}\hfill
+
+
+
+Definition at line 599 of file glob\-Route.C.
+
+Referenced by {\bf nwires}(), and {\bf print\-Route}().\small\begin{verbatim}00601 {
+00602    graphVertexTerminalIterator nextTerm(v);
+00603    expansionGridTerminal *t;
+00604    while ( t = (expansionGridTerminal *) nextTerm() )
+00605       if ( t->compass() == poc )
+00606      break;
+00607    if ( t == NIL )
+00608       return NIL;
+00609    else
+00610       return (expansionGridEdge *) t->thisEdge();
+00611 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a3}
+\index{expansionGrid@{expansion\-Grid}!instance2xy@{instance2xy}}
+\index{instance2xy@{instance2xy}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::instance2xy (CIRINSTPTR {\em cirinst}, int \& {\em x}, int \& {\em y})}\hfill
+
+
+
+Definition at line 184 of file glob\-Route.C.
+
+Referenced by {\bf build\-Expansion\-Grid\-Vertices}(), and {\bf build\-Glob\-Nets}().\small\begin{verbatim}00185 {
+00186    int n = atoi(cirinst->name) - 1; // n is in the range 0...numparts-1
+00187    x = 2 * (n % totalp->nx);
+00188    y = 2 * (n / totalp->nx);
+00189 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c3}
+\index{expansionGrid@{expansion\-Grid}!makeEdge@{makeEdge}}
+\index{makeEdge@{makeEdge}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::make\-Edge (int {\em x}, int {\em y}, {\bf edge\-Direction} {\em dir}, int {\em weight})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 117 of file glob\-Route.C.
+
+Referenced by {\bf build\-Expansion\-Grid\-Edges}().\small\begin{verbatim}00118 {
+00119    expansionGridEdge *e;
+00120    if ( dir == HorizontalEdge)
+00121    {
+00122       if ( x+1 < nx() )
+00123       {
+00124       // create a horizontal edge:
+00125       e = new expansionGridEdge(weight,x,y,HorizontalEdge);
+00126       expansionGridTerminal *tl = new expansionGridTerminal(East);
+00127       expansionGridTerminal *tr = new expansionGridTerminal(West);
+00128       e->addToEdge(thematrix[x][y], GenericEdge, tl)
+00129      ->addToEdge(thematrix[x+1][y], GenericEdge, tr);
+00130       }
+00131    }
+00132    else if ( dir == VerticalEdge )
+00133    {
+00134       if ( y+1 < ny() )
+00135       {
+00136      // create a vertical edge:
+00137      e =  new expansionGridEdge(weight,x,y,VerticalEdge);
+00138      expansionGridTerminal *tb = new expansionGridTerminal(North);
+00139      expansionGridTerminal *tt = new expansionGridTerminal(South);
+00140      e->addToEdge(thematrix[x][y], GenericEdge, tb)
+00141         ->addToEdge(thematrix[x][y+1], GenericEdge, tt);
+00142       }
+00143    }
+00144    else
+00145       EGerror("FATAL INTERNAL: unknown edgeDirection");
+00146 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c5}
+\index{expansionGrid@{expansion\-Grid}!makeRoutingInfo@{makeRoutingInfo}}
+\index{makeRoutingInfo@{makeRoutingInfo}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::make\-Routing\-Info ({\bf ROUTING\_\-INFO} \& {\em rinfo}, int {\em x}, int {\em y})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 494 of file glob\-Route.C.
+
+Referenced by {\bf summarize\-Glob\-Nets}().\small\begin{verbatim}00495 {
+00496    int matrix_x = 2*x;      // the inverse operation of instance2xy()
+00497    int matrix_y = 2*y;
+00498    ROUTING_CHANNEL& ch_hor = rinfo.channel[HOR];
+00499    ROUTING_CHANNEL& ch_ver = rinfo.channel[VER];
+00500    ch_hor.nwires = nwires(West, East, matrix_x, matrix_y+1, &ch_hor.length);
+00501    ch_hor.ncells = roundWiresToCells(HOR, ch_hor.nwires);
+00502    ch_ver.nwires = nwires(South, North, matrix_x+1, matrix_y, &ch_ver.length);
+00503    ch_ver.ncells = roundWiresToCells(VER, ch_ver.nwires);
+00504 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a7}
+\index{expansionGrid@{expansion\-Grid}!nwires@{nwires}}
+\index{nwires@{nwires}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid::nwires ({\bf point\-Of\-Compass} {\em poc1}, {\bf point\-Of\-Compass} {\em poc2}, int {\em x}, int {\em y}, int $\ast$ {\em length} = NIL)}\hfill
+
+
+
+Definition at line 514 of file glob\-Route.C.
+
+Referenced by {\bf make\-Routing\-Info}().\small\begin{verbatim}00516 {
+00517    if (length) *length = 0;
+00518    if (x >= thematrix.dimension1() || y >= thematrix.dimension2())
+00519       return 0;         // this channel does not exist!
+00520    // (poc1, poc2) is either (South, North) or (East, West)
+00521    expansionGridVertex *vx = thematrix[x][y];
+00522    expansionGridEdge *oneSide = findEdge(vx, poc1);
+00523    expansionGridEdge *otherSide = findEdge(vx, poc2);
+00524    int nwiresOneSide = 0, nwiresOtherSide = 0;
+00525    if (oneSide != NIL)
+00526    {
+00527       nwiresOneSide = oneSide->addToOccupation(0);
+00528       if (length) *length += oneSide->length();
+00529    }
+00530    if (otherSide != NIL)
+00531    {
+00532       nwiresOtherSide = otherSide->addToOccupation(0);
+00533       if (length) *length += otherSide->length();
+00534    }
+00535    if (nwiresOneSide > nwiresOtherSide)
+00536       return nwiresOneSide;
+00537    else
+00538       return nwiresOtherSide;
+00539 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a1}
+\index{expansionGrid@{expansion\-Grid}!nx@{nx}}
+\index{nx@{nx}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const int expansion\-Grid::nx ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 136 of file glob\-Route.h.
+
+Referenced by {\bf build\-Expansion\-Grid\-Edges}(), {\bf build\-Expansion\-Grid\-Vertices}(), {\bf make\-Edge}(), and {\bf print\-Route}().\small\begin{verbatim}00136 {return 2*totalp->nx - 1;}
+\end{verbatim}\normalsize 
+\label{expansionGrid_a2}
+\index{expansionGrid@{expansion\-Grid}!ny@{ny}}
+\index{ny@{ny}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const int expansion\-Grid::ny ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 137 of file glob\-Route.h.
+
+Referenced by {\bf build\-Expansion\-Grid\-Edges}(), {\bf build\-Expansion\-Grid\-Vertices}(), {\bf make\-Edge}(), and {\bf print\-Route}().\small\begin{verbatim}00137 {return 2*totalp->ny - 1;}
+\end{verbatim}\normalsize 
+\label{expansionGrid_a10}
+\index{expansionGrid@{expansion\-Grid}!printRoute@{printRoute}}
+\index{printRoute@{printRoute}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::print\-Route ({\bf glob\-Net} $\ast$ {\em globnet}, ostream \& {\em thestream} = cout)}\hfill
+
+
+
+Definition at line 389 of file glob\-Route.C.
+
+Referenced by {\bf print\-Route\-Glob\-Net}().\small\begin{verbatim}00390 {
+00391    for (int y = ny()-1; y >= 0; --y)
+00392    {
+00393       int x;
+00394       for (x = 0; x < nx(); ++x)
+00395       {
+00396      expansionGridEdge *e = findEdge(thematrix[x][y],North);
+00397      if (e == NIL)
+00398         continue;
+00399      if (globnet->isInRoute(e))
+00400         thestream << "|";
+00401      else
+00402         thestream << " ";
+00403      if ( x < nx()-1 )
+00404         thestream << " ";
+00405       }
+00406       thestream << endl;
+00407       for (x = 0; x < nx(); ++x)
+00408       {
+00409      switch (thematrix[x][y]->type())
+00410      {
+00411      case PartitionGV:
+00412         if (globnet->isInNet(thematrix[x][y]))
+00413            thestream << "x"; // required vertex is "x"
+00414         else
+00415            thestream << "+"; // non-required vertex is "+"
+00416         break;
+00417      case HorizontalChannelGV:
+00418      case VerticalChannelGV:
+00419      case ChannelCrossingGV:
+00420         thestream << ".";
+00421      }
+00422      expansionGridEdge *e = findEdge(thematrix[x][y],East);
+00423      if (e == NIL)
+00424         continue;
+00425      if (globnet->isInRoute(e))
+00426         thestream << "_";
+00427      else
+00428         thestream << " ";
+00429       }
+00430       thestream << endl;
+00431    }
+00432 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c7}
+\index{expansionGrid@{expansion\-Grid}!printRouteGlobNet@{printRouteGlobNet}}
+\index{printRouteGlobNet@{printRouteGlobNet}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::print\-Route\-Glob\-Net ({\bf glob\-Net} $\ast$ {\em gnet})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 230 of file glob\-Route.C.
+
+Referenced by {\bf route\-Glob\-Nets}().\small\begin{verbatim}00231 {
+00232    if (RouteAsciiFile != NIL)
+00233    {  // the option -R<filename> was specified on the command line; print
+00234       // an ascii representation of the global route taken by this net:
+00235       extern filebuf RouteAsciiStreamBuf; // file already opened in main()
+00236       ostream routeAsciiStream(&RouteAsciiStreamBuf);
+00237       routeAsciiStream << gnet->net()->name << " (terminals = "
+00238                << gnet->size() << ", weight = "
+00239                << gnet->weight() << "):" << endl;
+00240       printRoute(gnet, routeAsciiStream);
+00241       routeAsciiStream << "\n\n\n" << flush;
+00242    }
+00243 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c8}
+\index{expansionGrid@{expansion\-Grid}!printRouteSummary@{printRouteSummary}}
+\index{printRouteSummary@{printRouteSummary}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::print\-Route\-Summary ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 248 of file glob\-Route.C.
+
+Referenced by {\bf route\-Glob\-Nets}().\small\begin{verbatim}00249 {
+00250    if (RouteAsciiFile != NIL)
+00251    {  // the option -R<filename> was specified on the command line; print
+00252       // an ascii representation of the global route taken by this net:
+00253       extern filebuf RouteAsciiStreamBuf; // file already opened in main()
+00254       ostream routeAsciiStream(&RouteAsciiStreamBuf);
+00255       routeAsciiStream << "Global routing summary:\n\n" << flush;
+00256       printRouting(routeAsciiStream);
+00257       routeAsciiStream << "\n\n\n" << flush;
+00258    }
+00259 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a11}
+\index{expansionGrid@{expansion\-Grid}!printRouting@{printRouting}}
+\index{printRouting@{printRouting}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::print\-Routing (ostream \& {\em thestream} = cout)}\hfill
+
+
+
+Definition at line 437 of file glob\-Route.C.
+
+Referenced by {\bf print\-Route\-Summary}().\small\begin{verbatim}00438 {
+00439    GLOBAL_ROUTINGPTR routing = totalp->routing;
+00440    if (routing == NIL)
+00441       return;
+00442    ROUTING_CHANNEL *ch_hor = routing->horizontal_channels;
+00443    ROUTING_CHANNEL *ch_ver = routing->vertical_channels;
+00444    thestream << "Horizontal channel heights [channel, nwires, ncells]:" << endl;
+00445    int i;
+00446    for (i = 0; i < totalp->ny - 1; ++i)
+00447       thestream << form("[%d %d %d] ",i,ch_hor[i].nwires,ch_hor[i].ncells);
+00448    thestream << "\n\nVertical channel widths [channel, nwires, ncells]:" << endl;
+00449    for (i = 0; i < totalp->nx - 1; ++i)
+00450       thestream << form("[%d %d %d] ",i,ch_ver[i].nwires,ch_ver[i].ncells);
+00451    thestream << "\n\nLocal channels [x, y, hor.nwires, ver.nwires]:" << endl;
+00452    for (int j = totalp->ny - 1; j >= 0; --j)
+00453    {
+00454       for (i = 0; i < totalp->nx; ++i)
+00455       {
+00456      ROUTING_INFO& ch = routing->small_channels[i][j];
+00457      thestream << form("[%d %d %d %d] ",i,j,ch.channel[HOR].nwires,
+00458                ch.channel[VER].nwires);
+00459       }
+00460       thestream << endl;
+00461    }
+00462 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a9}
+\index{expansionGrid@{expansion\-Grid}!roundWiresToCells@{roundWiresToCells}}
+\index{roundWiresToCells@{roundWiresToCells}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid::round\-Wires\-To\-Cells (int {\em channel\-Direction}, int {\em n\_\-wires})}\hfill
+
+
+
+Definition at line 545 of file glob\-Route.C.
+
+Referenced by {\bf make\-Routing\-Info}().\small\begin{verbatim}00546 {
+00547    // the width of a channel is a multiple of the core cell size in the
+00548    // direction that is *orthogonal* to the channelDirection:
+00549    int notChannelDirection = HOR;
+00550    if (channelDirection == HOR) notChannelDirection = VER;
+00551    int imageSize = image->size[notChannelDirection]; // size of a core cell
+00552    int n_cells = (n_wires + imageSize - 1) / imageSize; // round up
+00553    return n_cells;
+00554 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a4}
+\index{expansionGrid@{expansion\-Grid}!routeGlobNet@{routeGlobNet}}
+\index{routeGlobNet@{routeGlobNet}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::route\-Glob\-Net ({\bf glob\-Net} $\ast$ {\em gnet})}\hfill
+
+
+
+Definition at line 300 of file glob\-Route.C.
+
+Referenced by {\bf route\-Glob\-Nets}().\small\begin{verbatim}00301 {
+00302    sdfset theSteinerEdges; // this is a set of treeEdges, see <graphSteiner.h>
+00303    // build minimal steiner tree, the weight of the tree is returned to w:
+00304    /*
+00305    graphSteinOpts.installAcceptBranchFunction(&acceptBranch); // less greedy!!
+00306    */
+00307    int w = graphSteiner(thegraph, *gnet, theSteinerEdges);
+00308    gnet->ckConsistency();
+00309    gnet->weight(w);              // remember weight of the tree
+00310    sdfsetNextElmtIterator nextTreeEdge(&theSteinerEdges);
+00311    treeEdge *te;
+00312    while (te = (treeEdge *)nextTreeEdge())
+00313    {  // increment the occupation of the edge by one:
+00314       expansionGridEdge *ege = (expansionGridEdge *)te->edge();
+00315       ege->addToOccupation(1);
+00316    }
+00317    gnet->route.move(&theSteinerEdges); // store this steiner tree in gnet.route
+00318 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a5}
+\index{expansionGrid@{expansion\-Grid}!routeGlobNets@{routeGlobNets}}
+\index{routeGlobNets@{routeGlobNets}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::route\-Glob\-Nets ()}\hfill
+
+
+
+Definition at line 264 of file glob\-Route.C.
+
+Referenced by {\bf madonna}().\small\begin{verbatim}00265 {
+00266    theglobnets.ckConsistency();  // internal consistency check
+00267    int totalWeight = 0;
+00268    sdfsetNextElmtIterator nextGlobNet(&theglobnets); // iterate all global nets
+00269    globNet *gnet;
+00270    while (gnet = (globNet *)nextGlobNet())
+00271    {  // for each global net ...
+00272 #ifdef _DEBUG_MALLOC_INC
+00273       unsigned long  histid1, histid2, orig_size, current_size;
+00274       orig_size = malloc_inuse(&histid1);
+00275 #endif
+00276       cout << "     + routing net " << gnet->net()->name
+00277        << " (" << gnet->size() << " terminals): " << flush;
+00278       routeGlobNet(gnet);   // route this global net
+00279       printRouteGlobNet(gnet);
+00280       cout << " weight = " << gnet->weight() << endl;
+00281       totalWeight += gnet->weight();
+00282       gnet->route.delAll();      // don't need treeEdges anymore
+00283 #ifdef _DEBUG_MALLOC_INC
+00284       current_size = malloc_inuse(&histid2);
+00285       if (current_size != orig_size)
+00286          malloc_list(2,histid1,histid2);
+00287 #endif
+00288    }
+00289    summarizeGlobNets();     // this builds the totalp->routing struct
+00290    printRouteSummary();     // ...and this prints it
+00291    cout << "\n------ Routed " << theglobnets.size()
+00292     << " nets, total weight = " << totalWeight << "\n\n" << endl;
+00293    if (RouteAsciiFile != NIL)
+00294       cout << "\n------ A report of the routing process has been "
+00295        << "written to file \"" << RouteAsciiFile << "\"" << endl;
+00296 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_c6}
+\index{expansionGrid@{expansion\-Grid}!sumRoutingInfo@{sumRoutingInfo}}
+\index{sumRoutingInfo@{sumRoutingInfo}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::sum\-Routing\-Info (int {\em direction}, int {\em i}, {\bf ROUTING\_\-CHANNEL} \& {\em channel\_\-i})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 560 of file glob\-Route.C.
+
+Referenced by {\bf summarize\-Glob\-Nets}().\small\begin{verbatim}00561 {
+00562    int length = 0;
+00563    int ncells = 0;
+00564    int nwires = 0;
+00565    int j;
+00566    GLOBAL_ROUTINGPTR routing = totalp->routing;
+00567    if (routing == NIL)
+00568       EGerror("INTERNAL: cannot summarize non-existing info!");
+00569    if (direction == HOR)
+00570       // compute the density of the horizontal slicing channel i:
+00571       for (j=0; j < totalp->nx - 1; ++j)
+00572       {
+00573      ROUTING_CHANNEL& ch = routing->small_channels[j][i].channel[HOR];
+00574      // take the maximum of everything and the sum of the lengths:
+00575      if (ch.nwires > nwires) nwires = ch.nwires;
+00576      if (ch.ncells > ncells) ncells = ch.ncells;
+00577      length += ch.length;
+00578       }
+00579    else if (direction == VER)
+00580       // compute the density of the vertical slicing channel i:
+00581       for (j=0; j < totalp->ny - 1; ++j)
+00582       {
+00583      ROUTING_CHANNEL& ch = routing->small_channels[i][j].channel[VER];
+00584      // take the maximum of everything and the sum of the lengths:
+00585      if (ch.nwires > nwires) nwires = ch.nwires;
+00586      if (ch.ncells > ncells) ncells = ch.ncells;
+00587      length += ch.length;
+00588       }
+00589    else
+00590       EGerror("INTERNAL: illegal direction for sumRoutingInfo()");
+00591    channel_i.length = length;
+00592    channel_i.ncells = ncells;
+00593    channel_i.nwires = nwires;
+00594 }
+\end{verbatim}\normalsize 
+\label{expansionGrid_a6}
+\index{expansionGrid@{expansion\-Grid}!summarizeGlobNets@{summarizeGlobNets}}
+\index{summarizeGlobNets@{summarizeGlobNets}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid::summarize\-Glob\-Nets ()}\hfill
+
+
+
+Definition at line 468 of file glob\-Route.C.
+
+Referenced by {\bf route\-Glob\-Nets}().\small\begin{verbatim}00469 {
+00470    GLOBAL_ROUTINGPTR routing = new GLOBAL_ROUTING;
+00471    totalp->routing = routing;
+00472    routing->horizontal_channels = new ROUTING_CHANNEL [totalp->ny];
+00473    routing->vertical_channels = new ROUTING_CHANNEL [totalp->nx];
+00474    routing->small_channels = new (ROUTING_INFO *[totalp->nx]);
+00475    int i;
+00476    for (i = 0; i < totalp->nx; ++i)
+00477       routing->small_channels[i] = new ROUTING_INFO [totalp->ny];
+00478    // make routing info for all partitions [0..nx-1][0..ny-1]
+00479    for (i = 0; i < totalp->nx; ++i)
+00480       for (int j = 0; j <  totalp->ny; ++j)
+00481      makeRoutingInfo(routing->small_channels[i][j], i, j);
+00482    // summarize all the local vertical channels:
+00483    for (i = 0; i < totalp->nx; ++i)
+00484       sumRoutingInfo(VER, i, routing->vertical_channels[i]);
+00485    // ...and summarize the local horizontal channels:
+00486    for (i = 0; i < totalp->ny; ++i)
+00487       sumRoutingInfo(HOR, i, routing->horizontal_channels[i]);
+00488 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{expansionGrid_o4}
+\index{expansionGrid@{expansion\-Grid}!heavyWeight@{heavyWeight}}
+\index{heavyWeight@{heavyWeight}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid::heavy\-Weight\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 120 of file glob\-Route.h.\label{expansionGrid_o7}
+\index{expansionGrid@{expansion\-Grid}!image@{image}}
+\index{image@{image}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf IMAGEDESC} $\ast$ expansion\-Grid::image\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 123 of file glob\-Route.h.\label{expansionGrid_o5}
+\index{expansionGrid@{expansion\-Grid}!lightWeightHorizontal@{lightWeightHorizontal}}
+\index{lightWeightHorizontal@{lightWeightHorizontal}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid::light\-Weight\-Horizontal\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 122 of file glob\-Route.h.\label{expansionGrid_o6}
+\index{expansionGrid@{expansion\-Grid}!lightWeightVertical@{lightWeightVertical}}
+\index{lightWeightVertical@{lightWeightVertical}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid::light\-Weight\-Vertical\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 122 of file glob\-Route.h.\label{expansionGrid_o1}
+\index{expansionGrid@{expansion\-Grid}!theglobnets@{theglobnets}}
+\index{theglobnets@{theglobnets}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf sdfset} expansion\-Grid::theglobnets\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 114 of file glob\-Route.h.\label{expansionGrid_o0}
+\index{expansionGrid@{expansion\-Grid}!thegraph@{thegraph}}
+\index{thegraph@{thegraph}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}graph\-Descriptor expansion\-Grid::thegraph\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 113 of file glob\-Route.h.\label{expansionGrid_o2}
+\index{expansionGrid@{expansion\-Grid}!thematrix@{thematrix}}
+\index{thematrix@{thematrix}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix\-Grid} expansion\-Grid::thematrix\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 115 of file glob\-Route.h.\label{expansionGrid_o3}
+\index{expansionGrid@{expansion\-Grid}!totalp@{totalp}}
+\index{totalp@{totalp}!expansionGrid@{expansion\-Grid}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf TOTALPPTR} expansion\-Grid::totalp\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 116 of file glob\-Route.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf glob\-Route.h}\item 
+{\bf glob\-Route.C}\end{CompactItemize}

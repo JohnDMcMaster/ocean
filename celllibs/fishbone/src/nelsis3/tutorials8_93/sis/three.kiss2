@@ -1,0 +1,23 @@
+.i 4
+.o 1
+.r uit1
+---1 uit1 uit1 0
+1--0 uit1 uit1 0
+-1-0 uit1 uit1 0
+--10 uit1 uit1 0
+0000 uit1 uit0 0
+---1 uit0 uit0 0
+0000 uit0 uit0 0
+1--0 uit0 aan1 1
+-1-0 uit0 aan1 1
+--10 uit0 aan1 1
+---1 aan1 aan1 1
+1--0 aan1 aan1 1
+-1-0 aan1 aan1 1
+--10 aan1 aan1 1
+0000 aan1 aan0 1
+---1 aan0 aan0 1
+0000 aan0 aan0 1
+1--0 aan0 uit1 0
+-1-0 aan0 uit1 0
+--10 aan0 uit1 0

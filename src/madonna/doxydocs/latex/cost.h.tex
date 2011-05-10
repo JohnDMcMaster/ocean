@@ -1,0 +1,141 @@
+\subsection{cost.h File Reference}
+\label{cost.h}\index{cost.h@{cost.h}}
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-NETSTATE}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf LIST}\ 0
+\item 
+\#define {\bf PREV}\ 1
+\item 
+\#define {\bf NEXT}\ 2
+\item 
+\#define {\bf Row}(i) \ {\bf cvrt\_\-to\_\-row}[i]
+\item 
+\#define {\bf Clm}(i) \ {\bf cvrt\_\-to\_\-clm}[i]
+\item 
+\#define {\bf COSTSTATE}\ 0
+\item 
+\#define {\bf COSTVEC}\ 1
+\item 
+\#define {\bf New\-Netstate}(p) \ ((p)=({\bf NETSTATEPTR})mnew(sizeof({\bf NETSTATE})))
+\item 
+\#define {\bf Free\-Netstate}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf NETSTATE}))
+\end{CompactItemize}
+\subsubsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef struct {\bf \_\-NETSTATE}
+ {\bf NETSTATE}
+\item 
+typedef struct {\bf \_\-NETSTATE}$\ast$ {\bf NETSTATEPTR}
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+int$\ast$ {\bf cvrt\_\-to\_\-row}
+\item 
+int$\ast$ {\bf cvrt\_\-to\_\-clm}
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{cost.h_a5}
+\index{cost.h@{cost.h}!COSTSTATE@{COSTSTATE}}
+\index{COSTSTATE@{COSTSTATE}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define COSTSTATE\ 0}\hfill
+
+
+
+Definition at line 40 of file cost.h.\label{cost.h_a6}
+\index{cost.h@{cost.h}!COSTVEC@{COSTVEC}}
+\index{COSTVEC@{COSTVEC}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define COSTVEC\ 1}\hfill
+
+
+
+Definition at line 41 of file cost.h.\label{cost.h_a4}
+\index{cost.h@{cost.h}!Clm@{Clm}}
+\index{Clm@{Clm}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Clm(i)\ {\bf cvrt\_\-to\_\-clm}[i]}\hfill
+
+
+
+Definition at line 32 of file cost.h.\label{cost.h_a8}
+\index{cost.h@{cost.h}!FreeNetstate@{FreeNetstate}}
+\index{FreeNetstate@{FreeNetstate}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Netstate(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf NETSTATE}))}\hfill
+
+
+
+Definition at line 44 of file cost.h.\label{cost.h_a0}
+\index{cost.h@{cost.h}!LIST@{LIST}}
+\index{LIST@{LIST}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define LIST\ 0}\hfill
+
+
+
+Definition at line 23 of file cost.h.\label{cost.h_a2}
+\index{cost.h@{cost.h}!NEXT@{NEXT}}
+\index{NEXT@{NEXT}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define NEXT\ 2}\hfill
+
+
+
+Definition at line 25 of file cost.h.\label{cost.h_a7}
+\index{cost.h@{cost.h}!NewNetstate@{NewNetstate}}
+\index{NewNetstate@{NewNetstate}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Netstate(p)\ ((p)=({\bf NETSTATEPTR})mnew(sizeof({\bf NETSTATE})))}\hfill
+
+
+
+Definition at line 43 of file cost.h.\label{cost.h_a1}
+\index{cost.h@{cost.h}!PREV@{PREV}}
+\index{PREV@{PREV}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define PREV\ 1}\hfill
+
+
+
+Definition at line 24 of file cost.h.\label{cost.h_a3}
+\index{cost.h@{cost.h}!Row@{Row}}
+\index{Row@{Row}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Row(i)\ {\bf cvrt\_\-to\_\-row}[i]}\hfill
+
+
+
+Definition at line 31 of file cost.h.
+
+\subsubsection{Typedef Documentation}
+\label{cost.h_a9}
+\index{cost.h@{cost.h}!NETSTATE@{NETSTATE}}
+\index{NETSTATE@{NETSTATE}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-NETSTATE}
+ NETSTATE}\hfill
+
+\label{cost.h_a10}
+\index{cost.h@{cost.h}!NETSTATEPTR@{NETSTATEPTR}}
+\index{NETSTATEPTR@{NETSTATEPTR}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-NETSTATE}$\ast$ NETSTATEPTR}\hfill
+
+
+
+\subsubsection{Variable Documentation}
+\label{cost.h_a12}
+\index{cost.h@{cost.h}!cvrt_to_clm@{cvrt\_\-to\_\-clm}}
+\index{cvrt_to_clm@{cvrt\_\-to\_\-clm}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ cvrt\_\-to\_\-clm}\hfill
+
+
+
+Definition at line 29 of file cost.h.\label{cost.h_a11}
+\index{cost.h@{cost.h}!cvrt_to_row@{cvrt\_\-to\_\-row}}
+\index{cvrt_to_row@{cvrt\_\-to\_\-row}!cost.h@{cost.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ cvrt\_\-to\_\-row}\hfill
+
+
+
+Definition at line 28 of file cost.h.

@@ -1,0 +1,78 @@
+.TH ListIterator 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ListIterator \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <list.h>\fR
+.PP
+Inherits \fBBoxIterator\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBListIterator\fR ( const \fBList\fR& )"
+.br
+.ti -1c
+.RI "virtual \fB~ListIterator\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator int\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator Item &\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBget\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBoperator++\fR (int)"
+.br
+.ti -1c
+.RI "virtual void \fBrestart\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS ListIterator::ListIterator (const \fBList\fR & toIterate)\fC [inline]\fR
+.PP
+Definition at line 79 of file list.h.
+.SS ListIterator::~ListIterator ()\fC [virtual]\fR
+.PP
+Definition at line 119 of file list.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBItem\fR & ListIterator::get ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 143 of file list.C.
+.SS ListIterator::operator \fBItem\fR & ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 130 of file list.C.
+.SS ListIterator::operator int ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 124 of file list.C.
+.SS \fBItem\fR & ListIterator::operator++ (int)\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 156 of file list.C.
+.SS void ListIterator::restart ()\fC [virtual]\fR
+.PP
+Reimplemented from \fBBoxIterator\fR.
+.PP
+Definition at line 173 of file list.C.
+.PP
+Referenced by \fBImageMap::criticalFeed\fR().
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,151 @@
+.TH madonna.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+madonna.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream.h>\fR
+.br
+\fC#include <malloc.h>\fR
+.br
+\fC#include <stdlib.h>\fR
+.br
+\fC#include <libstruct.h>\fR
+.br
+\fC#include <sealibio.h>\fR
+.br
+\fC#include "genpart.h"\fR
+.br
+\fC#include "cost.h"\fR
+.br
+\fC#include "part.h"\fR
+.br
+\fC#include "globRoute.h"\fR
+.br
+\fC#include "phil_glob.h"\fR
+.br
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "CIRCUITPTR \fBmadonna\fR (CIRCUIT *circuit)"
+.br
+.in -1c
+.SS Variables
+
+.in +1c
+.ti -1c
+.RI "int \fBrequestedGridPoints\fR [] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}"
+.br
+.ti -1c
+.RI "int \fBexpandableDirection\fR = NOTINITIALIZED"
+.br
+.ti -1c
+.RI "LIBTABPTR \fBthislibtab\fR"
+.br
+.ti -1c
+.RI "FUNTABPTR \fBthisfuntab\fR"
+.br
+.ti -1c
+.RI "CIRTABPTR \fBthiscirtab\fR"
+.br
+.ti -1c
+.RI "LAYTABPTR \fBthislaytab\fR"
+.br
+.ti -1c
+.RI "LIBRARYPTR \fBthislib\fR"
+.br
+.ti -1c
+.RI "FUNCTIONPTR \fBthisfun\fR"
+.br
+.ti -1c
+.RI "CIRCUITPTR \fBthiscir\fR"
+.br
+.ti -1c
+.RI "LAYOUTPTR \fBthislay\fR"
+.br
+.ti -1c
+.RI "char* \fBcircuit_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBfunction_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBlibrary_name\fR = NIL"
+.br
+.ti -1c
+.RI "char * \fBlayoutname\fR = NIL"
+.br
+.ti -1c
+.RI "double \fBextraplaza\fR = 1.0"
+.br
+.ti -1c
+.RI "int \fBmadonnamakeminiplaza\fR = TRUE"
+.br
+.ti -1c
+.RI "int \fBmadonnamakepartition\fR = TRUE"
+.br
+.in -1c
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS CIRCUITPTR madonna (CIRCUIT * circuit)
+.PP
+Definition at line 76 of file madonna.C.
+.SH VARIABLE DOCUMENTATION
+.PP 
+.SS char * circuit_name = NIL
+.PP
+Definition at line 33 of file madonna.C.
+.SS int expandableDirection = NOTINITIALIZED
+.PP
+Definition at line 20 of file madonna.C.
+.SS double extraplaza = 1.0
+.PP
+Definition at line 37 of file madonna.C.
+.SS char * function_name = NIL
+.PP
+Definition at line 34 of file madonna.C.
+.SS char * layoutname = NIL
+.PP
+Definition at line 36 of file madonna.C.
+.SS char * library_name = NIL
+.PP
+Definition at line 35 of file madonna.C.
+.SS int madonnamakeminiplaza = TRUE
+.PP
+Definition at line 38 of file madonna.C.
+.SS int madonnamakepartition = TRUE
+.PP
+Definition at line 39 of file madonna.C.
+.SS int requestedGridPoints[] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}
+.PP
+Definition at line 19 of file madonna.C.
+.SS CIRCUITPTR thiscir
+.PP
+Definition at line 29 of file madonna.C.
+.SS CIRTABPTR thiscirtab
+.PP
+Definition at line 24 of file madonna.C.
+.SS FUNCTIONPTR thisfun
+.PP
+Definition at line 28 of file madonna.C.
+.SS FUNTABPTR thisfuntab
+.PP
+Definition at line 23 of file madonna.C.
+.SS LAYOUTPTR thislay
+.PP
+Definition at line 30 of file madonna.C.
+.SS LAYTABPTR thislaytab
+.PP
+Definition at line 25 of file madonna.C.
+.SS LIBRARYPTR thislib
+.PP
+Definition at line 27 of file madonna.C.
+.SS LIBTABPTR thislibtab
+.PP
+Definition at line 22 of file madonna.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

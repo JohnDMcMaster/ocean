@@ -1,0 +1,114 @@
+.TH cost.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cost.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fB_NETSTATE\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBLIST\fR  0"
+.br
+.ti -1c
+.RI "#define \fBPREV\fR  1"
+.br
+.ti -1c
+.RI "#define \fBNEXT\fR  2"
+.br
+.ti -1c
+.RI "#define \fBRow\fR(i)   \fBcvrt_to_row\fR[i]"
+.br
+.ti -1c
+.RI "#define \fBClm\fR(i)   \fBcvrt_to_clm\fR[i]"
+.br
+.ti -1c
+.RI "#define \fBCOSTSTATE\fR  0"
+.br
+.ti -1c
+.RI "#define \fBCOSTVEC\fR  1"
+.br
+.ti -1c
+.RI "#define \fBNewNetstate\fR(p)   ((p)=(\fBNETSTATEPTR\fR)mnew(sizeof(\fBNETSTATE\fR)))"
+.br
+.ti -1c
+.RI "#define \fBFreeNetstate\fR(p)   mfree((char **)(p),sizeof(\fBNETSTATE\fR))"
+.br
+.in -1c
+.SS Typedefs
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_NETSTATE\fR
+ \fBNETSTATE\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_NETSTATE\fR* \fBNETSTATEPTR\fR"
+.br
+.in -1c
+.SS Variables
+
+.in +1c
+.ti -1c
+.RI "int* \fBcvrt_to_row\fR"
+.br
+.ti -1c
+.RI "int* \fBcvrt_to_clm\fR"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define COSTSTATE  0
+.PP
+Definition at line 40 of file cost.h.
+.SS #define COSTVEC  1
+.PP
+Definition at line 41 of file cost.h.
+.SS #define Clm(i)  \fBcvrt_to_clm\fR[i]
+.PP
+Definition at line 32 of file cost.h.
+.SS #define FreeNetstate(p)  mfree((char **)(p),sizeof(\fBNETSTATE\fR))
+.PP
+Definition at line 44 of file cost.h.
+.SS #define LIST  0
+.PP
+Definition at line 23 of file cost.h.
+.SS #define NEXT  2
+.PP
+Definition at line 25 of file cost.h.
+.SS #define NewNetstate(p)  ((p)=(\fBNETSTATEPTR\fR)mnew(sizeof(\fBNETSTATE\fR)))
+.PP
+Definition at line 43 of file cost.h.
+.SS #define PREV  1
+.PP
+Definition at line 24 of file cost.h.
+.SS #define Row(i)  \fBcvrt_to_row\fR[i]
+.PP
+Definition at line 31 of file cost.h.
+.SH TYPEDEF DOCUMENTATION
+.PP 
+.SS typedef struct \fB_NETSTATE\fR
+ NETSTATE
+.PP
+.SS typedef struct \fB_NETSTATE\fR* NETSTATEPTR
+.PP
+.SH VARIABLE DOCUMENTATION
+.PP 
+.SS int * cvrt_to_clm
+.PP
+Definition at line 29 of file cost.h.
+.SS int * cvrt_to_row
+.PP
+Definition at line 28 of file cost.h.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

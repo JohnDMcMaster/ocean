@@ -1,0 +1,576 @@
+\subsection{im.h File Reference}
+\label{im.h}\index{im.h@{im.h}}
+{\tt \#include "image.h"}\par
+{\tt \#include "plaza.h"}\par
+{\tt \#include $<$libstruct.h$>$}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+char$\ast$ {\bf balloc} (int size)
+\item 
+void {\bf bfree} (char $\ast$blk)
+\item 
+short$\ast$ {\bf mtxidentity} (void)
+\item 
+void {\bf mtxtranslate} (short $\ast$mtx,int p,int q)
+\item 
+void {\bf mtxcopy} (short $\ast$dstmtx,short $\ast$srcmtx)
+\item 
+void {\bf mtxapply} (int $\ast$out,int $\ast$in,short $\ast$mtx)
+\item 
+void {\bf mtxaddvec} (short $\ast$mtx,int p,int q)
+\item 
+void {\bf mtxapplytocrd} (short $\ast$out,short $\ast$in,short $\ast$mtx)
+\item 
+short$\ast$ {\bf mtxchain} (short $\ast$mtxb,short $\ast$mtxa)
+\item 
+void {\bf initimagedesc} ({\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf drawmirroraxis} (int dblsize[$\,$],{\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf computetransrotmtx} ({\bf MIRRORPTR} mirror)
+\item 
+void {\bf labelallsectors} (int dblsize[$\,$],{\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf labelsector} (int $\ast$$\ast$stamp,int px,int py,int xsiz,int ysiz,int label)
+\item 
+void {\bf labelhalfsector} (int $\ast$$\ast$stamp,int dx,int px,int py,int xsiz,int ysiz,int label)
+\item 
+void {\bf mkequivalencelist} (int dblsize[$\,$],{\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf mtxdoubletonormal} ({\bf MIRRORPTR} maxis)
+\item 
+void {\bf readmirroraxis} ({\bf IMAGEDESCPTR} imagedescptr)
+\item 
+void {\bf printstamp} ({\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf printequiv} ({\bf IMAGEDESCPTR} imagedesc)
+\item 
+void {\bf printpivot} ({\bf PIVOTPTR} pivot)
+\item 
+void {\bf printchild} ({\bf PIVOTPTR} pivot)
+\item 
+void {\bf printmtx} (short $\ast$mtx)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{im.h_a0}
+\index{im.h@{im.h}!balloc@{balloc}}
+\index{balloc@{balloc}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ balloc (int {\em size})}\hfill
+
+
+
+Definition at line 14 of file stuff.C.\small\begin{verbatim}00015 {
+00016   return((char *)malloc(size));
+00017 }
+\end{verbatim}\normalsize 
+\label{im.h_a1}
+\index{im.h@{im.h}!bfree@{bfree}}
+\index{bfree@{bfree}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void bfree (char $\ast$ {\em blk})}\hfill
+
+
+
+Definition at line 20 of file stuff.C.\small\begin{verbatim}00021 {
+00022   free(blk);
+00023 }
+\end{verbatim}\normalsize 
+\label{im.h_a11}
+\index{im.h@{im.h}!computetransrotmtx@{computetransrotmtx}}
+\index{computetransrotmtx@{computetransrotmtx}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void computetransrotmtx ({\bf MIRRORPTR} {\em mirror})}\hfill
+
+
+
+Definition at line 96 of file initimagedsc.C.\small\begin{verbatim}00097 {
+00098 short *mtx=mirror->mtx;
+00099 int   j,*crd=mirror->axis; /* note: crd[] refers to dblsize coordinates */
+00100 
+00101 for(j=0; j<=5; ++j) mtx[j]=0;
+00102 if (mirror->delta[HOR]==0 && mirror->delta[VER]==1)
+00103    { mtx[A11]= -1; mtx[A22]= 1; mtx[B1]=2*crd[X1]; mtx[B2]=0; }
+00104 else if (mirror->delta[HOR]==1 && mirror->delta[VER]==0)
+00105    { mtx[A11]= 1; mtx[A22]= -1; mtx[B1]=0; mtx[B2]=2*crd[Y1]; }
+00106 else if (mirror->delta[HOR]==1 && mirror->delta[VER]==1)
+00107    {
+00108    mtx[A12]= 1; mtx[A21]= 1;
+00109    mtx[B1]=(crd[X1]-crd[Y1]);
+00110    mtx[B2]=(crd[Y1]-crd[X1]);
+00111    if ((mtx[B1]&1) || (mtx[B2]&1))
+00112       err(3,"invalid diagonal mirror axis defined");
+00113    }
+00114 else if (mirror->delta[HOR]==1 && mirror->delta[VER]== -1)
+00115    {
+00116    mtx[A12]= -1; mtx[A21]= -1;
+00117    mtx[B1]=(crd[X1]+crd[Y1]);
+00118    mtx[B2]=(crd[X1]+crd[Y1]);
+00119    if ((mtx[B1]&1) || (mtx[B2]&1))
+00120       err(3,"invalid diagonal mirror axis defined");
+00121    }
+00122 else
+00123    err(5,"computetransrotmtx: internal error 761");
+00124 }
+\end{verbatim}\normalsize 
+\label{im.h_a10}
+\index{im.h@{im.h}!drawmirroraxis@{drawmirroraxis}}
+\index{drawmirroraxis@{drawmirroraxis}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void drawmirroraxis (int {\em dblsize}[$\,$], {\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 41 of file initimagedsc.C.\small\begin{verbatim}00042 {
+00043 MIRRORPTR mirror;
+00044 int axisid,numaxis,*crd,dx,dy,x,y,**stamp;
+00045 
+00046 stamp=imagedesc->stamp;
+00047 axisid=1; numaxis=0;
+00048 for (mirror=imagedesc->mirroraxis; mirror!=NIL; mirror=mirror->next)
+00049    {
+00050    mirror->axisid=axisid;   /* assign id */
+00051    mirror->logaxisid=numaxis;
+00052    ++numaxis;
+00053    if (axisid<0)
+00054       { /* overflow */
+00055       fprintf(stderr,
+00056         "drawmirroraxis: too many mirror axis defined, ignore all but first %1d\n",numaxis);
+00057       break;
+00058       }
+00059    crd=mirror->axis;
+00060    if (crd[X1]<0 || crd[X1]>=dblsize[HOR] || crd[X2]<0 || crd[X2]>=dblsize[HOR] ||
+00061        crd[Y1]<0 || crd[Y1]>=dblsize[VER] || crd[Y2]<0 || crd[Y2]>=dblsize[VER])
+00062       err(5,"drawmirroraxis: axis coordinates out of range");
+00063    dx=dy=0;
+00064    if (crd[X1] < crd[X2]) dx= 1; else if (crd[X1] > crd[X2]) dx= -1;
+00065    if (crd[Y1] < crd[Y2]) dy= 1; else if (crd[Y1] > crd[Y2]) dy= -1;
+00066    /* normalize direction, that is, point to right/upper: */
+00067    if (dx== -1 || dx==0 && dy== -1)
+00068       { dx *= -1; dy *= -1; }
+00069    mirror->delta[HOR]=dx; mirror->delta[VER]=dy;
+00070    computetransrotmtx(mirror);
+00071    /* draw axis in one direction */
+00072    for (x=crd[X1],y=crd[Y1];
+00073   x<dblsize[HOR] && x>=0 && y<dblsize[VER] && y>=0; x+=dx,y+=dy)
+00074       stamp[x][y] |= axisid;
+00075    /* draw axis in other direction */
+00076    for (x=crd[X1],y=crd[Y1];
+00077   x<dblsize[HOR] && x>=0 && y<dblsize[VER] && y>=0; x-=dx,y-=dy)
+00078       stamp[x][y] |= axisid;
+00079    axisid <<= 1;
+00080    }
+00081 imagedesc->numaxis=numaxis;
+00082 }
+\end{verbatim}\normalsize 
+\label{im.h_a9}
+\index{im.h@{im.h}!initimagedesc@{initimagedesc}}
+\index{initimagedesc@{initimagedesc}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void initimagedesc ({\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 11 of file initimagedsc.C.\small\begin{verbatim}00012 {
+00013 int dblsize[2],i,j,*columnarray,*columnptr,**stamp;
+00014 
+00015 /*readmirroraxis(imagedesc);*/
+00016 dblsize[HOR]=2*(imagedesc->size[HOR]);
+00017 dblsize[VER]=2*(imagedesc->size[VER]);
+00018 /* allocate a two dimensional int array sized (dblsize[HOR],dblsize[VER]) */
+00019 if ((imagedesc->stamp=stamp=(int **)balloc(dblsize[HOR]*sizeof(int *)))==NIL)
+00020    err(5,"initimagedesc: cannot allocate memory");
+00021 if ((columnarray=(int *)balloc(dblsize[HOR]*dblsize[VER]*sizeof(int)))==NIL)
+00022    err(5,"initimagedesc: cannot allocate memory");
+00023 for (columnptr=columnarray,j=0; j<dblsize[HOR]; columnptr+=dblsize[VER],++j)
+00024    {
+00025    stamp[j]=columnptr;
+00026    for (i=dblsize[VER]-1; i>=0; --i)
+00027       columnptr[i]=0;
+00028    }
+00029 /* this one assigns to imagedesc->{numaxis,stamp,mirror} */
+00030 drawmirroraxis(dblsize,imagedesc);
+00031 /* and this one assigns to imagedesc->{numsector,sectorlist,stamp} */
+00032 labelallsectors(dblsize,imagedesc);
+00033 /* this sets up for each axis the lists of mirror equivalent sectors */
+00034 /* mkequivalencelist(dblsize,imagedesc); */
+00035 /* the matrices are now for double coords. Change this to normal coords.*/
+00036 mtxdoubletonormal(imagedesc->mirroraxis);
+00037 }
+\end{verbatim}\normalsize 
+\label{im.h_a12}
+\index{im.h@{im.h}!labelallsectors@{labelallsectors}}
+\index{labelallsectors@{labelallsectors}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void labelallsectors (int {\em dblsize}[$\,$], {\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 129 of file initimagedsc.C.\small\begin{verbatim}00130 {
+00131 int           sectorid,sectorcontrol,px,py,**stamp;
+00132 SECTORLISTPTR sectorlistp;
+00133 
+00134 stamp=imagedesc->stamp;
+00135 sectorid=1; sectorcontrol=1;
+00136 for (px=0; px<dblsize[HOR]; ++px)
+00137    for (py=0; py<dblsize[VER]; ++py)
+00138       if (stamp[px][py]==0)
+00139    { /* found a new sector, still unlabeled */
+00140    if (sectorcontrol==0)
+00141             err(5,"labelallsectors: cannot handle more sectors\n");
+00142      labelsector(stamp,px,py,dblsize[HOR],dblsize[VER],0-sectorid);
+00143    NewSectorlist(sectorlistp);
+00144    sectorlistp->point[HOR]=px;
+00145    sectorlistp->point[VER]=py;
+00146    sectorlistp->sectorid=sectorid;
+00147    sectorlistp->next=imagedesc->sectorlist;
+00148    imagedesc->sectorlist=sectorlistp;
+00149    ++sectorid;
+00150    sectorcontrol<<=1;   /* only to check for too many sectors */
+00151    }
+00152 imagedesc->numsector=sectorid-1;
+00153 }
+\end{verbatim}\normalsize 
+\label{im.h_a14}
+\index{im.h@{im.h}!labelhalfsector@{labelhalfsector}}
+\index{labelhalfsector@{labelhalfsector}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void labelhalfsector (int $\ast$$\ast$ {\em stamp}, int {\em dx}, int {\em px}, int {\em py}, int {\em xsiz}, int {\em ysiz}, int {\em label})}\hfill
+
+
+
+Definition at line 166 of file initimagedsc.C.\small\begin{verbatim}00167 {
+00168 int y,gofurther;
+00169 
+00170 for (; px>=0 && px<xsiz; px+=dx)
+00171    {
+00172    gofurther=(-1);
+00173    /* label the vertical line "x==px" (upper part) */
+00174    for (y=py; y<ysiz && stamp[px][y]<=0; ++y)
+00175       {
+00176       stamp[px][y]=label;
+00177       if (px+dx>=0 && px+dx<xsiz && stamp[px+dx][y]==0)
+00178    gofurther=y;
+00179       }
+00180    /* label the vertical line "x==px" (lower part) */
+00181    for (y=py-1; y>=0 && stamp[px][y]<=0; --y)
+00182       {
+00183       stamp[px][y]=label;
+00184       if (px+dx>=0 && px+dx<xsiz && stamp[px+dx][y]==0)
+00185    gofurther=y;
+00186       }
+00187    /* could we find an entry point to the next vertical line? */
+00188    if ((py=gofurther)==(-1))
+00189       break;
+00190    }
+00191 }
+\end{verbatim}\normalsize 
+\label{im.h_a13}
+\index{im.h@{im.h}!labelsector@{labelsector}}
+\index{labelsector@{labelsector}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void labelsector (int $\ast$$\ast$ {\em stamp}, int {\em px}, int {\em py}, int {\em xsiz}, int {\em ysiz}, int {\em label})}\hfill
+
+
+
+Definition at line 157 of file initimagedsc.C.\small\begin{verbatim}00158 {
+00159 /* label sector to the left of vertical line "x==px" */
+00160 labelhalfsector(stamp,-1,px,py,xsiz,ysiz,label);
+00161 /* label sector to the right of vertical line "x==px" */
+00162 labelhalfsector(stamp, 1,px,py,xsiz,ysiz,label);
+00163 }
+\end{verbatim}\normalsize 
+\label{im.h_a15}
+\index{im.h@{im.h}!mkequivalencelist@{mkequivalencelist}}
+\index{mkequivalencelist@{mkequivalencelist}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mkequivalencelist (int {\em dblsize}[$\,$], {\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 195 of file initimagedsc.C.\small\begin{verbatim}00196 {
+00197 MIRRORPTR      mirrax;
+00198 SECTORLISTPTR  sectorp;
+00199 EQUIVLISTPTR   equiv;
+00200 int            mpoint[2],**stamp=imagedesc->stamp;
+00201 
+00202 for (mirrax=imagedesc->mirroraxis; mirrax!=NIL; mirrax=mirrax->next)
+00203    for (sectorp=imagedesc->sectorlist; sectorp!=NIL; sectorp=sectorp->next)
+00204       {
+00205       NewEquivlist(equiv);
+00206       mtxcopy(equiv->mtx,mirrax->mtx);
+00207       mtxapply(mpoint,sectorp->point,equiv->mtx);
+00208       /* If mpoint outside current image block, correct this: */
+00209       if (mpoint[HOR]<0)    /* move to the right */
+00210    mtxaddvec(equiv->mtx,dblsize[HOR],0);
+00211       else if (mpoint[HOR]>=dblsize[HOR]) /* move to the left */
+00212    mtxaddvec(equiv->mtx,-(dblsize[HOR]),0);
+00213       if (mpoint[VER]<0)    /* move up */
+00214    mtxaddvec(equiv->mtx,0,dblsize[VER]);
+00215       else if (mpoint[VER]>=dblsize[VER]) /* move down */
+00216    mtxaddvec(equiv->mtx,0,-(dblsize[VER]));
+00217       /* Now retry... */
+00218       mtxapply(mpoint,sectorp->point,equiv->mtx);
+00219       if (mpoint[HOR]<0 || mpoint[HOR]>=dblsize[HOR] ||
+00220     mpoint[VER]<0 || mpoint[VER]>=dblsize[VER])
+00221    err(5,"mkequivalencelist: fatal internal error 55");
+00222       /* remember: sectorid=0-sectorlabel */
+00223       equiv->b=0-stamp[mpoint[HOR]][mpoint[VER]];
+00224       equiv->a=sectorp->sectorid;
+00225       equiv->next=mirrax->equivalence;
+00226       mirrax->equivalence=equiv;
+00227       /* change mtx form dblsize to normal size */
+00228       if ((equiv->mtx[B1])&1) err(5,"illegal mirror axis specified, goodbye");
+00229       equiv->mtx[B1]>>=1;
+00230       if ((equiv->mtx[B2])&1) err(5,"illegal mirror axis specified, goodbye");
+00231       equiv->mtx[B2]>>=1;
+00232       }
+00233 }
+\end{verbatim}\normalsize 
+\label{im.h_a6}
+\index{im.h@{im.h}!mtxaddvec@{mtxaddvec}}
+\index{mtxaddvec@{mtxaddvec}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxaddvec (short $\ast$ {\em mtx}, int {\em p}, int {\em q})}\hfill
+
+
+
+Definition at line 56 of file mtx.C.\small\begin{verbatim}00057 {
+00058 mtx[B1] += p;
+00059 mtx[B2] += q;
+00060 }
+\end{verbatim}\normalsize 
+\label{im.h_a5}
+\index{im.h@{im.h}!mtxapply@{mtxapply}}
+\index{mtxapply@{mtxapply}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxapply (int $\ast$ {\em out}, int $\ast$ {\em in}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 49 of file mtx.C.\small\begin{verbatim}00050 {
+00051 out[HOR] = mtx[A11]*in[HOR] + mtx[A12]*in[VER] + mtx[B1];
+00052 out[VER] = mtx[A21]*in[HOR] + mtx[A22]*in[VER] + mtx[B2];
+00053 }
+\end{verbatim}\normalsize 
+\label{im.h_a7}
+\index{im.h@{im.h}!mtxapplytocrd@{mtxapplytocrd}}
+\index{mtxapplytocrd@{mtxapplytocrd}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxapplytocrd (short $\ast$ {\em out}, short $\ast$ {\em in}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 64 of file mtx.C.\small\begin{verbatim}00065 {
+00066 out[XL] = mtx[A11]*in[XL] + mtx[A12]*in[YB] + mtx[B1];
+00067 out[YB] = mtx[A21]*in[XL] + mtx[A22]*in[YB] + mtx[B2];
+00068 out[XR] = mtx[A11]*in[XR] + mtx[A12]*in[YT] + mtx[B1];
+00069 out[YT] = mtx[A21]*in[XR] + mtx[A22]*in[YT] + mtx[B2];
+00070 }
+\end{verbatim}\normalsize 
+\label{im.h_a8}
+\index{im.h@{im.h}!mtxchain@{mtxchain}}
+\index{mtxchain@{mtxchain}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ mtxchain (short $\ast$ {\em mtxb}, short $\ast$ {\em mtxa})}\hfill
+
+
+
+Definition at line 78 of file mtx.C.\small\begin{verbatim}00079 {
+00080 static short out[6];
+00081 out[A11] = mtxb[A11]*mtxa[A11] + mtxb[A12]*mtxa[A21];
+00082 out[A12] = mtxb[A11]*mtxa[A12] + mtxb[A12]*mtxa[A22];
+00083 out[A21] = mtxb[A21]*mtxa[A11] + mtxb[A22]*mtxa[A21];
+00084 out[A22] = mtxb[A21]*mtxa[A12] + mtxb[A22]*mtxa[A22];
+00085 out[B1]  = mtxb[A11]*mtxa[B1]  + mtxb[A12]*mtxa[B2] + mtxb[B1];
+00086 out[B2]  = mtxb[A21]*mtxa[B1]  + mtxb[A22]*mtxa[B2] + mtxb[B2];
+00087 return(out);
+00088 }
+\end{verbatim}\normalsize 
+\label{im.h_a4}
+\index{im.h@{im.h}!mtxcopy@{mtxcopy}}
+\index{mtxcopy@{mtxcopy}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxcopy (short $\ast$ {\em dstmtx}, short $\ast$ {\em srcmtx})}\hfill
+
+
+
+Definition at line 37 of file mtx.C.\small\begin{verbatim}00038 {
+00039 dstmtx[A11]=srcmtx[A11];
+00040 dstmtx[A12]=srcmtx[A12];
+00041 dstmtx[A21]=srcmtx[A21];
+00042 dstmtx[A22]=srcmtx[A22];
+00043 dstmtx[B1] =srcmtx[B1];
+00044 dstmtx[B2] =srcmtx[B2];
+00045 }
+\end{verbatim}\normalsize 
+\label{im.h_a16}
+\index{im.h@{im.h}!mtxdoubletonormal@{mtxdoubletonormal}}
+\index{mtxdoubletonormal@{mtxdoubletonormal}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxdoubletonormal ({\bf MIRRORPTR} {\em maxis})}\hfill
+
+
+
+Definition at line 237 of file initimagedsc.C.\small\begin{verbatim}00238 {
+00239 int nerrors=0;
+00240 for (; maxis!=NIL; maxis=maxis->next)
+00241    {
+00242    short *mtx=maxis->mtx;
+00243    if ((mtx[B1]&1) || (mtx[B2]&1))
+00244       {
+00245       ++nerrors;
+00246       fprintf(stderr,
+00247         "(%1d) illegal mirror axis specified, cannot continue\n",nerrors);
+00248       }
+00249    mtx[B1] >>= 1;
+00250    mtx[B2] >>= 1;
+00251    }
+00252 if (nerrors>0)
+00253    err(3,"...please go hacking your image specification !!!");
+00254 }
+\end{verbatim}\normalsize 
+\label{im.h_a2}
+\index{im.h@{im.h}!mtxidentity@{mtxidentity}}
+\index{mtxidentity@{mtxidentity}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ mtxidentity (void)}\hfill
+
+
+
+Definition at line 10 of file mtx.C.\small\begin{verbatim}00011 {
+00012 static short identity[6] = {0,0,0,0,0,0};
+00013 if (identity[A11]==0)
+00014    { /* cannot initialize compile time without knowing symbolic constants (write time) */
+00015    identity[A11]=identity[A22]=1;
+00016    identity[A12]=identity[A21]=0;
+00017    identity[B1]=identity[B2]=0;
+00018    }
+00019 return(identity);
+00020 }
+\end{verbatim}\normalsize 
+\label{im.h_a3}
+\index{im.h@{im.h}!mtxtranslate@{mtxtranslate}}
+\index{mtxtranslate@{mtxtranslate}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void mtxtranslate (short $\ast$ {\em mtx}, int {\em p}, int {\em q})}\hfill
+
+
+
+Definition at line 29 of file mtx.C.\small\begin{verbatim}00030 {
+00031 mtx[B1]+=(p-mtx[A11]*p-mtx[A12]*q);
+00032 mtx[B2]+=(q-mtx[A21]*p-mtx[A22]*q);
+00033 }
+\end{verbatim}\normalsize 
+\label{im.h_a21}
+\index{im.h@{im.h}!printchild@{printchild}}
+\index{printchild@{printchild}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printchild ({\bf PIVOTPTR} {\em pivot})}\hfill
+
+
+
+Definition at line 54 of file debug.C.
+
+Referenced by {\bf printpivot}().\small\begin{verbatim}00055 {
+00056 PLAZGLAFPTR glaf=pivot->children;
+00057 LAYINSTPTR  li;
+00058 LAYOUTPTR   lay;
+00059 
+00060 fprintf(stderr,"\n (Children");
+00061 for (; glaf!=NIL; glaf=glaf->next)
+00062    {
+00063    lay=glaf->layout;
+00064    fprintf(stderr,"\n  (Layout (%s(%s(%s)))",
+00065      lay->name,lay->circuit->name,lay->circuit->function->name);
+00066    glaf=(PLAZGLAFPTR)lay->flag.p;
+00067    if (glaf->layout!=lay)
+00068       fprintf(stderr," GLAF_LAYOUT");
+00069    for (li=glaf->layinst; li!=NIL; li=(LAYINSTPTR)li->flag.p)
+00070       fprintf(stderr," (%s)",li->name);
+00071    fprintf(stderr,")");
+00072    }
+00073 fprintf(stderr,")");
+00074 }
+\end{verbatim}\normalsize 
+\label{im.h_a19}
+\index{im.h@{im.h}!printequiv@{printequiv}}
+\index{printequiv@{printequiv}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printequiv ({\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 29 of file debug.C.\small\begin{verbatim}00030 {
+00031 MIRRORPTR      mirrax;
+00032 EQUIVLISTPTR   equiv;
+00033 
+00034 for (mirrax=imagedesc->mirroraxis; mirrax!=NIL; mirrax=mirrax->next)
+00035    {
+00036    fprintf(stderr,"(Mirrax %1d",mirrax->axisid);
+00037    for (equiv=mirrax->equivalence; equiv!=NIL; equiv=equiv->next)
+00038       fprintf(stderr," (%1d %1d)",equiv->a,equiv->b);
+00039    fprintf(stderr,")\n");
+00040    }
+00041 }
+\end{verbatim}\normalsize 
+\label{im.h_a22}
+\index{im.h@{im.h}!printmtx@{printmtx}}
+\index{printmtx@{printmtx}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printmtx (short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 78 of file debug.C.\small\begin{verbatim}00079 {
+00080 fprintf(stderr,"/ %2d %2d \\   / %2d \\\n",
+00081   (int)mtx[A11],(int)mtx[A12],(int)mtx[B1]);
+00082 fprintf(stderr,"\\ %2d %2d /   \\ %2d /\n",
+00083   (int)mtx[A21],(int)mtx[A22],(int)mtx[B2]);
+00084 }
+\end{verbatim}\normalsize 
+\label{im.h_a20}
+\index{im.h@{im.h}!printpivot@{printpivot}}
+\index{printpivot@{printpivot}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printpivot ({\bf PIVOTPTR} {\em pivot})}\hfill
+
+
+
+Definition at line 45 of file debug.C.\small\begin{verbatim}00046 {
+00047 fprintf(stderr,"\n(Pivot (%1d %1d) (%1d %1d)",pivot->x,pivot->y,pivot->lx,pivot->ly);
+00048 printchild(pivot);
+00049 fprintf(stderr,")");
+00050 }
+\end{verbatim}\normalsize 
+\label{im.h_a18}
+\index{im.h@{im.h}!printstamp@{printstamp}}
+\index{printstamp@{printstamp}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void printstamp ({\bf IMAGEDESCPTR} {\em imagedesc})}\hfill
+
+
+
+Definition at line 13 of file debug.C.\small\begin{verbatim}00014 {
+00015 int x,y,**stamp=imagedesc->stamp;
+00016 
+00017 fprintf(stderr,"\n");
+00018 for (y=(imagedesc->size[VER]<<1)-1; y>=0; --y)
+00019    {
+00020    for (x=0; x<(imagedesc->size[HOR]<<1); ++x)
+00021       fprintf(stderr,"%3d",stamp[x][y]);
+00022    fprintf(stderr,"\n");
+00023    }
+00024 fprintf(stderr,"\n");
+00025 }
+\end{verbatim}\normalsize 
+\label{im.h_a17}
+\index{im.h@{im.h}!readmirroraxis@{readmirroraxis}}
+\index{readmirroraxis@{readmirroraxis}!im.h@{im.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void readmirroraxis ({\bf IMAGEDESCPTR} {\em imagedescptr})}\hfill
+
+
+
+Definition at line 259 of file initimagedsc.C.\small\begin{verbatim}00260 {
+00261 FILE      *fp;
+00262 int       t,x1,x2,y1,y2,j=0;
+00263 MIRRORPTR mp;
+00264 
+00265 if ((fp=fopen("mirror.axis","r"))==NIL)
+00266    err(5,"cannot open mirror.axis");
+00267 t=fscanf(fp,"Size %d %d\n",&(imagedescptr->size[HOR]),&(imagedescptr->size[VER]));
+00268 if (t!=2)
+00269    err(5,"readmirroraxis: cannot read Size");
+00270 while ((t=fscanf(fp,"Axis %d %d %d %d\n",&x1,&x2,&y1,&y2))==4)
+00271    {
+00272    NewMirror(mp);
+00273    mp->axis[X1]=x1; mp->axis[X2]=x2; mp->axis[Y1]=y1; mp->axis[Y2]=y2;
+00274    mp->next=imagedescptr->mirroraxis;
+00275    imagedescptr->mirroraxis=mp;
+00276    ++j;
+00277    }
+00278 fprintf(stderr,"\nread %1d axis form file \"mirror.axis\"\n",j);
+00279 
+00280 }
+\end{verbatim}\normalsize 

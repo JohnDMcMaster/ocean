@@ -1,0 +1,275 @@
+\subsection{phil.h File Reference}
+\label{phil.h}\index{phil.h@{phil.h}}
+{\tt \#include "usrlib.h"}\par
+{\tt \#include "sea.h"}\par
+{\tt \#include "phil\_\-glob.h"}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf layout\-Map\-Type}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Point\-Class}\ \_\-\_\-first\-User\-Class
+\item 
+\#define {\bf Div\-Tab\-Class}\ (Point\-Class +1)
+\item 
+\#define {\bf Cluster\-Class}\ (Div\-Tab\-Class+1)
+\item 
+\#define {\bf Pattern\-Class}\ (Cluster\-Class+1)
+\item 
+\#define {\bf Window\-Class}\ (Pattern\-Class+1)
+\item 
+\#define {\bf Plane\-Class}\ (Window\-Class +1)
+\item 
+\#define {\bf Plcm\-Class}\ (Plane\-Class + 1)
+\item 
+\#define {\bf Clst\-Class}\ (Plcm\-Class + 1)
+\item 
+\#define {\bf Cri\-Point\-Class}\ (Clst\-Class + 1)
+\item 
+\#define {\bf Image\-Map\-Class}\ (Cri\-Point\-Class +1)
+\item 
+\#define {\bf Lay\-Map\-Class}\ (Image\-Map\-Class +1)
+\item 
+\#define {\bf Cri\-Net\-Class}\ (Lay\-Map\-Class +1)
+\item 
+\#define {\bf Plane\-Cell\-Class}\ (Cri\-Net\-Class +1)
+\item 
+\#define {\bf Cri\-Candidate\-Class}\ (Plane\-Cell\-Class +1)
+\item 
+\#define {\bf Prot\-Area\-Class}\ (Cri\-Candidate\-Class +1)
+\end{CompactItemize}
+\subsubsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum {\bf layer\-Type} \{ {\bf None\-Layer} = 0, 
+{\bf Diffusion\-Layer} = 0x01, 
+{\bf Poly\-Layer} = 0x02, 
+{\bf Metal1Layer} = 0x04, 
+{\bf Metal2Layer} = 0x08, 
+{\bf Metals\-Via\-Layer} = 0x10, 
+{\bf Via\-Layer} = 0x20
+ \}
+\item 
+enum {\bf flag\-Type} \{ {\bf Critical\-Area\-Flag} = 0x40, 
+{\bf Terminal\-Flag} = 0x80
+ \}
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf layer\-Type} {\bf recognize\-Layer} (short layer)
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{phil.h_a7}
+\index{phil.h@{phil.h}!ClstClass@{ClstClass}}
+\index{ClstClass@{ClstClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Clst\-Class\ (Plcm\-Class + 1)}\hfill
+
+
+
+Definition at line 27 of file phil.h.\label{phil.h_a2}
+\index{phil.h@{phil.h}!ClusterClass@{ClusterClass}}
+\index{ClusterClass@{ClusterClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Cluster\-Class\ (Div\-Tab\-Class+1)}\hfill
+
+
+
+Definition at line 22 of file phil.h.\label{phil.h_a13}
+\index{phil.h@{phil.h}!CriCandidateClass@{CriCandidateClass}}
+\index{CriCandidateClass@{CriCandidateClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Cri\-Candidate\-Class\ (Plane\-Cell\-Class +1)}\hfill
+
+
+
+Definition at line 33 of file phil.h.\label{phil.h_a11}
+\index{phil.h@{phil.h}!CriNetClass@{CriNetClass}}
+\index{CriNetClass@{CriNetClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Cri\-Net\-Class\ (Lay\-Map\-Class +1)}\hfill
+
+
+
+Definition at line 31 of file phil.h.\label{phil.h_a8}
+\index{phil.h@{phil.h}!CriPointClass@{CriPointClass}}
+\index{CriPointClass@{CriPointClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Cri\-Point\-Class\ (Clst\-Class + 1)}\hfill
+
+
+
+Definition at line 28 of file phil.h.\label{phil.h_a1}
+\index{phil.h@{phil.h}!DivTabClass@{DivTabClass}}
+\index{DivTabClass@{DivTabClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Div\-Tab\-Class\ (Point\-Class +1)}\hfill
+
+
+
+Definition at line 21 of file phil.h.\label{phil.h_a9}
+\index{phil.h@{phil.h}!ImageMapClass@{ImageMapClass}}
+\index{ImageMapClass@{ImageMapClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Image\-Map\-Class\ (Cri\-Point\-Class +1)}\hfill
+
+
+
+Definition at line 29 of file phil.h.\label{phil.h_a10}
+\index{phil.h@{phil.h}!LayMapClass@{LayMapClass}}
+\index{LayMapClass@{LayMapClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Lay\-Map\-Class\ (Image\-Map\-Class +1)}\hfill
+
+
+
+Definition at line 30 of file phil.h.\label{phil.h_a3}
+\index{phil.h@{phil.h}!PatternClass@{PatternClass}}
+\index{PatternClass@{PatternClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Pattern\-Class\ (Cluster\-Class+1)}\hfill
+
+
+
+Definition at line 23 of file phil.h.\label{phil.h_a12}
+\index{phil.h@{phil.h}!PlaneCellClass@{PlaneCellClass}}
+\index{PlaneCellClass@{PlaneCellClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Plane\-Cell\-Class\ (Cri\-Net\-Class +1)}\hfill
+
+
+
+Definition at line 32 of file phil.h.\label{phil.h_a5}
+\index{phil.h@{phil.h}!PlaneClass@{PlaneClass}}
+\index{PlaneClass@{PlaneClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Plane\-Class\ (Window\-Class +1)}\hfill
+
+
+
+Definition at line 25 of file phil.h.\label{phil.h_a6}
+\index{phil.h@{phil.h}!PlcmClass@{PlcmClass}}
+\index{PlcmClass@{PlcmClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Plcm\-Class\ (Plane\-Class + 1)}\hfill
+
+
+
+Definition at line 26 of file phil.h.\label{phil.h_a0}
+\index{phil.h@{phil.h}!PointClass@{PointClass}}
+\index{PointClass@{PointClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Point\-Class\ \_\-\_\-first\-User\-Class}\hfill
+
+
+
+Definition at line 20 of file phil.h.\label{phil.h_a14}
+\index{phil.h@{phil.h}!ProtAreaClass@{ProtAreaClass}}
+\index{ProtAreaClass@{ProtAreaClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Prot\-Area\-Class\ (Cri\-Candidate\-Class +1)}\hfill
+
+
+
+Definition at line 34 of file phil.h.\label{phil.h_a4}
+\index{phil.h@{phil.h}!WindowClass@{WindowClass}}
+\index{WindowClass@{WindowClass}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Window\-Class\ (Pattern\-Class+1)}\hfill
+
+
+
+Definition at line 24 of file phil.h.
+
+\subsubsection{Enumeration Type Documentation}
+\label{phil.h_a26}
+\index{phil.h@{phil.h}!flagType@{flagType}}
+\index{flagType@{flagType}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum flag\-Type}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{CriticalAreaFlag@{CriticalAreaFlag}!phil.h@{phil.h}}\index{phil.h@{phil.h}!CriticalAreaFlag@{Critical\-Area\-Flag}}\item[
+\label{phil.h_a23}
+{\em Critical\-Area\-Flag}]\index{TerminalFlag@{TerminalFlag}!phil.h@{phil.h}}\index{phil.h@{phil.h}!TerminalFlag@{Terminal\-Flag}}\item[
+\label{phil.h_a24}
+{\em Terminal\-Flag}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 51 of file phil.h.\small\begin{verbatim}00052 {
+00053   CriticalAreaFlag = 0x40,
+00054   TerminalFlag = 0x80
+00055 
+00056 }
+\end{verbatim}\normalsize 
+\label{phil.h_a25}
+\index{phil.h@{phil.h}!layerType@{layerType}}
+\index{layerType@{layerType}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum layer\-Type}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{NoneLayer@{NoneLayer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!NoneLayer@{None\-Layer}}\item[
+\label{phil.h_a16}
+{\em None\-Layer}]\index{DiffusionLayer@{DiffusionLayer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!DiffusionLayer@{Diffusion\-Layer}}\item[
+\label{phil.h_a17}
+{\em Diffusion\-Layer}]\index{PolyLayer@{PolyLayer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!PolyLayer@{Poly\-Layer}}\item[
+\label{phil.h_a18}
+{\em Poly\-Layer}]\index{Metal1Layer@{Metal1Layer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!Metal1Layer@{Metal1Layer}}\item[
+\label{phil.h_a19}
+{\em Metal1Layer}]\index{Metal2Layer@{Metal2Layer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!Metal2Layer@{Metal2Layer}}\item[
+\label{phil.h_a20}
+{\em Metal2Layer}]\index{MetalsViaLayer@{MetalsViaLayer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!MetalsViaLayer@{Metals\-Via\-Layer}}\item[
+\label{phil.h_a21}
+{\em Metals\-Via\-Layer}]\index{ViaLayer@{ViaLayer}!phil.h@{phil.h}}\index{phil.h@{phil.h}!ViaLayer@{Via\-Layer}}\item[
+\label{phil.h_a22}
+{\em Via\-Layer}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 38 of file phil.h.
+
+Referenced by {\bf Lay\-Map::add\-Critical\-Points}().\small\begin{verbatim}00039 {
+00040   NoneLayer = 0,
+00041   DiffusionLayer = 0x01,    // or restricted feed
+00042   PolyLayer = 0x02,         // or universal feed
+00043   Metal1Layer = 0x04,
+00044   Metal2Layer = 0x08,
+00045   MetalsViaLayer = 0x10,    // via from metal 1 to metal 2
+00046   ViaLayer = 0x20,          // via from metal 
+00047 
+00048 
+00049 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Function Documentation}
+\label{phil.h_a15}
+\index{phil.h@{phil.h}!recognizeLayer@{recognizeLayer}}
+\index{recognizeLayer@{recognizeLayer}!phil.h@{phil.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf layer\-Type} recognize\-Layer (short {\em layer})}\hfill
+
+
+
+Definition at line 218 of file pattern.C.
+
+Referenced by {\bf Lay\-Map::add\-Wires}(), and {\bf Pattern::scan}().\small\begin{verbatim}00221 {
+00222   layerType l;
+00223 
+00224   switch (layer)
+00225     {
+00226     case 100:
+00227       l = ViaLayer;
+00228       break;
+00229     case 1:
+00230       l = Metal1Layer;  
+00231       break;
+00232     case 2:
+00233       l = Metal2Layer;  
+00234       break;
+00235     case 101:
+00236       l = MetalsViaLayer;  
+00237       break;
+00238     default:
+00239       l = Metal2Layer;
+00240     }
+00241   return l;
+00242 
+00243 }
+\end{verbatim}\normalsize 

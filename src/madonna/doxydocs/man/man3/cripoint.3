@@ -1,0 +1,116 @@
+.TH CriPoint 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CriPoint \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cri.h>\fR
+.PP
+Inherits \fBPoint\fR.
+.PP
+Inherited by \fBCriCandidate\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBCriPoint\fR ()"
+.br
+.ti -1c
+.RI "\fBCriPoint\fR (int \fBx\fR,int \fBy\fR,\fBlayerType\fR lay,unsigned int k)"
+.br
+.ti -1c
+.RI "\fB~CriPoint\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& o) const"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBlayerType\fR \fBlayer\fR"
+.br
+.ti -1c
+.RI "unsigned int \fBnet\fR"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "\fBList\fR& \fBoperator|=\fR ( \fBList\fR&,\fBList\fR&)"
+.br
+.ti -1c
+.RI "int \fBoperator &\fR ( \fBList\fR&,\fBList\fR&)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS CriPoint::CriPoint ()
+.PP
+Definition at line 31 of file cri.h.
+.SS CriPoint::CriPoint (int x, int y, \fBlayerType\fR lay, unsigned int k)
+.PP
+Definition at line 32 of file cri.h.
+.SS CriPoint::~CriPoint ()\fC [inline]\fR
+.PP
+Definition at line 35 of file cri.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int CriPoint::isEqual (const \fBItem\fR & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Definition at line 41 of file cri.h.
+.SS char * CriPoint::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Reimplemented in \fBCriCandidate\fR.
+.PP
+Definition at line 39 of file cri.h.
+.SS \fBclassType\fR CriPoint::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Reimplemented in \fBCriCandidate\fR.
+.PP
+Definition at line 38 of file cri.h.
+.SS void CriPoint::print (ostream & os) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPoint\fR.
+.PP
+Definition at line 86 of file cri.C.
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS int operator & (\fBList\fR & l1, \fBList\fR & l2)\fC [friend]\fR
+.PP
+Definition at line 59 of file cri.C.
+.SS \fBList\fR& operator|= (\fBList\fR & l1, \fBList\fR & l2)\fC [friend]\fR
+.PP
+Definition at line 19 of file cri.C.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBlayerType\fR CriPoint::layer
+.PP
+Definition at line 53 of file cri.h.
+.SS unsigned int CriPoint::net
+.PP
+Definition at line 54 of file cri.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

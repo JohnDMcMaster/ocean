@@ -1,0 +1,76 @@
+.TH Dummy 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Dummy \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <item.h>\fR
+.PP
+Inherits \fBItem\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBDummy\fR ()"
+.br
+.ti -1c
+.RI "virtual \fB~Dummy\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "void \fBoperator delete\fR ( void * )"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Dummy::Dummy ()\fC [inline]\fR
+.PP
+Definition at line 63 of file item.h.
+.SS Dummy::~Dummy ()\fC [virtual]\fR
+.PP
+Definition at line 73 of file item.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int Dummy::isEqual (const \fBItem\fR & testItem) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 101 of file item.C.
+.SS char * Dummy::myName () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 89 of file item.C.
+.SS \fBclassType\fR Dummy::myNo () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 83 of file item.C.
+.SS void Dummy::operator delete (void * toFree)
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 78 of file item.C.
+.SS void Dummy::print (ostream & out) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 95 of file item.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,140 @@
+\subsection{Div\-Table  Class Reference}
+\label{DivTable}\index{DivTable@{Div\-Table}}
+{\tt \#include $<$div\-Table.h$>$}
+
+Inheritance diagram for Div\-Table:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{6cm}
+\epsfbox{class_divtable.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Div\-Table} ( char $\ast$file\-Name = "div.tab", char $\ast$file\-Name2="seadif/div.tab" )
+\item 
+{\bf $\sim$Div\-Table} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{DivTable_a0}
+\index{DivTable@{Div\-Table}!DivTable@{DivTable}}
+\index{DivTable@{DivTable}!DivTable@{Div\-Table}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Div\-Table::Div\-Table (char $\ast$ {\em file\-Name} = "div.tab", char $\ast$ {\em file\-Name2} = "seadif/div.tab")}\hfill
+
+
+
+Definition at line 12 of file div\-Table.C.\small\begin{verbatim}00012 :Array(10,0,10)
+00013 //
+00014 // Constructor : reads our table from file.
+00015 {
+00016   int i,x,y;
+00017   char c;
+00018   ifstream ins;
+00019 
+00020   ins.open(fileName);
+00021   if (!ins) ins.open(fileName2);
+00022 
+00023   if(!ins)
+00024   {
+00025     cerr << "\n WARNING : Cannot find file " << fileName << " or " << fileName2 << "\n";
+00026     cerr << "   The default way of dividing a rectangle into n \n";
+00027     cerr << "   parts  will be used .. " << endl << endl;
+00028     
+00029     Point *newDiv= new Point(2,2);
+00030     addAt( *newDiv ,4);
+00031 
+00032     newDiv = new Point(3,3);
+00033     addAt( *newDiv ,9);
+00034 
+00035     newDiv = new Point(4,4);
+00036     addAt( *newDiv ,16);
+00037 
+00038     newDiv = new Point(5,4);
+00039     addAt( *newDiv ,20);
+00040 
+00041     newDiv = new Point(6,4);
+00042     addAt( *newDiv ,24);
+00043 
+00044     newDiv = new Point(8,4);
+00045     addAt( *newDiv ,32);
+00046 
+00047     newDiv = new Point(16,4);
+00048     addAt( *newDiv ,64);
+00049 
+00050     newDiv = new Point(16,8);
+00051     addAt( *newDiv ,128);
+00052 
+00053     newDiv = new Point(32,8);
+00054     addAt( *newDiv ,256);
+00055 
+00056     newDiv = new Point(64,8);
+00057     addAt( *newDiv ,512);
+00058 
+00059 
+00060   }
+00061   while ( ins) 
+00062   {
+00063     ins >> i >> x >> y;
+00064     if (ins.rdstate() & ios::eofbit)
+00065       return;
+00066 
+00067     if (!ins)
+00068       usrErr("DivTable::DivTable",EINPDAT);
+00069     
+00070     //  now skip everything to the end of the line
+00071 
+00072     while(ins.get(c) && c!='\n');
+00073 
+00074     Point &newDiv= *new Point(x,y);
+00075     addAt( newDiv ,i);
+00076   }
+00077   
+00078 }
+\end{verbatim}\normalsize 
+\label{DivTable_a1}
+\index{DivTable@{Div\-Table}!~DivTable@{$\sim$DivTable}}
+\index{~DivTable@{$\sim$DivTable}!DivTable@{Div\-Table}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Div\-Table::$\sim$Div\-Table ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 27 of file div\-Table.h.\small\begin{verbatim}00027 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{DivTable_a3}
+\index{DivTable@{Div\-Table}!myName@{myName}}
+\index{myName@{myName}!DivTable@{Div\-Table}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Div\-Table::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Array} {\rm (p.\,\pageref{Array_a6})}.
+
+Definition at line 30 of file div\-Table.h.\small\begin{verbatim}00030 { return "DivTab"; }
+\end{verbatim}\normalsize 
+\label{DivTable_a2}
+\index{DivTable@{Div\-Table}!myNo@{myNo}}
+\index{myNo@{myNo}!DivTable@{Div\-Table}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Div\-Table::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Array} {\rm (p.\,\pageref{Array_a5})}.
+
+Definition at line 29 of file div\-Table.h.\small\begin{verbatim}00029 { return DivTabClass; }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf div\-Table.h}\item 
+{\bf div\-Table.C}\end{CompactItemize}

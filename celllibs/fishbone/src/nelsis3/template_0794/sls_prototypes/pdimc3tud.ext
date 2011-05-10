@@ -1,0 +1,49 @@
+/* * * * * * * * * * * * * * * * 
+ *
+ * This is the file 'pdimpm25d.ext'.
+ * Contents: The external sls-declarations of all cells
+ *           in the portable digital library 'pdimpm25d'.
+ *	     (gate array version nov 1993)
+ * Purpose:  To determine the terminal configuration of the
+ *           library cells and to include in your sls-description file.
+ * Created:  Jul 1st 1994 by Henk Smit
+ * Modified: ..
+ *
+ * This file was copied into this project directory by 'mkopr'
+ */
+
+extern network an02d1 (terminal A1, A2, Z, vss, vdd)
+extern network an03d1 (terminal A1, A2, A3, Z, vss, vdd)
+extern network an04d1 (terminal A1, A2, A3, A4, Z, vss, vdd)
+extern network ao01d1 (terminal A1, A2, B1, B2, ZN, vss, vdd)
+extern network ao04d1 (terminal A1, A2, B, ZN, vss, vdd)
+extern network ao05d1 (terminal A1, A2, B, C, ZN, vss, vdd)
+extern network dfctnb (terminal D, CP, CDN, QN, Q, vss, vdd)
+extern network dfntnb (terminal D, CP, QN, Q, vss, vdd)
+extern network in01d1 (terminal I, ZN, vss, vdd)
+extern network in01d2 (terminal I, ZN, vss, vdd)
+extern network in01d3 (terminal I, ZN, vss, vdd)
+extern network in01d4 (terminal I, ZN, vss, vdd)
+extern network it01d1 (terminal I, OE, ZN, vss, vdd)
+extern network it02d1 (terminal I, OEN, ZN, vss, vdd)
+extern network lacfnb (terminal D, EN, CDN, QN, Q, vss, vdd)
+extern network lactnb (terminal D, E, CDN, QN, Q, vss, vdd)
+extern network mfctnb (terminal DA, DB, CP, SA, CDN, QN, Q, vss, vdd)
+extern network mfntnb (terminal DA, DB, CP, SA, QN, Q, vss, vdd)
+extern network mx21d1 (terminal I0, I1, S, Z, vss, vdd)
+extern network nd02d1 (terminal A1, A2, ZN, vss, vdd)
+extern network nd03d1 (terminal A1, A2, A3, ZN, vss, vdd)
+extern network nd04d1 (terminal A1, A2, A3, A4, ZN, vss, vdd)
+extern network ni01d2 (terminal I, Z, vss, vdd)
+extern network ni01d3 (terminal I, Z, vss, vdd)
+extern network nr02d1 (terminal A1, A2, ZN, vss, vdd)
+extern network nr03d1 (terminal A1, A2, A3, ZN, vss, vdd)
+extern network nr04d1 (terminal A1, A2, A3, A4, ZN, vss, vdd)
+extern network oa01d1 (terminal A1, A2, B1, B2, ZN, vss, vdd)
+extern network oa04d1 (terminal A1, A2, B, ZN, vss, vdd)
+extern network oa05d1 (terminal A1, A2, B, C, ZN, vss, vdd)
+extern network or02d1 (terminal A1, A2, Z, vss, vdd)
+extern network or03d1 (terminal A1, A2, A3, Z, vss, vdd)
+extern network or04d1 (terminal A1, A2, A3, A4, Z, vss, vdd)
+extern network xn02d1 (terminal A1, A2, ZN, vss, vdd)
+extern network xo02d1 (terminal A1, A2, Z, vss, vdd)

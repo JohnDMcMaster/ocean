@@ -1,0 +1,510 @@
+/* 
+ *
+ * This is the file 'image.seadif'
+ * Contents: Image description for the the 'gatearray' image. This image
+ *           originates from Philips. It is a typical old-fashoined gate-array.
+ *           The process is 1-layer.
+ * Purpose:  All OCEAN tools read this file to get process and image 
+ *           specific information. This file is read by fish, sea nelsea, 
+ *           ghoti, madonna, trout and seadali. You may edit this file to 
+ *           change the behaviour of (for instance) the router. In that 
+ *           case you can copy a version of this file into your process 
+ *           directory. All OCEAN tools will read your local image 
+ *           description file in that case.
+ * Created:  by Patrick Groeneveld, Paul Stravers and Henk Smit
+ *           march 1993
+ *
+ * (c) The OCEAN/NELSIS Sea-of-Gates design system 
+ * Delft University of Technology
+ *
+ */
+
+(Seadif "Image description file for gatearray image"
+
+   /*
+    * Set the size of an empty image if you press 'fish'
+    */
+   (ChipDescription chip
+      (ChipSize 6 3)
+   )
+ 
+
+   /*
+    * blocks which describes an image
+    */
+   (ImageDescription pm25
+      (Technology gatearray
+	 (DesignRules
+	    /* 
+	     * Specify data about routing layers. First metal layer
+             * (which is closest to the solicon) has index 0:
+	     *    -1  <- polysilicon/diffusion
+             *     0  <- metal 1
+             *     1  <- metal 2
+             *     2  <- metal 3
+             *    etc.
+             * Take as many layers as you want, we we only have 1 here.
+             */
+            (NumberOfLayers 1)        /* set the number of metal layers */
+	    /* style of the layers (not used by fish): */
+            (WireOrient 0 horizontal)
+            (WireWidth 0 6)           /* set wire width of the layers */
+            (WireMaskName 0 "in")     /* layer0 name = in */
+            (DummyMaskName "bb")      /* dummy mask */
+	    /* cell name of via between image and layer 1: */
+            (ViaCellName -1 0 "Via_ps_in")
+	    /* mask names of vias between core and layer 1: */
+            (ViaMaskName -1 0 "co")
+         )             
+      )
+
+         
+      /*
+       * description of the grid-image 
+       */
+      (GridImage
+         /*
+          * declaration of the image grid. 
+          * This image is a rectangular grid which is repeated 
+          *
+	  * Set the size of a single grid cell in grid points in
+	  * fishbone this is 12 (x) by 21 (y), which means that the
+	  * gridpositions range from 0,0 to 11, 20
+	  */
+         (GridSize  12 21
+	    /*
+	     * Specify how the gridpoints map to the layout
+	     * coordinates In this case, for instance, the grid point
+	     * (0, 1) will map to point (14, 6) lambda in the actual
+	     * image. In this way it is possible to specify a
+	     * non-regular grid.
+             */ 
+            (GridMapping horizontal      
+                14 28 42 56 70 84 98 112 126 140 154 168) 
+            (GridMapping vertical 
+                  6  18  30  42  54  66  80  93 
+                107 119 132 146 159 173 
+                185 199 211 223 235 247 259)
+
+	    /* 
+	     * This image has a complicated non-regular grid.  We use
+	     * a special mapping over active area (rows 7 to 13) to
+	     * match the grid...
+	     */
+            (OverlayMapping
+               horizontal 
+               7 13 
+               14 20 37 53 70 84 98 115 131 140 154 168)  
+
+            /* 
+             * implicit power lines in the image
+             *
+             * (PowerLine <orient> <ident> <layer_no> <row or column number>) 
+	     */
+            (PowerLine horizontal vss 0 7 ) 
+            (PowerLine horizontal vdd 0 13) 
+
+	    /* overlap of the repeated image in x and y direction: */
+	    (ImageOverlap 0 0)
+         )
+
+	 (Axis
+	    /* 
+	     * Mirror axis information for the detailed placer. Format is
+	     * (MirrorAxis x1 x2 y1 y2) where (x1,y1) and (x2,y2) are two
+	     * coordinates thru which the mirror axis runs. NOTE: because
+	     * a mirror axis can run just IN BETWEEN two gridpoints, the
+	     * arguments of MirrorAxis specify HALF GRIDPOINT UNITS. E.g.
+	     * a mirror axis running thru the gridpoints (1,1) and (5,5)
+	     * would be specified as (MirrorAxis 2 10 2 10).
+	     */
+	    (MirrorAxis 10 10  0 40)
+	    (MirrorAxis 22 22  0 40)
+	 ) 
+
+         /*
+          * Specifies the connections/feeds between grid points.
+          */
+         (GridConnectList
+
+            /*
+             * Default vias are allowed at EACH grid point between metal
+             * layers (layer no >= 0) and at NO gridpoint to the core
+             * (from layer 0 to -1).  Using the 'block' statement it is
+             * possible to remove edges from the graph and therefore also
+             * possible vias.
+             */
+	    /* no connection between pos (0,7,0) and (0,8,0)
+	     * and (0,12,0) and (0,13,0): */
+            (Block 0 7 0 0 8 0) (Block 0 12 0 0 13 0)
+	    (Block 1 7 0 1 8 0) (Block 1 8 0 1 9 0) (Block 1 9 0 1 10 0)
+	    (Block 1 10 0 1 11 0) (Block 1 11 0 1 12 0) (Block 1 12 0 1 13 0)
+	    (Block 2 7 0 2 8 0) (Block 2 8 0 2 9 0) (Block 2 9 0 2 10 0)
+	    (Block 2 10 0 2 11 0) (Block 2 11 0 2 12 0) (Block 2 12 0 2 13 0)
+	    (Block 3 7 0 3 8 0) (Block 3 8 0 3 9 0) (Block 3 9 0 3 10 0)
+	    (Block 3 10 0 3 11 0) (Block 3 11 0 3 12 0) (Block 3 12 0 3 13 0)
+	    (Block 4 7 0 4 8 0) (Block 4 8 0 4 9 0) (Block 4 9 0 4 10 0)
+	    (Block 4 10 0 4 11 0) (Block 4 11 0 4 12 0) (Block 4 12 0 4 13 0)
+	    (Block 5 7 0 5 8 0) (Block 5 8 0 5 9 0) (Block 5 9 0 5 10 0)
+	    (Block 5 10 0 5 11 0) (Block 5 11 0 5 12 0) (Block 5 12 0 5 13 0)
+	    (Block 6 7 0 6 8 0) (Block 6 8 0 6 9 0) (Block 6 9 0 6 10 0)
+	    (Block 6 10 0 6 11 0) (Block 6 11 0 6 12 0) (Block 6 12 0 6 13 0)
+	    (Block 7 7 0 7 8 0) (Block 7 8 0 7 9 0) (Block 7 9 0 7 10 0)
+	    (Block 7 10 0 7 11 0) (Block 7 11 0 7 12 0) (Block 7 12 0 7 13 0)
+	    (Block 8 7 0 8 8 0) (Block 8 8 0 8 9 0) (Block 8 9 0 8 10 0)
+	    (Block 8 10 0 8 11 0) (Block 8 11 0 8 12 0) (Block 8 12 0 8 13 0)
+	    (Block 9 7 0 9 8 0) (Block 9 8 0 9 9 0) (Block 9 9 0 9 10 0)
+	    (Block 9 10 0 9 11 0) (Block 9 11 0 9 12 0) (Block 9 12 0 9 13 0)
+            (Block 10 7 0 10 8 0) (Block 10 12 0 10 13 0)
+            (Block 11 7 0 11 8 0) (Block 11 12 0 11 13 0) 
+
+               
+	    (Block 0 8 0 1 8 0) (Block 1 8 0 2 8 0) (Block 2 8 0 3 8 0)
+	    (Block 3 8 0 4 8 0) (Block 4 8 0 5 8 0) (Block 5 8 0 6 8 0)
+	    (Block 6 8 0 7 8 0) (Block 7 8 0 8 8 0) (Block 8 8 0 9 8 0)
+	    (Block 9 8 0 10 8 0) (Block 10 8 0 11 8 0)
+	    (Block 0 9 0 1 9 0) (Block 1 9 0 2 9 0) (Block 2 9 0 3 9 0)
+	    (Block 3 9 0 4 9 0) (Block 4 9 0 5 9 0) (Block 5 9 0 6 9 0)
+	    (Block 6 9 0 7 9 0) (Block 7 9 0 8 9 0) (Block 8 9 0 9 9 0)
+	    (Block 9 9 0 10 9 0) (Block 10 9 0 11 9 0)
+	    (Block 0 10 0 1 10 0) (Block 1 10 0 2 10 0) (Block 2 10 0 3 10 0)
+	    (Block 3 10 0 4 10 0) (Block 4 10 0 5 10 0)
+	    (Block 5 10 0 6 10 0) (Block 6 10 0 7 10 0) (Block 7 10 0 8 10 0)
+	    (Block 8 10 0 9 10 0) (Block 9 10 0 10 10 0) (Block 10 10 0 11 10 0)
+	    (Block 0 11 0 1 11 0) (Block 1 11 0 2 11 0) (Block 2 11 0 3 11 0)
+	    (Block 3 11 0 4 11 0) (Block 4 11 0 5 11 0)
+	    (Block 5 11 0 6 11 0) (Block 6 11 0 7 11 0) (Block 7 11 0 8 11 0)
+	    (Block 8 11 0 9 11 0) (Block 9 11 0 10 11 0) (Block 10 11 0 11 11 0)
+	    (Block 0 12 0 1 12 0) (Block 1 12 0 2 12 0) (Block 2 12 0 3 12 0)
+	    (Block 3 12 0 4 12 0) (Block 4 12 0 5 12 0)
+	    (Block 5 12 0 6 12 0) (Block 6 12 0 7 12 0) (Block 7 12 0 8 12 0)
+	    (Block 8 12 0 9 12 0) (Block 9 12 0 10 12 0) (Block 10 12 0 11 12 0)
+
+            /*
+             * Declare the internal feeds of the image (e.g. feeds
+             * through a poly wire).  This declaration also implies that
+             * it is possible to make a via at a certain grid position.
+             * Therefore the cell name of the required via must be given
+             * at each feed position. The via cell name must be declared
+             * previously in the technology block using the 'ViaMaskName'
+             * statement.  We recoqnize two types of feeds: UniversalFeed
+             * and RestrictedFeed.  For fish there is no difference, but
+             * for the router there is.  The router can use universal
+             * feeds for aribitrary wire segments.  Restricted feeds have
+             * a limited use: they can only indicate that a set of
+             * gridpoints (in the image = layer -1) are electrically
+             * equivalent.  In the example image the the poly gates can
+             * serve as universal feeds, while the diffusion source and
+             * drain cannot.  A feed position can also point to a
+             * position outside the size of the image cell.  Fish does
+             * not use the feed information, but it needs a via cell name
+             * for each position where a connection to layer -1 can be
+             * made.  It is allowed to add dummy feeds: e.g.
+             *    (UniversalFeed (Feed "Via_ps_in" 0 1))
+             * indicates that at 0,1 a via to core can be placed, with
+             * name Via_ps_in.
+             */
+
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 0   0) (Feed "Via_ps_in" 0   1)
+	       (Feed "Via_ps_in" 0   2) (Feed "Via_ps_in" 0   3)
+	       (Feed "Via_ps_in" 0   4) (Feed "Via_ps_in" 0   5)
+	       (Feed "Via_ps_in" 0  -1) (Feed "Via_ps_in" 0  -2)
+	       (Feed "Via_ps_in" 0  -3) (Feed "Via_ps_in" 0  -4)
+	       (Feed "Via_ps_in" 0  -5) (Feed "Via_ps_in" 0  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 1   0) (Feed "Via_ps_in" 1   1)
+	       (Feed "Via_ps_in" 1   2) (Feed "Via_ps_in" 1   3)
+	       (Feed "Via_ps_in" 1   4) (Feed "Via_ps_in" 1   5)
+	       (Feed "Via_ps_in" 1  -1) (Feed "Via_ps_in" 1  -2)
+	       (Feed "Via_ps_in" 1  -3) (Feed "Via_ps_in" 1  -4)
+	       (Feed "Via_ps_in" 1  -5) (Feed "Via_ps_in" 1  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 2   0) (Feed "Via_ps_in" 2   1)
+	       (Feed "Via_ps_in" 2   2) (Feed "Via_ps_in" 2   3)
+	       (Feed "Via_ps_in" 2   4) (Feed "Via_ps_in" 2   5)
+	       (Feed "Via_ps_in" 2  -1) (Feed "Via_ps_in" 2  -2)
+	       (Feed "Via_ps_in" 2  -3) (Feed "Via_ps_in" 2  -4)
+	       (Feed "Via_ps_in" 2  -5) (Feed "Via_ps_in" 2  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 3   0) (Feed "Via_ps_in" 3   1)
+	       (Feed "Via_ps_in" 3   2) (Feed "Via_ps_in" 3   3)
+	       (Feed "Via_ps_in" 3   4) (Feed "Via_ps_in" 3   5)
+	       (Feed "Via_ps_in" 3   6) (Feed "Via_ps_in" 3  -1)
+	       (Feed "Via_ps_in" 3  -2) (Feed "Via_ps_in" 3  -3)
+	       (Feed "Via_ps_in" 3  -4) (Feed "Via_ps_in" 3  -5)
+	       (Feed "Via_ps_in" 3  -6) (Feed "Via_ps_in" 3  -7))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 4   0) (Feed "Via_ps_in" 4   1)
+	       (Feed "Via_ps_in" 4   2) (Feed "Via_ps_in" 4   3)
+	       (Feed "Via_ps_in" 4   4) (Feed "Via_ps_in" 4   5)
+	       (Feed "Via_ps_in" 4  -1) (Feed "Via_ps_in" 4  -2)
+	       (Feed "Via_ps_in" 4  -3) (Feed "Via_ps_in" 4  -4)
+	       (Feed "Via_ps_in" 4  -5) (Feed "Via_ps_in" 4  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 5   0) (Feed "Via_ps_in" 5   1)
+	       (Feed "Via_ps_in" 5   2) (Feed "Via_ps_in" 5   3)
+	       (Feed "Via_ps_in" 5   4) (Feed "Via_ps_in" 5   5)
+	       (Feed "Via_ps_in" 5   6) (Feed "Via_ps_in" 5  -1)
+	       (Feed "Via_ps_in" 5  -2) (Feed "Via_ps_in" 5  -3)
+	       (Feed "Via_ps_in" 5  -4) (Feed "Via_ps_in" 5  -5)
+	       (Feed "Via_ps_in" 5  -6) (Feed "Via_ps_in" 5  -7)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 6   0) (Feed "Via_ps_in" 6   1)
+	       (Feed "Via_ps_in" 6   2) (Feed "Via_ps_in" 6   3)
+	       (Feed "Via_ps_in" 6   4) (Feed "Via_ps_in" 6   5)
+	       (Feed "Via_ps_in" 6  -1) (Feed "Via_ps_in" 6  -2)
+	       (Feed "Via_ps_in" 6  -3) (Feed "Via_ps_in" 6  -4)
+	       (Feed "Via_ps_in" 6  -5) (Feed "Via_ps_in" 6  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 7   0) (Feed "Via_ps_in" 7   1)
+	       (Feed "Via_ps_in" 7   2) (Feed "Via_ps_in" 7   3)
+	       (Feed "Via_ps_in" 7   4) (Feed "Via_ps_in" 7   5)
+	       (Feed "Via_ps_in" 7   6) (Feed "Via_ps_in" 7  -1)
+	       (Feed "Via_ps_in" 7  -2) (Feed "Via_ps_in" 7  -3)
+	       (Feed "Via_ps_in" 7  -4) (Feed "Via_ps_in" 7  -5)
+	       (Feed "Via_ps_in" 7  -6) (Feed "Via_ps_in" 7  -7))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 8   0) (Feed "Via_ps_in" 8   1)
+	       (Feed "Via_ps_in" 8   2) (Feed "Via_ps_in" 8   3)
+	       (Feed "Via_ps_in" 8   4) (Feed "Via_ps_in" 8   5)
+	       (Feed "Via_ps_in" 8  -1) (Feed "Via_ps_in" 8  -2)
+	       (Feed "Via_ps_in" 8  -3) (Feed "Via_ps_in" 8  -4)
+	       (Feed "Via_ps_in" 8  -5) (Feed "Via_ps_in" 8  -6)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 9   0) (Feed "Via_ps_in" 9   1)
+	       (Feed "Via_ps_in" 9   2) (Feed "Via_ps_in" 9   3)
+	       (Feed "Via_ps_in" 9   4) (Feed "Via_ps_in" 9   5)
+	       (Feed "Via_ps_in" 9  -1) (Feed "Via_ps_in" 9  -2)
+	       (Feed "Via_ps_in" 9  -3) (Feed "Via_ps_in" 9  -4)
+	       (Feed "Via_ps_in" 9  -5) (Feed "Via_ps_in" 9  -6)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 10   0) (Feed "Via_ps_in" 10   1)
+	       (Feed "Via_ps_in" 10   2) (Feed "Via_ps_in" 10   3)
+	       (Feed "Via_ps_in" 10   4) (Feed "Via_ps_in" 10   5)
+	       (Feed "Via_ps_in" 10  -1) (Feed "Via_ps_in" 10  -2)
+	       (Feed "Via_ps_in" 10  -3) (Feed "Via_ps_in" 10  -4)
+	       (Feed "Via_ps_in" 10  -5) (Feed "Via_ps_in" 10  -6))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 11   0) (Feed "Via_ps_in" 11   1)
+	       (Feed "Via_ps_in" 11   2) (Feed "Via_ps_in" 11   3)
+	       (Feed "Via_ps_in" 11   4) (Feed "Via_ps_in" 11   5)
+	       (Feed "Via_ps_in" 11   6) (Feed "Via_ps_in" 11  -1)
+	       (Feed "Via_ps_in" 11  -2) (Feed "Via_ps_in" 11  -3)
+	       (Feed "Via_ps_in" 11  -4) (Feed "Via_ps_in" 11  -5)
+	       (Feed "Via_ps_in" 11  -6) (Feed "Via_ps_in" 11  -7))
+
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 0   20) (Feed "Via_ps_in" 0   19)
+	       (Feed "Via_ps_in" 0   18) (Feed "Via_ps_in" 0   17)
+	       (Feed "Via_ps_in" 0   16) (Feed "Via_ps_in" 0   15)
+	       (Feed "Via_ps_in" 0   21) (Feed "Via_ps_in" 0   22)
+	       (Feed "Via_ps_in" 0   23) (Feed "Via_ps_in" 0   24)
+	       (Feed "Via_ps_in" 0   25) (Feed "Via_ps_in" 0   26)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 1   20) (Feed "Via_ps_in" 1   19)
+	       (Feed "Via_ps_in" 1   18) (Feed "Via_ps_in" 1   17)
+	       (Feed "Via_ps_in" 1   16) (Feed "Via_ps_in" 1   15)
+	       (Feed "Via_ps_in" 1   21) (Feed "Via_ps_in" 1   22)
+	       (Feed "Via_ps_in" 1   23) (Feed "Via_ps_in" 1   24)
+	       (Feed "Via_ps_in" 1   25) (Feed "Via_ps_in" 1   26))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 2   20) (Feed "Via_ps_in" 2   19)
+	       (Feed "Via_ps_in" 2   18) (Feed "Via_ps_in" 2   17)
+	       (Feed "Via_ps_in" 2   16) (Feed "Via_ps_in" 2   15)
+	       (Feed "Via_ps_in" 2   21) (Feed "Via_ps_in" 2   22)
+	       (Feed "Via_ps_in" 2   23) (Feed "Via_ps_in" 2   24)
+	       (Feed "Via_ps_in" 2   25) (Feed "Via_ps_in" 2   26))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 3   20) (Feed "Via_ps_in" 3   19)
+	       (Feed "Via_ps_in" 3   18) (Feed "Via_ps_in" 3   17)
+	       (Feed "Via_ps_in" 3   16) (Feed "Via_ps_in" 3   15)
+	       (Feed "Via_ps_in" 3   14) (Feed "Via_ps_in" 3   21)
+	       (Feed "Via_ps_in" 3   22) (Feed "Via_ps_in" 3   23)
+	       (Feed "Via_ps_in" 3   24) (Feed "Via_ps_in" 3   25)
+	       (Feed "Via_ps_in" 3   26) (Feed "Via_ps_in" 3   27))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 4   20) (Feed "Via_ps_in" 4   19)
+	       (Feed "Via_ps_in" 4   18) (Feed "Via_ps_in" 4   17)
+	       (Feed "Via_ps_in" 4   16) (Feed "Via_ps_in" 4   15)
+	       (Feed "Via_ps_in" 4   21) (Feed "Via_ps_in" 4   22)
+	       (Feed "Via_ps_in" 4   23) (Feed "Via_ps_in" 4   24)
+	       (Feed "Via_ps_in" 4   25) (Feed "Via_ps_in" 4   26)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 5   20) (Feed "Via_ps_in" 5   19)
+	       (Feed "Via_ps_in" 5   18) (Feed "Via_ps_in" 5   17)
+	       (Feed "Via_ps_in" 5   16) (Feed "Via_ps_in" 5   15)
+	       (Feed "Via_ps_in" 5   14) (Feed "Via_ps_in" 5   21)
+	       (Feed "Via_ps_in" 5   22) (Feed "Via_ps_in" 5   23)
+	       (Feed "Via_ps_in" 5   24) (Feed "Via_ps_in" 5   25)
+	       (Feed "Via_ps_in" 5   26) (Feed "Via_ps_in" 5   27)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 6   20) (Feed "Via_ps_in" 6   19)
+	       (Feed "Via_ps_in" 6   18) (Feed "Via_ps_in" 6   17)
+	       (Feed "Via_ps_in" 6   16) (Feed "Via_ps_in" 6   15)
+	       (Feed "Via_ps_in" 6   21) (Feed "Via_ps_in" 6   22)
+	       (Feed "Via_ps_in" 6   23) (Feed "Via_ps_in" 6   24)
+	       (Feed "Via_ps_in" 6   25) (Feed "Via_ps_in" 6   26))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 7   20) (Feed "Via_ps_in" 7   19)
+	       (Feed "Via_ps_in" 7   18) (Feed "Via_ps_in" 7   17)
+	       (Feed "Via_ps_in" 7   16) (Feed "Via_ps_in" 7   15)
+	       (Feed "Via_ps_in" 7   14) (Feed "Via_ps_in" 7   21)
+	       (Feed "Via_ps_in" 7   22) (Feed "Via_ps_in" 7   23)
+	       (Feed "Via_ps_in" 7   24) (Feed "Via_ps_in" 7   25)
+	       (Feed "Via_ps_in" 7   26) (Feed "Via_ps_in" 7   27))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 8   20) (Feed "Via_ps_in" 8   19)
+	       (Feed "Via_ps_in" 8   18) (Feed "Via_ps_in" 8   17)
+	       (Feed "Via_ps_in" 8   16) (Feed "Via_ps_in" 8   15)
+	       (Feed "Via_ps_in" 8   21) (Feed "Via_ps_in" 8   22)
+	       (Feed "Via_ps_in" 8   23) (Feed "Via_ps_in" 8   24)
+	       (Feed "Via_ps_in" 8   25) (Feed "Via_ps_in" 8   26)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 9   20) (Feed "Via_ps_in" 9   19)
+	       (Feed "Via_ps_in" 9   18) (Feed "Via_ps_in" 9   17)
+	       (Feed "Via_ps_in" 9   16) (Feed "Via_ps_in" 9   15)
+	       (Feed "Via_ps_in" 9   21) (Feed "Via_ps_in" 9   22)
+	       (Feed "Via_ps_in" 9   23) (Feed "Via_ps_in" 9   24)
+	       (Feed "Via_ps_in" 9   25) (Feed "Via_ps_in" 9   26)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 10  20) (Feed "Via_ps_in" 10  19)
+	       (Feed "Via_ps_in" 10  18) (Feed "Via_ps_in" 10  17)
+	       (Feed "Via_ps_in" 10  16) (Feed "Via_ps_in" 10  15)
+	       (Feed "Via_ps_in" 10  21) (Feed "Via_ps_in" 10  22)
+	       (Feed "Via_ps_in" 10  23) (Feed "Via_ps_in" 10  24)
+	       (Feed "Via_ps_in" 10  25) (Feed "Via_ps_in" 10  26))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 11  20) (Feed "Via_ps_in" 11  19)
+	       (Feed "Via_ps_in" 11  18) (Feed "Via_ps_in" 11  17)
+	       (Feed "Via_ps_in" 11  16) (Feed "Via_ps_in" 11  15)
+	       (Feed "Via_ps_in" 11  14) (Feed "Via_ps_in" 11  21)
+	       (Feed "Via_ps_in" 11  22) (Feed "Via_ps_in" 11  23)
+	       (Feed "Via_ps_in" 11  24) (Feed "Via_ps_in" 11  25)
+	       (Feed "Via_ps_in" 11  26) (Feed "Via_ps_in" 11  27))
+
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 0  6) (Feed "Via_ps_in" 0  8)
+	       (Feed "Via_ps_in" 0  9) (Feed "Via_ps_in" 0 10)
+	       (Feed "Via_ps_in" 0 11) (Feed "Via_ps_in" 0 12)
+	       (Feed "Via_ps_in" 0 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 1  6) (Feed "Via_ps_in" 1 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 2  6) (Feed "Via_ps_in" 2 10)
+	       (Feed "Via_ps_in" 3 10) (Feed "Via_ps_in" 3 11))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 2 11) (Feed "Via_ps_in" 2 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 4  6) (Feed "Via_ps_in" 4 10))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 4  11) (Feed "Via_ps_in" 4 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 6 6) (Feed "Via_ps_in" 6 10))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 6  11) (Feed "Via_ps_in" 6 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 8 11) (Feed "Via_ps_in" 8 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 8  6) (Feed "Via_ps_in" 8 10)
+	       (Feed "Via_ps_in" 7 10) (Feed "Via_ps_in" 7 11))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 9  6) (Feed "Via_ps_in" 9 14))
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 10  6) (Feed "Via_ps_in" 10  8)
+	       (Feed "Via_ps_in" 10  9) (Feed "Via_ps_in" 10 10)
+	       (Feed "Via_ps_in" 10 11) (Feed "Via_ps_in" 10 12)
+	       (Feed "Via_ps_in" 10 14)) 
+	    (UniversalFeed
+	       (Feed "Via_ps_in" 11  8) (Feed "Via_ps_in" 11  9)
+	       (Feed "Via_ps_in" 11 10) (Feed "Via_ps_in" 11 11)
+	       (Feed "Via_ps_in" 11 12)) 
+
+            (RestrictedFeed (Feed "Via_ps_in" 2 12) (Feed "Via_ps_in" 2 13))
+
+            (RestrictedFeed (Feed "Via_ps_in" 3 12) (Feed "Via_ps_in" 3 13))
+
+            (RestrictedFeed (Feed "Via_ps_in" 5 8) (Feed "Via_ps_in" 5 9))
+            (RestrictedFeed (Feed "Via_ps_in" 5 12) (Feed "Via_ps_in" 5 13))
+
+            (RestrictedFeed (Feed "Via_ps_in" 7 12) (Feed "Via_ps_in" 7 13))
+
+
+            (RestrictedFeed (Feed "Via_ps_in" 8 12) (Feed "Via_ps_in" 8 13))
+         )
+
+
+         /*
+          * cost parameters to steer the router, not used by fish
+          */
+         (GridCostList
+	    /* <cost> <vector> <startpoint_range> <endpoint_range> */
+
+            /* basic metal1 cost: 10 per unit */
+	    (GridCost 10   1  0 0  0 0 0  11 20 0)
+	    (GridCost 10  -1  0 0  0 0 0  11 20 0)
+	    (GridCost 12   0  1 0  0 0 0  11 20 0)
+	    (GridCost 12   0 -1 0  0 0 0  11 20 0) 
+
+            /* protect areas over terminals */
+	    (GridCost 100  1 0 0  0  5 0  11  6 0)
+	    (GridCost 100 -1 0 0  0  5 0  11  6 0)    
+	    (GridCost 100  1 0 0  0 14 0  11 15 0)
+	    (GridCost 100 -1 0 0  0 14 0  11 15 0)         
+
+
+            /* high cost of an adjacent feed */
+	    (FeedCost 18    0  1 0     0 0 0    11 20 0)
+	    (FeedCost 18    0 -1 0     0 0 0    11 20 0) 
+	    (FeedCost 20    0  2 0     0 0 0    11 20 0)
+	    (FeedCost 20    0 -2 0     0 0 0    11 20 0) 
+	    (FeedCost 22    0  3 0     0 0 0    11 20 0)
+	    (FeedCost 22    0 -3 0     0 0 0    11 20 0) 
+	    (FeedCost 24    0  4 0     0 0 0    11 20 0)
+	    (FeedCost 24    0 -4 0     0 0 0    11 20 0) 
+	    (FeedCost 26    0  5 0     0 0 0    11 20 0)
+	    (FeedCost 26    0 -5 0     0 0 0    11 20 0)
+	    (FeedCost 28    0  6 0     0 0 0    11 20 0)
+	    (FeedCost 28    0 -6 0     0 0 0    11 20 0)
+	    (FeedCost 30    0  7 0     0 0 0    11 20 0)
+	    (FeedCost 30    0 -7 0     0 0 0    11 20 0) 
+	    (FeedCost 32    0  8 0     0 0 0    11 20 0)
+	    (FeedCost 32    0 -8 0     0 0 0    11 20 0) 
+	    (FeedCost 34    0  9 0     0 0 0    11 20 0)
+	    (FeedCost 34    0 -9 0     0 0 0    11 20 0) 
+	    (FeedCost 36    0  10 0    0 0 0    11 20 0)
+	    (FeedCost 36    0 -10 0    0 0 0    11 20 0) 
+	    (FeedCost 38    0  11 0    0 0 0    11 20 0)
+	    (FeedCost 38    0 -11 0    0 0 0    11 20 0) 
+	    (FeedCost 40    0  12 0    0 0 0    11 20 0)
+	    (FeedCost 40    0 -12 0    0 0 0    11 20 0) 
+	    (FeedCost 42    0  13 0    0 0 0    11 20 0)
+	    (FeedCost 42    0 -13 0    0 0 0    11 20 0) 
+ 
+	    (FeedCost 25    1  0 0     0 0 0    11 20 0)
+	    (FeedCost 25   -1  0 0     0 0 0    11 20 0) 
+            (FeedCost 25    1  1 0     0 0 0    11 20 0)
+	    (FeedCost 25    1 -1 0     0 0 0    11 20 0) 
+            (FeedCost 25   -1  1 0     0 0 0    11 20 0)
+	    (FeedCost 25   -1 -1 0     0 0 0    11 20 0) 
+         )
+      )
+
+      /*
+       * decribe the actual layout of the image cell
+       */
+      (LayoutImage      
+
+         /*
+          * currently the cell is just imported as a model-call:
+          */
+	 (LayoutModelCall "a_grid")
+
+         /* 
+          * the repetition distance in x is 168,
+          * the repetition distance in y is 265
+          */
+         (LayoutImageRepetition 168 265)
+      )
+   )
+)

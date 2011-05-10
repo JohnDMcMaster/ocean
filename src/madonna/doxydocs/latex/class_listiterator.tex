@@ -1,0 +1,177 @@
+\subsection{List\-Iterator  Class Reference}
+\label{ListIterator}\index{ListIterator@{List\-Iterator}}
+{\tt \#include $<$list.h$>$}
+
+Inheritance diagram for List\-Iterator:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_listiterator.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf List\-Iterator} ( const {\bf List}\& )
+\item 
+virtual {\bf $\sim$List\-Iterator} ()
+\item 
+virtual {\bf operator int} ()
+\item 
+virtual {\bf operator Item \&} ()
+\item 
+virtual {\bf Item}\& {\bf get} ()
+\item 
+virtual {\bf Item}\& {\bf operator++} (int)
+\item 
+virtual void {\bf restart} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf List\-Element}$\ast$ {\bf current\-Element}
+\item 
+{\bf List\-Element}$\ast$ {\bf starting\-Element}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ListIterator_a0}
+\index{ListIterator@{List\-Iterator}!ListIterator@{ListIterator}}
+\index{ListIterator@{ListIterator}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Iterator::List\-Iterator (const {\bf List} \& {\em to\-Iterate})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 79 of file list.h.\small\begin{verbatim}00080 {
+00081   currentElement = startingElement = toIterate.head;  
+00082 }
+\end{verbatim}\normalsize 
+\label{ListIterator_a1}
+\index{ListIterator@{List\-Iterator}!~ListIterator@{$\sim$ListIterator}}
+\index{~ListIterator@{$\sim$ListIterator}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Iterator::$\sim$List\-Iterator ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 119 of file list.C.\small\begin{verbatim}00120 {
+00121 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{ListIterator_a4}
+\index{ListIterator@{List\-Iterator}!get@{get}}
+\index{get@{get}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& List\-Iterator::get ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a4})}.
+
+Definition at line 143 of file list.C.\small\begin{verbatim}00144 {
+00145   if ( currentElement == 0 )
+00146   {
+00147     return NOITEM;
+00148   }
+00149   else
+00150   {
+00151     return ( (Item&)(*(currentElement->data)) );
+00152   }
+00153 }
+\end{verbatim}\normalsize 
+\label{ListIterator_a3}
+\index{ListIterator@{List\-Iterator}!operator Item &@{operator Item \&}}
+\index{operator Item &@{operator Item \&}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Iterator::operator {\bf Item} \& ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a3})}.
+
+Definition at line 130 of file list.C.\small\begin{verbatim}00131 {
+00132   if ( currentElement == 0 )
+00133   {
+00134     return NOITEM;
+00135   }
+00136   else
+00137   {
+00138     return ( (Item&)(*(currentElement->data)) );
+00139   }
+00140 }
+\end{verbatim}\normalsize 
+\label{ListIterator_a2}
+\index{ListIterator@{List\-Iterator}!operator int@{operator int}}
+\index{operator int@{operator int}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List\-Iterator::operator int ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a2})}.
+
+Definition at line 124 of file list.C.\small\begin{verbatim}00125 {
+00126   return currentElement != 0;
+00127 }
+\end{verbatim}\normalsize 
+\label{ListIterator_a5}
+\index{ListIterator@{List\-Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& List\-Iterator::operator++ (int)\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a5})}.
+
+Definition at line 156 of file list.C.\small\begin{verbatim}00157 {
+00158   ListElement *trailer = currentElement;
+00159   
+00160   if ( currentElement != 0 )
+00161   {
+00162     currentElement = currentElement->next;
+00163     return ( (Item&)(*(trailer->data)) );
+00164   }
+00165   else 
+00166   {
+00167     return NOITEM;
+00168   }
+00169   
+00170 }
+\end{verbatim}\normalsize 
+\label{ListIterator_a6}
+\index{ListIterator@{List\-Iterator}!restart@{restart}}
+\index{restart@{restart}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void List\-Iterator::restart ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box\-Iterator} {\rm (p.\,\pageref{BoxIterator_a6})}.
+
+Definition at line 173 of file list.C.
+
+Referenced by {\bf Image\-Map::critical\-Feed}().\small\begin{verbatim}00174 {
+00175   currentElement = startingElement;
+00176 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{ListIterator_o0}
+\index{ListIterator@{List\-Iterator}!currentElement@{currentElement}}
+\index{currentElement@{currentElement}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List\-Element} $\ast$ List\-Iterator::current\-Element\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 75 of file list.h.\label{ListIterator_o1}
+\index{ListIterator@{List\-Iterator}!startingElement@{startingElement}}
+\index{startingElement@{startingElement}!ListIterator@{List\-Iterator}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List\-Element} $\ast$ List\-Iterator::starting\-Element\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 76 of file list.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf list.h}\item 
+{\bf list.C}\end{CompactItemize}

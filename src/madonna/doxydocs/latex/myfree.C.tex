@@ -1,0 +1,26 @@
+\subsection{myfree.C File Reference}
+\label{myfree.C}\index{myfree.C@{myfree.C}}
+{\tt \#include $<$malloc.h$>$}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf myfree} (void $\ast$ptr)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{myfree.C_a0}
+\index{myfree.C@{myfree.C}!myfree@{myfree}}
+\index{myfree@{myfree}!myfree.C@{myfree.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void myfree (void $\ast$ {\em ptr})}\hfill
+
+
+
+Definition at line 5 of file myfree.C.\small\begin{verbatim}00006 {
+00007 #ifdef sparc
+00008    free((char *)ptr);
+00009 #else
+00010    free(ptr);
+00011 #endif
+00012 }
+\end{verbatim}\normalsize 

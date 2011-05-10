@@ -1,0 +1,194 @@
+\subsection{Item  Class Reference}
+\label{Item}\index{Item@{Item}}
+{\tt \#include $<$item.h$>$}
+
+Inheritance diagram for Item:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{5.10638cm}
+\epsfbox{class_item.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Item} ()
+\item 
+{\bf Item} ( Item\& )
+\item 
+virtual {\bf $\sim$Item} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const = 0
+\item 
+virtual char$\ast$ {\bf my\-Name} () const = 0
+\item 
+virtual int {\bf is\-Equal} ( const Item\& ) const = 0
+\item 
+void$\ast$ {\bf operator new} ( size\_\-t s )
+\item 
+void {\bf operator delete} (void$\ast$ s)
+\item 
+virtual void {\bf print} ( ostream\& ) const = 0
+\end{CompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{CompactItemize}
+\item 
+Item$\ast$ {\bf NOTHING} = (Item $\ast$)\&{\bf the\-Dummy\-Item}
+\end{CompactItemize}
+\subsubsection*{Friends}
+\begin{CompactItemize}
+\item 
+ostream\& {\bf operator$<$$<$} ( ostream\&, const Item\& )
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Item_a0}
+\index{Item@{Item}!Item@{Item}}
+\index{Item@{Item}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Item::Item ()}\hfill
+
+
+
+Definition at line 21 of file item.C.\small\begin{verbatim}00022 {
+00023    int x = 4;
+00024 }
+\end{verbatim}\normalsize 
+\label{Item_a1}
+\index{Item@{Item}!Item@{Item}}
+\index{Item@{Item}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Item::Item (Item \&)\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 37 of file item.h.\small\begin{verbatim}00037 {}
+\end{verbatim}\normalsize 
+\label{Item_a2}
+\index{Item@{Item}!~Item@{$\sim$Item}}
+\index{~Item@{$\sim$Item}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Item::$\sim$Item ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 29 of file item.C.\small\begin{verbatim}00030 {
+00031 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Item_a5}
+\index{Item@{Item}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual int Item::is\-Equal (const Item \& {\em o}) const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a12})}, {\bf Box} {\rm (p.\,\pageref{Box_a6})}, {\bf Cluster} {\rm (p.\,\pageref{Cluster_a5})}, {\bf Cri\-Net} {\rm (p.\,\pageref{CriNet_a5})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a6})}, {\bf Dummy} {\rm (p.\,\pageref{Dummy_a4})}, {\bf Pattern} {\rm (p.\,\pageref{Pattern_a4})}, and {\bf Point} {\rm (p.\,\pageref{Point_a7})}.
+
+Referenced by {\bf operator==}().\label{Item_a4}
+\index{Item@{Item}!myName@{myName}}
+\index{myName@{myName}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual char$\ast$ Item::my\-Name () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a6})}, {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a11})}, {\bf Box} {\rm (p.\,\pageref{Box_a5})}, {\bf Clst} {\rm (p.\,\pageref{Clst_a4})}, {\bf Cluster} {\rm (p.\,\pageref{Cluster_a4})}, {\bf Cri\-Candidate} {\rm (p.\,\pageref{CriCandidate_a3})}, {\bf Cri\-Net} {\rm (p.\,\pageref{CriNet_a3})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a4})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a3})}, {\bf Dummy} {\rm (p.\,\pageref{Dummy_a3})}, {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a3})}, {\bf List} {\rm (p.\,\pageref{List_a7})}, {\bf Package} {\rm (p.\,\pageref{Package_a9})}, {\bf Pattern} {\rm (p.\,\pageref{Pattern_a3})}, {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a3})}, {\bf Point} {\rm (p.\,\pageref{Point_a5})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a3})}, and {\bf Window} {\rm (p.\,\pageref{Window_a3})}.\label{Item_a3}
+\index{Item@{Item}!myNo@{myNo}}
+\index{myNo@{myNo}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf class\-Type} Item::my\-No () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a5})}, {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a10})}, {\bf Box} {\rm (p.\,\pageref{Box_a4})}, {\bf Clst} {\rm (p.\,\pageref{Clst_a3})}, {\bf Cluster} {\rm (p.\,\pageref{Cluster_a3})}, {\bf Cri\-Candidate} {\rm (p.\,\pageref{CriCandidate_a2})}, {\bf Cri\-Net} {\rm (p.\,\pageref{CriNet_a2})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a3})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a2})}, {\bf Dummy} {\rm (p.\,\pageref{Dummy_a2})}, {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a2})}, {\bf List} {\rm (p.\,\pageref{List_a6})}, {\bf Package} {\rm (p.\,\pageref{Package_a8})}, {\bf Pattern} {\rm (p.\,\pageref{Pattern_a2})}, {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a2})}, {\bf Point} {\rm (p.\,\pageref{Point_a4})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a2})}, and {\bf Window} {\rm (p.\,\pageref{Window_a2})}.
+
+Referenced by {\bf operator==}().\label{Item_a7}
+\index{Item@{Item}!operator delete@{operator delete}}
+\index{operator delete@{operator delete}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Item::operator delete (void $\ast$ {\em to\-Free})}\hfill
+
+
+
+Reimplemented in {\bf Dummy} {\rm (p.\,\pageref{Dummy_a6})}.
+
+Definition at line 60 of file item.C.\small\begin{verbatim}00061 {
+00062 #ifdef USE_MNEW_ALLOCATOR
+00063    char *cp = (char *)toFree;
+00064    cp -= EXTRASIZ;      // Point to the real start of this thing
+00065    int size = *((int *)cp); // Find out what the size of this object is
+00066    mfree((char **)cp,size); // Release it
+00067 #else
+00068    ::operator delete(toFree);
+00069 #endif
+00070 }
+\end{verbatim}\normalsize 
+\label{Item_a6}
+\index{Item@{Item}!operator new@{operator new}}
+\index{operator new@{operator new}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Item::operator new (size\_\-t {\em s})}\hfill
+
+
+
+Definition at line 34 of file item.C.\small\begin{verbatim}00035 {
+00036 #ifdef USE_MNEW_ALLOCATOR
+00037    void *allc = mnew(EXTRASIZ + s);
+00038    if (allc != 0)
+00039    {
+00040       *((int *)allc) = s + EXTRASIZ; // remember the size of this object
+00041       char *cp = (char *)allc;
+00042       cp += EXTRASIZ;       // now allc points to the requested object
+00043       allc = (void *)cp;
+00044       ((Item *)cp)->Item();
+00045    }
+00046 #else
+00047    void *allc = ::operator new( s );
+00048 #endif
+00049   if( allc == 0 )
+00050   {
+00051     cerr << "\n Cannot allocate new object.\n";
+00052     exit(1);    
+00053     return (void *)NOTHING;
+00054   }
+00055   else
+00056     return allc;
+00057 }
+\end{verbatim}\normalsize 
+\label{Item_a8}
+\index{Item@{Item}!print@{print}}
+\index{print@{print}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual void Item::print (ostream \& {\em os}) const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented in {\bf Box} {\rm (p.\,\pageref{Box_a7})}, {\bf Clst} {\rm (p.\,\pageref{Clst_a5})}, {\bf Cri\-Net} {\rm (p.\,\pageref{CriNet_a4})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a5})}, {\bf Dummy} {\rm (p.\,\pageref{Dummy_a5})}, and {\bf Point} {\rm (p.\,\pageref{Point_a6})}.
+
+Referenced by {\bf operator$<$$<$}(), and {\bf Base\-Array::print\-Contents\-On}().
+
+\subsubsection{Friends And Related Function Documentation}
+\label{Item_l0}
+\index{Item@{Item}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em out}, const Item \& {\em an\-Item})\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 84 of file item.h.\small\begin{verbatim}00085 {
+00086   anItem.print( out );
+00087   return out;
+00088 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Item_p0}
+\index{Item@{Item}!NOTHING@{NOTHING}}
+\index{NOTHING@{NOTHING}!Item@{Item}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Item $\ast$ Item::NOTHING = (Item $\ast$)\&{\bf the\-Dummy\-Item}\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 49 of file item.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf item.h}\item 
+{\bf item.C}\end{CompactItemize}

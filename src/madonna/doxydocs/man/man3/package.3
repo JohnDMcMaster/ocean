@@ -1,0 +1,102 @@
+.TH Package 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Package \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <package.h>\fR
+.PP
+Inherits \fBBox\fR.
+.PP
+Inherited by \fBBaseArray\fR, and \fBList\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBPackage\fR ()"
+.br
+.ti -1c
+.RI "virtual \fB~Package\fR ()"
+.br
+.ti -1c
+.RI "virtual void \fBadd\fR ( \fBItem\fR& ) = 0"
+.br
+.ti -1c
+.RI "virtual void \fBpickOut\fR ( const \fBItem\fR&, int = 0 ) = 0"
+.br
+.ti -1c
+.RI "virtual int \fBhasItem\fR ( const \fBItem\fR& ) const"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBfindItem\fR ( const \fBItem\fR& ) const"
+.br
+.ti -1c
+.RI "virtual \fBBoxIterator\fR& \fBinitIterator\fR () const = 0"
+.br
+.ti -1c
+.RI "void \fBremove\fR ( const \fBItem\fR& o )"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const = 0"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Package::Package ()\fC [inline]\fR
+.PP
+Definition at line 32 of file package.h.
+.SS Package::~Package ()\fC [inline, virtual]\fR
+.PP
+Definition at line 34 of file package.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS virtual void Package::add (\fBItem\fR & toAdd)\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, and \fBList\fR.
+.SS \fBItem\fR & Package::findItem (const \fBItem\fR & testItem) const\fC [virtual]\fR
+.PP
+Definition at line 22 of file package.C.
+.PP
+Referenced by \fBhasItem\fR(), and \fBoperator &\fR().
+.SS int Package::hasItem (const \fBItem\fR & testItem) const\fC [virtual]\fR
+.PP
+Definition at line 41 of file package.C.
+.PP
+Referenced by \fBLayMap::addCriticalPoints\fR(), and \fBoperator|=\fR().
+.SS virtual \fBBoxIterator\fR& Package::initIterator () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBBox\fR.
+.PP
+Reimplemented in \fBBaseArray\fR, and \fBList\fR.
+.PP
+Referenced by \fBfindItem\fR().
+.SS virtual char* Package::myName () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBBox\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBDivTable\fR, \fBImageMap\fR, \fBList\fR, \fBPattern\fR, and \fBPlaneCell\fR.
+.SS virtual \fBclassType\fR Package::myNo () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBBox\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBDivTable\fR, \fBImageMap\fR, \fBList\fR, \fBPattern\fR, and \fBPlaneCell\fR.
+.SS virtual void Package::pickOut (const \fBItem\fR & toDetach, int deleteItemToo = 0)\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBBaseArray\fR, and \fBList\fR.
+.PP
+Referenced by \fBremove\fR(), \fBList::remove\fR(), and \fBBaseArray::remove\fR().
+.SS void Package::remove (const \fBItem\fR & l)\fC [inline]\fR
+.PP
+Reimplemented in \fBList\fR.
+.PP
+Definition at line 44 of file package.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

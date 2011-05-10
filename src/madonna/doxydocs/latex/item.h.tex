@@ -1,0 +1,74 @@
+\subsection{item.h File Reference}
+\label{item.h}\index{item.h@{item.h}}
+{\tt \#include $<$iostream.h$>$}\par
+{\tt \#include $<$stddef.h$>$}\par
+{\tt \#include $<$basedefs.h$>$}\par
+{\tt \#include $<$malloc.h$>$}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf Dummy}
+\item 
+class {\bf Item}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf NOITEM}\ $\ast$({\bf Item::NOTHING})
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf operator==} ( const {\bf Item}\& t1, const {\bf Item}\& t2 )
+\item 
+int {\bf operator!=} ( const {\bf Item}\& t1, const {\bf Item}\& t2 )
+\item 
+ostream\& {\bf operator$<$$<$} ( ostream\& out, const {\bf Item}\& an\-Item )
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{item.h_a0}
+\index{item.h@{item.h}!NOITEM@{NOITEM}}
+\index{NOITEM@{NOITEM}!item.h@{item.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define NOITEM\ $\ast$({\bf Item::NOTHING})}\hfill
+
+
+
+Definition at line 56 of file item.h.
+
+\subsubsection{Function Documentation}
+\label{item.h_a2}
+\index{item.h@{item.h}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!item.h@{item.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf Item} \& {\em t1}, const {\bf Item} \& {\em t2})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 79 of file item.h.\small\begin{verbatim}00080 {
+00081   return ( !( t1 == t2 ) );
+00082 }
+\end{verbatim}\normalsize 
+\label{item.h_a3}
+\index{item.h@{item.h}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!item.h@{item.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}ostream \& operator$<$$<$ (ostream \& {\em out}, const {\bf Item} \& {\em an\-Item})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 84 of file item.h.\small\begin{verbatim}00085 {
+00086   anItem.print( out );
+00087   return out;
+00088 }
+\end{verbatim}\normalsize 
+\label{item.h_a1}
+\index{item.h@{item.h}!operator==@{operator==}}
+\index{operator==@{operator==}!item.h@{item.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf Item} \& {\em t1}, const {\bf Item} \& {\em t2})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 73 of file item.h.\small\begin{verbatim}00074 {
+00075   return ( (t1.myNo() == t2.myNo()) && t1.isEqual( t2 ) );
+00076 }
+\end{verbatim}\normalsize 

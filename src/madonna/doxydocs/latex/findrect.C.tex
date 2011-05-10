@@ -1,0 +1,693 @@
+\subsection{findrect.C File Reference}
+\label{findrect.C}\index{findrect.C@{findrect.C}}
+{\tt \#include $<$stream.h$>$}\par
+{\tt \#include "sealib.h"}\par
+{\tt \#include "genpart.h"}\par
+{\tt \#include "part.h"}\par
+{\tt \#include "cost.h"}\par
+{\tt \#include "math.h"}\par
+{\tt \#include "phil\_\-glob.h"}\par
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf BBX\_\-MEAN\_\-X}\ 0
+\item 
+\#define {\bf BBX\_\-MEAN\_\-Y}\ 1
+\item 
+\#define {\bf BBX\_\-MAX\_\-X}\ 2
+\item 
+\#define {\bf BBX\_\-MAX\_\-Y}\ 3
+\item 
+\#define {\bf BBX\_\-N\_\-CELL}\ 4
+\item 
+\#define {\bf BBX\_\-AREA}\ 5
+\item 
+\#define {\bf BBX\_\-AVAIL}\ 6
+\item 
+\#define {\bf BBX\_\-ARRAY\_\-SIZE}\ 7
+\item 
+\#define {\bf NOTINITIALIZED}\ -1
+\item 
+\#define {\bf MAX}(a,b) \ ((a)$>$(b)?(a):(b))
+\item 
+\#define {\bf MEAN\_\-CELLS\_\-PER\_\-AREA}\ 3.0
+\item 
+\#define {\bf MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED}\ 10.0
+\item 
+\#define {\bf MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS}\ 512
+\item 
+\#define {\bf TOO\_\-SMALL}\ 0.00001
+\item 
+\#define {\bf TOO\_\-BIG}\ 10000.0
+\item 
+\#define {\bf VERY\_\-NEGATIVE}\ -10000
+\end{CompactItemize}
+\subsubsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum {\bf Rounding\-Policy} \{ {\bf No\-Rounding}, 
+{\bf Round\-Up}, 
+{\bf Round\-Down}, 
+{\bf Round\-Near}
+ \}
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf oldfashionedwayofdoingthings} (CIRCUITPTR circuit, int $\ast$nx, int $\ast$ny, {\bf CFUNC} $\ast$costfunctions)
+\item 
+void {\bf compute\-Mean\-Bbx} (CIRCUITPTR circuit, double $\ast$mean\-X, double $\ast$mean\-Y)
+\item 
+int {\bf other\-Direction} (int dir)
+\item 
+double {\bf grid\-Points\-To\-Core\-Cells} (int gridpoints,int direction, {\bf Rounding\-Policy} rounding = No\-Rounding)
+\item 
+int {\bf core\-Cells\-To\-Grid\-Points} (double core\-Cells, int direction)
+\item 
+void {\bf compute\-Bbx\-Statistics} (CIRCUITPTR circuit, double bbx\-Statistics[$\,$])
+\item 
+void {\bf think\-About\-Grid\-Size} (double stats[$\,$],double {\bf extraplaza})
+\item 
+int {\bf findrectangleandcostfunctions} (CIRCUITPTR circuit, int $\ast$nx, int $\ast$ny, {\bf CFUNC} $\ast$costfunctions, int calldepth)
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+int {\bf make\-Channels} = 0
+\item 
+{\bf CFUNC} {\bf thecostfunctions} [2]
+\item 
+int {\bf requested\-Grid\-Points} [$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}
+\item 
+int {\bf expandable\-Direction} = NOTINITIALIZED
+\item 
+double {\bf extraplaza} = 1.0
+\item 
+int {\bf target\-Grid\-Points} [2]
+\item 
+double {\bf target\-Areas} [2]
+\item 
+int {\bf core\-Cell\-Size} [$\,$] = \{NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\}
+\item 
+int {\bf core\-Cell\-Overlap} [$\,$] = \{NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\}
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{findrect.C_a5}
+\index{findrect.C@{findrect.C}!BBX_AREA@{BBX\_\-AREA}}
+\index{BBX_AREA@{BBX\_\-AREA}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-AREA\ 5}\hfill
+
+
+
+Definition at line 19 of file findrect.C.\label{findrect.C_a7}
+\index{findrect.C@{findrect.C}!BBX_ARRAY_SIZE@{BBX\_\-ARRAY\_\-SIZE}}
+\index{BBX_ARRAY_SIZE@{BBX\_\-ARRAY\_\-SIZE}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-ARRAY\_\-SIZE\ 7}\hfill
+
+
+
+Definition at line 21 of file findrect.C.\label{findrect.C_a6}
+\index{findrect.C@{findrect.C}!BBX_AVAIL@{BBX\_\-AVAIL}}
+\index{BBX_AVAIL@{BBX\_\-AVAIL}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-AVAIL\ 6}\hfill
+
+
+
+Definition at line 20 of file findrect.C.\label{findrect.C_a2}
+\index{findrect.C@{findrect.C}!BBX_MAX_X@{BBX\_\-MAX\_\-X}}
+\index{BBX_MAX_X@{BBX\_\-MAX\_\-X}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-MAX\_\-X\ 2}\hfill
+
+
+
+Definition at line 16 of file findrect.C.\label{findrect.C_a3}
+\index{findrect.C@{findrect.C}!BBX_MAX_Y@{BBX\_\-MAX\_\-Y}}
+\index{BBX_MAX_Y@{BBX\_\-MAX\_\-Y}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-MAX\_\-Y\ 3}\hfill
+
+
+
+Definition at line 17 of file findrect.C.\label{findrect.C_a0}
+\index{findrect.C@{findrect.C}!BBX_MEAN_X@{BBX\_\-MEAN\_\-X}}
+\index{BBX_MEAN_X@{BBX\_\-MEAN\_\-X}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-MEAN\_\-X\ 0}\hfill
+
+
+
+Definition at line 14 of file findrect.C.\label{findrect.C_a1}
+\index{findrect.C@{findrect.C}!BBX_MEAN_Y@{BBX\_\-MEAN\_\-Y}}
+\index{BBX_MEAN_Y@{BBX\_\-MEAN\_\-Y}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-MEAN\_\-Y\ 1}\hfill
+
+
+
+Definition at line 15 of file findrect.C.\label{findrect.C_a4}
+\index{findrect.C@{findrect.C}!BBX_N_CELL@{BBX\_\-N\_\-CELL}}
+\index{BBX_N_CELL@{BBX\_\-N\_\-CELL}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define BBX\_\-N\_\-CELL\ 4}\hfill
+
+
+
+Definition at line 18 of file findrect.C.\label{findrect.C_a9}
+\index{findrect.C@{findrect.C}!MAX@{MAX}}
+\index{MAX@{MAX}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAX(a, b)\ ((a)$>$(b)?(a):(b))}\hfill
+
+
+
+Definition at line 43 of file findrect.C.\label{findrect.C_a12}
+\index{findrect.C@{findrect.C}!MAXIMUM_NUMBER_OF_PLACEMENT_AREAS@{MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS}}
+\index{MAXIMUM_NUMBER_OF_PLACEMENT_AREAS@{MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MAXIMUM\_\-NUMBER\_\-OF\_\-PLACEMENT\_\-AREAS\ 512}\hfill
+
+
+
+Definition at line 48 of file findrect.C.\label{findrect.C_a10}
+\index{findrect.C@{findrect.C}!MEAN_CELLS_PER_AREA@{MEAN\_\-CELLS\_\-PER\_\-AREA}}
+\index{MEAN_CELLS_PER_AREA@{MEAN\_\-CELLS\_\-PER\_\-AREA}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MEAN\_\-CELLS\_\-PER\_\-AREA\ 3.0}\hfill
+
+
+
+Definition at line 46 of file findrect.C.\label{findrect.C_a11}
+\index{findrect.C@{findrect.C}!MEAN_CELLS_PER_AREA_IF_CHANNELED@{MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED}}
+\index{MEAN_CELLS_PER_AREA_IF_CHANNELED@{MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define MEAN\_\-CELLS\_\-PER\_\-AREA\_\-IF\_\-CHANNELED\ 10.0}\hfill
+
+
+
+Definition at line 47 of file findrect.C.\label{findrect.C_a8}
+\index{findrect.C@{findrect.C}!NOTINITIALIZED@{NOTINITIALIZED}}
+\index{NOTINITIALIZED@{NOTINITIALIZED}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define NOTINITIALIZED\ -1}\hfill
+
+
+
+Definition at line 23 of file findrect.C.\label{findrect.C_a14}
+\index{findrect.C@{findrect.C}!TOO_BIG@{TOO\_\-BIG}}
+\index{TOO_BIG@{TOO\_\-BIG}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define TOO\_\-BIG\ 10000.0}\hfill
+
+
+
+Definition at line 245 of file findrect.C.\label{findrect.C_a13}
+\index{findrect.C@{findrect.C}!TOO_SMALL@{TOO\_\-SMALL}}
+\index{TOO_SMALL@{TOO\_\-SMALL}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define TOO\_\-SMALL\ 0.00001}\hfill
+
+
+
+Definition at line 244 of file findrect.C.\label{findrect.C_a15}
+\index{findrect.C@{findrect.C}!VERY_NEGATIVE@{VERY\_\-NEGATIVE}}
+\index{VERY_NEGATIVE@{VERY\_\-NEGATIVE}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define VERY\_\-NEGATIVE\ -10000}\hfill
+
+
+
+Definition at line 375 of file findrect.C.
+
+\subsubsection{Enumeration Type Documentation}
+\label{findrect.C_a37}
+\index{findrect.C@{findrect.C}!RoundingPolicy@{RoundingPolicy}}
+\index{RoundingPolicy@{RoundingPolicy}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}enum Rounding\-Policy}\hfill
+
+\begin{Desc}
+\item[{\bf Enumeration values:}]\par
+\begin{description}
+\index{NoRounding@{NoRounding}!findrect.C@{findrect.C}}\index{findrect.C@{findrect.C}!NoRounding@{No\-Rounding}}\item[
+\label{findrect.C_a33}
+{\em No\-Rounding}]\index{RoundUp@{RoundUp}!findrect.C@{findrect.C}}\index{findrect.C@{findrect.C}!RoundUp@{Round\-Up}}\item[
+\label{findrect.C_a34}
+{\em Round\-Up}]\index{RoundDown@{RoundDown}!findrect.C@{findrect.C}}\index{findrect.C@{findrect.C}!RoundDown@{Round\-Down}}\item[
+\label{findrect.C_a35}
+{\em Round\-Down}]\index{RoundNear@{RoundNear}!findrect.C@{findrect.C}}\index{findrect.C@{findrect.C}!RoundNear@{Round\-Near}}\item[
+\label{findrect.C_a36}
+{\em Round\-Near}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 25 of file findrect.C.\small\begin{verbatim}00025 {NoRounding, RoundUp, RoundDown, RoundNear}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Function Documentation}
+\label{findrect.C_a21}
+\index{findrect.C@{findrect.C}!computeBbxStatistics@{computeBbxStatistics}}
+\index{computeBbxStatistics@{computeBbxStatistics}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void compute\-Bbx\-Statistics (CIRCUITPTR {\em circuit}, double {\em bbx\-Statistics}[$\,$])\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 378 of file findrect.C.
+
+Referenced by {\bf findrectangleandcostfunctions}().\small\begin{verbatim}00378 :
+00379 static void computeBbxStatistics(CIRCUITPTR circuit, double bbxStatistics[])
+00380 {
+00381    int totalx=0,totaly=0,totalarea=0,maximumx=VERY_NEGATIVE,maximumy=VERY_NEGATIVE;
+00382    CIRINSTPTR cirinst = circuit->cirinst;
+00383 
+00384    static STRING tmpcell = cs("Tmp_Cell_");
+00385    // if (tmpcell==NIL) tmpcell = cs("Tmp_Cell_");  // skip these layouts
+00386 
+00387    // integer n counts the number of circuits, integer n2 counts the total
+00388    // number of layouts that are available for these circuits.
+00389    int n, n2;
+00390    for (n=0, n2=0; cirinst!=NIL; cirinst=cirinst->next, ++n)
+00391    {
+00392       LAYOUTPTR lay = cirinst->circuit->layout;
+00393       // OK, what to do? There can be more than one layout for this cicuit.
+00394       // Maybe it\'s best to take them all into account...:
+00395       int old_n2;
+00396       for (old_n2 = n2; lay!=NIL; lay=lay->next)
+00397       {
+00398      if (lay->name == tmpcell) continue;
+00399      n2 += 1;
+00400      totalx += lay->bbx[HOR];
+00401      totaly += lay->bbx[VER];
+00402      totalarea += lay->bbx[HOR] * lay->bbx[VER];
+00403      if (lay->bbx[HOR] > maximumx) maximumx = lay->bbx[HOR];
+00404      if (lay->bbx[VER] > maximumy) maximumy = lay->bbx[VER];
+00405       }
+00406       if (old_n2 == n2)     // this should never happen
+00407       {
+00408      char s[200];
+00409      sprintf(s,"(INTERNAL) findrect: circuit (%s(%s(%s))) w/o layout",
+00410          cirinst->circuit->name,cirinst->circuit->function->name,
+00411          cirinst->circuit->function->library->name);
+00412      err(5,s);
+00413       }
+00414    }
+00415    // avoid division by zero, even if n == 0 ...:
+00416    bbxStatistics[BBX_MEAN_X] = double(totalx) / MAX(1,n2);
+00417    bbxStatistics[BBX_MEAN_Y] = double(totaly) / MAX(1,n2);
+00418    bbxStatistics[BBX_MAX_X]  = (double) MAX(0,maximumx);
+00419    bbxStatistics[BBX_MAX_Y]  = (double) MAX(0,maximumy);
+00420    bbxStatistics[BBX_AREA]   = (double) totalarea;
+00421    bbxStatistics[BBX_AVAIL]  = double(n) / double(n2);
+00422    bbxStatistics[BBX_N_CELL] = (double) n;
+}
+\end{verbatim}\normalsize 
+\label{findrect.C_a17}
+\index{findrect.C@{findrect.C}!computeMeanBbx@{computeMeanBbx}}
+\index{computeMeanBbx@{computeMeanBbx}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void compute\-Mean\-Bbx (CIRCUITPTR {\em circuit}, double $\ast$ {\em mean\-X}, double $\ast$ {\em mean\-Y})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+\label{findrect.C_a20}
+\index{findrect.C@{findrect.C}!coreCellsToGridPoints@{coreCellsToGridPoints}}
+\index{coreCellsToGridPoints@{coreCellsToGridPoints}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int core\-Cells\-To\-Grid\-Points (double {\em core\-Cells}, int {\em direction})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 349 of file findrect.C.
+
+Referenced by {\bf findrectangleandcostfunctions}(), and {\bf think\-About\-Grid\-Size}().\small\begin{verbatim}00351 {
+00352    if (coreCells <= 0) return 0;
+00353 
+00354    if (coreCellSize[HOR] == NOTINITIALIZED)
+00355    {
+00356       IMAGEDESC *id = getImageDesc(); // get stuff from image.seadif
+00357       coreCellSize[HOR] = id->size[HOR];
+00358       coreCellSize[VER] = id->size[VER];
+00359    }
+00360 
+00361 
+\end{verbatim}\normalsize 
+\label{findrect.C_a23}
+\index{findrect.C@{findrect.C}!findrectangleandcostfunctions@{findrectangleandcostfunctions}}
+\index{findrectangleandcostfunctions@{findrectangleandcostfunctions}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int findrectangleandcostfunctions (CIRCUITPTR {\em circuit}, int $\ast$ {\em nx}, int $\ast$ {\em ny}, {\bf CFUNC} $\ast$ {\em costfunctions}, int {\em calldepth})}\hfill
+
+
+
+Definition at line 74 of file findrect.C.\small\begin{verbatim}00077 {
+00078    // return oldfashionedwayofdoingthings(circuit,nx,ny,costfunctions);
+00079 
+00080    // currently we do not support recursive partitioning...:
+00081    if (calldepth > 1) return NIL;
+00082 
+00083    double stats[BBX_ARRAY_SIZE];
+00084    computeBbxStatistics(circuit,stats);
+00085 
+00086    thinkAboutGridSize(stats,extraplaza); // maybe modify requestedGridPoints[] ...
+00087 
+00088    if (stats[BBX_N_CELL] <= 1) return NIL; // no cells...
+00089 
+00090    // if we also make routing channels, than this is probably a standard-cell
+00091    // like placement. Because flipflops are about 8 times as big as inverters,
+00092    // we want more cells_per_area if the number of flipflops is small.
+00093    double cells_per_area;
+00094    if (makeChannels && stats[BBX_N_CELL] > 100)
+00095       cells_per_area = MEAN_CELLS_PER_AREA_IF_CHANNELED;
+00096    else
+00097       cells_per_area = MEAN_CELLS_PER_AREA;
+00098    int numberOfPlacementAreas
+00099       = 1 + int((stats[BBX_N_CELL] -1) / cells_per_area);
+00100    if (numberOfPlacementAreas < 2) return NIL; // nothing to partition...
+00101    if (numberOfPlacementAreas > MAXIMUM_NUMBER_OF_PLACEMENT_AREAS)
+00102       // we don\'t want too many areas because it\'s too time consuming...
+00103       numberOfPlacementAreas = MAXIMUM_NUMBER_OF_PLACEMENT_AREAS;
+00104 
+00105    // The shapeCoefficient tells us something about the shape of the cells:
+00106    double shapeCoef = stats[BBX_MEAN_Y] / stats[BBX_MEAN_X];
+00107    // Now think of a reasonable partitioning. We must be aware that
+00108    //   1. targetAreas[HOR] * targetAreas[VER] == numberOfPlacementAreas
+00109    //   2. if cells are very wide we want targetAreas[HOR] << targetAreas[VER]
+00110    //                                               (and the other way around)
+00111    targetAreas[HOR] = sqrt(numberOfPlacementAreas * shapeCoef);
+00112    targetAreas[VER] = sqrt(numberOfPlacementAreas / shapeCoef);
+00113 
+00114    // initialize the targetGridPoints...:
+00115    targetGridPoints[HOR] = requestedGridPoints[HOR];
+00116    targetGridPoints[VER] = requestedGridPoints[VER];
+00117 
+00118    // And now we take into account the area that the user specified...:
+00119    // First make sure that the requested area is large enough. If it is already
+00120    // too large, do not make it smaller...
+00121    double requiredSurface =
+00122       stats[BBX_MEAN_X] * stats[BBX_MEAN_Y] * stats[BBX_N_CELL];
+00123    double requestedSurface =
+00124       requestedGridPoints[HOR] * requestedGridPoints[VER];
+00125    if (requiredSurface > requestedSurface)
+00126    {
+00127       // Expand the requested surface in the direction that the user specified
+00128       // as the "minimum" size. Don\'t touch the other side!
+00129       targetGridPoints[expandableDirection] = 
+00130      int(0.5 + requestedGridPoints[expandableDirection] *
+00131          (requiredSurface / requestedSurface));
+00132    }
+00133    // At this point we have two potentially conflicting requirements:
+00134    //  1. targetAreas[HOR..VER] is based on the shapes of the cells to be placed
+00135    //  2. targetGridPoints[HOR..VER] is based on the user-supplied sizes
+00136    // Our problem is to find a targetCoreCells[HOR..VER] such that it fits (in
+00137    // both directions) an integer number of times in targetAreas[HOR..VER]. Of
+00138    // course, targetCoreCells must be as close as possible to targetGridPoints
+00139    // AND it must respect the expandableDirection specified by the user...
+00140    //
+00141    //                     ____ D O N \'T   P A N I C ____
+00142 
+00143    // first create and initialize targetCoreCells...:
+00144    double targetCoreCells[2];
+00145    targetCoreCells[expandableDirection] =
+00146       gridPointsToCoreCells(targetGridPoints[expandableDirection],expandableDirection);
+00147    int fixedDirection = otherDirection(expandableDirection);
+00148    targetCoreCells[fixedDirection] =
+00149       gridPointsToCoreCells(targetGridPoints[fixedDirection],fixedDirection);
+00150 
+00151    // Well, actually we are only interested in the number of image core cells
+00152    // in a "scaled" fashion.   Suppose most cells have a height of 10 times a
+00153    // core cell, then we rather have something like:
+00154    targetCoreCells[HOR] =
+00155       targetCoreCells[HOR] / MAX(1.0, gridPointsToCoreCells((int)stats[BBX_MEAN_X],HOR));
+00156    targetCoreCells[VER] =
+00157       targetCoreCells[VER] / MAX(1.0, gridPointsToCoreCells((int)stats[BBX_MEAN_Y],VER));
+00158 
+00159    // Find out what the critical direction is. This is the direction where the
+00160    // "resolution" is the smallest, i.e. where targetCoreCells/targetAreas is
+00161    // smallest...:
+00162    int criticalDirection;
+00163    if (float(targetCoreCells[HOR])/targetAreas[HOR] <
+00164        float(targetCoreCells[VER])/targetAreas[VER])
+00165       criticalDirection = HOR;
+00166    else
+00167       criticalDirection = VER;
+00168 
+00169    if (targetAreas[criticalDirection] >= targetCoreCells[criticalDirection])
+00170    {
+00171       // we have more areas than we have core cells in the critical direction...
+00172       if (criticalDirection == expandableDirection)
+00173      // fortunately, we can expand the number of core cells....:
+00174      targetCoreCells[criticalDirection] = int(targetAreas[criticalDirection]);
+00175       else
+00176       {
+00177      // not allowed to expand number of core cells.... the only thing we
+00178      // can do here is lower targetAreas to match targetCoreCells...:
+00179      targetAreas[criticalDirection] = targetCoreCells[criticalDirection];
+00180      targetAreas[expandableDirection] =
+00181         float(numberOfPlacementAreas)/targetAreas[criticalDirection];
+00182       }
+00183    }
+00184    else // I think this "else" part is rubbish...:
+00185    {
+00186       // we have more core cells than areas in the critical direction...
+00187       if (criticalDirection == expandableDirection)
+00188      // it\'s our lucky day: we are allowed to increase targetCoreCells...:
+00189      targetCoreCells[criticalDirection] =
+00190         int(ceil(targetCoreCells[criticalDirection]/targetAreas[criticalDirection])
+00191         * targetAreas[criticalDirection]);
+00192       else
+00193       {
+00194      // not allowed to expand, so we make it smaller...:
+00195      double shapeCorrection =
+00196         floor(targetCoreCells[criticalDirection]/targetAreas[criticalDirection]);
+00197      targetCoreCells[criticalDirection] =
+00198         int(targetAreas[criticalDirection] * shapeCorrection);
+00199      targetCoreCells[expandableDirection] =
+00200         int(targetAreas[expandableDirection] / shapeCorrection);        
+00201       }
+00202    }
+00203    // output the results....:
+00204    *nx = MAX(1,int(targetAreas[HOR] + 0.5));
+00205    *ny = MAX(1,int(targetAreas[VER] + 0.5));
+00206 
+00207    cout << "------ partitioning " << int(stats[BBX_N_CELL])
+00208         << " cells into (hor x vert) = ("
+00209     << *nx << " x " << *ny << ") partitions\n" << endl;
+00210 
+00211    // ...and make sure that requestedGridPoints[] is consistent with our choice
+00212    // of number of areas in horizontal (nx) and vertical (ny) direction:
+00213    int k = 1;
+00214    for (; *nx * coreCellsToGridPoints(k,HOR) < requestedGridPoints[HOR]; ++k)
+00215       ;
+00216    // k is the number of core cells per area in horizontal direction:
+00217    requestedGridPoints[HOR] = (*nx * coreCellsToGridPoints(k,HOR));
+00218    for (k=1; *ny * coreCellsToGridPoints(k,VER) < requestedGridPoints[VER]; ++k)
+00219       ;
+00220    // k is the number of core cells per area in vertical direction:
+00221    requestedGridPoints[VER] = (*ny * coreCellsToGridPoints(k,VER));
+00222 
+00223    // on the other hand, we loose badly if all the code above somehow arranged
+00224    // for a grid that in one or two dimensions is smaller than the largest cell
+00225    // that we are going to place... Assert that this is not the case:
+00226    if (requestedGridPoints[HOR] < stats[BBX_MAX_X])
+00227       requestedGridPoints[HOR] =
+00228      coreCellsToGridPoints
+00229      (gridPointsToCoreCells(int(ceil(stats[BBX_MAX_X])),RoundUp),HOR);
+00230 
+00231    if (requestedGridPoints[VER] < stats[BBX_MAX_Y])
+00232       requestedGridPoints[VER] =
+00233      coreCellsToGridPoints
+00234      (gridPointsToCoreCells(int(ceil(stats[BBX_MAX_Y])),RoundUp),VER);
+00235    cout << "------ requested grid points = (" << requestedGridPoints[HOR]
+00236     << ", " << requestedGridPoints[VER] << ")\n" << endl;
+00237 
+00238    costfunctions[COSTSTATE] = thecostfunctions[COSTSTATE];
+00239    costfunctions[COSTVEC]   = thecostfunctions[COSTVEC];
+00240 
+00241 
+\end{verbatim}\normalsize 
+\label{findrect.C_a19}
+\index{findrect.C@{findrect.C}!gridPointsToCoreCells@{gridPointsToCoreCells}}
+\index{gridPointsToCoreCells@{gridPointsToCoreCells}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double grid\-Points\-To\-Core\-Cells (int {\em gridpoints}, int {\em direction}, {\bf Rounding\-Policy} {\em round} = No\-Rounding)\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 312 of file findrect.C.
+
+Referenced by {\bf findrectangleandcostfunctions}(), and {\bf think\-About\-Grid\-Size}().\small\begin{verbatim}00312 :
+00313 static double gridPointsToCoreCells(int gridpoints,int direction,
+00314                     RoundingPolicy round)
+00315 {
+00316    if (gridpoints <= 0) return 0;
+00317 
+00318    if (coreCellSize[HOR] == NOTINITIALIZED)
+00319    {
+00320       IMAGEDESC *id = getImageDesc(); // get stuff from image.seadif
+00321       coreCellSize[HOR]    = id->size[HOR];
+00322       coreCellSize[VER]    = id->size[VER];
+00323       coreCellOverlap[HOR] = id->overlap[HOR];
+00324       coreCellOverlap[VER] = id->overlap[VER];
+00325    }
+00326 
+00327    double fgridpoints = double(gridpoints - coreCellOverlap[direction]);
+00328    if (fgridpoints < 1.0) fgridpoints = 1.0;
+00329    double fcorecellsize = double(coreCellSize[direction]);
+00330    if (fcorecellsize < 1.0) fcorecellsize = 1.0;
+00331 
+00332    switch (round)
+00333    {
+00334    case NoRounding:
+00335       return fgridpoints / fcorecellsize;
+00336    case RoundDown:
+00337       return floor(fgridpoints / fcorecellsize);
+00338    case RoundUp:
+00339       return ceil(fgridpoints / fcorecellsize);
+00340    case RoundNear:
+00341       return floor(0.5 + fgridpoints / fcorecellsize);
+00342    default:
+00343       err(5,"(INTERNAL) gridPointsToCoreCells: "
+00344       "illegal rounding policy specified");
+00345       return -1;        // not reached
+00346    }
+}
+\end{verbatim}\normalsize 
+\label{findrect.C_a16}
+\index{findrect.C@{findrect.C}!oldfashionedwayofdoingthings@{oldfashionedwayofdoingthings}}
+\index{oldfashionedwayofdoingthings@{oldfashionedwayofdoingthings}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int oldfashionedwayofdoingthings (CIRCUITPTR {\em circuit}, int $\ast$ {\em nx}, int $\ast$ {\em ny}, {\bf CFUNC} $\ast$ {\em costfunctions})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+\label{findrect.C_a18}
+\index{findrect.C@{findrect.C}!otherDirection@{otherDirection}}
+\index{otherDirection@{otherDirection}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int other\-Direction (int {\em dir})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 366 of file findrect.C.
+
+Referenced by {\bf findrectangleandcostfunctions}().\small\begin{verbatim}00366 :
+00367 static int otherDirection(int dir)
+00368 {
+00369    if (dir == HOR) return VER;
+00370    if (dir == VER) return HOR;
+00371    err(5,"(internal error) illegal direction: HOR or VER expected");
+00372    return NIL;
+}
+\end{verbatim}\normalsize 
+\label{findrect.C_a22}
+\index{findrect.C@{findrect.C}!thinkAboutGridSize@{thinkAboutGridSize}}
+\index{thinkAboutGridSize@{thinkAboutGridSize}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void think\-About\-Grid\-Size (double {\em stats}[$\,$], double {\em extraplaza})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 249 of file findrect.C.
+
+Referenced by {\bf findrectangleandcostfunctions}().\small\begin{verbatim}00251 {
+00252    if (extraplaza < TOO_SMALL || extraplaza > TOO_BIG)
+00253       err(5,"unreasonable value for extraplaza");
+00254 
+00255    if (requestedGridPoints[HOR] == NOTINITIALIZED &&
+00256        requestedGridPoints[VER] == NOTINITIALIZED)
+00257    {
+00258       // no preferred size in both directions... assume square...:
+00259       requestedGridPoints[HOR] = requestedGridPoints[VER]
+00260      = int(0.5 +
+00261            sqrt(stats[BBX_AREA] * extraplaza));
+00262    }
+00263    else if (requestedGridPoints[HOR] == NOTINITIALIZED)
+00264    {
+00265       requestedGridPoints[HOR] =
+00266      int(0.5 +
+00267          sqrt(stats[BBX_AREA] * extraplaza / requestedGridPoints[VER]));
+00268    }
+00269    else if (requestedGridPoints[VER] == NOTINITIALIZED)
+00270    {
+00271       requestedGridPoints[VER] =
+00272      int(0.5 + 
+00273          sqrt(stats[BBX_AREA] * extraplaza / requestedGridPoints[HOR]));
+00274    }
+00275 
+00276    // check for extreme cases...:
+00277    if (requestedGridPoints[HOR] < stats[BBX_MAX_X])
+00278       requestedGridPoints[HOR] = int(ceil(stats[BBX_MAX_X]));
+00279 
+00280    if (requestedGridPoints[VER] < stats[BBX_MAX_Y])
+00281       requestedGridPoints[VER] = int(ceil(stats[BBX_MAX_Y]));
+00282       
+00283    // round requestedGridPoints to a multiple of the core cell size...:
+00284    requestedGridPoints[HOR] =
+00285       int(gridPointsToCoreCells(requestedGridPoints[HOR],HOR,RoundUp));
+00286    requestedGridPoints[HOR] = MAX(1,coreCellsToGridPoints(requestedGridPoints[HOR],HOR));
+00287    requestedGridPoints[VER] =
+00288       int(gridPointsToCoreCells(requestedGridPoints[VER],VER,RoundUp));
+00289    requestedGridPoints[VER] = MAX(1,coreCellsToGridPoints(requestedGridPoints[VER],VER));
+00290 
+00291    // If for some reason the requested area is far too small, increase it to
+00292    // match a magnification of newAreaQuotient ...:
+00293    const double tooSmallAreaQuotient = 0.5;
+00294    const double newAreaQuotient = 0.7;
+00295    const double areaQuotient =
+00296       (requestedGridPoints[HOR] * requestedGridPoints[VER]) /
+00297      (stats[BBX_N_CELL] * stats[BBX_MEAN_X] * stats[BBX_MEAN_Y]);
+00298    if (areaQuotient < tooSmallAreaQuotient)
+00299    {
+00300       requestedGridPoints[expandableDirection] =
+00301      int(double(requestedGridPoints[expandableDirection]) *
+00302          (newAreaQuotient / areaQuotient));
+00303    }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Variable Documentation}
+\label{findrect.C_a32}
+\index{findrect.C@{findrect.C}!coreCellOverlap@{coreCellOverlap}}
+\index{coreCellOverlap@{coreCellOverlap}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int core\-Cell\-Overlap[$\,$] = \{NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\}\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 309 of file findrect.C.\label{findrect.C_a31}
+\index{findrect.C@{findrect.C}!coreCellSize@{coreCellSize}}
+\index{coreCellSize@{coreCellSize}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int core\-Cell\-Size[$\,$] = \{NOTINITIALIZED,NOTINITIALIZED,NOTINITIALIZED\}\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 307 of file findrect.C.\label{findrect.C_a27}
+\index{findrect.C@{findrect.C}!expandableDirection@{expandableDirection}}
+\index{expandableDirection@{expandableDirection}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expandable\-Direction = NOTINITIALIZED}\hfill
+
+
+
+Definition at line 60 of file findrect.C.\label{findrect.C_a28}
+\index{findrect.C@{findrect.C}!extraplaza@{extraplaza}}
+\index{extraplaza@{extraplaza}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double extraplaza = 1.0}\hfill
+
+
+
+Definition at line 61 of file findrect.C.\label{findrect.C_a24}
+\index{findrect.C@{findrect.C}!makeChannels@{makeChannels}}
+\index{makeChannels@{makeChannels}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int make\-Channels = 0}\hfill
+
+
+
+Definition at line 40 of file findrect.C.\label{findrect.C_a26}
+\index{findrect.C@{findrect.C}!requestedGridPoints@{requestedGridPoints}}
+\index{requestedGridPoints@{requestedGridPoints}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int requested\-Grid\-Points[$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}}\hfill
+
+
+
+Definition at line 59 of file findrect.C.\label{findrect.C_a30}
+\index{findrect.C@{findrect.C}!targetAreas@{targetAreas}}
+\index{targetAreas@{targetAreas}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double target\-Areas[2]\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 67 of file findrect.C.\label{findrect.C_a29}
+\index{findrect.C@{findrect.C}!targetGridPoints@{targetGridPoints}}
+\index{targetGridPoints@{targetGridPoints}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int target\-Grid\-Points[2]\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 66 of file findrect.C.\label{findrect.C_a25}
+\index{findrect.C@{findrect.C}!thecostfunctions@{thecostfunctions}}
+\index{thecostfunctions@{thecostfunctions}!findrect.C@{findrect.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf CFUNC} thecostfunctions[2]\hspace{0.3cm}{\tt  [static]}}\hfill
+
+{\bf Initializer:}\small\begin{verbatim}{(CFUNC)netstatecost,
+                                    (CFUNC)netstatecost2}\end{verbatim}\normalsize 
+
+
+Definition at line 50 of file findrect.C.

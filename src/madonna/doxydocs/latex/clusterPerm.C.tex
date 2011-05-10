@@ -1,0 +1,202 @@
+\subsection{cluster\-Perm.C File Reference}
+\label{clusterPerm.C}\index{clusterPerm.C@{cluster\-Perm.C}}
+{\tt \#include $<$stream.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include "matrix\-Int.h"}\par
+{\tt \#include "part.h"}\par
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf connect\-Info}
+\item 
+class {\bf dist\-Info}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf INFINITY}\ 1000000
+\end{CompactItemize}
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf absolute} (int x)
+\item 
+int {\bf cluster\-Cost} ({\bf connect\-Info}\& connectivity, {\bf dist\-Info}\& distance)
+\item 
+void {\bf apply\-Permutation} ({\bf connect\-Info}\& connectivity, {\bf dist\-Info}\& distance, int a, int b, int $\ast$pi, int\& best\-Cost, int best\-Perm[$\,$], int\& worst\-Cost)
+\item 
+void {\bf generate\-Permutations} (int\& best\-Cost, int best\-Perm[$\,$], int\& worst\-Cost, {\bf connect\-Info}\& connectivity, {\bf dist\-Info}\& distance)
+\item 
+void {\bf permutate\-This\-Partitioning} ({\bf TOTALPPTR} total, int best\-Perm[$\,$])
+\item 
+int {\bf cluster\-Permutate} ({\bf TOTALPPTR} total)
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{clusterPerm.C_a0}
+\index{clusterPerm.C@{cluster\-Perm.C}!INFINITY@{INFINITY}}
+\index{INFINITY@{INFINITY}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define INFINITY\ 1000000}\hfill
+
+
+
+Definition at line 217 of file cluster\-Perm.C.
+
+\subsubsection{Function Documentation}
+\label{clusterPerm.C_a1}
+\index{clusterPerm.C@{cluster\-Perm.C}!absolute@{absolute}}
+\index{absolute@{absolute}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int absolute (int {\em x})\hspace{0.3cm}{\tt  [inline, static]}}\hfill
+
+
+
+Definition at line 90 of file cluster\-Perm.C.
+
+Referenced by {\bf dist\-Info::dist\-Info}().\small\begin{verbatim}00090 {if (x < 0) return -x; else return x;}
+\end{verbatim}\normalsize 
+\label{clusterPerm.C_a3}
+\index{clusterPerm.C@{cluster\-Perm.C}!applyPermutation@{applyPermutation}}
+\index{applyPermutation@{applyPermutation}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void apply\-Permutation ({\bf connect\-Info} \& {\em connectivity}, {\bf dist\-Info} \& {\em distance}, int {\em a}, int {\em b}, int $\ast$ {\em pi}, int \& {\em best\-Cost}, int {\em best\-Perm}[$\,$], int \& {\em worst\-Cost})}\hfill
+
+
+
+Definition at line 126 of file cluster\-Perm.C.
+
+Referenced by {\bf generate\-Permutations}().\small\begin{verbatim}00129 {
+00130    if (a == b) return;
+00131    a -= 1; b -= 1; pi += 1; // Trotter-Johnson use range 1..n NOT 0..n-1
+00132    distance.exchange(a, b); // exchange the partitions a and b
+00133    int thisCost = clusterCost(connectivity, distance);
+00134    if (thisCost < bestCost)
+00135    {
+00136       bestCost = thisCost;
+00137       int permsize = connectivity.numparts();
+00138       for (int i = 0; i < permsize; ++i)
+00139      bestPerm[i] = pi[i];   // save this permutation
+00140    }
+00141    if (thisCost > worstCost) worstCost = thisCost;
+00142 }
+\end{verbatim}\normalsize 
+\label{clusterPerm.C_a2}
+\index{clusterPerm.C@{cluster\-Perm.C}!clusterCost@{clusterCost}}
+\index{clusterCost@{clusterCost}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cluster\-Cost ({\bf connect\-Info} \& {\em connectivity}, {\bf dist\-Info} \& {\em distance})}\hfill
+
+
+
+Definition at line 115 of file cluster\-Perm.C.
+
+Referenced by {\bf apply\-Permutation}(), and {\bf cluster\-Permutate}().\small\begin{verbatim}00116 {
+00117    int cost = 0;
+00118    int numParts = connectivity.numparts();
+00119    for (int i = 0; i < numParts - 1; ++i)
+00120       for (int j = i + 1; j < numParts; ++j)
+00121      cost += connectivity(i,j) * distance(i,j);
+00122    return cost;
+00123 }
+\end{verbatim}\normalsize 
+\label{clusterPerm.C_a6}
+\index{clusterPerm.C@{cluster\-Perm.C}!clusterPermutate@{clusterPermutate}}
+\index{clusterPermutate@{clusterPermutate}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int cluster\-Permutate ({\bf TOTALPPTR} {\em total})}\hfill
+
+
+
+Definition at line 219 of file cluster\-Perm.C.\small\begin{verbatim}00220 {
+00221    if (total->bestpart == NIL) return NIL;
+00222    if (total->numparts > 8) return NIL; // later I think of something smarter
+00223    if (total->numparts < 3) return NIL; // less than 3 does not make sense ...
+00224    connectInfo connectivity(total->numparts, total->bestpart);
+00225    distInfo distance(total->nx, total->ny);
+00226    int startCost = clusterCost(connectivity, distance);
+00227    int bestCost = INFINITY, worstCost = -INFINITY;
+00228    int *bestPerm = new int[total->numparts];
+00229    generatePermutations(bestCost, bestPerm, worstCost, connectivity, distance);
+00230    cout << form("------ s, w, b = %d, %d, %d; perm = ",
+00231         startCost, worstCost, bestCost);
+00232    for (int i = 0; i < total->numparts; ++i)
+00233       cout << bestPerm[i] << " ";
+00234    cout << endl;
+00235    if (bestCost != INFINITY)
+00236       permutateThisPartitioning(total, bestPerm);
+00237    return NIL;
+00238 }
+\end{verbatim}\normalsize 
+\label{clusterPerm.C_a4}
+\index{clusterPerm.C@{cluster\-Perm.C}!generatePermutations@{generatePermutations}}
+\index{generatePermutations@{generatePermutations}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void generate\-Permutations (int \& {\em best\-Cost}, int {\em best\-Perm}[$\,$], int \& {\em worst\-Cost}, {\bf connect\-Info} \& {\em connectivity}, {\bf dist\-Info} \& {\em distance})}\hfill
+
+
+
+Definition at line 154 of file cluster\-Perm.C.
+
+Referenced by {\bf cluster\-Permutate}().\small\begin{verbatim}00156 {
+00157    int n = distance.numparts();
+00158    int m = n+1;
+00159    // pi[1..n] is "active", pi[0] and pi[n+1] are auxiliaries
+00160    int *pi = new int[n+2];
+00161    int *p  = new int[n+2];
+00162    int *d  = new int[n+2];
+00163 
+00164    for (int i=1; i<=n ; ++i)
+00165    {
+00166       pi[i] = p[i] = i;
+00167       d[i] = -1;
+00168    }
+00169    d[1] = 0;
+00170    pi[0] = pi[n+1] = m;
+00171    register int a = 0, b = 0;
+00172    while (m > 1)
+00173    {
+00174       applyPermutation(connectivity, distance, a, b, pi,
+00175                bestCost, bestPerm, worstCost);
+00176       m = n;
+00177       while (pi[p[m]+d[m]] > m)
+00178       {
+00179      d[m] = -d[m];
+00180      --m;
+00181       }
+00182       // exchange the two neighbors a and b:
+00183       a = p[m];
+00184       b = p[m] + d[m];
+00185       register int temp = pi[a];
+00186       pi[a] = pi[b];
+00187       pi[b] = temp;
+00188       // exchange some more things:
+00189       temp = p[pi[p[m]]];
+00190       p[pi[p[m]]] = p[m];
+00191       p[m] = temp;
+00192    }
+00193    delete pi, p, d;
+00194 }
+\end{verbatim}\normalsize 
+\label{clusterPerm.C_a5}
+\index{clusterPerm.C@{cluster\-Perm.C}!permutateThisPartitioning@{permutateThisPartitioning}}
+\index{permutateThisPartitioning@{permutateThisPartitioning}!clusterPerm.C@{cluster\-Perm.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void permutate\-This\-Partitioning ({\bf TOTALPPTR} {\em total}, int {\em best\-Perm}[$\,$])}\hfill
+
+
+
+Definition at line 197 of file cluster\-Perm.C.
+
+Referenced by {\bf cluster\-Permutate}().\small\begin{verbatim}00198 {
+00199    CIRCUITPTR  c = total->bestpart;
+00200    if (c == NIL) return;
+00201    for (CIRINSTPTR cinst = c->cirinst; cinst != NIL; cinst = cinst->next)
+00202    {
+00203       int oldpartition = atoi(cinst->name);
+00204       int newpartition;
+00205       for (newpartition =0; newpartition < total->numparts; ++newpartition)
+00206      if (bestPerm[newpartition] == oldpartition)
+00207         break;
+00208       if (newpartition >= total->numparts)
+00209      err(5,"permutate: internal error 5675");
+00210       newpartition += 1;    // since we start counting from 1, not 0 ...
+00211       fs(cinst->name);
+00212       cinst->name = cs(form("%d",newpartition));
+00213    }
+00214 }
+\end{verbatim}\normalsize 

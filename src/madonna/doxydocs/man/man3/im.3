@@ -1,0 +1,163 @@
+.TH im.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+im.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include "image.h"\fR
+.br
+\fC#include "plaza.h"\fR
+.br
+\fC#include <libstruct.h>\fR
+.br
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "char* \fBballoc\fR (int size)"
+.br
+.ti -1c
+.RI "void \fBbfree\fR (char *blk)"
+.br
+.ti -1c
+.RI "short* \fBmtxidentity\fR (void)"
+.br
+.ti -1c
+.RI "void \fBmtxtranslate\fR (short *mtx,int p,int q)"
+.br
+.ti -1c
+.RI "void \fBmtxcopy\fR (short *dstmtx,short *srcmtx)"
+.br
+.ti -1c
+.RI "void \fBmtxapply\fR (int *out,int *in,short *mtx)"
+.br
+.ti -1c
+.RI "void \fBmtxaddvec\fR (short *mtx,int p,int q)"
+.br
+.ti -1c
+.RI "void \fBmtxapplytocrd\fR (short *out,short *in,short *mtx)"
+.br
+.ti -1c
+.RI "short* \fBmtxchain\fR (short *mtxb,short *mtxa)"
+.br
+.ti -1c
+.RI "void \fBinitimagedesc\fR (\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBdrawmirroraxis\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBcomputetransrotmtx\fR (\fBMIRRORPTR\fR mirror)"
+.br
+.ti -1c
+.RI "void \fBlabelallsectors\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBlabelsector\fR (int **stamp,int px,int py,int xsiz,int ysiz,int label)"
+.br
+.ti -1c
+.RI "void \fBlabelhalfsector\fR (int **stamp,int dx,int px,int py,int xsiz,int ysiz,int label)"
+.br
+.ti -1c
+.RI "void \fBmkequivalencelist\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBmtxdoubletonormal\fR (\fBMIRRORPTR\fR maxis)"
+.br
+.ti -1c
+.RI "void \fBreadmirroraxis\fR (\fBIMAGEDESCPTR\fR imagedescptr)"
+.br
+.ti -1c
+.RI "void \fBprintstamp\fR (\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBprintequiv\fR (\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBprintpivot\fR (\fBPIVOTPTR\fR pivot)"
+.br
+.ti -1c
+.RI "void \fBprintchild\fR (\fBPIVOTPTR\fR pivot)"
+.br
+.ti -1c
+.RI "void \fBprintmtx\fR (short *mtx)"
+.br
+.in -1c
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS char * balloc (int size)
+.PP
+Definition at line 14 of file stuff.C.
+.SS void bfree (char * blk)
+.PP
+Definition at line 20 of file stuff.C.
+.SS void computetransrotmtx (\fBMIRRORPTR\fR mirror)
+.PP
+Definition at line 96 of file initimagedsc.C.
+.SS void drawmirroraxis (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 41 of file initimagedsc.C.
+.SS void initimagedesc (\fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 11 of file initimagedsc.C.
+.SS void labelallsectors (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 129 of file initimagedsc.C.
+.SS void labelhalfsector (int ** stamp, int dx, int px, int py, int xsiz, int ysiz, int label)
+.PP
+Definition at line 166 of file initimagedsc.C.
+.SS void labelsector (int ** stamp, int px, int py, int xsiz, int ysiz, int label)
+.PP
+Definition at line 157 of file initimagedsc.C.
+.SS void mkequivalencelist (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 195 of file initimagedsc.C.
+.SS void mtxaddvec (short * mtx, int p, int q)
+.PP
+Definition at line 56 of file mtx.C.
+.SS void mtxapply (int * out, int * in, short * mtx)
+.PP
+Definition at line 49 of file mtx.C.
+.SS void mtxapplytocrd (short * out, short * in, short * mtx)
+.PP
+Definition at line 64 of file mtx.C.
+.SS short * mtxchain (short * mtxb, short * mtxa)
+.PP
+Definition at line 78 of file mtx.C.
+.SS void mtxcopy (short * dstmtx, short * srcmtx)
+.PP
+Definition at line 37 of file mtx.C.
+.SS void mtxdoubletonormal (\fBMIRRORPTR\fR maxis)
+.PP
+Definition at line 237 of file initimagedsc.C.
+.SS short * mtxidentity (void)
+.PP
+Definition at line 10 of file mtx.C.
+.SS void mtxtranslate (short * mtx, int p, int q)
+.PP
+Definition at line 29 of file mtx.C.
+.SS void printchild (\fBPIVOTPTR\fR pivot)
+.PP
+Definition at line 54 of file debug.C.
+.PP
+Referenced by \fBprintpivot\fR().
+.SS void printequiv (\fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 29 of file debug.C.
+.SS void printmtx (short * mtx)
+.PP
+Definition at line 78 of file debug.C.
+.SS void printpivot (\fBPIVOTPTR\fR pivot)
+.PP
+Definition at line 45 of file debug.C.
+.SS void printstamp (\fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 13 of file debug.C.
+.SS void readmirroraxis (\fBIMAGEDESCPTR\fR imagedescptr)
+.PP
+Definition at line 259 of file initimagedsc.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

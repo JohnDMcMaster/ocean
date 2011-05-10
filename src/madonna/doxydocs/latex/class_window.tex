@@ -1,0 +1,135 @@
+\subsection{Window  Class Reference}
+\label{Window}\index{Window@{Window}}
+{\tt \#include $<$window.h$>$}
+
+Inheritance diagram for Window:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_window.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Window} ({\bf Cluster} \&c,int w,int h)
+\item 
+{\bf $\sim$Window} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+void {\bf get\-Div} (char$\ast$ ,int $\ast$,int $\ast$,int$\ast$,int$\ast$)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf width}
+\item 
+int {\bf high}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Window_a0}
+\index{Window@{Window}!Window@{Window}}
+\index{Window@{Window}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Window::Window ({\bf Cluster} \& {\em c}, int {\em w}, int {\em h})}\hfill
+
+
+
+Definition at line 24 of file window.h.\small\begin{verbatim}00024 :Cluster(c),width(w),
+00025                                      high(h){}
+\end{verbatim}\normalsize 
+\label{Window_a1}
+\index{Window@{Window}!~Window@{$\sim$Window}}
+\index{~Window@{$\sim$Window}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Window::$\sim$Window ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 27 of file window.h.\small\begin{verbatim}00027 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Window_a4}
+\index{Window@{Window}!getDiv@{getDiv}}
+\index{getDiv@{getDiv}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Window::get\-Div (char $\ast$ {\em str}, int $\ast$ {\em col\-Num}, int $\ast$ {\em row\-Num}, int $\ast$ {\em new\-Width}, int $\ast$ {\em new\-High})}\hfill
+
+
+
+Definition at line 14 of file window.C.
+
+Referenced by {\bf Plcm::create\-Plane}().\small\begin{verbatim}00019 :
+00020 //             n=HORxVER
+00021 {
+00022   int num,x,y;
+00023   char c;
+00024 
+00025   istrstream  is(str);
+00026 
+00027   is >> num >> c >> x >> c >> y ;
+00028 
+00029   if(!is || x <= 0 || y <= 0)
+00030     usrErr("Window::getDiv",EINPDAT);
+00031 
+00032 
+00033   *newWidth=width/x;
+00034 
+00035   *newHigh=high/y;
+00036 
+00037 
+00038   *colNum=x;
+00039   *rowNum=y;
+00040 
+00041 }// Window::getDiv  //
+
+\end{verbatim}\normalsize 
+\label{Window_a3}
+\index{Window@{Window}!myName@{myName}}
+\index{myName@{myName}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Window::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a4})}.
+
+Definition at line 30 of file window.h.\small\begin{verbatim}00030 { return "Window"; }
+\end{verbatim}\normalsize 
+\label{Window_a2}
+\index{Window@{Window}!myNo@{myNo}}
+\index{myNo@{myNo}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Window::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a3})}.
+
+Definition at line 29 of file window.h.\small\begin{verbatim}00029 { return WindowClass; }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Window_m1}
+\index{Window@{Window}!high@{high}}
+\index{high@{high}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Window::high}\hfill
+
+
+
+Definition at line 33 of file window.h.\label{Window_m0}
+\index{Window@{Window}!width@{width}}
+\index{width@{width}!Window@{Window}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Window::width}\hfill
+
+
+
+Definition at line 32 of file window.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf window.h}\item 
+{\bf window.C}\end{CompactItemize}

@@ -1,0 +1,2 @@
+/x/i/n/c/d/o t:\lib\c0l.obj, 
+o:\madonna.exe, /o- lia\lia.lib /o- main\main.lib /o+ part\part.lib /o+ phil\phil.lib /o- ..\sealib\sealib.lib t:\lib\overlay.lib t:\lib\emu.lib t:\lib\mathl.lib t:\lib\cl.lib 

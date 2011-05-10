@@ -1,0 +1,149 @@
+\subsection{Array  Class Reference}
+\label{Array}\index{Array@{Array}}
+{\tt \#include $<$array.h$>$}
+
+Inheritance diagram for Array:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{6cm}
+\epsfbox{class_array.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Array} ( int top, int bottom = 0, {\bf size\-Type} a\-Delta = 0 )
+\item 
+virtual {\bf $\sim$Array} ()
+\item 
+{\bf Item}\& {\bf operator[$\,$]} ( int ) const
+\item 
+virtual void {\bf add} ( {\bf Item}\& )
+\item 
+void {\bf add\-At} ( {\bf Item}\&, int )
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Array_a0}
+\index{Array@{Array}!Array@{Array}}
+\index{Array@{Array}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array::Array (int {\em top}, int {\em bottom} = 0, {\bf size\-Type} {\em a\-Delta} = 0)}\hfill
+
+
+
+Definition at line 32 of file array.h.\small\begin{verbatim}00032 :
+00033     BaseArray( top, bottom, aDelta ) {}
+
+\end{verbatim}\normalsize 
+\label{Array_a1}
+\index{Array@{Array}!~Array@{$\sim$Array}}
+\index{~Array@{$\sim$Array}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Array::$\sim$Array ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 25 of file array.C.\small\begin{verbatim}00026 {
+00027 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Array_a3}
+\index{Array@{Array}!add@{add}}
+\index{add@{add}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Array::add ({\bf Item} \& {\em to\-Add})\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a6})}.
+
+Definition at line 42 of file array.C.\small\begin{verbatim}00043 {
+00044   while( theArray[ whereToAdd ] != NOTHING && whereToAdd <= topbound )
+00045   {
+00046     whereToAdd++;
+00047   } 
+00048   
+00049   if( whereToAdd > topbound )
+00050   {
+00051     reallocate( whereToAdd - bottombound + 1 );
+00052   }
+00053   theArray[ whereToAdd++ ] = &toAdd;
+00054   itemsInBox++;
+00055   
+00056 }
+\end{verbatim}\normalsize 
+\label{Array_a4}
+\index{Array@{Array}!addAt@{addAt}}
+\index{addAt@{addAt}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Array::add\-At ({\bf Item} \& {\em to\-Add}, int {\em at\-Index})}\hfill
+
+
+
+Definition at line 59 of file array.C.\small\begin{verbatim}00060 {
+00061   
+00062   if( atIndex > topbound )
+00063   {
+00064     reallocate( atIndex - bottombound + 1 );
+00065   }
+00066   
+00067   if ( theArray[ atIndex ] != NOTHING )
+00068   {
+00069     delete theArray[ atIndex ];
+00070     itemsInBox--;
+00071   }
+00072   theArray[ atIndex ] = &toAdd;
+00073   itemsInBox++;
+00074 }
+\end{verbatim}\normalsize 
+\label{Array_a6}
+\index{Array@{Array}!myName@{myName}}
+\index{myName@{myName}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Array::my\-Name () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a11})}.
+
+Reimplemented in {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a3})}, and {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a3})}.
+
+Definition at line 36 of file array.C.\small\begin{verbatim}00037 {
+00038   return "Array";
+00039 }
+\end{verbatim}\normalsize 
+\label{Array_a5}
+\index{Array@{Array}!myNo@{myNo}}
+\index{myNo@{myNo}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Array::my\-No () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Base\-Array} {\rm (p.\,\pageref{BaseArray_a10})}.
+
+Reimplemented in {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a2})}, and {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a2})}.
+
+Definition at line 30 of file array.C.\small\begin{verbatim}00031 {
+00032   return arrayClass; 
+00033 }
+\end{verbatim}\normalsize 
+\label{Array_a2}
+\index{Array@{Array}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Array@{Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Array::operator[$\,$] (int {\em at}) const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 46 of file array.h.\small\begin{verbatim}00047 {
+00048   return itemAt( at );
+00049 }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf array.h}\item 
+{\bf array.C}\end{CompactItemize}

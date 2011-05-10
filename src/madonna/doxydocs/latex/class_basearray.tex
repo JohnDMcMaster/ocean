@@ -1,0 +1,426 @@
+\subsection{Base\-Array  Class Reference}
+\label{BaseArray}\index{BaseArray@{Base\-Array}}
+{\tt \#include $<$basearr.h$>$}
+
+Inheritance diagram for Base\-Array:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{6cm}
+\epsfbox{class_basearray.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Base\-Array} ( int top, int bottom = 0, {\bf size\-Type} a\-Delta = 0 )
+\item 
+virtual {\bf $\sim$Base\-Array} ()
+\item 
+int {\bf bottom\-Bound} () const
+\item 
+int {\bf top\-Bound} () const
+\item 
+{\bf size\-Type} {\bf array\-Size} () const
+\item 
+virtual {\bf Box\-Iterator}\& {\bf init\-Iterator} () const
+\item 
+virtual void {\bf add} ( {\bf Item}\& ) = 0
+\item 
+void {\bf remove} ( int i )
+\item 
+void {\bf pick\-Out} ( int, int = 0 )
+\item 
+virtual void {\bf pick\-Out} ( const {\bf Item}\&, int = 0 )
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const = 0
+\item 
+virtual char$\ast$ {\bf my\-Name} () const = 0
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& ) const
+\item 
+virtual void {\bf print\-Contents\-On} ( ostream\& ) const
+\end{CompactItemize}
+\subsubsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+{\bf Item}\& {\bf item\-At} ( int i ) const
+\item 
+void {\bf reallocate} ( {\bf size\-Type} )
+\end{CompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf size\-Type} {\bf delta}
+\item 
+int {\bf bottombound}
+\item 
+int {\bf topbound}
+\item 
+int {\bf where\-To\-Add}
+\item 
+{\bf Item}$\ast$$\ast$ {\bf the\-Array}
+\end{CompactItemize}
+\subsubsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf Array\-Iterator}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{BaseArray_a0}
+\index{BaseArray@{Base\-Array}!BaseArray@{BaseArray}}
+\index{BaseArray@{BaseArray}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Base\-Array::Base\-Array (int {\em an\-Upper}, int {\em a\-Lower} = 0, {\bf size\-Type} {\em a\-Delta} = 0)}\hfill
+
+
+
+Definition at line 36 of file basearr.C.\small\begin{verbatim}00037 {
+00038   bottombound = whereToAdd = aLower;
+00039   topbound = anUpper;
+00040   delta = aDelta;
+00041   theArray = new Item *[ arraySize() ];
+00042   for( int i = 0; i < arraySize(); i++ )
+00043   {
+00044     theArray[ i ] = NOTHING;
+00045   } 
+00046 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a1}
+\index{BaseArray@{Base\-Array}!~BaseArray@{$\sim$BaseArray}}
+\index{~BaseArray@{$\sim$BaseArray}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Base\-Array::$\sim$Base\-Array ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 50 of file basearr.C.\small\begin{verbatim}00051 {
+00052   for( int i = 0; i < arraySize(); i++ )
+00053     if( theArray[ i ] != NOTHING )
+00054       delete theArray[ i ];
+00055   delete theArray;
+00056 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{BaseArray_a6}
+\index{BaseArray@{Base\-Array}!add@{add}}
+\index{add@{add}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual void Base\-Array::add ({\bf Item} \& {\em to\-Add})\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a2})}.
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a3})}.\label{BaseArray_a4}
+\index{BaseArray@{Base\-Array}!arraySize@{arraySize}}
+\index{arraySize@{arraySize}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf size\-Type} Base\-Array::array\-Size () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 70 of file basearr.h.
+
+Referenced by {\bf Base\-Array}(), {\bf is\-Equal}(), {\bf pick\-Out}(), {\bf reallocate}(), and {\bf $\sim$Base\-Array}().\small\begin{verbatim}00071 {
+00072   return sizeType( topbound - bottombound + 1 );
+00073 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a2}
+\index{BaseArray@{Base\-Array}!bottomBound@{bottomBound}}
+\index{bottomBound@{bottomBound}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::bottom\-Bound () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 37 of file basearr.h.\small\begin{verbatim}00038 { return bottombound; }
+\end{verbatim}\normalsize 
+\label{BaseArray_a5}
+\index{BaseArray@{Base\-Array}!initIterator@{initIterator}}
+\index{initIterator@{initIterator}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Box\-Iterator} \& Base\-Array::init\-Iterator () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a6})}.
+
+Definition at line 175 of file basearr.C.
+
+Referenced by {\bf print\-Contents\-On}().\small\begin{verbatim}00176 {
+00177   return *( (BoxIterator *)new ArrayIterator( *this ) );
+00178 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a12}
+\index{BaseArray@{Base\-Array}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::is\-Equal (const {\bf Item} \& {\em test\-Item}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Box} {\rm (p.\,\pageref{Box_a6})}.
+
+Definition at line 139 of file basearr.C.\small\begin{verbatim}00140 {
+00141   
+00142   if ( bottombound != ((BaseArray&)testItem).bottombound ||
+00143       topbound != ((BaseArray&)testItem).topbound )
+00144   {
+00145     return 0;
+00146   }
+00147   
+00148   for ( int i = 0; i < arraySize(); i++ )
+00149   {
+00150     if ( theArray[i] != NOTHING )
+00151     {
+00152       if ( ((BaseArray&)testItem).theArray[i] != NOTHING )
+00153       {
+00154     if ( *theArray[i] !=
+00155         *( ((BaseArray &)testItem).theArray[i] ) )
+00156     {
+00157       return 0; 
+00158     }
+00159       }
+00160       else 
+00161       {
+00162     return 0;
+00163       }
+00164     }
+00165     else
+00166       if ( ((BaseArray&)testItem).theArray[i] != NOTHING )
+00167       {
+00168     return 0;  
+00169       }
+00170   }  
+00171   return 1;
+00172 }
+\end{verbatim}\normalsize 
+\label{BaseArray_b0}
+\index{BaseArray@{Base\-Array}!itemAt@{itemAt}}
+\index{itemAt@{itemAt}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& Base\-Array::item\-At (int {\em i}) const\hspace{0.3cm}{\tt  [inline, protected]}}\hfill
+
+
+
+Definition at line 57 of file basearr.h.
+
+Referenced by {\bf Array\-Iterator::get}(), {\bf Array\-Iterator::operator Item \&}(), {\bf Array\-Iterator::operator++}(), and {\bf Array::operator[$\,$]}().\small\begin{verbatim}00058 { return *theArray[ i - bottombound ]; }
+\end{verbatim}\normalsize 
+\label{BaseArray_a11}
+\index{BaseArray@{Base\-Array}!myName@{myName}}
+\index{myName@{myName}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual char$\ast$ Base\-Array::my\-Name () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a9})}.
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a6})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a3})}, and {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a3})}.\label{BaseArray_a10}
+\index{BaseArray@{Base\-Array}!myNo@{myNo}}
+\index{myNo@{myNo}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf class\-Type} Base\-Array::my\-No () const\hspace{0.3cm}{\tt  [pure virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a8})}.
+
+Reimplemented in {\bf Array} {\rm (p.\,\pageref{Array_a5})}, {\bf Div\-Table} {\rm (p.\,\pageref{DivTable_a2})}, and {\bf Image\-Map} {\rm (p.\,\pageref{ImageMap_a2})}.\label{BaseArray_a9}
+\index{BaseArray@{Base\-Array}!pickOut@{pickOut}}
+\index{pickOut@{pickOut}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Base\-Array::pick\-Out (const {\bf Item} \& {\em to\-Pick}, int {\em delete\-Item\-Too} = 0)\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a3})}.
+
+Definition at line 60 of file basearr.C.\small\begin{verbatim}00061 {
+00062   if ( toPick == NOITEM )
+00063     return;
+00064   
+00065   for ( int i = 0; i < arraySize(); i++ )
+00066   {
+00067     if ( ( theArray[ i ] != NOTHING ) && ( *theArray[ i ] == toPick ) )
+00068     {
+00069       if ( deleteItemToo )
+00070       {
+00071     delete theArray[ i ];
+00072       }
+00073       theArray[ i ] = NOTHING;
+00074       itemsInBox--;
+00075       break;
+00076     }
+00077   } 
+00078 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a8}
+\index{BaseArray@{Base\-Array}!pickOut@{pickOut}}
+\index{pickOut@{pickOut}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Base\-Array::pick\-Out (int {\em at\-Index}, int {\em delete\-Item\-Too} = 0)}\hfill
+
+
+
+Definition at line 83 of file basearr.C.\small\begin{verbatim}00084 {
+00085   if ( theArray[ atIndex - bottombound ] != NOTHING )
+00086   {
+00087     if ( deleteItemToo )
+00088     {
+00089       delete ( theArray[ atIndex - bottombound ] );
+00090     }
+00091     theArray[ atIndex - bottombound ] = NOTHING;
+00092     itemsInBox--;
+00093   } 
+00094 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a13}
+\index{BaseArray@{Base\-Array}!printContentsOn@{printContentsOn}}
+\index{printContentsOn@{printContentsOn}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Base\-Array::print\-Contents\-On (ostream \& {\em out}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 181 of file basearr.C.\small\begin{verbatim}00182 {
+00183   BoxIterator& printIterator = initIterator();
+00184   
+00185   makeHeader( out );
+00186   
+00187   while( int(printIterator) != 0 )
+00188   {
+00189     Item& arrayItem = printIterator++;
+00190     if ( arrayItem != NOITEM )
+00191     {
+00192       arrayItem.print( out );
+00193       
+00194       if ( int(printIterator) != 0 )
+00195       {
+00196     makeSeparator( out );
+00197       }
+00198       else 
+00199       {
+00200     break;
+00201       }
+00202     } 
+00203   } 
+00204   
+00205   makeFooter( out );
+00206   delete (void*)(&printIterator);
+00207 }
+\end{verbatim}\normalsize 
+\label{BaseArray_b1}
+\index{BaseArray@{Base\-Array}!reallocate@{reallocate}}
+\index{reallocate@{reallocate}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Base\-Array::reallocate ({\bf size\-Type} {\em new\-Size})\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 98 of file basearr.C.
+
+Referenced by {\bf Array::add}(), and {\bf Array::add\-At}().\small\begin{verbatim}00099 {
+00100   if ( delta == 0 )
+00101   {
+00102     cerr << "Dummy:  Attempting to expand a fixed size array.";
+00103     sdfexit(1);
+00104   }
+00105   
+00106   int i;        
+00107   
+00108   if (newSize <= arraySize())
+00109   {
+00110      cerr << "assertion failed, file basearr.C\n" << flush;
+00111      sdfexit(1);
+00112   }
+00113 
+00114   sizeType adjustedSize = newSize + ( delta - ( newSize % delta ) );
+00115   
+00116   Item **newArray = new Item *[ adjustedSize ];
+00117   if ( newArray == 0 )
+00118   {
+00119     cerr << "Dummy:  Out of Memory";
+00120     sdfexit(1);
+00121   }
+00122   
+00123   for ( i = 0; i < arraySize(); i++ )
+00124   {
+00125     newArray[i] = theArray[i];
+00126   }
+00127   for (; i < adjustedSize; i++ )
+00128   {
+00129     newArray[i] = NOTHING;
+00130   }
+00131   
+00132   delete  theArray;
+00133   theArray = newArray;
+00134   topbound = adjustedSize + bottombound - 1;
+00135   
+00136 }
+\end{verbatim}\normalsize 
+\label{BaseArray_a7}
+\index{BaseArray@{Base\-Array}!remove@{remove}}
+\index{remove@{remove}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Base\-Array::remove (int {\em i})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 46 of file basearr.h.\small\begin{verbatim}00046 { pickOut( i, 1 ); }
+\end{verbatim}\normalsize 
+\label{BaseArray_a3}
+\index{BaseArray@{Base\-Array}!topBound@{topBound}}
+\index{topBound@{topBound}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::top\-Bound () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 39 of file basearr.h.\small\begin{verbatim}00040 { return topbound; }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Friends And Related Function Documentation}
+\label{BaseArray_l0}
+\index{BaseArray@{Base\-Array}!ArrayIterator@{ArrayIterator}}
+\index{ArrayIterator@{ArrayIterator}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}class Array\-Iterator\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 66 of file basearr.h.
+
+Referenced by {\bf init\-Iterator}().
+
+\subsubsection{Member Data Documentation}
+\label{BaseArray_n1}
+\index{BaseArray@{Base\-Array}!bottombound@{bottombound}}
+\index{bottombound@{bottombound}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::bottombound\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 61 of file basearr.h.\label{BaseArray_n0}
+\index{BaseArray@{Base\-Array}!delta@{delta}}
+\index{delta@{delta}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf size\-Type} Base\-Array::delta\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 60 of file basearr.h.\label{BaseArray_n4}
+\index{BaseArray@{Base\-Array}!theArray@{theArray}}
+\index{theArray@{theArray}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} $\ast$$\ast$ Base\-Array::the\-Array\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 64 of file basearr.h.\label{BaseArray_n2}
+\index{BaseArray@{Base\-Array}!topbound@{topbound}}
+\index{topbound@{topbound}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::topbound\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 62 of file basearr.h.\label{BaseArray_n3}
+\index{BaseArray@{Base\-Array}!whereToAdd@{whereToAdd}}
+\index{whereToAdd@{whereToAdd}!BaseArray@{Base\-Array}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Base\-Array::where\-To\-Add\hspace{0.3cm}{\tt  [protected]}}\hfill
+
+
+
+Definition at line 63 of file basearr.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf basearr.h}\item 
+{\bf basearr.C}\end{CompactItemize}

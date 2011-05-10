@@ -1,0 +1,126 @@
+\subsection{Prot\-Area  Class Reference}
+\label{ProtArea}\index{ProtArea@{Prot\-Area}}
+{\tt \#include $<$prot\-Area.h$>$}
+
+Inheritance diagram for Prot\-Area:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_protarea.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Prot\-Area} ({\bf Cluster} \&c)
+\item 
+{\bf $\sim$Prot\-Area} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+void {\bf update} (int hor,int ver)
+\item 
+int {\bf is} (int h,int v) const
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf max\-X}
+\item 
+int {\bf max\-Y}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ProtArea_a0}
+\index{ProtArea@{Prot\-Area}!ProtArea@{ProtArea}}
+\index{ProtArea@{ProtArea}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Prot\-Area::Prot\-Area ({\bf Cluster} \& {\em c})}\hfill
+
+
+
+Definition at line 17 of file prot\-Area.h.\small\begin{verbatim}00017 :Cluster(c),maxX(c.cX),
+00018                                      maxY(c.cY){}
+\end{verbatim}\normalsize 
+\label{ProtArea_a1}
+\index{ProtArea@{Prot\-Area}!~ProtArea@{$\sim$ProtArea}}
+\index{~ProtArea@{$\sim$ProtArea}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Prot\-Area::$\sim$Prot\-Area ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 20 of file prot\-Area.h.\small\begin{verbatim}00020 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{ProtArea_a5}
+\index{ProtArea@{Prot\-Area}!is@{is}}
+\index{is@{is}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Prot\-Area::is (int {\em h}, int {\em v}) const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 29 of file prot\-Area.h.\small\begin{verbatim}00029 {return h < maxX && v < maxY; }
+\end{verbatim}\normalsize 
+\label{ProtArea_a3}
+\index{ProtArea@{Prot\-Area}!myName@{myName}}
+\index{myName@{myName}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Prot\-Area::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a4})}.
+
+Definition at line 23 of file prot\-Area.h.\small\begin{verbatim}00023 { return "ProtArea"; }
+\end{verbatim}\normalsize 
+\label{ProtArea_a2}
+\index{ProtArea@{Prot\-Area}!myNo@{myNo}}
+\index{myNo@{myNo}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Prot\-Area::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a3})}.
+
+Definition at line 22 of file prot\-Area.h.\small\begin{verbatim}00022 { return ProtAreaClass; }
+\end{verbatim}\normalsize 
+\label{ProtArea_a4}
+\index{ProtArea@{Prot\-Area}!update@{update}}
+\index{update@{update}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Prot\-Area::update (int {\em h}, int {\em v})}\hfill
+
+
+
+Definition at line 14 of file prot\-Area.C.\small\begin{verbatim}00017 {
+00018   if(h > maxX && v >= maxY)
+00019     maxX=h;
+00020   if(v > maxY && h >= maxX)
+00021     maxY=v;
+00022 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{ProtArea_m0}
+\index{ProtArea@{Prot\-Area}!maxX@{maxX}}
+\index{maxX@{maxX}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Prot\-Area::max\-X}\hfill
+
+
+
+Definition at line 25 of file prot\-Area.h.\label{ProtArea_m1}
+\index{ProtArea@{Prot\-Area}!maxY@{maxY}}
+\index{maxY@{maxY}!ProtArea@{Prot\-Area}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Prot\-Area::max\-Y}\hfill
+
+
+
+Definition at line 26 of file prot\-Area.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf prot\-Area.h}\item 
+{\bf prot\-Area.C}\end{CompactItemize}

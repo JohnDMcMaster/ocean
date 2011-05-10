@@ -1,0 +1,223 @@
+\subsection{image.h File Reference}
+\label{image.h}\index{image.h@{image.h}}
+\subsubsection*{Compounds}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-EQUIVLIST}
+\item 
+struct {\bf \_\-IMAGEDESC}
+\item 
+struct {\bf \_\-MIRROR}
+\item 
+struct {\bf \_\-POWERLINE}
+\item 
+struct {\bf \_\-SECTORLIST}
+\end{CompactItemize}
+\subsubsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf X1}\ XL
+\item 
+\#define {\bf X2}\ XR
+\item 
+\#define {\bf Y1}\ YB
+\item 
+\#define {\bf Y2}\ YT
+\item 
+\#define {\bf New\-Mirror}(p) \ ((p)=({\bf MIRRORPTR})mnew(sizeof({\bf MIRROR})))
+\item 
+\#define {\bf New\-Sectorlist}(p) \ ((p)=({\bf SECTORLISTPTR})mnew(sizeof({\bf SECTORLIST})))
+\item 
+\#define {\bf New\-Equivlist}(p) \ ((p)=({\bf EQUIVLISTPTR})mnew(sizeof({\bf EQUIVLIST})))
+\item 
+\#define {\bf New\-Imagedesc}(p) \ ((p)=({\bf IMAGEDESCPTR})mnew(sizeof({\bf IMAGEDESC})))
+\item 
+\#define {\bf Free\-Mirror}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf MIRROR}))
+\item 
+\#define {\bf Free\-Sectorlist}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf SECTORLIST}))
+\item 
+\#define {\bf Free\-Equivlist}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf EQUIVLIST}))
+\item 
+\#define {\bf Free\-Imagedesc}(p) \ mfree((char $\ast$$\ast$)(p),sizeof({\bf IMAGEDESC}))
+\end{CompactItemize}
+\subsubsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef struct {\bf \_\-EQUIVLIST}
+ {\bf EQUIVLIST}
+\item 
+typedef struct {\bf \_\-EQUIVLIST}$\ast$ {\bf EQUIVLISTPTR}
+\item 
+typedef struct {\bf \_\-MIRROR}
+ {\bf MIRROR}
+\item 
+typedef struct {\bf \_\-MIRROR}$\ast$ {\bf MIRRORPTR}
+\item 
+typedef struct {\bf \_\-SECTORLIST}
+ {\bf SECTORLIST}
+\item 
+typedef struct {\bf \_\-SECTORLIST}$\ast$ {\bf SECTORLISTPTR}
+\item 
+typedef struct {\bf \_\-POWERLINE}
+ {\bf POWERLINE}
+\item 
+typedef struct {\bf \_\-POWERLINE} $\ast$ {\bf POWERLINEPTR}
+\item 
+typedef struct {\bf \_\-IMAGEDESC}
+ {\bf IMAGEDESC}
+\item 
+typedef struct {\bf \_\-IMAGEDESC}$\ast$ {\bf IMAGEDESCPTR}
+\end{CompactItemize}
+
+
+\subsubsection{Define Documentation}
+\label{image.h_a10}
+\index{image.h@{image.h}!FreeEquivlist@{FreeEquivlist}}
+\index{FreeEquivlist@{FreeEquivlist}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Equivlist(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf EQUIVLIST}))}\hfill
+
+
+
+Definition at line 78 of file image.h.\label{image.h_a11}
+\index{image.h@{image.h}!FreeImagedesc@{FreeImagedesc}}
+\index{FreeImagedesc@{FreeImagedesc}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Imagedesc(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf IMAGEDESC}))}\hfill
+
+
+
+Definition at line 79 of file image.h.\label{image.h_a8}
+\index{image.h@{image.h}!FreeMirror@{FreeMirror}}
+\index{FreeMirror@{FreeMirror}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Mirror(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf MIRROR}))}\hfill
+
+
+
+Definition at line 76 of file image.h.
+
+Referenced by {\bf Parser\-Interface::remove\-Duplicates}().\label{image.h_a9}
+\index{image.h@{image.h}!FreeSectorlist@{FreeSectorlist}}
+\index{FreeSectorlist@{FreeSectorlist}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Free\-Sectorlist(p)\ mfree((char $\ast$$\ast$)(p),sizeof({\bf SECTORLIST}))}\hfill
+
+
+
+Definition at line 77 of file image.h.\label{image.h_a6}
+\index{image.h@{image.h}!NewEquivlist@{NewEquivlist}}
+\index{NewEquivlist@{NewEquivlist}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Equivlist(p)\ ((p)=({\bf EQUIVLISTPTR})mnew(sizeof({\bf EQUIVLIST})))}\hfill
+
+
+
+Definition at line 74 of file image.h.
+
+Referenced by {\bf mkequivalencelist}().\label{image.h_a7}
+\index{image.h@{image.h}!NewImagedesc@{NewImagedesc}}
+\index{NewImagedesc@{NewImagedesc}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Imagedesc(p)\ ((p)=({\bf IMAGEDESCPTR})mnew(sizeof({\bf IMAGEDESC})))}\hfill
+
+
+
+Definition at line 75 of file image.h.\label{image.h_a4}
+\index{image.h@{image.h}!NewMirror@{NewMirror}}
+\index{NewMirror@{NewMirror}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Mirror(p)\ ((p)=({\bf MIRRORPTR})mnew(sizeof({\bf MIRROR})))}\hfill
+
+
+
+Definition at line 72 of file image.h.
+
+Referenced by {\bf readmirroraxis}().\label{image.h_a5}
+\index{image.h@{image.h}!NewSectorlist@{NewSectorlist}}
+\index{NewSectorlist@{NewSectorlist}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define New\-Sectorlist(p)\ ((p)=({\bf SECTORLISTPTR})mnew(sizeof({\bf SECTORLIST})))}\hfill
+
+
+
+Definition at line 73 of file image.h.
+
+Referenced by {\bf labelallsectors}().\label{image.h_a0}
+\index{image.h@{image.h}!X1@{X1}}
+\index{X1@{X1}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define X1\ XL}\hfill
+
+
+
+Definition at line 8 of file image.h.\label{image.h_a1}
+\index{image.h@{image.h}!X2@{X2}}
+\index{X2@{X2}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define X2\ XR}\hfill
+
+
+
+Definition at line 9 of file image.h.\label{image.h_a2}
+\index{image.h@{image.h}!Y1@{Y1}}
+\index{Y1@{Y1}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Y1\ YB}\hfill
+
+
+
+Definition at line 10 of file image.h.\label{image.h_a3}
+\index{image.h@{image.h}!Y2@{Y2}}
+\index{Y2@{Y2}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}\#define Y2\ YT}\hfill
+
+
+
+Definition at line 11 of file image.h.
+
+\subsubsection{Typedef Documentation}
+\label{image.h_a12}
+\index{image.h@{image.h}!EQUIVLIST@{EQUIVLIST}}
+\index{EQUIVLIST@{EQUIVLIST}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-EQUIVLIST}
+ EQUIVLIST}\hfill
+
+\label{image.h_a13}
+\index{image.h@{image.h}!EQUIVLISTPTR@{EQUIVLISTPTR}}
+\index{EQUIVLISTPTR@{EQUIVLISTPTR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-EQUIVLIST}$\ast$ EQUIVLISTPTR}\hfill
+
+\label{image.h_a20}
+\index{image.h@{image.h}!IMAGEDESC@{IMAGEDESC}}
+\index{IMAGEDESC@{IMAGEDESC}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-IMAGEDESC}
+ IMAGEDESC}\hfill
+
+\label{image.h_a21}
+\index{image.h@{image.h}!IMAGEDESCPTR@{IMAGEDESCPTR}}
+\index{IMAGEDESCPTR@{IMAGEDESCPTR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-IMAGEDESC}$\ast$ IMAGEDESCPTR}\hfill
+
+\label{image.h_a14}
+\index{image.h@{image.h}!MIRROR@{MIRROR}}
+\index{MIRROR@{MIRROR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-MIRROR}
+ MIRROR}\hfill
+
+\label{image.h_a15}
+\index{image.h@{image.h}!MIRRORPTR@{MIRRORPTR}}
+\index{MIRRORPTR@{MIRRORPTR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-MIRROR}$\ast$ MIRRORPTR}\hfill
+
+\label{image.h_a18}
+\index{image.h@{image.h}!POWERLINE@{POWERLINE}}
+\index{POWERLINE@{POWERLINE}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-POWERLINE}
+ POWERLINE}\hfill
+
+\label{image.h_a19}
+\index{image.h@{image.h}!POWERLINEPTR@{POWERLINEPTR}}
+\index{POWERLINEPTR@{POWERLINEPTR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-POWERLINE} $\ast$ POWERLINEPTR}\hfill
+
+\label{image.h_a16}
+\index{image.h@{image.h}!SECTORLIST@{SECTORLIST}}
+\index{SECTORLIST@{SECTORLIST}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-SECTORLIST}
+ SECTORLIST}\hfill
+
+\label{image.h_a17}
+\index{image.h@{image.h}!SECTORLISTPTR@{SECTORLISTPTR}}
+\index{SECTORLISTPTR@{SECTORLISTPTR}!image.h@{image.h}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-SECTORLIST}$\ast$ SECTORLISTPTR}\hfill
+

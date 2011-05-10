@@ -1,0 +1,85 @@
+.TH clusterPerm.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+clusterPerm.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stream.h>\fR
+.br
+\fC#include <stdlib.h>\fR
+.br
+\fC#include "matrixInt.h"\fR
+.br
+\fC#include "part.h"\fR
+.br
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "class \fBconnectInfo\fR"
+.br
+.ti -1c
+.RI "class \fBdistInfo\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBINFINITY\fR  1000000"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "int \fBclusterCost\fR (\fBconnectInfo\fR& connectivity, \fBdistInfo\fR& distance)"
+.br
+.ti -1c
+.RI "void \fBapplyPermutation\fR (\fBconnectInfo\fR& connectivity, \fBdistInfo\fR& distance, int a, int b, int *pi, int& bestCost, int bestPerm[], int& worstCost)"
+.br
+.ti -1c
+.RI "void \fBgeneratePermutations\fR (int& bestCost, int bestPerm[], int& worstCost, \fBconnectInfo\fR& connectivity, \fBdistInfo\fR& distance)"
+.br
+.ti -1c
+.RI "void \fBpermutateThisPartitioning\fR (\fBTOTALPPTR\fR total, int bestPerm[])"
+.br
+.ti -1c
+.RI "int \fBclusterPermutate\fR (\fBTOTALPPTR\fR total)"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define INFINITY  1000000
+.PP
+Definition at line 217 of file clusterPerm.C.
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS void applyPermutation (\fBconnectInfo\fR & connectivity, \fBdistInfo\fR & distance, int a, int b, int * pi, int & bestCost, int bestPerm[], int & worstCost)
+.PP
+Definition at line 126 of file clusterPerm.C.
+.PP
+Referenced by \fBgeneratePermutations\fR().
+.SS int clusterCost (\fBconnectInfo\fR & connectivity, \fBdistInfo\fR & distance)
+.PP
+Definition at line 115 of file clusterPerm.C.
+.PP
+Referenced by \fBapplyPermutation\fR(), and \fBclusterPermutate\fR().
+.SS int clusterPermutate (\fBTOTALPPTR\fR total)
+.PP
+Definition at line 219 of file clusterPerm.C.
+.SS void generatePermutations (int & bestCost, int bestPerm[], int & worstCost, \fBconnectInfo\fR & connectivity, \fBdistInfo\fR & distance)
+.PP
+Definition at line 154 of file clusterPerm.C.
+.PP
+Referenced by \fBclusterPermutate\fR().
+.SS void permutateThisPartitioning (\fBTOTALPPTR\fR total, int bestPerm[])
+.PP
+Definition at line 197 of file clusterPerm.C.
+.PP
+Referenced by \fBclusterPermutate\fR().
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

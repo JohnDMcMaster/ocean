@@ -1,0 +1,225 @@
+\subsection{expansion\-Grid\-Edge  Class Reference}
+\label{expansionGridEdge}\index{expansionGridEdge@{expansion\-Grid\-Edge}}
+{\tt \#include $<$glob\-Route.h$>$}
+
+Inheritance diagram for expansion\-Grid\-Edge:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_expansiongridedge.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf expansion\-Grid\-Edge} (int edge\-Length, int \_\-x\_\-, int \_\-y\_\-, {\bf edge\-Direction} dir)
+\item 
+{\bf add\-To\-Occupation} (int d)
+\item 
+{\bf add\-To\-Capacity} (int d)
+\item 
+const {\bf edge\-Direction} {\bf direction} ()
+\item 
+const int {\bf x} ()
+\item 
+const int {\bf y} ()
+\item 
+const int {\bf length} ()
+\item 
+virtual int {\bf e\-Weight} ()
+\item 
+virtual void {\bf print} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf \_\-capacity}
+\item 
+int {\bf \_\-occupation}
+\item 
+int {\bf \_\-length}
+\item 
+int {\bf under\-Capacity\-Penalty}
+\item 
+int {\bf over\-Capacity\-Reward}
+\item 
+int {\bf \_\-x}
+\item 
+int {\bf \_\-y}
+\item 
+{\bf edge\-Direction} {\bf \_\-direction}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{expansionGridEdge_a0}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!expansionGridEdge@{expansionGridEdge}}
+\index{expansionGridEdge@{expansionGridEdge}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid\-Edge::expansion\-Grid\-Edge (int {\em edge\-Length}, int {\em \_\-x\_\-}, int {\em \_\-y\_\-}, {\bf edge\-Direction} {\em dir})}\hfill
+
+
+
+Definition at line 194 of file glob\-Route.C.\small\begin{verbatim}00196 {
+00197    _capacity = 0;      // how many wires can be routed through this edge
+00198    _occupation = 0;    // how many wires are actually routed through here
+00199    _length = edgeLength;   // eg. the length of a wire that passes through here
+00200    underCapacityPenalty = 1;
+00201    overCapacityReward = 1;
+00202    _x = _x_;
+00203    _y = _y_;
+00204    _direction = dir;
+00205 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{expansionGridEdge_a2}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!addToCapacity@{addToCapacity}}
+\index{addToCapacity@{addToCapacity}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid\-Edge::add\-To\-Capacity (int {\em d})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 52 of file glob\-Route.h.\small\begin{verbatim}00052 {return _capacity += d;}
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a1}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!addToOccupation@{addToOccupation}}
+\index{addToOccupation@{addToOccupation}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid\-Edge::add\-To\-Occupation (int {\em d})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 51 of file glob\-Route.h.
+
+Referenced by {\bf expansion\-Grid::nwires}(), and {\bf expansion\-Grid::route\-Glob\-Net}().\small\begin{verbatim}00051 {return _occupation += d;}
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a3}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!direction@{direction}}
+\index{direction@{direction}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const {\bf edge\-Direction} expansion\-Grid\-Edge::direction ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 53 of file glob\-Route.h.\small\begin{verbatim}00053 {return _direction;}
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a7}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!eWeight@{eWeight}}
+\index{eWeight@{eWeight}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::e\-Weight ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 211 of file glob\-Route.C.\small\begin{verbatim}00212 {
+00213    return _length;
+00214 }
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a6}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!length@{length}}
+\index{length@{length}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const int expansion\-Grid\-Edge::length ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 56 of file glob\-Route.h.
+
+Referenced by {\bf expansion\-Grid::nwires}().\small\begin{verbatim}00056 {return _length;}
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a8}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!print@{print}}
+\index{print@{print}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid\-Edge::print ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 368 of file glob\-Route.C.\small\begin{verbatim}00369 {
+00370    char *s;
+00371    if (_direction == HorizontalEdge)
+00372       s = "Hor";
+00373    else
+00374       s = "Ver";
+00375    cout << form("egE(%d,%d,%s) ",_x,_y,s) << flush;
+00376 }
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a4}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!x@{x}}
+\index{x@{x}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const int expansion\-Grid\-Edge::x ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 54 of file glob\-Route.h.\small\begin{verbatim}00054 {return _x;}
+\end{verbatim}\normalsize 
+\label{expansionGridEdge_a5}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!y@{y}}
+\index{y@{y}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}const int expansion\-Grid\-Edge::y ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 55 of file glob\-Route.h.\small\begin{verbatim}00055 {return _y;}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{expansionGridEdge_o0}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_capacity@{\_\-capacity}}
+\index{_capacity@{\_\-capacity}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::\_\-capacity\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 45 of file glob\-Route.h.\label{expansionGridEdge_o7}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_direction@{\_\-direction}}
+\index{_direction@{\_\-direction}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf edge\-Direction} expansion\-Grid\-Edge::\_\-direction\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 48 of file glob\-Route.h.\label{expansionGridEdge_o2}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_length@{\_\-length}}
+\index{_length@{\_\-length}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::\_\-length\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 45 of file glob\-Route.h.\label{expansionGridEdge_o1}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_occupation@{\_\-occupation}}
+\index{_occupation@{\_\-occupation}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::\_\-occupation\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 45 of file glob\-Route.h.\label{expansionGridEdge_o5}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_x@{\_\-x}}
+\index{_x@{\_\-x}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::\_\-x\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 47 of file glob\-Route.h.\label{expansionGridEdge_o6}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!_y@{\_\-y}}
+\index{_y@{\_\-y}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::\_\-y\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 47 of file glob\-Route.h.\label{expansionGridEdge_o4}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!overCapacityReward@{overCapacityReward}}
+\index{overCapacityReward@{overCapacityReward}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::over\-Capacity\-Reward\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 46 of file glob\-Route.h.\label{expansionGridEdge_o3}
+\index{expansionGridEdge@{expansion\-Grid\-Edge}!underCapacityPenalty@{underCapacityPenalty}}
+\index{underCapacityPenalty@{underCapacityPenalty}!expansionGridEdge@{expansion\-Grid\-Edge}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Edge::under\-Capacity\-Penalty\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 46 of file glob\-Route.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf glob\-Route.h}\item 
+{\bf glob\-Route.C}\end{CompactItemize}

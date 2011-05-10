@@ -1,0 +1,220 @@
+\subsection{Clst  Class Reference}
+\label{Clst}\index{Clst@{Clst}}
+{\tt \#include $<$clst.h$>$}
+
+Inheritance diagram for Clst:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_clst.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Clst} (int g\-X,int g\-Y,int hor,int ver)
+\item 
+{\bf Clst} (int gx,int gy,int hor,int ver,int $\ast$$\ast$stamp)
+\item 
+{\bf Clst} (int ,int ,int ,int ,int $\ast$$\ast$,{\bf Lay\-Map} \&,{\bf layer\-Type} ,short$\ast$, int check = 0)
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual void {\bf print} ( ostream\& ) const
+\item 
+{\bf operator Boolean} ()
+\item 
+{\bf operator List \&} ()
+\item 
+Clst\& {\bf operator$|$=} (Clst \&other)
+\item 
+int {\bf operator \&} (Clst \&other)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf List} {\bf critical\-Points}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Clst_a0}
+\index{Clst@{Clst}!Clst@{Clst}}
+\index{Clst@{Clst}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst::Clst (int {\em g\-X}, int {\em g\-Y}, int {\em hor}, int {\em ver})}\hfill
+
+
+
+Definition at line 24 of file clst.h.\small\begin{verbatim}00024 :
+00025                      Cluster(gX,gY,hor,ver){};
+
+\end{verbatim}\normalsize 
+\label{Clst_a1}
+\index{Clst@{Clst}!Clst@{Clst}}
+\index{Clst@{Clst}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst::Clst (int {\em gx}, int {\em gy}, int {\em hor}, int {\em ver}, int $\ast$$\ast$ {\em stamp})}\hfill
+
+
+
+Definition at line 26 of file clst.h.\small\begin{verbatim}00026 :
+00027                          Cluster(gx,gy,hor,ver,stamp),
+00028                          criticalPoints(){};
+
+\end{verbatim}\normalsize 
+\label{Clst_a2}
+\index{Clst@{Clst}!Clst@{Clst}}
+\index{Clst@{Clst}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst::Clst (int {\em gx}, int {\em gy}, int {\em hor}, int {\em ver}, int $\ast$$\ast$ {\em stamp}, {\bf Lay\-Map} \& {\em l\-Map}, {\bf layer\-Type} {\em lay}, short $\ast$ {\em mtx}, int {\em check} = 0)}\hfill
+
+
+
+Definition at line 10 of file clst.C.\small\begin{verbatim}00011 :
+00012                        Cluster(gx,gy,hor,ver,stamp),
+00013                                criticalPoints() 
+00014 
+00015 //  Constructor : Creates one new cluster with some sectors marked
+00016 //  (if point gx,gy lays in this sector) and with an empty list of critical
+00017 //  points. If gx,gy lays in a critical area then some points are added to this
+00018 //  list.
+00019 //  iMap - image map for this layout 
+00020 //  lay  - layer
+00021 //  check - when 1 then create list of potential critical points.
+00022 // 
+00023 {
+00024   int a,b;
+00025 
+00026 //  layerType criLay;
+00027 
+00028   a=gx % hor;   // coordinates inside cluster
+00029   b=gy % ver;
+00030   if ( a < 0)
+00031     a+=hor;
+00032   if(b < 0)
+00033     b+=ver;
+00034 
+00035                 // first check if it's not a wire on mirror axis (then
+00036                 // Cluster::pattern == 0)
+00037   
+00038   if (check && lay != ViaLayer  && pattern == 0)  // metal 1 metal 2 or via between
+00039                                          // them
+00040   {
+00041     int net=lMap.findNetId(gx,gy,lay,mtx);
+00042 
+00043     if (net != 0)
+00044     {
+00045       CriPoint *criPtr =  new CriPoint( a,b,lay,net);
+00046       criticalPoints.add(*criPtr);
+00047     }
+00048   }
+00049 
+00050 }// Clst::Clst  //
+
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Clst_a4}
+\index{Clst@{Clst}!myName@{myName}}
+\index{myName@{myName}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Clst::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a4})}.
+
+Definition at line 34 of file clst.h.\small\begin{verbatim}00034 { return "Clst"; }
+\end{verbatim}\normalsize 
+\label{Clst_a3}
+\index{Clst@{Clst}!myNo@{myNo}}
+\index{myNo@{myNo}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Clst::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cluster} {\rm (p.\,\pageref{Cluster_a3})}.
+
+Definition at line 33 of file clst.h.\small\begin{verbatim}00033 { return ClstClass; }
+\end{verbatim}\normalsize 
+\label{Clst_a9}
+\index{Clst@{Clst}!operator &@{operator \&}}
+\index{operator &@{operator \&}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Clst::operator \& (Clst \& {\em other})}\hfill
+
+
+
+Definition at line 69 of file clst.C.\small\begin{verbatim}00073 {
+00074   if ( pattern & (clusterMapType)other)
+00075     return 1;
+00076   return criticalPoints & other.criticalPoints;
+00077 
+00078 }
+\end{verbatim}\normalsize 
+\label{Clst_a6}
+\index{Clst@{Clst}!operator Boolean@{operator Boolean}}
+\index{operator Boolean@{operator Boolean}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst::operator {\bf Boolean} ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 37 of file clst.h.\small\begin{verbatim}00037 {return (Boolean)(pattern != 0 || 
+00038                    criticalPoints.getItemsInBox()>0);}
+\end{verbatim}\normalsize 
+\label{Clst_a7}
+\index{Clst@{Clst}!operator List &@{operator List \&}}
+\index{operator List &@{operator List \&}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst::operator {\bf List} \& ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 39 of file clst.h.\small\begin{verbatim}00039 { return criticalPoints; }
+\end{verbatim}\normalsize 
+\label{Clst_a8}
+\index{Clst@{Clst}!operator\texttt{"|}=@{operator\texttt{"|}=}}
+\index{operator\texttt{"|}=@{operator\texttt{"|}=}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Clst \& Clst::operator$|$= (Clst \& {\em other})}\hfill
+
+
+
+Definition at line 54 of file clst.C.\small\begin{verbatim}00058 {
+00059   pattern|=other.pattern;
+00060 
+00061   criticalPoints |= other.criticalPoints;
+00062 
+00063   return *this;
+00064 
+00065 }
+\end{verbatim}\normalsize 
+\label{Clst_a5}
+\index{Clst@{Clst}!print@{print}}
+\index{print@{print}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Clst::print (ostream \& {\em o}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Point} {\rm (p.\,\pageref{Point_a6})}.
+
+Definition at line 81 of file clst.C.\small\begin{verbatim}00084 {
+00085   o << "Clst(cX=" << cX << ",cY=" << cY ;
+00086   o << ",pattern = " << hex << pattern << " " << dec;
+00087   o << criticalPoints << ")";
+00088 
+00089 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Clst_m0}
+\index{Clst@{Clst}!criticalPoints@{criticalPoints}}
+\index{criticalPoints@{criticalPoints}!Clst@{Clst}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List} Clst::critical\-Points}\hfill
+
+
+
+Definition at line 47 of file clst.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf clst.h}\item 
+{\bf clst.C}\end{CompactItemize}

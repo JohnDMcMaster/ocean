@@ -1,0 +1,88 @@
+.TH Transparency 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Transparency \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <pattern.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBTransparency\fR ()"
+.br
+.ti -1c
+.RI "\fBTransparency\fR (int sh,int sv)"
+.br
+.ti -1c
+.RI "\fB~Transparency\fR ()"
+.br
+.ti -1c
+.RI "Transparency& \fBoperator=\fR (const Transparency& o)"
+.br
+.ti -1c
+.RI "int \fBfreeTracks\fR (int dir)"
+.br
+.ti -1c
+.RI "Transparency* \fBtransform\fR (short* mtx)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBtransGridType\fR* \fBverGridMap\fR"
+.br
+.ti -1c
+.RI "\fBtransGridType\fR* \fBhorGridMap\fR"
+.br
+.ti -1c
+.RI "int \fBsizeHor\fR"
+.br
+.ti -1c
+.RI "int \fBsizeVer\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Transparency::Transparency ()\fC [inline]\fR
+.PP
+Definition at line 24 of file pattern.h.
+.SS Transparency::Transparency (int sh, int sv)
+.PP
+Definition at line 395 of file pattern.C.
+.SS Transparency::~Transparency ()
+.PP
+Definition at line 421 of file pattern.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int Transparency::freeTracks (int dir)
+.PP
+Definition at line 508 of file pattern.C.
+.SS Transparency & Transparency::operator= (const Transparency & other)
+.PP
+Definition at line 407 of file pattern.C.
+.SS Transparency * Transparency::transform (short * mtx)
+.PP
+Definition at line 432 of file pattern.C.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBtransGridType\fR * Transparency::horGridMap
+.PP
+Definition at line 33 of file pattern.h.
+.SS int Transparency::sizeHor
+.PP
+Definition at line 36 of file pattern.h.
+.SS int Transparency::sizeVer
+.PP
+Definition at line 37 of file pattern.h.
+.SS \fBtransGridType\fR * Transparency::verGridMap
+.PP
+Definition at line 32 of file pattern.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

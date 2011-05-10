@@ -1,0 +1,36 @@
+/* * * * * * * * * * * * * * * * 
+ *
+ * This is the file 'exlib8_93.ext'.
+ * Contents: The external sls-declarations of all cells
+ *           in the library 'exlib8_93'. (version aug 1993)
+ * Purpose:  To determine the terminal configuration of the
+ *           library cells and to include in your sls-description file.
+ * Created:  july 18th, 1993 by Patrick Groeneveld
+ * Modified: aug11, 1993 by by Patrick Groeneveld
+ *
+ */
+
+extern network buf20    (terminal A, Y, vss, vdd)
+extern network dfn10    (terminal D, CK, Q, QN, vss, vdd)
+extern network dfr11    (terminal D, R, CK, Q, QN, vss, vdd)
+extern network add10    (terminal A, B, CI, CO, Y, vss, vdd)
+extern network buf100   (terminal A, Y, vss, vdd)
+extern network itb20    (terminal A, EN, Y, vss, vdd)
+
+/* * * * * * * * * * * * * * * * * 
+ *
+ * Start of extracted cells 
+ * These cells start with capitals
+ * you probably never want to use these
+ * Therefore they are commented out now. 
+ * Remove the comment marks to enable them
+ */
+
+/* commented out (remove this line to enable)
+extern network Buf20    (terminal A, Y, vss, vdd)
+extern network Dfn10    (terminal D, CK, Q, QN, vss, vdd)
+extern network Dfr11    (terminal D, R, CK, Q, QN, vss, vdd)
+extern network Add10    (terminal A, B, CI, CO, Y, vss, vdd)
+extern network Buf100   (terminal A, Y, vss, vdd)
+extern network Itb20    (terminal A, EN, Y, vss, vdd)
+ end of out commenting (remove this line to enable) */

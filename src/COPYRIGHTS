@@ -1,0 +1,65 @@
+
+    OCEAN is a sea-of-gates chip design package designed at Delft University of
+    Technology in the Netherlands.
+    Copyright (C) 1992-1999 Patrick Groeneveld and Paul Stravers.
+
+    The OCEAN package can freely be used.  This program is distributed in the 
+    hope that it will be useful, but WITHOUT ANY WARRANTY.
+
+    If you have any questions or doubts about this copyright notice, contact
+    the authors either by e-mail or by paper mail. The address is
+
+         Paul Stravers or Patrick Groeneveld
+	 Delft Univerity of Technology
+         Faculty of Electrical Engineering
+	 Mekelweg 4
+	 2628CD  Delft
+	 The Netherlands
+
+	 internet e-mail: ocean@cas.et.tudelft.nl
+
+The OCEAN tools are a central component in the 'fishbone' Sea-of-Gates
+design trajectory. This trajectory covers the design from circuit level to a
+physical chip. All software and design effort for this trajectory was
+performed 'in house' at Delft University of Technology, department of
+electrical engineering. The following people contibuted to the trajectory:
+
+ ** The software **
+Circuit tools 'sls' 'simeye':  Arjan van Genderen 
+Extractor 'space':             Nick van der Meijs
+Ocean placer 'Madonna':        Paul Stravers and Irek Karkowski
+Ocean router 'trout':          Patrick Groeneveld
+Layout editor 'seadali':       Patrick Groeneveld (based on nelsis 'dali')
+Purifiers 'fish'and 'ghoti':   Patrick Groeneveld and Paul Stravers
+Database support (seadif):     Paul Stravers and Patrick Groeneveld
+Database support (Nelsis3):    Nick v/d Meijs, Paul Stravers, Patrick Groeneveld
+Database support (Nelsis4):    Alfred van der Hoeven and Pieter van der Wolf
+Nelsis backbone system:        Legacy of many people
+Overall software Coordination: Patrick Groeneveld 
+
+ ** The chip **
+The 'fishbone' image:          Paul Stravers and Patrick Groeneveld
+Multi-project chip:            Paul Stravers, Patrick Groeneveld,
+                               Reinder Nouta, Anton Bakker and Antoon Frehe
+Library design:                Anton Bakker, Emile Hendriks, 
+	                       Paul Stravers and Patrick Groeneveld
+Design 'empty' chip:           Rein Nouta, Paul Stravers, and Antoon Frehe
+Processing 125 empty wafers:   Philips Research Laboratories (via Rein Nouta)
+Metalization (DIMES):          Hugo Schellevis, Cees Beenakker
+Chip layout assembly:          Antoon Frehe
+Chip testing:                  Rob Bruinink and Hubert Schuiyt
+
+ ** documentation **
+Manuals/tutorials:             Paul Stravers, Patrick Groeneveld, Anton Bakker, 
+			       Emile Hendriks, Rein Nouta, Arjan van Genderen
+
+ ** and finally **
+The OP practicum commission:   Emile Hendriks, Anton Bakker, Reinder Nouta,
+			       Chris Verhoeven, Cees Beenakker and 
+			       Patrick Groeneveld
+Financial support by:	       Faculty of Electrical Engineering, TU Delft
+			       PICO (wafer processing, test equipment)
+			       IOP Sea-of-Gates project 
+			       Royal Dutch Academy of Arts and Sciences
+Special thanks to:             Prof. Ralph Otten, Prof. Patrick Dewilde
+

@@ -1,0 +1,37 @@
+
+   @(#)DESCRIPTION 1.2 11/10/91 Delft University of Technology
+
+The files in this directory contain a set of base classes for C++ programs.
+Currently they implement the following mathematical concepts:
+
+    #include <graph.h>    This implements a hyper graph. The vertices can be
+			  in more than one graph at a time. For instance, you
+			  can make a vertex part of hierarchy graph, with edges
+			  to its children and father vertices, while at the
+			  same time this vertex is part of another graph that
+			  represents an electrical circuit. There is no
+			  limitation  to the number of graphs a vertex can take
+			  part in.
+
+    #include <set.h>	  This implements a mathematical set. The elements in
+			  the set are the setElmts. Tree types of sets are
+			  supported. In the NonOrderedSet the elements are
+			  ordered as they arrive, that is, setElmts added early
+			  precede setElmts added at a later time. In the
+			  IncreasingOrderedSet the setElmts are ordered
+			  according to their ordinate value as returned by the
+			  virtual function setElmt.ordinate(). As the name
+			  suggests, setElmts with a smaller ordinate precede
+			  setElmt with larger ordinates. By now you might be
+			  able to figure yourself what a DecreasingOrderedSet
+			  behaves like. User definable extensions to these
+			  three set types are supported by a virtual function
+			  postInstallElmtHandler that is called just after a
+			  new element has been added to the set. I used this
+			  handler to implement a set whose ordered elements
+			  form a strictly monotonously decreasing function
+			  (aka "shape function" in the floorplanning world).
+
+Although the reason for the creation of these base classes was to support a
+sea-of-gates layout system, the classes have been defined in a very general
+way. They probably are applicable to a wide range of C++ programs.

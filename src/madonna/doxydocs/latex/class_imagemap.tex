@@ -1,0 +1,447 @@
+\subsection{Image\-Map  Class Reference}
+\label{ImageMap}\index{ImageMap@{Image\-Map}}
+{\tt \#include $<$image\-Map.h$>$}
+
+Inheritance diagram for Image\-Map:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{6cm}
+\epsfbox{class_imagemap.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Image\-Map} (int,int,int $\ast$$\ast$stamp)
+\item 
+{\bf $\sim$Image\-Map} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+int {\bf add\-Feeds} ({\bf List}\&,{\bf layer\-Type})
+\item 
+void {\bf critical\-Island} ({\bf List}\& ,{\bf layer\-Type} )
+\item 
+void {\bf critical\-Feed} ({\bf List}\& )
+\item 
+void {\bf clear\-Feed\-No} ( void )
+\item 
+{\bf cluster\-Map\-Type} {\bf recognize\-Neighbors} (int,int)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf layout\-Map\-Type}$\ast$$\ast$ {\bf map}
+\item 
+{\bf Array} {\bf cri\-Lines}
+\item 
+int$\ast$$\ast$ {\bf tmp\-Stamp}
+\item 
+int {\bf rows}
+\item 
+int {\bf cols}
+\end{CompactItemize}
+\subsubsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf Lay\-Map}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{ImageMap_a0}
+\index{ImageMap@{Image\-Map}!ImageMap@{ImageMap}}
+\index{ImageMap@{ImageMap}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Image\-Map::Image\-Map (int {\em x}, int {\em y}, int $\ast$$\ast$ {\em stamp})}\hfill
+
+
+
+Definition at line 17 of file image\-Map.C.\small\begin{verbatim}00017 :Array(5,0,5),criLines(2,0,2)
+00018 //
+00019 // Contructor : should call a parser of image.seadif file .
+00020 //
+00021 {
+00022 
+00023   rows=y;
+00024   cols=x;
+00025   tmpStamp=stamp;
+00026 
+00027   
+00028   map=(layoutMapType**)allocArray2(cols,rows,sizeof(layoutMapType) );
+00029 
+00030 
+00031 }
+\end{verbatim}\normalsize 
+\label{ImageMap_a1}
+\index{ImageMap@{Image\-Map}!~ImageMap@{$\sim$ImageMap}}
+\index{~ImageMap@{$\sim$ImageMap}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Image\-Map::$\sim$Image\-Map ()}\hfill
+
+
+
+Definition at line 34 of file image\-Map.C.\small\begin{verbatim}00037 {
+00038 
+00039   freeArray2(cols,(void**)map);
+00040 
+00041 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{ImageMap_a4}
+\index{ImageMap@{Image\-Map}!addFeeds@{addFeeds}}
+\index{addFeeds@{addFeeds}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Image\-Map::add\-Feeds ({\bf List} \& {\em feeds}, {\bf layer\-Type} {\em lay})}\hfill
+
+
+
+Definition at line 44 of file image\-Map.C.\small\begin{verbatim}00054 {
+00055   static unsigned  int actFeedFlag=1;  // this variable is used to keep a
+00056                                        // a unique identifier of a feed
+00057                                        // which is used to recognize grid
+00058                                        // points of the same feed marked in
+00059                                        // actual function call.
+00060   unsigned char uniCount=0;
+00061   Boolean horExt=false,
+00062           verExt=false;
+00063   List *lPtr;
+00064   
+00065   if(lay == DiffusionLayer || lay == Metal1Layer ) 
+00066                                    // these functions add criLines elements
+00067                                    // too.
+00068     criticalIsland(feeds,lay);
+00069   else
+00070   {
+00071     lPtr = new List();
+00072     uniCount = getItemsInBox();
+00073     criticalFeed(feeds);
+00074   }
+00075                                     // we have to check also if it's
+00076                                     // an external feed ( has an
+00077                                     // extension to neighbor cluster
+00078   for(ListIterator cIter(feeds);(Item&)cIter != NOITEM; cIter++)  
+00079   {
+00080     CriPoint &test = (CriPoint&)(Item&)cIter;
+00081 
+00082     if ( test.net & 0x01)     // means horizontal extension
+00083       horExt=true;
+00084     if (test.net & 0x02)      // means vertical extension
+00085       verExt=true;
+00086   }
+00087   
+00088 
+00089   for(ListIterator lIter(feeds);(Item&)lIter != NOITEM; lIter++)
+00090   {
+00091         CriPoint &feed = (CriPoint&)(Item&)lIter;
+00092 
+00093         if ( feed.net == 0)     // External feed flag - we have to skip it
+00094         {
+00095     int x=feed.x,
+00096         y=feed.y;
+00097     
+00098     if(x > cols || y > rows)
+00099     {
+00100       warning("ImageMap::addFeeds",EINPDAT);
+00101       return 1;
+00102     }
+00103     map[x][y].layers |=lay;
+00104     map[x][y].termNo=actFeedFlag;  // we use that field for feed
+00105                                              // identifier
+00106     if ( lay == PolyLayer )
+00107     {
+00108       map[x][y].uniNo = uniCount;
+00109       lPtr->add( *new Point(x,y) );
+00110     }
+00111     else  // we have to mark some grids in neighborhood
+00112     {
+00113       if (y < rows-1 && map[x][y+1].termNo == actFeedFlag)
+00114       {
+00115     map[x][y].upWay |= lay;
+00116     map[x][y+1].downWay |= lay;
+00117       }
+00118       if (y > 0 && map[x][y-1].termNo == actFeedFlag)
+00119       {
+00120     map[x][y].downWay |= lay;
+00121     map[x][y-1].upWay |= lay;
+00122       }
+00123       if(y == rows-1 && verExt)  
+00124       {
+00125     map[x][y].upWay |= lay;
+00126     map[x][0].downWay |= lay;
+00127     
+00128       }
+00129 
+00130 
+00131       if (x < cols-1 && map[x+1][y].termNo == actFeedFlag)
+00132       {
+00133     map[x][y].rightWay |= lay;
+00134     map[x+1][y].leftWay |= lay;
+00135       }
+00136       if (x > 0 && map[x-1][y].termNo == actFeedFlag)
+00137       {
+00138     map[x][y].leftWay |= lay;
+00139     map[x-1][y].rightWay |= lay;
+00140       }
+00141       if(x==cols-1 && horExt)  
+00142       {
+00143     map[x][y].rightWay |= lay;
+00144     map[0][y].leftWay |= lay;
+00145       }
+00146 
+00147         }
+00148         }
+00149   }
+00150 
+00151   if(lay == PolyLayer)
+00152   {
+00153     add( *lPtr );
+00154   }
+00155   
+00156   actFeedFlag++;
+00157   return 0;
+00158 
+00159 }
+\end{verbatim}\normalsize 
+\label{ImageMap_a7}
+\index{ImageMap@{Image\-Map}!clearFeedNo@{clearFeedNo}}
+\index{clearFeedNo@{clearFeedNo}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Image\-Map::clear\-Feed\-No (void)}\hfill
+
+
+
+Definition at line 273 of file image\-Map.C.\small\begin{verbatim}00276 {
+00277   for(int i=0;i<cols;i++)
+00278   {
+00279     layoutMapType *lPtr=map[i];
+00280     
+00281     for(int j=0;j<rows;j++,lPtr++)
+00282     {
+00283       lPtr->termNo=0;
+00284     }
+00285   }
+00286 }
+\end{verbatim}\normalsize 
+\label{ImageMap_a6}
+\index{ImageMap@{Image\-Map}!criticalFeed@{criticalFeed}}
+\index{criticalFeed@{criticalFeed}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Image\-Map::critical\-Feed ({\bf List} \& {\em feeds})}\hfill
+
+
+
+Definition at line 203 of file image\-Map.C.\small\begin{verbatim}00210 {
+00211   static Boolean  warningFlag=false;
+00212   ListIterator  lIter(feeds);
+00213   int secNo = -1;
+00214   
+00215   for(;(Item&)lIter != NOITEM;lIter++)
+00216   {
+00217     CriPoint &prev = (CriPoint&)(Item&)lIter;
+00218     CriPoint p(prev);
+00219     
+00220     if (p.net > 0)
+00221     {
+00222       if(!warningFlag)
+00223       {
+00224     cerr << "\nWarning : Universal feeds extending to neighbor basic cells";
+00225     cerr << "\n won't be checked for existance of net conflicts !!! \n";
+00226     warningFlag=true;
+00227       }
+00228     }
+00229     else
+00230     {
+00231       int thisSec = -tmpStamp[p.x<<1][p.y<<1];
+00232       
+00233       if( tmpStamp[p.x<<1][p.y<<1] > 0 || (secNo != -1 && thisSec != secNo) )  
+00234       {
+00235     List *newList= new List();
+00236     lIter.restart();
+00237     // first we have to build a temporary
+00238     // pattern needed during critical points
+00239     // recognition
+00240     
+00241     clusterMapType pat=0x0;
+00242     for(;(Item&)lIter != NOITEM;lIter++)
+00243     {
+00244       p = (CriPoint&)(Item&)lIter;
+00245       clusterMapType cm;
+00246       if( (cm=tmpStamp[p.x<<1][p.y<<1])>0)
+00247         pat |= recognizeNeighbors(p.x,p.y);
+00248       else
+00249         pat |= 0x01 << (-1-cm); 
+00250       // marking these sectors
+00251     }
+00252     lIter.restart();
+00253     
+00254     for(;(Item&)lIter != NOITEM;lIter++)
+00255     {
+00256       CriPoint &tmp=(CriPoint&)(Item&)lIter;
+00257       p = tmp;
+00258       
+00259       newList->add (* new CriCandidate(p.x,p.y,PolyLayer,0,pat) );
+00260     }
+00261     criLines.add(*newList);
+00262     return;
+00263       }
+00264       else
+00265     secNo=thisSec;
+00266     }
+00267   }
+00268   
+00269 
+00270 }
+\end{verbatim}\normalsize 
+\label{ImageMap_a5}
+\index{ImageMap@{Image\-Map}!criticalIsland@{criticalIsland}}
+\index{criticalIsland@{criticalIsland}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Image\-Map::critical\-Island ({\bf List} \& {\em feeds}, {\bf layer\-Type} {\em layer})}\hfill
+
+
+
+Definition at line 164 of file image\-Map.C.\small\begin{verbatim}00169 {
+00170   List *newList = new List();
+00171   Boolean added = false;
+00172   ListIterator  lIter(feeds);
+00173 
+00174   for(;(Item&)lIter != NOITEM;lIter++)
+00175   {
+00176     CriPoint &prev = (CriPoint&)(Item&)lIter;
+00177     CriPoint p(prev);
+00178 
+00179     if(p.net > 0)     // skip external feed flags
+00180       continue;
+00181 
+00182     if(tmpStamp[p.x<<1][p.y<<1] > 0)     // mirror axis 
+00183     {
+00184       added=true;
+00185                                          // now recognizing neighbors
+00186       clusterMapType nb=recognizeNeighbors(p.x,p.y);
+00187 
+00188       newList->add ( *new CriCandidate(p.x,p.y,layer,0,nb) );
+00189     }
+00190   }
+00191 
+00192   if (added)
+00193   {
+00194     criLines.add(* newList);
+00195   }
+00196   else
+00197   {
+00198     delete newList;
+00199   }
+00200 }
+\end{verbatim}\normalsize 
+\label{ImageMap_a3}
+\index{ImageMap@{Image\-Map}!myName@{myName}}
+\index{myName@{myName}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Image\-Map::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Array} {\rm (p.\,\pageref{Array_a6})}.
+
+Definition at line 51 of file image\-Map.h.\small\begin{verbatim}00051 { return "ImageMap"; }
+\end{verbatim}\normalsize 
+\label{ImageMap_a2}
+\index{ImageMap@{Image\-Map}!myNo@{myNo}}
+\index{myNo@{myNo}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Image\-Map::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Array} {\rm (p.\,\pageref{Array_a5})}.
+
+Definition at line 50 of file image\-Map.h.\small\begin{verbatim}00050 { return ImageMapClass; }
+\end{verbatim}\normalsize 
+\label{ImageMap_a8}
+\index{ImageMap@{Image\-Map}!recognizeNeighbors@{recognizeNeighbors}}
+\index{recognizeNeighbors@{recognizeNeighbors}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf cluster\-Map\-Type} Image\-Map::recognize\-Neighbors (int {\em x}, int {\em y})}\hfill
+
+
+
+Definition at line 289 of file image\-Map.C.\small\begin{verbatim}00292 {
+00293 
+00294   clusterMapType nb=0x0;
+00295   int m1=x<<1,m2=y<<1;
+00296   clusterMapType cm;
+00297   int maxX=2*cols-1,
+00298       maxY=2*rows-1;
+00299     int i,j;
+00300 
+00301     for(i=m1-1;i<=m1+1;i++)
+00302         for(j=m2-1;j<=m2+1;j++)
+00303     {
+00304       if ( i>=0 && i<maxX && j>=0 && j<maxY && 
+00305       i!= m1 && j!=m2 && (cm=tmpStamp[i][j]) < 0)  
+00306     // means- there's a sector
+00307     nb |= 0x01 << (-1-cm);  
+00308     }
+00309   int highCount=0;
+00310   clusterMapType test=nb;
+00311 
+00312   for(int a=0;a< sizeof(clusterMapType)*8;a++,test = test >> 1)
+00313     if (test & 0x01)
+00314       highCount++; 
+00315   if (highCount < 2)
+00316     return 0;           // that's 'cos 0 means leave this point
+00317   else
+00318     return nb;
+00319 
+00320 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Friends And Related Function Documentation}
+\label{ImageMap_l0}
+\index{ImageMap@{Image\-Map}!LayMap@{LayMap}}
+\index{LayMap@{LayMap}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}class Lay\-Map\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 54 of file image\-Map.h.
+
+\subsubsection{Member Data Documentation}
+\label{ImageMap_o4}
+\index{ImageMap@{Image\-Map}!cols@{cols}}
+\index{cols@{cols}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Image\-Map::cols\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 71 of file image\-Map.h.\label{ImageMap_o1}
+\index{ImageMap@{Image\-Map}!criLines@{criLines}}
+\index{criLines@{criLines}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Array} Image\-Map::cri\-Lines\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 67 of file image\-Map.h.\label{ImageMap_o0}
+\index{ImageMap@{Image\-Map}!map@{map}}
+\index{map@{map}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf layout\-Map\-Type} $\ast$$\ast$ Image\-Map::map\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 66 of file image\-Map.h.\label{ImageMap_o3}
+\index{ImageMap@{Image\-Map}!rows@{rows}}
+\index{rows@{rows}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Image\-Map::rows\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 70 of file image\-Map.h.\label{ImageMap_o2}
+\index{ImageMap@{Image\-Map}!tmpStamp@{tmpStamp}}
+\index{tmpStamp@{tmpStamp}!ImageMap@{Image\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$$\ast$ Image\-Map::tmp\-Stamp\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 68 of file image\-Map.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf image\-Map.h}\item 
+{\bf image\-Map.C}\end{CompactItemize}

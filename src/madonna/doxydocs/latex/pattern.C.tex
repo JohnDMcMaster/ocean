@@ -1,0 +1,46 @@
+\subsection{pattern.C File Reference}
+\label{pattern.C}\index{pattern.C@{pattern.C}}
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$math.h$>$}\par
+{\tt \#include "pattern.h"}\par
+{\tt \#include "clst.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf layer\-Type} {\bf recognize\-Layer} (short layer)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{pattern.C_a0}
+\index{pattern.C@{pattern.C}!recognizeLayer@{recognizeLayer}}
+\index{recognizeLayer@{recognizeLayer}!pattern.C@{pattern.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf layer\-Type} recognize\-Layer (short {\em layer})}\hfill
+
+
+
+Definition at line 218 of file pattern.C.\small\begin{verbatim}00221 {
+00222   layerType l;
+00223 
+00224   switch (layer)
+00225     {
+00226     case 100:
+00227       l = ViaLayer;
+00228       break;
+00229     case 1:
+00230       l = Metal1Layer;  
+00231       break;
+00232     case 2:
+00233       l = Metal2Layer;  
+00234       break;
+00235     case 101:
+00236       l = MetalsViaLayer;  
+00237       break;
+00238     default:
+00239       l = Metal2Layer;
+00240     }
+00241   return l;
+00242 
+00243 }
+\end{verbatim}\normalsize 

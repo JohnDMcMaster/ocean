@@ -1,0 +1,106 @@
+.TH expansionGrid 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+expansionGrid \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <globRoute.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBexpansionGrid\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "const int \fBnx\fR ()"
+.br
+.ti -1c
+.RI "const int \fBny\fR ()"
+.br
+.ti -1c
+.RI "void \fBinstance2xy\fR (CIRINSTPTR cirinst, int& x, int& y)"
+.br
+.ti -1c
+.RI "void \fBrouteGlobNet\fR (\fBglobNet\fR *)"
+.br
+.ti -1c
+.RI "void \fBrouteGlobNets\fR ()"
+.br
+.ti -1c
+.RI "void \fBsummarizeGlobNets\fR ()"
+.br
+.ti -1c
+.RI "int \fBnwires\fR (\fBpointOfCompass\fR poc1, \fBpointOfCompass\fR poc2, int x, int y, int *length =NIL)"
+.br
+.ti -1c
+.RI "\fBexpansionGridEdge\fR* \fBfindEdge\fR (\fBexpansionGridVertex\fR *, \fBpointOfCompass\fR)"
+.br
+.ti -1c
+.RI "int \fBroundWiresToCells\fR (int direction, int n_wires)"
+.br
+.ti -1c
+.RI "void \fBprintRoute\fR (\fBglobNet\fR *, ostream& =cout)"
+.br
+.ti -1c
+.RI "void \fBprintRouting\fR (ostream& =cout)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS expansionGrid::expansionGrid (\fBTOTALPPTR\fR total)
+.PP
+Definition at line 27 of file globRoute.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBexpansionGridEdge\fR * expansionGrid::findEdge (\fBexpansionGridVertex\fR * v, \fBpointOfCompass\fR poc)
+.PP
+Definition at line 599 of file globRoute.C.
+.PP
+Referenced by \fBnwires\fR(), and \fBprintRoute\fR().
+.SS void expansionGrid::instance2xy (CIRINSTPTR cirinst, int & x, int & y)
+.PP
+Definition at line 184 of file globRoute.C.
+.SS int expansionGrid::nwires (\fBpointOfCompass\fR poc1, \fBpointOfCompass\fR poc2, int x, int y, int * length = NIL)
+.PP
+Definition at line 514 of file globRoute.C.
+.SS const int expansionGrid::nx ()\fC [inline]\fR
+.PP
+Definition at line 136 of file globRoute.h.
+.PP
+Referenced by \fBprintRoute\fR().
+.SS const int expansionGrid::ny ()\fC [inline]\fR
+.PP
+Definition at line 137 of file globRoute.h.
+.PP
+Referenced by \fBprintRoute\fR().
+.SS void expansionGrid::printRoute (\fBglobNet\fR * globnet, ostream & thestream = cout)
+.PP
+Definition at line 389 of file globRoute.C.
+.SS void expansionGrid::printRouting (ostream & thestream = cout)
+.PP
+Definition at line 437 of file globRoute.C.
+.SS int expansionGrid::roundWiresToCells (int channelDirection, int n_wires)
+.PP
+Definition at line 545 of file globRoute.C.
+.SS void expansionGrid::routeGlobNet (\fBglobNet\fR * gnet)
+.PP
+Definition at line 300 of file globRoute.C.
+.PP
+Referenced by \fBrouteGlobNets\fR().
+.SS void expansionGrid::routeGlobNets ()
+.PP
+Definition at line 264 of file globRoute.C.
+.PP
+Referenced by \fBmadonna\fR().
+.SS void expansionGrid::summarizeGlobNets ()
+.PP
+Definition at line 468 of file globRoute.C.
+.PP
+Referenced by \fBrouteGlobNets\fR().
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

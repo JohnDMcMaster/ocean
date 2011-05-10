@@ -1,0 +1,256 @@
+.TH part.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+part.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sea_decl.h>\fR
+.br
+\fC#include "genpart.h"\fR
+.br
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_row_clm_transformation_arrays\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBinitnetstate\fR (\fBNETSTATEPTR\fR netstate,\fBCFUNC\fR *costfunction)"
+.br
+.ti -1c
+.RI "int \fBnetstatecost\fR (int, \fBNETSTATEPTR\fR netstate)"
+.br
+.ti -1c
+.RI "int \fBnetstatecost2\fR (int, int xl,int xr,int yb,int yt,int deviation)"
+.br
+.ti -1c
+.RI "int \fBgainnetstate\fR (\fBNETSTATEPTR\fR netstate,int to_area,int from_area, \fBCFUNC\fR *costfunction)"
+.br
+.ti -1c
+.RI "void \fBkeep_track_of_bbx_after_decr\fR (int *,int *,int from_bar, int *barlist[])"
+.br
+.ti -1c
+.RI "void \fBkeep_track_of_bbx_after_decr_fake\fR (int *,int *,int from_bar, int *barlist[])"
+.br
+.ti -1c
+.RI "void \fBkeep_track_of_bbx_after_incr\fR (int *,int *,int to_bar,int *barlist[])"
+.br
+.ti -1c
+.RI "void \fBkeep_track_of_bbx_after_incr_fake\fR (int *,int *,int to_bar)"
+.br
+.ti -1c
+.RI "\fBNETSTATEPTR\fR \fBdomove_and_copy_netstate\fR (\fBNETSTATEPTR\fR oldnetstate, int *newstatebuf,int to_area,int from_area, \fBCFUNC\fR *costfunction)"
+.br
+.ti -1c
+.RI "int* \fBstartofstatebuf\fR (\fBNETSTATEPTR\fR netstate)"
+.br
+.ti -1c
+.RI "int \fBsizeofstatebuf\fR (\fBNETSTATEPTR\fR netstate)"
+.br
+.ti -1c
+.RI "int \fBsizeofstatebuf2\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBassignstatebuf\fR (\fBNETSTATEPTR\fR netstate,int *statebuf)"
+.br
+.ti -1c
+.RI "int \fBdopartitioning\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBmovecandidateandupdategains\fR (\fBPARTLISTPTR\fR thecandidate,\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBupdategains\fR (\fBPARTCELLPTR\fR thecell,int dstparti,int srcparti,\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBupdategainsincellsinnet\fR (NETPTR net,int movdst,int movsrc,\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBrememberthispartitioning\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBfixnetlist\fR (CIRCUITPTR ntop,CIRCUITPTR otop)"
+.br
+.ti -1c
+.RI "void \fBcopycpr\fR (CIRCUITPTR ntop,NETPTR nnet,CIRPORTREFPTR ocpr,int disappears)"
+.br
+.ti -1c
+.RI "int \fBnetdisappearsinsinglepartition\fR (NETPTR onet)"
+.br
+.ti -1c
+.RI "int \fBalreadyhavefun\fR (STRING fname,LIBRARYPTR lib)"
+.br
+.ti -1c
+.RI "char* \fBballoc\fR (int size)"
+.br
+.ti -1c
+.RI "void \fBbfree\fR (char *blk)"
+.br
+.ti -1c
+.RI "int \fBgenpart\fR (\fBTOTALPPTR\fR *totalout,CIRCUITPTR topcell,int nx,int ny, \fBCFUNC\fR *costfunction,int repeat)"
+.br
+.ti -1c
+.RI "int \fBreadlayoutofchildren\fR (long what,CIRCUITPTR topcell,int expandtobottom)"
+.br
+.ti -1c
+.RI "int \fBplazareadlayout\fR (long what,CIRCUITPTR c,int expandtobottom)"
+.br
+.ti -1c
+.RI "int \fBprefabmakemembersandcandidates\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "int \fBexitpartitionstructures\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "void \fBmadonna_\fR (\fBTOTALPPTR\fR *total,CIRCUITPTR circuit, int calldepth)"
+.br
+.ti -1c
+.RI "int \fBcostquad\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "void \fBmadonnastat\fR (\fBTOTALPPTR\fR total)"
+.br
+.ti -1c
+.RI "int \fBcost3x3\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBcost4x4\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBcost5x4\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBcost6x4\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBcost8x4\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBcost16x4\fR (int netdistr[],int numparts)"
+.br
+.ti -1c
+.RI "int \fBgencost\fR (int netdistr[],register int total,register int hor)"
+.br
+.ti -1c
+.RI "int \fBinitnetcostinfo\fR (void)"
+.br
+.ti -1c
+.RI "int \fBmakeRandomMove\fR (\fBTOTALPPTR\fR)"
+.br
+.ti -1c
+.RI "void \fBupdateTemperature\fR (\fBTOTALPPTR\fR)"
+.br
+.ti -1c
+.RI "void \fBraise_alarm_flag\fR (int signumber)"
+.br
+.ti -1c
+.RI "void \fBenable_reset_alarm_flag\fR (int signumber)"
+.br
+.ti -1c
+.RI "void \fBinitsignals\fR (void)"
+.br
+.in -1c
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS int alreadyhavefun (STRING fname, LIBRARYPTR lib)
+.PP
+.SS void assignstatebuf (\fBNETSTATEPTR\fR netstate, int * statebuf)
+.PP
+.SS char * balloc (int size)
+.PP
+Definition at line 14 of file stuff.C.
+.SS void bfree (char * blk)
+.PP
+Definition at line 20 of file stuff.C.
+.SS void copycpr (CIRCUITPTR ntop, NETPTR nnet, CIRPORTREFPTR ocpr, int disappears)
+.PP
+.SS int cost16x4 (int netdistr[], int numparts)
+.PP
+.SS int cost3x3 (int netdistr[], int numparts)
+.PP
+.SS int cost4x4 (int netdistr[], int numparts)
+.PP
+.SS int cost5x4 (int netdistr[], int numparts)
+.PP
+.SS int cost6x4 (int netdistr[], int numparts)
+.PP
+.SS int cost8x4 (int netdistr[], int numparts)
+.PP
+.SS int costquad (int netdistr[], int numparts)
+.PP
+.SS \fBNETSTATEPTR\fR domove_and_copy_netstate (\fBNETSTATEPTR\fR oldnetstate, int * newstatebuf, int to_area, int from_area, \fBCFUNC\fR * costfunction)
+.PP
+.SS int dopartitioning (\fBTOTALPPTR\fR total)
+.PP
+.SS void enable_reset_alarm_flag (int signumber)
+.PP
+.SS int exitpartitionstructures (\fBTOTALPPTR\fR total)
+.PP
+.SS void fixnetlist (CIRCUITPTR ntop, CIRCUITPTR otop)
+.PP
+.SS int gainnetstate (\fBNETSTATEPTR\fR netstate, int to_area, int from_area, \fBCFUNC\fR * costfunction)
+.PP
+.SS int gencost (int netdistr[], register int total, register int hor)
+.PP
+.SS int genpart (\fBTOTALPPTR\fR * totalout, CIRCUITPTR topcell, int nx, int ny, \fBCFUNC\fR * costfunction, int repeat)
+.PP
+.SS void init_row_clm_transformation_arrays (\fBTOTALPPTR\fR total)
+.PP
+.SS int initnetcostinfo (void)
+.PP
+Referenced by \fBmadonna\fR().
+.SS void initnetstate (\fBNETSTATEPTR\fR netstate, \fBCFUNC\fR * costfunction)
+.PP
+.SS void initsignals (void)
+.PP
+Referenced by \fBINITIAL_COOLING\fR(), and \fBmain\fR().
+.SS void keep_track_of_bbx_after_decr (int *, int *, int from_bar, int * barlist[])
+.PP
+.SS void keep_track_of_bbx_after_decr_fake (int *, int *, int from_bar, int * barlist[])
+.PP
+.SS void keep_track_of_bbx_after_incr (int *, int *, int to_bar, int * barlist[])
+.PP
+.SS void keep_track_of_bbx_after_incr_fake (int *, int *, int to_bar)
+.PP
+.SS void madonna_ (\fBTOTALPPTR\fR * total, CIRCUITPTR circuit, int calldepth)
+.PP
+Referenced by \fBmadonna\fR().
+.SS void madonnastat (\fBTOTALPPTR\fR total)
+.PP
+.SS int makeRandomMove (\fBTOTALPPTR\fR)
+.PP
+.SS void movecandidateandupdategains (\fBPARTLISTPTR\fR thecandidate, \fBTOTALPPTR\fR total)
+.PP
+.SS int netdisappearsinsinglepartition (NETPTR onet)
+.PP
+.SS int netstatecost (int, \fBNETSTATEPTR\fR netstate)
+.PP
+.SS int netstatecost2 (int, int xl, int xr, int yb, int yt, int deviation)
+.PP
+.SS int plazareadlayout (long what, CIRCUITPTR c, int expandtobottom)
+.PP
+.SS int prefabmakemembersandcandidates (\fBTOTALPPTR\fR total)
+.PP
+.SS void raise_alarm_flag (int signumber)
+.PP
+.SS int readlayoutofchildren (long what, CIRCUITPTR topcell, int expandtobottom)
+.PP
+.SS void rememberthispartitioning (\fBTOTALPPTR\fR total)
+.PP
+.SS int sizeofstatebuf (\fBNETSTATEPTR\fR netstate)
+.PP
+.SS int sizeofstatebuf2 (\fBTOTALPPTR\fR total)
+.PP
+.SS int* startofstatebuf (\fBNETSTATEPTR\fR netstate)
+.PP
+.SS void updateTemperature (\fBTOTALPPTR\fR)
+.PP
+.SS void updategains (\fBPARTCELLPTR\fR thecell, int dstparti, int srcparti, \fBTOTALPPTR\fR total)
+.PP
+.SS void updategainsincellsinnet (NETPTR net, int movdst, int movsrc, \fBTOTALPPTR\fR total)
+.PP
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

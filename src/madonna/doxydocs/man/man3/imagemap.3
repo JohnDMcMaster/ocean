@@ -1,0 +1,94 @@
+.TH ImageMap 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ImageMap \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <imageMap.h>\fR
+.PP
+Inherits \fBArray\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBImageMap\fR (int,int,int **stamp)"
+.br
+.ti -1c
+.RI "\fB~ImageMap\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "int \fBaddFeeds\fR (\fBList\fR&,\fBlayerType\fR)"
+.br
+.ti -1c
+.RI "void \fBcriticalIsland\fR (\fBList\fR& ,\fBlayerType\fR )"
+.br
+.ti -1c
+.RI "void \fBcriticalFeed\fR (\fBList\fR& )"
+.br
+.ti -1c
+.RI "void \fBclearFeedNo\fR ( void )"
+.br
+.ti -1c
+.RI "\fBclusterMapType\fR \fBrecognizeNeighbors\fR (int,int)"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "class \fBLayMap\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS ImageMap::ImageMap (int x, int y, int ** stamp)
+.PP
+Definition at line 17 of file imageMap.C.
+.SS ImageMap::~ImageMap ()
+.PP
+Definition at line 34 of file imageMap.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int ImageMap::addFeeds (\fBList\fR & feeds, \fBlayerType\fR lay)
+.PP
+Definition at line 44 of file imageMap.C.
+.SS void ImageMap::clearFeedNo (void)
+.PP
+Definition at line 273 of file imageMap.C.
+.SS void ImageMap::criticalFeed (\fBList\fR & feeds)
+.PP
+Definition at line 203 of file imageMap.C.
+.SS void ImageMap::criticalIsland (\fBList\fR & feeds, \fBlayerType\fR layer)
+.PP
+Definition at line 164 of file imageMap.C.
+.SS char * ImageMap::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBArray\fR.
+.PP
+Definition at line 51 of file imageMap.h.
+.SS \fBclassType\fR ImageMap::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBArray\fR.
+.PP
+Definition at line 50 of file imageMap.h.
+.SS \fBclusterMapType\fR ImageMap::recognizeNeighbors (int x, int y)
+.PP
+Definition at line 289 of file imageMap.C.
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS class LayMap\fC [friend]\fR
+.PP
+Definition at line 54 of file imageMap.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

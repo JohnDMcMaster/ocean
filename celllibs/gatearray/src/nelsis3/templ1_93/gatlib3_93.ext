@@ -1,0 +1,22 @@
+/* * * * * * * * * * * * * * * * 
+ *
+ * This is the file 'oplib1_93.ext'.
+ * Contents: The external sls-declarations of all cells
+ *           in the library oplib1_93. (version jan 1993)
+ * Purpose:  To determine the terminal configuration of the
+ *           library cells and to include in your sls-description file.
+ * Created:  dec 22, 1992 by Patrick Groeneveld
+ * Modified: ..
+ *
+ * This file was copied into this project directory by 'mkopr'
+ */
+
+network buf20 (terminal A, Y, vss, vdd)
+network dfn10 (terminal D, CK, Q, QN, vss, vdd)
+network dfr11 (terminal D, R, CK, Q, QN, vss, vdd)
+network ex210 (terminal A, B, Y, vss, vdd)
+network iv110 (terminal A, Y, vss, vdd)
+network na210 (terminal A, B, Y, vss, vdd)
+network na310 (terminal A, B, C, Y, vss, vdd)
+network no210 (terminal A, B, Y, vss, vdd)
+network no310 (terminal A, B, C, Y, vss, vdd)

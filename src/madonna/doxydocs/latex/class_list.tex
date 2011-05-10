@@ -1,0 +1,231 @@
+\subsection{List  Class Reference}
+\label{List}\index{List@{List}}
+{\tt \#include $<$list.h$>$}
+
+Inheritance diagram for List:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{5cm}
+\epsfbox{class_list.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf List} ()
+\item 
+virtual {\bf $\sim$List} ()
+\item 
+{\bf Item}\& {\bf peek\-Head} () const
+\item 
+void {\bf add} ( {\bf Item}\& )
+\item 
+void {\bf pick\-Out} ( const {\bf Item}\&, int = 0 )
+\item 
+void {\bf remove} ( const {\bf Item}\& l )
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual {\bf Box\-Iterator}\& {\bf init\-Iterator} () const
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf List\-Element}$\ast$ {\bf head}
+\end{CompactItemize}
+\subsubsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf List\-Iterator}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{List_a0}
+\index{List@{List}!List@{List}}
+\index{List@{List}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List::List ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 41 of file list.h.\small\begin{verbatim}00041 { head = 0; }
+\end{verbatim}\normalsize 
+\label{List_a1}
+\index{List@{List}!~List@{$\sim$List}}
+\index{~List@{$\sim$List}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}List::$\sim$List ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 36 of file list.C.\small\begin{verbatim}00037 {
+00038   while( head != 0 )
+00039   {
+00040     ListElement *temp = head;
+00041     head = head->next;
+00042     delete temp;
+00043   }
+00044 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{List_a3}
+\index{List@{List}!add@{add}}
+\index{add@{add}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void List::add ({\bf Item} \& {\em to\-Add})\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a2})}.
+
+Definition at line 48 of file list.C.
+
+Referenced by {\bf Lay\-Map::add\-Critical\-Points}(), {\bf Image\-Map::add\-Feeds}(), {\bf Image\-Map::critical\-Feed}(), {\bf Image\-Map::critical\-Island}(), and {\bf operator$|$=}().\small\begin{verbatim}00049 {
+00050   ListElement *newElement = new ListElement( &toAdd );
+00051   
+00052   newElement->next = head;
+00053   head = newElement;
+00054   itemsInBox++;
+00055 }
+\end{verbatim}\normalsize 
+\label{List_a8}
+\index{List@{List}!initIterator@{initIterator}}
+\index{initIterator@{initIterator}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Box\-Iterator} \& List::init\-Iterator () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a6})}.
+
+Definition at line 113 of file list.C.\small\begin{verbatim}00114 {
+00115   return *( (BoxIterator *)new ListIterator( *this ) );
+00116 }
+\end{verbatim}\normalsize 
+\label{List_a7}
+\index{List@{List}!myName@{myName}}
+\index{myName@{myName}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ List::my\-Name () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a9})}.
+
+Reimplemented in {\bf Pattern} {\rm (p.\,\pageref{Pattern_a3})}, and {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a3})}.
+
+Definition at line 107 of file list.C.\small\begin{verbatim}00108 {
+00109   return "List";
+00110 }
+\end{verbatim}\normalsize 
+\label{List_a6}
+\index{List@{List}!myNo@{myNo}}
+\index{myNo@{myNo}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} List::my\-No () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a8})}.
+
+Reimplemented in {\bf Pattern} {\rm (p.\,\pageref{Pattern_a2})}, and {\bf Plane\-Cell} {\rm (p.\,\pageref{PlaneCell_a2})}.
+
+Definition at line 100 of file list.C.\small\begin{verbatim}00101 {
+00102   return listClass;
+00103 }
+\end{verbatim}\normalsize 
+\label{List_a2}
+\index{List@{List}!peekHead@{peekHead}}
+\index{peekHead@{peekHead}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Item} \& List::peek\-Head () const\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 44 of file list.h.\small\begin{verbatim}00044 { return *(head->data); }
+\end{verbatim}\normalsize 
+\label{List_a4}
+\index{List@{List}!pickOut@{pickOut}}
+\index{pickOut@{pickOut}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void List::pick\-Out (const {\bf Item} \& {\em to\-Detach}, int {\em delete\-Item\-Too} = 0)\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a3})}.
+
+Definition at line 59 of file list.C.\small\begin{verbatim}00060 {
+00061   ListElement *cursor = head;
+00062   
+00063   if ( *(head->data) == toDetach )
+00064   {
+00065     head = head->next;
+00066   }
+00067   else  
+00068   {
+00069     ListElement *trailer = head;
+00070     
+00071     cursor=head->next;
+00072     while(cursor != 0)
+00073     {
+00074       if (*(cursor->data) == toDetach)
+00075       {
+00076     trailer->next=cursor->next;
+00077     break;
+00078       }
+00079       else
+00080       {
+00081         trailer=cursor;
+00082         cursor=cursor->next;
+00083       }
+00084     }
+00085   } 
+00086   
+00087   if( cursor != 0 )
+00088   {
+00089     itemsInBox--;
+00090     if ( ! deleteItemToo )
+00091     {
+00092       cursor->data = 0;       
+00093     }
+00094     
+00095     delete cursor;
+00096   }
+00097 }
+\end{verbatim}\normalsize 
+\label{List_a5}
+\index{List@{List}!remove@{remove}}
+\index{remove@{remove}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void List::remove (const {\bf Item} \& {\em l})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Reimplemented from {\bf Package} {\rm (p.\,\pageref{Package_a7})}.
+
+Definition at line 48 of file list.h.\small\begin{verbatim}00048 { pickOut( l, 1 ); }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Friends And Related Function Documentation}
+\label{List_l0}
+\index{List@{List}!ListIterator@{ListIterator}}
+\index{ListIterator@{ListIterator}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}class List\-Iterator\hspace{0.3cm}{\tt  [friend]}}\hfill
+
+
+
+Definition at line 58 of file list.h.
+
+Referenced by {\bf init\-Iterator}().
+
+\subsubsection{Member Data Documentation}
+\label{List_o0}
+\index{List@{List}!head@{head}}
+\index{head@{head}!List@{List}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List\-Element} $\ast$ List::head\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 56 of file list.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf list.h}\item 
+{\bf list.C}\end{CompactItemize}

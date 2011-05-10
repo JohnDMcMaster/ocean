@@ -1,0 +1,1655 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of CS</TITLE>
+</HEAD><BODY>
+<H1>CS</H1>
+Section: C Library Functions (3)<BR>Updated: THE SEADIF PROGRAMMERS MANUAL<BR><A HREF="#index">Index</A>
+<A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+cs, canonicstring, fs, forgetstring - functions to efficiently store strings
+in a static heap.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;STRING&nbsp;cs(char&nbsp;*somestring)
+<P>
+<BR>&nbsp;STRING&nbsp;canonicstring(char&nbsp;*somestring)
+<P>
+<BR>&nbsp;int&nbsp;fs(STRING&nbsp;canonstring)
+<P>
+<BR>&nbsp;int&nbsp;forgetstring(STRING&nbsp;canonstring)
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Cs() maintains a private heap containing copies of all the strings currently
+known to cs(). On every call, cs() inspects this heap to see if the argument
+somestring is already in the heap. If so, cs() returns a pointer to the copy in
+the heap. If not, cs() copies the new string to the heap and then
+returns a pointer to this copy.
+<P>
+Cs() internally associates a reference count with each string in the heap. When
+a string is copied to the heap this reference count is initialized to 1. Any
+subsequent request for storage of the same string causes cs() to increment the
+reference count of this string.
+<P>
+Canonicstring() performs exactly the same operation as cs(); it calls cs(), so
+the latter is a little bit faster, though somewhat more cryptic.
+<P>
+Strings no longer worth to remember can be removed from the heap by calling
+fs() or forgetstring() using the canonic string to be removed as an argument.
+Fs() operates by first decrementing the reference count associated with the
+string to forget. Only if the count becomes zero the string is removed from
+the heap.
+<P>
+If a program immediately stores its strings thru cs() as the strings enter the
+program's environment, no subsequent calls to strcmp() are needed to test
+whether two canonicized strings are equal because cs() guarantees equality if
+the STRING pointers are equal. The
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3)
+
+functions use this feature to speed up their search thru the data base
+administration.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+Cs() and canonicstring() return a character pointer (type STRING).
+Fs() and forgetstring() return NIL if the string is not in the heap, i.e. not
+canonic. Otherwise they return TRUE.
+<A NAME="lbAF">&nbsp;</A>
+<H2>LIMITATION</H2>
+
+Although cs() accepts strings of any length, it does not store more than 257
+chars (including terminating NULL). Consequently, two strings are considered
+equal if they do not differ in any of the first 256 chars.
+<A NAME="lbAG">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+This piece of code first canonicizes the string &quot;blablah&quot; and then immediately
+forgets about it:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;fs(cs(&quot;blablah&quot;))&nbsp;==&nbsp;NIL&nbsp;)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;this&nbsp;can&nbsp;never&nbsp;happen...&quot;);
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbAI">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3).
+
+
+
+
+<A NAME="lbAJ">&nbsp;</A>
+<H2>NAME</H2>
+
+mnew, mfree - functions for fast allocation of small memory chunks.
+<A NAME="lbAK">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;char&nbsp;*mnew(int&nbsp;size)
+<P>
+<BR>&nbsp;void&nbsp;mfree(char&nbsp;**memblk,&nbsp;int&nbsp;size)
+<P>
+<A NAME="lbAL">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Mnew() returns a memory block of the requested size. The parameter
+<I>size</I>
+
+is in bytes. All bytes in the block are cleared. Mfree() returns a memory block
+to the free list so that it can be used by mnew() again.
+<P>
+Mnew is much faster than
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+malloc">malloc</A></I>(3)
+
+because it obtains large blocks of memory from the system by calling
+<I><A HREF="http://localhost/cgi-bin/man/man2html?2+sbrk">sbrk</A></I>(2).
+
+Each time mnew() is called it just returns a small piece of this large block.
+Only once in many times the large block is exhausted, urging mnew() to call
+sbrk() again.
+<P>
+All the sealib functions call mnew() and mfree() to deal with memory allocation
+for the structures that make up the in-core seadif tree (see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3)).
+
+<A NAME="lbAM">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+Mnew returns a pointer to the requested block. Alignment of the pointer is
+guaranteed to be suitable for any data type in the C programming language.
+If the requested block size is out of range, mnew() returns NIL.
+<A NAME="lbAN">&nbsp;</A>
+<H2>LIMITATION</H2>
+
+Mnew() and mfree() do not deal with blocks larger than 256 bytes.
+<A NAME="lbAO">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+Suppose we have a structure named DTYPE, then the following two #define's
+provide functionality to create new objects of type DTYPE and also to get rid
+of them at will:
+<P>
+<BR>&nbsp;#define&nbsp;NewDtype(dptr)&nbsp;\
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;\
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dptr)=(DTYPE&nbsp;*)mnew(sizeof(DTYPE));&nbsp;\
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dptr)-&gt;field=initvalue;&nbsp;\
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<P>
+<BR>&nbsp;#define&nbsp;FreeDtype(dptr)&nbsp;\
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mfree((char&nbsp;**)dptr,sizeof(DTYPE))
+<P>
+If initvalue is 0 then the initializing statement in the NewDtype macro is
+unnecessary. We don't check if mnew() returns NIL because we know at compile
+time that sizeof(DTYPE) is within the permitted range.
+<A NAME="lbAP">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbAQ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+malloc">malloc</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?2+sbrk">sbrk</A>(2), <A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3).
+
+
+
+
+<A NAME="lbAR">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfattachlib - bind a seadif library to a specific file.
+<A NAME="lbAS">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdfattachlib(LIBRARYPTR&nbsp;lib,&nbsp;char&nbsp;*filename)
+<BR>&nbsp;
+<A NAME="lbAT">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+During normal sealib operation, calling this function should never be
+necessary. However, it is provided to give the sophisticated user (i.e. hackers
+and the like) enhanced control over the seadif data base.
+Sdfattachlib() moves the named library from the file it is currently in to the
+named file. However, the move only takes effect when the data base is closed
+with
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A></I>(3).
+
+<P>
+If filename does not start with a '/' or with './' sdfattachlib prepends the
+value of the environment variable NEWSEADIR to filename.
+If NEWSEADIR is not set nothing is prepended.
+<P>
+For this time only, the filename parameter can be an ordinary character string
+and is not required to be canonic.
+<A NAME="lbAU">&nbsp;</A>
+<H2>WARNING</H2>
+
+If you attach a library to a seadif file that was not opened with
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A></I>(3)
+
+sdfattachlib currently refuses to overwrite the file.
+<A NAME="lbAV">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbAW">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4).
+
+
+
+
+<A NAME="lbAX">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfclose - function to close a seadif data base.
+<A NAME="lbAY">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;void&nbsp;sdfclose(void)
+<P>
+<A NAME="lbAZ">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This function closes a seadif data base. If some cells had been written with
+any of the functions described in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A></I>(3)
+
+then these write actions will only now update the data base. Consequently, if
+you forget to call sdfclose (or if your program fails to do so because of a
+crash), the data base remains unaffected. It just stays as it was when you
+opened it with sdfopen().
+<A NAME="lbBA">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbBB">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbBC">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfdelete - functions to delete seadif in-core memory structures.
+<A NAME="lbBD">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;void&nbsp;sdfdeletecirport(CIRPORTPTR&nbsp;ccirport);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletecirinst(CIRINSTPTR&nbsp;cirinst,int&nbsp;recursively);
+<BR>&nbsp;/*&nbsp;if&nbsp;recursively&nbsp;==&nbsp;TRUE&nbsp;then&nbsp;remove&nbsp;childcircuit
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;childcircuit-&gt;linkcnt&nbsp;becomes&nbsp;zero&nbsp;*/
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletenetlist(NETPTR&nbsp;netlist);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletebuslist(BUSPTR&nbsp;buslist);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletecircuit(CIRCUITPTR&nbsp;circuit,&nbsp;int&nbsp;recursively);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletelayout(LAYOUTPTR&nbsp;layout,&nbsp;int&nbsp;recursively);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletelayport(LAYPORTPTR&nbsp;layport);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeleteslice(SLICEPTR&nbsp;slice,&nbsp;int&nbsp;recursively);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletelayinst(LAYINSTPTR&nbsp;layinst,&nbsp;intrecursively);
+<P>
+<BR>&nbsp;void&nbsp;sdfdeletewire(WIREPTR&nbsp;wire);
+<P>
+<A NAME="lbBE">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions delete in-core seadif data structures. If a seadif
+datastructure has a <I>linkcnt</I> field then the functions first decrement this
+count and only if the count becomes 0 the data structure is deleted.
+<P>
+The data-structures participating in a hierarchy can be passed the option
+<I>recursively</I>. If TRUE it means that de data structures that are lower in
+the hierarchy also must be deleted. (You don't want this parameter to be NIL.)
+<A NAME="lbBF">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+No return value.
+<A NAME="lbBG">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbBH">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+The file &lt;<A HREF="file:/usr/include/libstruct.h">libstruct.h</A>&gt;
+
+
+
+
+<A NAME="lbBI">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfexistslib, sdfexistsfun, sdfexistscir, sdfexistslay - functions to test
+whether a seadif cell exists and to provide an entry in the internal hash
+tables of the sealib functions.
+<A NAME="lbBJ">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;extern&nbsp;LIBTABPTR&nbsp;thislibtab;&nbsp;&nbsp;&nbsp;/*&nbsp;set&nbsp;by&nbsp;existslib&nbsp;*/
+<BR>&nbsp;extern&nbsp;FUNTABPTR&nbsp;thisfuntab;&nbsp;&nbsp;&nbsp;/*&nbsp;set&nbsp;by&nbsp;existsfun&nbsp;*/
+<BR>&nbsp;extern&nbsp;CIRTABPTR&nbsp;thiscirtab;&nbsp;&nbsp;&nbsp;/*&nbsp;set&nbsp;by&nbsp;existscir&nbsp;*/
+<BR>&nbsp;extern&nbsp;LAYTABPTR&nbsp;thislaytab;&nbsp;&nbsp;&nbsp;/*&nbsp;set&nbsp;by&nbsp;existslay&nbsp;*/
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfexistslib(STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfexistsfun(STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfexistscir(STRING&nbsp;cirname,&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfexistslay(STRING&nbsp;layname,&nbsp;STRING&nbsp;cirname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<A NAME="lbBK">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions return TRUE if the named object exists in the data base,
+otherwise they return NIL. In addition, if the function returns TRUE, the
+corresponding global pointer
+<I>thislibtab</I>,
+
+<I>thisfuntab</I>,
+
+<I>thiscirtab</I>
+
+or
+<I>thislaytab</I>
+
+points to an entry in the hash tables that contains information about the
+object.  To see what kind of information is currently available from the hash
+tables, please inspect the data structures defined in the file &lt;<A HREF="file:/usr/include/libio.h">libio.h</A>&gt;.
+<A NAME="lbBL">&nbsp;</A>
+<H2>WARNING</H2>
+
+As usual, the argument strings of these functions must be canonic, see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A></I>(3).
+
+<A NAME="lbBM">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbBN">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfremove">sdfremove</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbBO">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfgetcwd - return the current working directory as a canonic string
+<A NAME="lbBP">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;STRING&nbsp;sdfgetcwd(void)
+<P>
+<A NAME="lbBQ">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The function sdfgetcwd() returns the name of the current working directory as a
+canonicstring. Depending on whether you are on a BSD system or not, sdfgetcwd()
+calls itself either getwd() or getcwd() and then converts the result to a
+canonicstring. Subsequent calls to sdfgetcwd() return pointers to the same
+memory location and do not cause any more calls to getwd() or getcwd() or cs().
+<P>
+<A NAME="lbBR">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+A successful call to sdfgetcwd() returns a pointer to the name of the current
+working directory. On failure it returns NIL.
+<P>
+<A NAME="lbBS">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<P>
+<A NAME="lbBT">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+getwd">getwd</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+getcwd">getcwd</A>(3).
+
+
+
+
+<A NAME="lbBU">&nbsp;</A>
+<H2>NAME</H2>
+
+sdflistlay, sdflistcir, sdflistfun, sdflistlib - Set of seadif calls that read
+all the meta-children of an object, you know what i mean...
+<A NAME="lbBV">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdflistlay(long&nbsp;what,&nbsp;CIRCUITPTR&nbsp;circuit);
+<P>
+<BR>&nbsp;int&nbsp;sdflistcir(long&nbsp;what,&nbsp;FUNCTIONPTR&nbsp;function);
+<P>
+<BR>&nbsp;int&nbsp;sdflistfun(long&nbsp;what,&nbsp;LIBRARYPTR&nbsp;library);
+<P>
+<BR>&nbsp;int&nbsp;sdflistlib(long&nbsp;what);
+<P>
+<A NAME="lbBW">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Sdflistlay reads all the layouts associated with a circuit.
+Sdflistcir reads all the circuits associated with a function.
+Sdflistfun reads all the functions contained in a library.
+Sdflistlib reads all the libraries known to the system.
+<P>
+All four functions require a first argument specifying in detail what to get
+from the database. Refer to <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3) to see what values are allowed for
+this parameter.
+<P>
+<A NAME="lbBX">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+A successful call to any of the four functions returns TRUE. On failure NIL is
+returned.
+<P>
+<A NAME="lbBY">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<P>
+<A NAME="lbBZ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdflistall">sdflistall</A>(3).
+
+
+
+
+<A NAME="lbCA">&nbsp;</A>
+<H2>NAME</H2>
+
+sdflistalllay, sdflistallcir - Set of seadif calls that read
+all the meta-children of an object and their children.
+<P>
+<A NAME="lbCB">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdflistalllay(long&nbsp;what,&nbsp;CIRCUITPTR&nbsp;circuit);
+<P>
+<BR>&nbsp;int&nbsp;sdflistallcir(long&nbsp;what,&nbsp;FUNCTIONPTR&nbsp;function);
+<P>
+<A NAME="lbCC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Sdflistalllay reads all the layouts associated with a circuit and recursively
+all the children of these layouts.  Sdflistallcir reads all the circuits
+associated with a function and recursively all the children of these circuits.
+<P>
+Both functions require a first argument specifying in detail what to get
+from the database. Refer to <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3) to see what values are allowed for
+this parameter.
+<P>
+<A NAME="lbCD">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+A successful call to any of the functions returns TRUE. On failure NIL is
+returned.
+<P>
+<A NAME="lbCE">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<P>
+<A NAME="lbCF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdflist">sdflist</A>(3).
+
+
+
+
+<A NAME="lbCG">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfmakeshapef - Seadif call to install the shape function in a CIRCUIT structure.
+<A NAME="lbCH">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdfmakeshapef(CIRCUITPTR&nbsp;circuit);
+<P>
+<A NAME="lbCI">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This function reads the bounding boxes of all layouts associated with a circuit
+and then computes the shape function for that circuit. The result is a linear
+list of structures of type SHAPEF (defined in libstruct.h). The bbx fields in
+the list consist of strictly monotonously increasing bbx[HOR] values and
+strictly monotonously decreasing bbx[VER] values.
+<P>
+A successful call to sdfmakeshapef returns the shape function in
+circuit-&gt;shapef. It also leaves the list of layouts in the field
+circuit-&gt;layout.  Sdfmakeshapef only reads the layout bounding boxes (the bbx
+field in the LAYOUT structure), so only this minimal amount of information will
+be present in the list of layouts --unless you read more layout information
+yourself.
+<P>
+<A NAME="lbCJ">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+A successful call to sdfmakeshapef returns TRUE. On failure it returns NIL. If
+no layout information is available for the circuit it still returns TRUE, but
+the circuit-&gt;shapef field is left untouched.
+<P>
+<A NAME="lbCK">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<P>
+<A NAME="lbCL">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdflist">sdflist</A>(3).
+
+
+
+
+<A NAME="lbCM">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfopen - function to open a seadif data base.
+<A NAME="lbCN">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdfopen(void)
+<P>
+<A NAME="lbCO">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This function obtains the table of contents of the seadif data base (see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3))
+
+and stores this information in in-core hash tables. Subsequent calls to other
+sealib function use these hash tables to get information about the data base
+and to administrate some of their actions.
+<P>
+The environment variable SEALIB specifies a colon-separated list of directories
+to be searched for seadif files. It is not an error if one or more directories
+do not exists. If SEALIB is not set in the environment then the default value
+is &quot;.:/usr/local/lib/seadif&quot;.
+<P>
+The variable SEALIBWRITE can be set to a colon-separated list of directories
+containing the seadif files that are allowed to be modified.  Directories that
+appear in the SEALIBWRITE list and that do not occur in the SEALIB list are
+ignored.  If SEALIBWRITE is not set, then all (writable) seadif files found
+through SEALIB can be written with the
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A></I>(3)
+
+functions.
+<P>
+<A NAME="lbCP">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+Sdfopen() returns SDF_NOERROR on success. If parts of the database are found to
+be locked SDFERROR_FILELOCK is returned. Other failures cause SDFERROR_SEADIF
+to be returned.
+<P>
+<A NAME="lbCQ">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<P>
+<A NAME="lbCR">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbCS">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfreadlib, sdfreadfun, sdfreadcir, sdfreadlay - set of sealib routines to
+read objects from the seadif data base into main memory.
+<A NAME="lbCT">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;extern&nbsp;LIBRARYPTR&nbsp;&nbsp;thislib;
+<BR>&nbsp;extern&nbsp;FUNCTIONPTR&nbsp;thisfun;
+<BR>&nbsp;extern&nbsp;CIRCUITPTR&nbsp;&nbsp;thiscir;
+<BR>&nbsp;extern&nbsp;LAYOUTPTR&nbsp;&nbsp;&nbsp;thislay;
+<P>
+<BR>&nbsp;int&nbsp;sdfreadlib(long&nbsp;what,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;int&nbsp;sdfreadfun(long&nbsp;what,&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;int&nbsp;sdfreadcir(long&nbsp;what,&nbsp;STRING&nbsp;cirname,&nbsp;STRING&nbsp;funname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;int&nbsp;sdfreadlay(long&nbsp;what,&nbsp;STRING&nbsp;layname,&nbsp;STRING&nbsp;cirname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<A NAME="lbCU">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions read the named object from a seadif data base and install the
+object in an in-core tree. The root of the tree is sdfroot, see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3).
+
+The data base must have been opened with the sealib function
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A></I>(3).
+
+<P>
+The parameter &quot;what&quot; specifies what attributes of the object must be read.
+Currently the following values are legal for what:
+<P>
+With
+<I>sdfreadlib</I>()
+
+the value SDFLIBBODY requests the bare library.
+<BR>&nbsp;&nbsp;SDFLIBSTAT&nbsp;requests&nbsp;the&nbsp;library&nbsp;status.
+<BR>&nbsp;&nbsp;SDFLIBALL&nbsp;requests&nbsp;all&nbsp;aforementioned&nbsp;library&nbsp;features.
+<P>
+With
+<I>sdfreadfun</I>()
+
+the value SDFFUNBODY requests the bare function.
+<BR>&nbsp;&nbsp;SDFFUNSTAT&nbsp;requests&nbsp;the&nbsp;function&nbsp;status.
+<BR>&nbsp;&nbsp;SDFFUNTYPE&nbsp;requests&nbsp;the&nbsp;function&nbsp;type&nbsp;and
+<BR>&nbsp;&nbsp;SDFFUNALL&nbsp;requests&nbsp;everyting.
+<P>
+With
+<I>sdfreadcir</I>()
+
+the value SDFCIRBODY requests the bare circuit.
+<BR>&nbsp;&nbsp;SDFCIRSTAT&nbsp;requests&nbsp;the&nbsp;circuit&nbsp;status.
+<BR>&nbsp;&nbsp;SDFCIRPORT&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;circuit&nbsp;ports.
+<BR>&nbsp;&nbsp;SDFCIRINST&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;circuit&nbsp;instances&nbsp;(children&nbsp;of&nbsp;the&nbsp;circuit).
+<BR>&nbsp;&nbsp;SDFCIRNETLIST&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;nets.
+<BR>&nbsp;&nbsp;SDFCIRBUS&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;buses.
+<BR>&nbsp;&nbsp;SDFCIRATTRIB&nbsp;requests&nbsp;the&nbsp;circuit&nbsp;attributes&nbsp;and
+<BR>&nbsp;&nbsp;SDFCIRALL&nbsp;requests&nbsp;all&nbsp;circuit&nbsp;features&nbsp;listed&nbsp;above.
+<P>
+Some attributes depend on other attributes. For instance the presence of the
+netlist requires the presence of the port list (SDFCIRPORT) and the instance
+list (SDFCIRINST) and of course the circuit body (SDFCIRBODY). The function
+sdfreadcir() &quot;knows&quot; these dependencies and automatically adds such attributes if
+the request makes it necessary.
+<P>
+With
+<I>sdfreadlay</I>()
+
+the value SDFLAYBODY requests the bare layout.
+<BR>&nbsp;&nbsp;SDFLAYSTAT&nbsp;requests&nbsp;the&nbsp;layout&nbsp;status.
+<BR>&nbsp;&nbsp;SDFLAYPORT&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;layout&nbsp;ports.&nbsp;(Each&nbsp;layout&nbsp;port&nbsp;corresponds&nbsp;to&nbsp;a
+circuit port but a circuit port may correspond to several layout ports.)
+<BR>&nbsp;&nbsp;SDFLAYSLICE&nbsp;requests&nbsp;the&nbsp;sliceing&nbsp;tree&nbsp;of&nbsp;the&nbsp;floorplan.&nbsp;This&nbsp;tree&nbsp;contains&nbsp;the
+names and placement of all the child layouts.
+<BR>&nbsp;&nbsp;SDFLAYWIRE&nbsp;requests&nbsp;the&nbsp;list&nbsp;of&nbsp;all&nbsp;wires&nbsp;(rectangles)&nbsp;that&nbsp;make&nbsp;up&nbsp;the&nbsp;layout.
+<BR>&nbsp;&nbsp;SDFLAYBBX&nbsp;requests&nbsp;the&nbsp;sizes&nbsp;of&nbsp;the&nbsp;bounding&nbsp;box&nbsp;to&nbsp;be&nbsp;read.&nbsp;(This&nbsp;information
+is actually redundant because it can be derived from the extreme values of the
+rectangles in the wire list and the layout port list.)
+<BR>&nbsp;&nbsp;SDFLAYOFF&nbsp;requests&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;cell&nbsp;to&nbsp;the&nbsp;lower-left&nbsp;corner&nbsp;of&nbsp;a&nbsp;basic
+sea-of-gates image.
+<BR>&nbsp;&nbsp;SDFLAYATTRIB&nbsp;requests&nbsp;the&nbsp;layout&nbsp;attributes&nbsp;(currently&nbsp;not&nbsp;supported).
+<BR>&nbsp;&nbsp;SDFLAYALL&nbsp;requests&nbsp;all&nbsp;layout&nbsp;features&nbsp;listed&nbsp;above.
+<P>
+As said before, the sdfread functions install the requested objects in the
+sdfroot tree. In addition, one or more global variables are left to point to
+the objects just read. These are the variables named
+<I>thislib</I>,
+
+<I>thisfun</I>,
+
+<I>thiscir</I>
+
+and
+<I>thislay</I>.
+
+For instance, after a succesfull call &quot;sdfreadcir(SDFCIRALL,cnam,fnam,bnam)&quot;
+the global variable thislib points to the library named bnam, thisfun points to
+the function fnam and thiscir points to the circuit cnam.
+<P>
+If you want to read a cell which is composed of yet other cells (for instance:
+a flip-flop built from latches, the latches in turn built from nands and the
+nands built from transistors) you can call the function sdfreadallcir() or
+sdfreadalllay() to obtain all levels of the hierarchy in a single call. (Note:
+this is not the meta hierarchy.) The manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfreadall">sdfreadall</A></I>(3)
+
+unveils the details.
+<P>
+The sealib functions keep a record of all the objects and attributes that have
+been read into core. As a consequence, repeated calls for the same object
+result only the first time in retrieving the object from the data base. The
+following calls just set the global pointers to the previously read object.
+This behavior is especially advantageous when a hierarchical cell is read that
+at some point in its hierarchy refers a number of times to the same child cell.
+Only one time needs the function sdfread retrieve this child cell from the data
+base. While descending the hierarchy tree, sdfread automatically discriminates
+between newly encountered cells and those that are already in core. This speeds
+up the sdfread function significantly.
+<A NAME="lbCV">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+All functions return TRUE on succes and NIL on failure.
+<A NAME="lbCW">&nbsp;</A>
+<H2>WARNINGS</H2>
+
+Do not forget to canonicize the cell names before passing them to sdfread. See
+also
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3)
+
+and
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A></I>(3).
+
+<P>
+Don't you dare to change the name of a cell. This would confuse the sealib
+internal administration and invalidate the hashtables !!!
+<A NAME="lbCX">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+This piece of code reads the layout (small(cmos(nand2(basic_stuff)))), calls a
+user function to compute the bounding box and then writes the result back to
+the data base.
+<P>
+<BR>&nbsp;&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;&nbsp;main()
+<BR>&nbsp;&nbsp;{
+<BR>&nbsp;&nbsp;if&nbsp;(sdfopen()&nbsp;==&nbsp;NIL)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;cannot&nbsp;open&nbsp;data&nbsp;base&quot;);
+<BR>&nbsp;&nbsp;update_bbx();
+<BR>&nbsp;&nbsp;if&nbsp;(sdfclose()&nbsp;==&nbsp;NIL)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;cannot&nbsp;close&nbsp;data&nbsp;base&quot;);
+<BR>&nbsp;&nbsp;}
+<P>
+<BR>&nbsp;&nbsp;void&nbsp;update_bbx()
+<BR>&nbsp;&nbsp;{
+<BR>&nbsp;&nbsp;STRING&nbsp;lnam,cnam,fnam,bnam;
+<BR>&nbsp;&nbsp;long&nbsp;&nbsp;&nbsp;whatweneed
+<BR>&nbsp;&nbsp;short&nbsp;&nbsp;xsize,ysize;
+<P>
+<BR>&nbsp;&nbsp;lnam&nbsp;=&nbsp;cs(&quot;small&quot;);&nbsp;cnam&nbsp;=&nbsp;cs(&quot;cmos&quot;);
+<BR>&nbsp;&nbsp;fnam&nbsp;=&nbsp;cs(&quot;nand2&quot;);&nbsp;bnam&nbsp;=&nbsp;cs(&quot;basis_stuff&quot;);
+<BR>&nbsp;&nbsp;whatweneed&nbsp;=&nbsp;SDFLAYPORT&nbsp;+&nbsp;SDFLAYWIRE;
+<BR>&nbsp;&nbsp;if&nbsp;(sdfreadlay(whatweneed,lnam,cnam,fnam,bnam)&nbsp;==&nbsp;NIL)&nbsp;&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;cannot&nbsp;read&nbsp;layout&quot;);
+<BR>&nbsp;&nbsp;compute_bbx(&amp;xsize,&amp;ysize,thislay);
+<BR>&nbsp;&nbsp;thislay-&gt;bbx[HOR]&nbsp;=&nbsp;xsize;
+<BR>&nbsp;&nbsp;thislay-&gt;bbx[VER]&nbsp;=&nbsp;ysize;
+<BR>&nbsp;&nbsp;if&nbsp;(sdfwritelay(SDFLAYBBX,thislay)&nbsp;==&nbsp;NIL)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(&quot;cannot&nbsp;write&nbsp;layout&quot;);
+<BR>&nbsp;&nbsp;}
+<P>
+<A NAME="lbCY">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbCZ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfreadall">sdfreadall</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdflist">sdflist</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdflistall">sdflistall</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbDA">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfreadallcir, sdfreadalllay - set of sealib routines to read a hierarchical
+subtree of objects from the seadif data base into main memory.
+<A NAME="lbDB">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;extern&nbsp;LIBRARYPTR&nbsp;&nbsp;thislib;
+<BR>&nbsp;extern&nbsp;FUNCTIONPTR&nbsp;thisfun;
+<BR>&nbsp;extern&nbsp;CIRCUITPTR&nbsp;&nbsp;thiscir;
+<BR>&nbsp;extern&nbsp;LAYOUTPTR&nbsp;&nbsp;&nbsp;thislay;
+<P>
+<P>
+<BR>&nbsp;int&nbsp;sdfreadallcir(long&nbsp;what,&nbsp;STRING&nbsp;cirname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;int&nbsp;sdfreadalllay(long&nbsp;what,&nbsp;STRING&nbsp;layname,&nbsp;STRING&nbsp;cirname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<A NAME="lbDC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions read the named object and recursively all its child cells from
+a seadif data base and install the object and its children in an in-core tree.
+The root of the tree is sdfroot, see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3).
+
+The data base must have been opened with the sealib function
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A></I>(3).
+
+<P>
+The parameter &quot;what&quot; specifies what attributes of the object must be read.
+Legal values are exactly as described in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A></I>(3).
+
+In fact, sdfreadall operates by repeatedly calling sdfread. (You could have
+written sdfreadall by yourself, but we provided it for your convenience...)
+<P>
+The value of the global variables
+<I>thislib</I>,
+
+<I>thisfun</I>,
+
+<I>thiscir</I>
+
+and
+<I>thislay</I>
+
+refer to the specified parent cell, not to its children. See manual page of
+sdfread for details.
+<A NAME="lbDD">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+Both functions return TRUE on succes and NIL on failure.
+<A NAME="lbDE">&nbsp;</A>
+<H2>WARNINGS</H2>
+
+Do not forget to canonicize the cell names before passing them to sdfread. See
+also
+<P>
+Don't you dare to change the name of a cell. This would confuse the sealib
+internal administration and invalidate the hashtables !!!
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3)
+
+and
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A></I>(3).
+
+<A NAME="lbDF">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbDG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbDH">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfremovelib, sdfremovefun, sdfremovecir, sdfremovelay - functions that
+remove an object from the Seadif library.
+<A NAME="lbDI">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfremovelib(STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfremovefun(STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfremovecir(STRING&nbsp;cirname,&nbsp;STRING&nbsp;funname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;libname)
+<P>
+<BR>&nbsp;public&nbsp;int&nbsp;sdfremovelay(STRING&nbsp;layname,&nbsp;STRING&nbsp;cirname,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STRING&nbsp;funname,&nbsp;STRING&nbsp;libname)
+<P>
+<A NAME="lbDJ">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions remove the named object from the seadf database. The removal
+only takes place when
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A></I>(3)
+
+is called. Until that time,
+<I>sdfremove</I>
+
+does not prevent the programmer from accessing a cell that has been &quot;removed&quot;.
+<A NAME="lbDK">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+The functions return TRUE for success and NIL for failure.
+<A NAME="lbDL">&nbsp;</A>
+<H2>WARNING</H2>
+
+As usual, the argument strings of these functions must be canonic, see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A></I>(3).
+
+<A NAME="lbDM">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbDN">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbDO">&nbsp;</A>
+<H2>NAME</H2>
+
+sdftouch - functions to set the modification date of a seadif object.
+<A NAME="lbDP">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdftouchlay(LAYOUTPTR&nbsp;&nbsp;&nbsp;lay,&nbsp;time_t&nbsp;timestamp);
+<BR>&nbsp;int&nbsp;sdftouchcir(CIRCUITPTR&nbsp;&nbsp;cir,&nbsp;time_t&nbsp;timestamp);
+<BR>&nbsp;int&nbsp;sdftouchlib(LIBRARYPTR&nbsp;&nbsp;lib,&nbsp;time_t&nbsp;timestamp);
+<BR>&nbsp;int&nbsp;sdftouchfun(FUNCTIONPTR&nbsp;fun,&nbsp;time_t&nbsp;timestamp);
+<P>
+<A NAME="lbDQ">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+If the named seadif object does not yet exist in the database it is created,
+similar to <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), and the modification date in the Status field is
+set to
+<I>timestamp</I>.
+
+<P>
+If the named seadif object already exists in the database, then
+<I>sdftouch</I>
+
+sets the modification date of the object to
+<I>timestamp</I>.
+
+Because of run time efficiency, this modifiction date is not written to the
+seadif database.
+As a consequence, the programmer must call
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A></I>(3)
+
+before closing the database, otherwise the call to
+<I>sdftouch</I>
+
+has no effect.
+<A NAME="lbDR">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+These functions return TRUE if the date could be set, NIL otherwise.
+<A NAME="lbDS">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbDT">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4)
+
+
+
+
+<A NAME="lbDU">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfwritelib, sdfwritefun, sdfwritecir, sdfwritelay - functions for updating
+and creating objects in a seadif data base.
+<A NAME="lbDV">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdfwritelib(long&nbsp;what,&nbsp;LIBRARYPTR&nbsp;library)
+<P>
+<BR>&nbsp;int&nbsp;sdfwritefun(long&nbsp;what,&nbsp;FUNCTIONPTR&nbsp;function)
+<P>
+<BR>&nbsp;int&nbsp;sdfwritecir(long&nbsp;what,&nbsp;CIRCUITPTR&nbsp;circuit)
+<P>
+<BR>&nbsp;int&nbsp;sdfwritelay(long&nbsp;what,&nbsp;LAYOUTPTR&nbsp;layout)
+<P>
+<A NAME="lbDW">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions write the attributes specified in the parameter &quot;what&quot; to the
+data base. If any such attribute already exists it is overwritten. The legal
+values for &quot;what&quot; are described in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A></I>(3).
+
+<P>
+If you want to write a father cell and all its children, the functions
+sdfwriteallcir() and sdfwritealllay() may be exactly what you are looking for,
+see the manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwriteall">sdfwriteall</A></I>(3).
+
+<A NAME="lbDX">&nbsp;</A>
+<H2>ENVIRONMENT</H2>
+
+SEALIBWRITE, see
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3)</I>
+
+<A NAME="lbDY">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbDZ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwriteall">sdfwriteall</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbEA">&nbsp;</A>
+<H2>NAME</H2>
+
+sdfwriteallcir, sdfwritealllay - functions for updating
+and creating a hierarchical tree of cells in a seadif data base.
+<A NAME="lbEB">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<BR>&nbsp;#include&nbsp;&lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<P>
+<BR>&nbsp;int&nbsp;sdfwriteallcir(long&nbsp;what,&nbsp;CIRCUITPTR&nbsp;circuit)
+<BR>&nbsp;int&nbsp;sdfwritealllay(long&nbsp;what,&nbsp;LAYOUTPTR&nbsp;layout)
+<P>
+<A NAME="lbEC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions write the attributes specified in the parameter &quot;what&quot; to the
+data base for the specified cell and for all its children. If any such
+attribute already exists it is overwritten. The legal values for &quot;what&quot; are
+described in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A></I>(3).
+
+<P>
+The functions operate by repeatedly calling sdfwrite. They also administrate
+which cells have been written, so that multiple instances of the same cell only
+account for a single write operation.
+<A NAME="lbED">&nbsp;</A>
+<H2>WARNING</H2>
+
+For their own convenience, the functions sdfwriteallcir() and sdfwritealllay()
+modify bit 15 (0x8000) of layout-&gt;flag.l and all its children.
+<A NAME="lbEE">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+Paul Stravers, Delft University of Technology.  E-mail address is
+<A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbEF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+sdfwrite (3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwriteall">sdfwriteall</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbEG">&nbsp;</A>
+<H2>NAME</H2>
+
+Sealib - set of library functions to manage a seadif data base.
+<A NAME="lbEH">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+#include &lt;<A HREF="file:/usr/include/sealib.h">sealib.h</A>&gt;
+<A NAME="lbEI">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+A seadif data base basicly consists of a small number of files (typicly 1 to
+20) each containing one or more libraries in the seadif language.
+(The manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A></I>(4)
+
+describes the seadif language.)  A seadif file name always end in &quot;.sdf&quot;.  The
+set of seadif files that make up a consistent data base can either be in a
+single directory or in multiple directories. The user indicates which
+directories belong to the database by setting the environment variable
+SEALIB.  Alternative directory names are separated by a colon (:).  The
+default value of SEALIB is &quot;.:/usr/local/lib/seadif&quot; (specifying the current
+directory and /usr/local/lib/seadif to contain the seadif files that make up a
+single consistent seadif data base).
+<P>
+The sealib library package provides a convenient means for reading and writing
+the objects in a seadif data base. Sealib operates on the predefined in-core
+data structures described in the file &lt;<A HREF="file:/usr/include/libstruct.h">libstruct.h</A>&gt; These data structures
+represent a list of libraries. Each library contains a list of functions and
+each function contains a hierarchical tree of circuits. In turn, each circuit
+refers to a hierarchical tree of layouts. Thus the four-level meta hierarchy as
+discussed in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A></I>(4)
+
+is also present in memory. At the top of the meta hierarchy is the global
+variable sdfroot (declared in libstruct.h). It points to the list of libraries.
+<P>
+Before any interaction with the database can take place it must be opened with
+the sealib function
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A></I>(3).
+
+This function constructs a table of contents of the data base and stores it in
+hash tables in main memory, thus enabling fast access to the data base.
+Following this initialization step, the user can read data objects at any of
+the four levels of meta hierarchy into main memory: libraries with
+sdfreadlib(), functions with sdfreadfun(), circuits with sdfreadcir() and
+layouts with the sealib function sdfreadlay().  The manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A></I>(3)
+
+describes the operation of these functions.
+In a similar way the functions sdfwritelib(), sdfwritefun(), sdfwritecir() and
+sdfwritelay() allow for data objects at any level of the meta hierarchy to be
+written into the data base, see the manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A></I>(3).
+
+Before the user exits, he/she must call the function sdfclose(), as described
+in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A></I>(3).
+
+If for some reason sdfclose() is not called, the data base will not be updated
+but remain as it was when it was opened by sdfopen(), even if the data base had
+been &quot;written&quot;. A pleasant consequence of this behavior is that if a program
+crashes before it calls sdfclose(), the data base will not be left in a
+partially updated state.
+<P>
+The user can acquire (read only) access to the hash tables constructed by
+sdfopen() by calling any of the functions sdfexistslib(), sdfexistsfun(),
+sdfexistscir() and sdfexistslay() as described in the manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A></I>(3).
+
+This is especially useful when the user needs information regarding the meta
+hierarchy. For instance, a question like &quot;which layouts implement this
+circuit?&quot; could be answered by calling sdfexistscir(). For details, refer to
+the appropriate manual page.
+<P>
+Normally it is transparent to the user in which file a particular data object
+resides. The only thing the user needs to know is the seadif name of the
+object, not the name of the file where the object happens to be. However, when
+the user creates a new library it is not clear in which file it must be stored.
+In such cases the sealib functions inspect the environment variable NEWSEALIB.
+It should hold the name of the file where new libraries ought to go. If
+NEWSEALIB is not set, new libraries by default go into the file
+&quot;@newsealib.sdf&quot;.
+<P>
+At any time, the user may force a particular library to go into a specified
+file. The manual page
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A></I>(3)
+
+explains the details.
+<P>
+The sealib functions often must be passed character strings for names of seadif
+objects. In order to speed up the interaction with the data base, all strings
+must be canonicized by the function
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A></I>(3)
+
+before they can be used as a parameter to a sealib function. Strings returned
+by the sealib functions are guaranteed to be canonic, so they can be used as
+parameter without processing by cs().
+<A NAME="lbEJ">&nbsp;</A>
+<H2>WARNINGS</H2>
+
+The sealib package provides for single user access only. Parts of the data base
+can be shared among multiple projects as long as they are read only.
+The data base was designed to be fast and disc-space efficient. As a
+consequence fancy stuff like access control and version control has been left
+out. If you really are in need for such features you can implement a fancy
+shell around the sealib package to do it for you...
+<A NAME="lbEK">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Paul Stravers and Patrick Groeneveld, Delft University of Technology.  E-mail
+address is <A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbEL">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfdelete">sdfdelete</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sdfattachlib">sdfattachlib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfexists">sdfexists</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+cs">cs</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+memman">memman</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?4+seadif">seadif</A>(4),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+
+
+
+
+<A NAME="lbEM">&nbsp;</A>
+<H2>NAME</H2>
+
+Seadif - language for sea-of-gates data representation.
+<A NAME="lbEN">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Seadif is a language that is specially suited for data representation in a
+sea-of-gates database. It essentially is a subset of the Edif (Electronic Design
+Interchange Format) language version 2.0.0, but it has a number of enhancements.
+These enhancements mainly deal with convenient layout representation and with
+a so called &quot;meta hierarchy&quot;. The meta hierarchy consists of four levels. At the
+top are the
+<I>libraries,</I>
+
+at the second level are the
+<I>functions,</I>
+
+at the third level are the
+<I>circuits</I>
+
+and at the lowest level are the
+<I>layouts.</I>
+
+The main objective of the meta hierarchy is to provide a selection mechanism:
+each function lists a number of functional equivalent circuits and each
+circuit list a number of net-equivalent layouts.
+<P>
+
+The Seadif language is an &quot;open&quot; language. It can be extended while remaining
+compatibility with the older version. The seadif I/O library
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3)
+
+skips unknown language elements and processes only the elements that it
+recognizes.
+The following five subsections discuss the Seadif statements currently defined
+and recognized by the Seadif I/O functions mentioned in
+<I><A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A></I>(3).
+
+Meaning of the --rather informal-- syntax used below to describe the syntax of
+the Seadif language is as follows.
+<P>
+
+<BR>&nbsp;&nbsp;&lt;statement&gt;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;statement&nbsp;or&nbsp;a&nbsp;terminal&nbsp;symbol&nbsp;like
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;&lt;string&gt;&nbsp;or&nbsp;a&nbsp;&lt;number&gt;,&nbsp;see&nbsp;below;
+<BR>&nbsp;&nbsp;&lt;statement&gt;?&nbsp;&nbsp;means&nbsp;zero&nbsp;or&nbsp;one&nbsp;time&nbsp;&lt;statement&gt;;
+<BR>&nbsp;&nbsp;&lt;statement&gt;*&nbsp;&nbsp;means&nbsp;zero,&nbsp;one&nbsp;or&nbsp;more&nbsp;times&nbsp;&lt;statement&gt;;
+<BR>&nbsp;&nbsp;&lt;aa&gt;&nbsp;|&nbsp;&lt;bb&gt;&nbsp;&nbsp;&nbsp;means&nbsp;either&nbsp;&lt;aa&gt;&nbsp;or&nbsp;&lt;bb&gt;,&nbsp;not&nbsp;both;
+<BR>&nbsp;&nbsp;{&nbsp;&lt;aa&gt;&nbsp;&lt;bb&gt;&nbsp;}&nbsp;groups&nbsp;two&nbsp;statements&nbsp;&lt;aa&gt;&nbsp;and&nbsp;&lt;bb&gt;&nbsp;to
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;syntacticly&nbsp;form&nbsp;a&nbsp;single&nbsp;statement.
+<P>
+
+All other symbols represent themselves. Spaces, tabs and newlines are all
+equivalent. Left and right parenthesis do not need surrounding spaces in order
+to be recognized, but other language element need either spaces or parenthesis
+surrounding them.  For most statements the order in which they appear is
+unimportant. This, however, is not true for arguments of the LaySlice statement
+(see below).  It also is not true for terminal symbols of type &lt;string&gt; and
+type &lt;number&gt;.
+<P>
+
+Terminal symbols of type &lt;number&gt; can be octal, decimal or hex and the format
+corresponds to the C-syntax, that is, leading '0' for octal and leading '0x'
+for hex. For instance, 023 = 19 = 0x13. Terminal symbols of type &lt;string&gt;
+should be quoted with double-quotes (&quot;) and they may contain any character
+except double-quote. Strictly alphanumeric strings do not require quotes but
+they do require a leading percent (%) if the first position is numeric. For
+instance, &quot;2towers&quot; is equivalent to %2towers.  (This is all very messy but it
+comes with tradition...)
+<P>
+
+The following terminal symbols are &lt;strings&gt;s: &lt;libraryname&gt;, &lt;functionname&gt;,
+&lt;circuitname&gt;, &lt;cirportname&gt;, &lt;cirinstname&gt;, &lt;layinstname&gt;, &lt;netname&gt;,
+&lt;busname&gt;, &lt;attributestring&gt; and &lt;layoutname&gt;.
+<P>
+
+The following terminal symbols are &lt;number&gt;s: &lt;layernumber&gt;, &lt;xposition&gt;,
+&lt;yposition&gt;, &lt;xlength&gt;, &lt;ylength&gt;, &lt;xoffset&gt;, &lt;yoffset&gt;, &lt;mtx0&gt;, &lt;mtx1&gt;,
+&lt;mtx2&gt;, &lt;mtx3&gt;, &lt;mtx4&gt;, &lt;mtx5&gt;, &lt;xleft&gt;, &lt;xright&gt;, &lt;ybottom&gt; and &lt;ytop&gt;.
+<P>
+
+<I>SEADIF</I>
+
+<BR>
+
+The Seadif statement is the root of the meta hierarchy. It serves no other
+purpose than grouping a set of libraries and image descriptions. Synopsis:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Seadif&gt;&nbsp;::=&nbsp;(Seadif&nbsp;&lt;string&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Status&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SeadifImage&gt;*
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Library&gt;*&nbsp;)
+<P>
+
+For a description of &lt;SeadifImage&gt; refer to
+<I><A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A></I>(4).
+
+The &lt;Status&gt;, &lt;SeadifImage&gt; and &lt;Library&gt; statements may occur in any order.
+<P>
+
+<I>LIBRARY</I>
+
+<BR>
+
+A library groups a set of related functions that are available in a certain
+technology. Synopsis:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Library&gt;&nbsp;::=&nbsp;(Library&nbsp;&lt;libraryname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Technology&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Status&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Function&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Technology&gt;&nbsp;::=&nbsp;(Technology&nbsp;&lt;string&gt;&nbsp;)
+<P>
+
+The &lt;Technology&gt;, &lt;Status&gt; and &lt;Function&gt; statements may occur in any order.
+<P>
+
+<I>FUNCTION</I>
+
+<BR>
+
+A function groups a set of functional equivalent circuits.
+Synopsis:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Function&gt;&nbsp;::=&nbsp;(Function&nbsp;&lt;functionname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;FunSimulate&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;FunType&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Status&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Circuit&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;FunType&gt;&nbsp;::=&nbsp;(FunType&nbsp;&lt;string&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;FunSimulate&gt;&nbsp;::=&nbsp;(FunSimulate&nbsp;&lt;string&gt;&nbsp;)
+<P>
+
+Normally, FunSimulate refers to a procedure that simulates the behavior of the
+function. FunType provides additional information for logic synthesis.  The
+&lt;FunSimulate&gt;, &lt;FunType&gt;, &lt;Status&gt; and &lt;Circuit&gt; statements may occur in any
+order.
+<P>
+
+<I>CIRCUIT</I>
+
+<BR>
+
+A circuit describes a network of (yet other) circuits that implement the
+function.  A circuit also groups layouts that have identical net lists.
+Synopsis:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Circuit&gt;&nbsp;::=&nbsp;(Circuit&nbsp;&lt;circuitname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Status&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirPortList&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirInstList&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetList&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;BusList&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Attribute&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Layout&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirPortList&gt;&nbsp;::=&nbsp;(CirPortList&nbsp;&lt;CirPort&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirPort&gt;&nbsp;::=&nbsp;(CirPort&nbsp;&lt;cirportname&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirInstList&gt;&nbsp;::=&nbsp;(CirInstList&nbsp;&lt;CirInst&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirInst&gt;&nbsp;::=&nbsp;(CirInst&nbsp;&lt;cirinstname&gt;&nbsp;&lt;CirCellRef&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;attributestring&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirCellRef&gt;&nbsp;::=&nbsp;(CirCellRef&nbsp;&lt;circuitname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirFunRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirFunRef&gt;&nbsp;::=&nbsp;(CirFunRef&nbsp;&lt;functionname&gt;&nbsp;&lt;CirLibRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;CirLibRef&gt;&nbsp;::=&nbsp;(CirLibRef&nbsp;&lt;libraryname&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetList&gt;&nbsp;::=&nbsp;(NetList&nbsp;&lt;Net&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Net&gt;&nbsp;::=&nbsp;(Net&nbsp;&lt;netname&gt;&nbsp;&lt;Joined&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Joined&gt;&nbsp;::=&nbsp;(Joined&nbsp;&lt;NetPortRef&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetPortRef&gt;&nbsp;::=&nbsp;(NetPortRef&nbsp;&lt;cirportname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetInstRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetInstRef&gt;&nbsp;::=&nbsp;(NetInstRef&nbsp;&lt;cirinstname&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;BusList&gt;&nbsp;::=&nbsp;(BusList&nbsp;&lt;bus&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Bus&gt;&nbsp;::=&nbsp;(Bus&nbsp;&lt;busname&gt;&nbsp;&lt;NetRef&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Attribute&gt;&nbsp;::=&nbsp;(Attribute&nbsp;&lt;attributestring&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;NetRef&gt;&nbsp;::=&nbsp;(NetRef&nbsp;&lt;netname&gt;&nbsp;&lt;NetPortRef&gt;*&nbsp;)
+<P>
+
+The CirPortList is the list of i/o ports (&quot;terminals&quot;) through which the
+circuit comunicates with other circuits. The CirInstList names all circuits
+that are one step lower in the hierarchy (note: this is
+<I>not</I>
+
+the meta hierarchy). The NetList specifies the connections between the CirPorts
+on this (parent) circuit and the CirPorts on the child circuits listed in the
+CirInstList. Sometimes it is convenient to think of a set of Nets as a bus. The
+Bus statement provides a means for net grouping. WARNING: the current
+implementation (october 1991) disallows &lt;NetPortRef&gt;s in a &lt;NetRef&gt;.
+The Attribute string specifies miscellaneous information about the circuit. For
+instance, the attributes of a transistor could be &quot;l=1.6 w=23&quot;, specifying
+the channel length and width. The attributes of a circuit instance usually
+override the (default) attributes of the instantiated circuit.
+<P>
+
+<I>LAYOUT</I>
+
+<BR>
+
+A layout statement describes the geometry of a circuit implementation.
+Synopsis:
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Layout&gt;&nbsp;::=&nbsp;(Layout&nbsp;&lt;layoutname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Status&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayPortList&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayBbx&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayOffset&gt;?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&lt;LayInstList&gt;&nbsp;|&nbsp;&lt;LaySlice&gt;}?
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;WireList&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayPortList&gt;&nbsp;::=&nbsp;(LayPortList&nbsp;&lt;LayPort&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayPort&gt;&nbsp;::=&nbsp;(LayPort&nbsp;&lt;cirportname&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PortLayer&gt;?&nbsp;&lt;LayPort&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;PortLayer&gt;&nbsp;::=&nbsp;(PortLayer&nbsp;&lt;layernumber&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;PortPos&gt;&nbsp;::=&nbsp;(PortPos&nbsp;&lt;xposition&gt;&nbsp;&lt;yposition&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayBbx&gt;&nbsp;::=&nbsp;(LayBbx&nbsp;&lt;xlength&gt;&nbsp;&lt;ylength&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayOffset&gt;&nbsp;::=&nbsp;(LayOffset&nbsp;&lt;xoffset&gt;&nbsp;&lt;yoffset&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayInstList&gt;&nbsp;::=&nbsp;(LayInstList
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayInst&gt;*
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LaySlice&gt;*
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayInstList&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayInst&gt;&nbsp;::=&nbsp;(LayInst&nbsp;&lt;layinstname&gt;&nbsp;&lt;LayCellRef&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Orient&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Orient&gt;&nbsp;::=&nbsp;(Orient&nbsp;&lt;mtx0&gt;&nbsp;&lt;mtx1&gt;&nbsp;&lt;mtx2&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mtx3&gt;&nbsp;&lt;mtx4&gt;&nbsp;&lt;mtx5&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayCellRef&gt;&nbsp;::=&nbsp;(LayCellRef&nbsp;&lt;layoutname&gt;&nbsp;&lt;LayCirRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayCirRef&gt;&nbsp;::=&nbsp;(LayCirRef&nbsp;&lt;circuitname&gt;&nbsp;&lt;LayFunRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayFunRef&gt;&nbsp;::=&nbsp;(LayFunRef&nbsp;&lt;functionname&gt;&nbsp;&lt;LayLibRef&gt;?&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayLibRef&gt;&nbsp;::=&nbsp;(LayLibRef&nbsp;&lt;libraryname&gt;&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LaySlice&gt;&nbsp;::=&nbsp;(LaySlice&nbsp;{vertical&nbsp;|&nbsp;horizontal&nbsp;|&nbsp;chaos}
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LayInst&gt;*
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LaySlice&gt;*
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;layInstList&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;WireList&gt;&nbsp;::=&nbsp;(WireList&nbsp;&lt;Wire&gt;*&nbsp;)
+<P>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Wire&gt;&nbsp;::=&nbsp;(Wire&nbsp;&lt;layernumber&gt;&nbsp;&lt;xleft&gt;&nbsp;&lt;xright&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ybottom&gt;&nbsp;&lt;ytop&gt;&nbsp;)
+<P>
+
+The LayPortList lists for each CirPort one or more geometrical representations
+(LayPorts). A LayPort occupies exactly one grid point indicated by PortPos. The
+&lt;layernumber&gt; of the PortLayer (and also of the Wire statement) is interpreted
+as follows.  If &lt;layernumber&gt; is positive then the indicated layer is added to
+the position. If &lt;layernumber&gt; is negative then the layer 0 - &lt;layernumber&gt; is
+removed from the position. Currently, the Oceanic sea-of-gates tools interpret
+the layers 1, 2 and 3 as first metal, second metal and third metal. Contacts
+between the image and first metal have &lt;layernumber&gt; 100, contacts between
+first and second metal have &lt;layernumber&gt; 101 and contacts between second and
+third metal have &lt;layernumber&gt; 102.  The LayBbx statement declares the bounding
+box of the layout. The LayOffset specifies a shift with respect to the &quot;basics
+image&quot;, refer to
+<I><A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A></I>(4).
+
+The LayInstList names the layout instances used. The LaySlice statement does
+exactly the same, but it also specifies a slicing placement for the instances.
+With the modifier &quot;horizontal&quot; the arguments of LaySlice are placed from left
+to right. The modifier &quot;vertical&quot; specifies ordering from bottom to top.  The
+modifier &quot;chaos&quot; does not specify any order at all -- it is equivalent to
+LayInstList.  The WireList lists all the rectangles that make up the layout.
+Interpretation of &lt;layernumber&gt; is as described above.
+<A NAME="lbEO">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Patrick Groeneveld and Paul Stravers, Delft University of Technology.
+E-mail address is <A HREF="mailto:ocean@donau.et.tudelft.nl">ocean@donau.et.tudelft.nl</A>.
+<A NAME="lbEP">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="http://localhost/cgi-bin/man/man2html?3+sealib">sealib</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfread">sdfread</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfwrite">sdfwrite</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfopen">sdfopen</A>(3), <A HREF="http://localhost/cgi-bin/man/man2html?3+sdfclose">sdfclose</A>(3),
+<A HREF="http://localhost/cgi-bin/man/man2html?4+sdfimage">sdfimage</A>(4).
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">LIMITATION</A><DD>
+<DT><A HREF="#lbAG">EXAMPLE</A><DD>
+<DT><A HREF="#lbAH">AUTHOR</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+<DT><A HREF="#lbAJ">NAME</A><DD>
+<DT><A HREF="#lbAK">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAL">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAM">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAN">LIMITATION</A><DD>
+<DT><A HREF="#lbAO">EXAMPLE</A><DD>
+<DT><A HREF="#lbAP">AUTHOR</A><DD>
+<DT><A HREF="#lbAQ">SEE ALSO</A><DD>
+<DT><A HREF="#lbAR">NAME</A><DD>
+<DT><A HREF="#lbAS">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAT">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAU">WARNING</A><DD>
+<DT><A HREF="#lbAV">AUTHOR</A><DD>
+<DT><A HREF="#lbAW">SEE ALSO</A><DD>
+<DT><A HREF="#lbAX">NAME</A><DD>
+<DT><A HREF="#lbAY">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAZ">DESCRIPTION</A><DD>
+<DT><A HREF="#lbBA">AUTHOR</A><DD>
+<DT><A HREF="#lbBB">SEE ALSO</A><DD>
+<DT><A HREF="#lbBC">NAME</A><DD>
+<DT><A HREF="#lbBD">SYNOPSIS</A><DD>
+<DT><A HREF="#lbBE">DESCRIPTION</A><DD>
+<DT><A HREF="#lbBF">RETURN VALUE</A><DD>
+<DT><A HREF="#lbBG">AUTHOR</A><DD>
+<DT><A HREF="#lbBH">SEE ALSO</A><DD>
+<DT><A HREF="#lbBI">NAME</A><DD>
+<DT><A HREF="#lbBJ">SYNOPSIS</A><DD>
+<DT><A HREF="#lbBK">DESCRIPTION</A><DD>
+<DT><A HREF="#lbBL">WARNING</A><DD>
+<DT><A HREF="#lbBM">AUTHOR</A><DD>
+<DT><A HREF="#lbBN">SEE ALSO</A><DD>
+<DT><A HREF="#lbBO">NAME</A><DD>
+<DT><A HREF="#lbBP">SYNOPSIS</A><DD>
+<DT><A HREF="#lbBQ">DESCRIPTION</A><DD>
+<DT><A HREF="#lbBR">RETURN VALUE</A><DD>
+<DT><A HREF="#lbBS">AUTHOR</A><DD>
+<DT><A HREF="#lbBT">SEE ALSO</A><DD>
+<DT><A HREF="#lbBU">NAME</A><DD>
+<DT><A HREF="#lbBV">SYNOPSIS</A><DD>
+<DT><A HREF="#lbBW">DESCRIPTION</A><DD>
+<DT><A HREF="#lbBX">RETURN VALUE</A><DD>
+<DT><A HREF="#lbBY">AUTHOR</A><DD>
+<DT><A HREF="#lbBZ">SEE ALSO</A><DD>
+<DT><A HREF="#lbCA">NAME</A><DD>
+<DT><A HREF="#lbCB">SYNOPSIS</A><DD>
+<DT><A HREF="#lbCC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbCD">RETURN VALUE</A><DD>
+<DT><A HREF="#lbCE">AUTHOR</A><DD>
+<DT><A HREF="#lbCF">SEE ALSO</A><DD>
+<DT><A HREF="#lbCG">NAME</A><DD>
+<DT><A HREF="#lbCH">SYNOPSIS</A><DD>
+<DT><A HREF="#lbCI">DESCRIPTION</A><DD>
+<DT><A HREF="#lbCJ">RETURN VALUE</A><DD>
+<DT><A HREF="#lbCK">AUTHOR</A><DD>
+<DT><A HREF="#lbCL">SEE ALSO</A><DD>
+<DT><A HREF="#lbCM">NAME</A><DD>
+<DT><A HREF="#lbCN">SYNOPSIS</A><DD>
+<DT><A HREF="#lbCO">DESCRIPTION</A><DD>
+<DT><A HREF="#lbCP">RETURN VALUE</A><DD>
+<DT><A HREF="#lbCQ">AUTHOR</A><DD>
+<DT><A HREF="#lbCR">SEE ALSO</A><DD>
+<DT><A HREF="#lbCS">NAME</A><DD>
+<DT><A HREF="#lbCT">SYNOPSIS</A><DD>
+<DT><A HREF="#lbCU">DESCRIPTION</A><DD>
+<DT><A HREF="#lbCV">RETURN VALUE</A><DD>
+<DT><A HREF="#lbCW">WARNINGS</A><DD>
+<DT><A HREF="#lbCX">EXAMPLE</A><DD>
+<DT><A HREF="#lbCY">AUTHOR</A><DD>
+<DT><A HREF="#lbCZ">SEE ALSO</A><DD>
+<DT><A HREF="#lbDA">NAME</A><DD>
+<DT><A HREF="#lbDB">SYNOPSIS</A><DD>
+<DT><A HREF="#lbDC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbDD">RETURN VALUE</A><DD>
+<DT><A HREF="#lbDE">WARNINGS</A><DD>
+<DT><A HREF="#lbDF">AUTHOR</A><DD>
+<DT><A HREF="#lbDG">SEE ALSO</A><DD>
+<DT><A HREF="#lbDH">NAME</A><DD>
+<DT><A HREF="#lbDI">SYNOPSIS</A><DD>
+<DT><A HREF="#lbDJ">DESCRIPTION</A><DD>
+<DT><A HREF="#lbDK">RETURN VALUE</A><DD>
+<DT><A HREF="#lbDL">WARNING</A><DD>
+<DT><A HREF="#lbDM">AUTHOR</A><DD>
+<DT><A HREF="#lbDN">SEE ALSO</A><DD>
+<DT><A HREF="#lbDO">NAME</A><DD>
+<DT><A HREF="#lbDP">SYNOPSIS</A><DD>
+<DT><A HREF="#lbDQ">DESCRIPTION</A><DD>
+<DT><A HREF="#lbDR">RETURN VALUE</A><DD>
+<DT><A HREF="#lbDS">AUTHOR</A><DD>
+<DT><A HREF="#lbDT">SEE ALSO</A><DD>
+<DT><A HREF="#lbDU">NAME</A><DD>
+<DT><A HREF="#lbDV">SYNOPSIS</A><DD>
+<DT><A HREF="#lbDW">DESCRIPTION</A><DD>
+<DT><A HREF="#lbDX">ENVIRONMENT</A><DD>
+<DT><A HREF="#lbDY">AUTHOR</A><DD>
+<DT><A HREF="#lbDZ">SEE ALSO</A><DD>
+<DT><A HREF="#lbEA">NAME</A><DD>
+<DT><A HREF="#lbEB">SYNOPSIS</A><DD>
+<DT><A HREF="#lbEC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbED">WARNING</A><DD>
+<DT><A HREF="#lbEE">AUTHOR</A><DD>
+<DT><A HREF="#lbEF">SEE ALSO</A><DD>
+<DT><A HREF="#lbEG">NAME</A><DD>
+<DT><A HREF="#lbEH">SYNOPSIS</A><DD>
+<DT><A HREF="#lbEI">DESCRIPTION</A><DD>
+<DT><A HREF="#lbEJ">WARNINGS</A><DD>
+<DT><A HREF="#lbEK">AUTHORS</A><DD>
+<DT><A HREF="#lbEL">SEE ALSO</A><DD>
+<DT><A HREF="#lbEM">NAME</A><DD>
+<DT><A HREF="#lbEN">DESCRIPTION</A><DD>
+<DT><A HREF="#lbEO">AUTHORS</A><DD>
+<DT><A HREF="#lbEP">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 07:27:51 GMT, September 29, 2000
+</BODY>
+</HTML>

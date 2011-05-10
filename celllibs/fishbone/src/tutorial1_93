@@ -1,0 +1,67 @@
+# This script is to be sourced by ICELLS. It creates a nelsis project directory
+# and imports the libraries "primitives", "oplib1_93" and "bonding" into that
+# project.
+#
+# This script assumes that the following have been set by ICELLS:
+#         $PROJECT  (the full path name of the project to be created)
+#         $BINLIBS  (the full path to the directory containing the
+#                    binary version of the libraries)
+#         $SRCLIBS  (the full path to the directory containing the ascii version
+#                    of the libraries, as well as the template directory)
+#
+#
+# First set some parameters ...
+#
+LIB_PRIM=primitives
+LIB_OP=oplib1_93
+LIB_BONDING=bonding
+SRC_TEMPL=templ1_93
+SRC_T=`basename $PROJECT`
+SRC_TUTORIAL=tutorials/$SRC_T
+#
+#
+#
+if [ "$SRC_T" = "" ] ; then
+   echo "ERROR: you must specify a tutorial name. Valid tutorials are:"
+   cd $SRCLIBS/tutorials
+   /bin/ls | sed "s/^/       /"
+   exit 1
+fi
+if [ ! -d $SRCLIBS/$SRC_TUTORIAL ] ; then
+   echo ERROR: the tutorial \"$SRC_T\" does not exist. Valid tutorials are:
+   cd $SRCLIBS/tutorials
+   /bin/ls | sed "s/^/       /"
+   exit 1
+fi
+#
+# And now for the real work ...
+#
+echo ------- creating project $PROJECT -------
+checkAndCreateNewProject $PROJECT
+#
+#
+echo ------- importing $LIB_PRIM -------
+importCellLibrary $PROJECT $BINLIBS/$LIB_PRIM
+#
+#
+echo ------- importing $LIB_OP -------
+importCellLibrary $PROJECT $BINLIBS/$LIB_OP
+#
+#
+echo ------- importing $LIB_BONDING -------
+importCellLibrary $PROJECT $BINLIBS/$LIB_BONDING
+#
+#
+echo ------- copying default config files -------
+cp $SRCLIBS/$SRC_TEMPL/.??* $PROJECT   # copy the default dot files
+cp $SRCLIBS/$SRC_TEMPL/*    $PROJECT   # copy the external declarations etc.
+#
+#
+echo ------- copying tutorial-specific files --------
+cp $SRCLIBS/$SRC_TUTORIAL/.??* $PROJECT 2>/dev/null # copy dot files, if any.
+cp $SRCLIBS/$SRC_TUTORIAL/*    $PROJECT   # copy the sls and cmd files, etc.
+#
+# We did it!
+#
+echo
+echo ...done. Enjoy your tutorial \"$PROJECT\" !!!

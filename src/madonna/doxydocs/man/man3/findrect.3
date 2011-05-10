@@ -1,0 +1,192 @@
+.TH findrect.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+findrect.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stream.h>\fR
+.br
+\fC#include "sealib.h"\fR
+.br
+\fC#include "genpart.h"\fR
+.br
+\fC#include "part.h"\fR
+.br
+\fC#include "cost.h"\fR
+.br
+\fC#include "math.h"\fR
+.br
+\fC#include "phil_glob.h"\fR
+.br
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBBBX_MEAN_X\fR  0"
+.br
+.ti -1c
+.RI "#define \fBBBX_MEAN_Y\fR  1"
+.br
+.ti -1c
+.RI "#define \fBBBX_MAX_X\fR  2"
+.br
+.ti -1c
+.RI "#define \fBBBX_MAX_Y\fR  3"
+.br
+.ti -1c
+.RI "#define \fBBBX_N_CELL\fR  4"
+.br
+.ti -1c
+.RI "#define \fBBBX_AREA\fR  5"
+.br
+.ti -1c
+.RI "#define \fBBBX_AVAIL\fR  6"
+.br
+.ti -1c
+.RI "#define \fBBBX_ARRAY_SIZE\fR  7"
+.br
+.ti -1c
+.RI "#define \fBNOTINITIALIZED\fR  -1"
+.br
+.ti -1c
+.RI "#define \fBMAX\fR(a,b)   ((a)>(b)?(a):(b))"
+.br
+.ti -1c
+.RI "#define \fBMEAN_CELLS_PER_AREA\fR  3.0"
+.br
+.ti -1c
+.RI "#define \fBMEAN_CELLS_PER_AREA_IF_CHANNELED\fR  10.0"
+.br
+.ti -1c
+.RI "#define \fBMAXIMUM_NUMBER_OF_PLACEMENT_AREAS\fR  512"
+.br
+.ti -1c
+.RI "#define \fBTOO_SMALL\fR  0.00001"
+.br
+.ti -1c
+.RI "#define \fBTOO_BIG\fR  10000.0"
+.br
+.ti -1c
+.RI "#define \fBVERY_NEGATIVE\fR  -10000"
+.br
+.in -1c
+.SS Enumerations
+
+.in +1c
+.ti -1c
+.RI "enum \fBRoundingPolicy\fR { \fBNoRounding\fR, \fBRoundUp\fR, \fBRoundDown\fR, \fBRoundNear\fR }"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "int \fBfindrectangleandcostfunctions\fR (CIRCUITPTR circuit, int *nx, int *ny, \fBCFUNC\fR *costfunctions, int calldepth)"
+.br
+.in -1c
+.SS Variables
+
+.in +1c
+.ti -1c
+.RI "int \fBmakeChannels\fR = 0"
+.br
+.ti -1c
+.RI "int \fBrequestedGridPoints\fR [] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}"
+.br
+.ti -1c
+.RI "int \fBexpandableDirection\fR = NOTINITIALIZED"
+.br
+.ti -1c
+.RI "double \fBextraplaza\fR = 1.0"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define BBX_AREA  5
+.PP
+Definition at line 19 of file findrect.C.
+.SS #define BBX_ARRAY_SIZE  7
+.PP
+Definition at line 21 of file findrect.C.
+.SS #define BBX_AVAIL  6
+.PP
+Definition at line 20 of file findrect.C.
+.SS #define BBX_MAX_X  2
+.PP
+Definition at line 16 of file findrect.C.
+.SS #define BBX_MAX_Y  3
+.PP
+Definition at line 17 of file findrect.C.
+.SS #define BBX_MEAN_X  0
+.PP
+Definition at line 14 of file findrect.C.
+.SS #define BBX_MEAN_Y  1
+.PP
+Definition at line 15 of file findrect.C.
+.SS #define BBX_N_CELL  4
+.PP
+Definition at line 18 of file findrect.C.
+.SS #define MAX(a, b)  ((a)>(b)?(a):(b))
+.PP
+Definition at line 43 of file findrect.C.
+.SS #define MAXIMUM_NUMBER_OF_PLACEMENT_AREAS  512
+.PP
+Definition at line 48 of file findrect.C.
+.SS #define MEAN_CELLS_PER_AREA  3.0
+.PP
+Definition at line 46 of file findrect.C.
+.SS #define MEAN_CELLS_PER_AREA_IF_CHANNELED  10.0
+.PP
+Definition at line 47 of file findrect.C.
+.SS #define NOTINITIALIZED  -1
+.PP
+Definition at line 23 of file findrect.C.
+.SS #define TOO_BIG  10000.0
+.PP
+Definition at line 245 of file findrect.C.
+.SS #define TOO_SMALL  0.00001
+.PP
+Definition at line 244 of file findrect.C.
+.SS #define VERY_NEGATIVE  -10000
+.PP
+Definition at line 375 of file findrect.C.
+.SH ENUMERATION TYPE DOCUMENTATION
+.PP 
+.SS enum RoundingPolicy
+.PP
+\fBEnumeration values:\fR
+.in +1c
+.TP
+\fB\fINoRounding\fR \fR
+.TP
+\fB\fIRoundUp\fR \fR
+.TP
+\fB\fIRoundDown\fR \fR
+.TP
+\fB\fIRoundNear\fR \fR
+.PP
+Definition at line 25 of file findrect.C.
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS int findrectangleandcostfunctions (CIRCUITPTR circuit, int * nx, int * ny, \fBCFUNC\fR * costfunctions, int calldepth)
+.PP
+Definition at line 74 of file findrect.C.
+.SH VARIABLE DOCUMENTATION
+.PP 
+.SS int expandableDirection = NOTINITIALIZED
+.PP
+Definition at line 60 of file findrect.C.
+.SS double extraplaza = 1.0
+.PP
+Definition at line 61 of file findrect.C.
+.SS int makeChannels = 0
+.PP
+Definition at line 40 of file findrect.C.
+.SS int requestedGridPoints[] = {NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED}
+.PP
+Definition at line 59 of file findrect.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

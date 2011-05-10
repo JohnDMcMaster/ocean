@@ -1,0 +1,728 @@
+\subsection{Lay\-Map  Class Reference}
+\label{LayMap}\index{LayMap@{Lay\-Map}}
+{\tt \#include $<$lay\-Map.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Lay\-Map} (LAYOUT $\ast$,{\bf Image\-Map} $\ast$,{\bf Array} $\ast$)
+\item 
+{\bf $\sim$Lay\-Map} ()
+\item 
+{\bf layer\-Type} {\bf via\-To\-Critical\-Area} (int,int)
+\item 
+unsigned int {\bf find\-Net\-Id} (int,int,{\bf layer\-Type},short$\ast$)
+\item 
+void {\bf add\-Critical\-Points} ({\bf Clst} \&,short$\ast$)
+\item 
+int {\bf get\-Hor} ()
+\item 
+int {\bf get\-Ver} ()
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+unsigned int {\bf search} (int,int,{\bf layer\-Type})
+\item 
+void {\bf create} ()
+\item 
+void {\bf add\-Wires} (int,int,LAYOUT $\ast$,short $\ast$)
+\item 
+void {\bf go\-Deeper} (SLICE $\ast$,LAYOUT $\ast$,short $\ast$)
+\item 
+void {\bf refresh} ()
+\item 
+void {\bf add\-Terms} (short $\ast$)
+\item 
+void {\bf recognize\-Terminals} ()
+\item 
+void {\bf clear\-Flags} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf x\-Min}
+\item 
+int {\bf x\-Max}
+\item 
+int {\bf y\-Min}
+\item 
+int {\bf y\-Max}
+\item 
+{\bf Boolean} {\bf init\-Flag}
+\item 
+{\bf layout\-Map\-Type}$\ast$$\ast$ {\bf map}
+\item 
+LAYOUT$\ast$ {\bf layout}
+\item 
+short$\ast$ {\bf actual\-Matrix}
+\item 
+{\bf Image\-Map}$\ast$ {\bf image\-Map}
+\item 
+{\bf Array}$\ast$ {\bf free\-Nets}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{LayMap_a0}
+\index{LayMap@{Lay\-Map}!LayMap@{LayMap}}
+\index{LayMap@{LayMap}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Lay\-Map::Lay\-Map (LAYOUT $\ast$ {\em l}, {\bf Image\-Map} $\ast$ {\em i}, {\bf Array} $\ast$ {\em n})}\hfill
+
+
+
+Definition at line 15 of file lay\-Map.C.\small\begin{verbatim}00015 :
+00016                     layout(l),imageMap(i),freeNets(n)
+00017 //
+00018 // Constructor
+00019 {
+00020   initFlag=false;
+00021   actualMatrix=NULL;   // to ensure that no wires in "map"
+00022   map=NULL;
+00023 
+00024 }// LayMap::LayMap  //
+
+\end{verbatim}\normalsize 
+\label{LayMap_a1}
+\index{LayMap@{Lay\-Map}!~LayMap@{$\sim$LayMap}}
+\index{~LayMap@{$\sim$LayMap}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Lay\-Map::$\sim$Lay\-Map ()}\hfill
+
+
+
+Definition at line 28 of file lay\-Map.C.\small\begin{verbatim}00031 {
+00032   if(initFlag)
+00033   {
+00034     freeArray2(xMax-xMin+2,(void**)map);
+00035   }
+00036 
+00037 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{LayMap_a4}
+\index{LayMap@{Lay\-Map}!addCriticalPoints@{addCriticalPoints}}
+\index{addCriticalPoints@{addCriticalPoints}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::add\-Critical\-Points ({\bf Clst} \& {\em c}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 105 of file lay\-Map.C.\small\begin{verbatim}00109 {
+00110   int ver=imageMap->rows,
+00111       hor=imageMap->cols;
+00112   List& list=c.criticalPoints;
+00113   int x=c.cX,y=c.cY;
+00114 
+00115   ArrayIterator aIter(imageMap->criLines);
+00116   
+00117   for(;(Item&)aIter != NOITEM;aIter++)
+00118   {
+00119     List &criLine = (List&)(Item&)aIter;
+00120 
+00121     ListIterator criIter(criLine);
+00122     
+00123     for(;(Item&)criIter != NOITEM;criIter++)
+00124     {
+00125       CriCandidate &cp = (CriCandidate&)(Item&)criIter;
+00126       
+00127       if (cp.neighbors == 0 || (cp.neighbors & c.pattern)!= cp.neighbors)
+00128       {
+00129     // we don't have to check points laying
+00130     // on mirror axis between two sectors
+00131     // taken by this cell or belonging
+00132     // to critical universal feeds laying
+00133     // inside this cell
+00134     // cp.neighbors in this place contains set of
+00135     // bits on positions of sectors on
+00136     // both sides of axis for restricted feed
+00137     // or sectors to which belong critical
+00138     // universal feed
+00139     
+00140     int net=findNetId(x*hor+cp.x,y*ver+cp.y,layerType(cp.layer),mtx);
+00141     
+00142     if (net != 0)                    // this point is connected
+00143                                          // to one of terminals
+00144     {
+00145       CriPoint &newCp = * new CriPoint(cp.x,cp.y,layerType(cp.layer),net);
+00146       if ( ! list.hasItem( newCp) )
+00147         list.add( newCp );
+00148       else
+00149         delete (void*)&newCp;
+00150     } 
+00151       }      
+00152     }
+00153     
+00154   }
+00155 
+00156 }
+\end{verbatim}\normalsize 
+\label{LayMap_c5}
+\index{LayMap@{Lay\-Map}!addTerms@{addTerms}}
+\index{addTerms@{addTerms}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::add\-Terms (short $\ast$ {\em mtx})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 506 of file lay\-Map.C.\small\begin{verbatim}00509 {
+00510   int out[2],in[2];
+00511   
+00512   for(LAYPORT *pPtr=layout->layport;pPtr!=NULL;pPtr=pPtr->next)
+00513   {
+00514     in[HOR]=pPtr->pos[HOR];
+00515     in[VER]=pPtr->pos[VER];
+00516 
+00517     mtxapply(out,in,mtx);
+00518     map[out[HOR]-xMin][out[VER]-yMin].termNo=(unsigned char)pPtr->flag.l;  
+00519                                                   // here there's previously
+00520                                                   // recognized "free" net
+00521                                                   // number or 1 when this
+00522                                                   // "contrained"
+00523   }
+00524 }
+\end{verbatim}\normalsize 
+\label{LayMap_c2}
+\index{LayMap@{Lay\-Map}!addWires@{addWires}}
+\index{addWires@{addWires}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::add\-Wires (int {\em xoffs}, int {\em yoffs}, LAYOUT $\ast$ {\em l\-Ptr}, short $\ast$ {\em matrix})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 349 of file lay\-Map.C.\small\begin{verbatim}00353 {
+00354 
+00355   for(SLICE *slPtr = lPtr->slice;slPtr != NULL;slPtr=slPtr->next)
+00356     goDeeper(slPtr,lPtr,matrix); 
+00357 
+00358   for(WIRE *wPtr=lPtr->wire;wPtr!= NULL;wPtr=wPtr->next)
+00359   {
+00360     short  out[4];                   // wire after transformation
+00361     layerType layer;
+00362     int  xBegin,
+00363          xEnd,
+00364          yBegin,
+00365          yEnd;
+00366 
+00367     mtxapplytocrd(out,wPtr->crd,matrix);
+00368 
+00369     layer=recognizeLayer(wPtr->layer);
+00370 
+00371 
+00372     if (out[XL] <= out[XR])           // after transformation relation between
+00373     {                                 // points may change
+00374       xBegin=out[XL]-xMin;
+00375       xEnd=out[XR]-xMin;
+00376     }  
+00377     else
+00378     {
+00379       xBegin=out[XR]-xMin;
+00380       xEnd=out[XL]-xMin;
+00381     }
+00382     if (out[YB] <= out[YT])    
+00383     {                          
+00384       yBegin=out[YB]-yMin;
+00385       yEnd=out[YT]-yMin;
+00386     }  
+00387     else
+00388     {
+00389       yBegin=out[YT]-yMin;
+00390       yEnd=out[YB]-yMin;
+00391     }
+00392                 // layout instances may be shifted
+00393     yBegin+=yoffs;
+00394     yEnd+=yoffs;
+00395     xBegin+=xoffs;
+00396     xEnd+=xoffs;
+00397 
+00398     if (xBegin < 0 || yBegin < 0 || yEnd > yMax-yMin || xEnd > xMax-xMin )
+00399     {
+00400       // cerr << "\n  Wrong wire segment - coordinates out of range !\n";
+00401        // users really tend to get upset if you do not tell \'m WHERE the cause
+00402        // of their problem is. So why not print the NAME OF THE LAYOUT that we
+00403        // are complaining about?
+00404        cerr << form("\n Layout %s(%s(%s(%s))), Wire [%d %d %d %d %d] "
+00405             "coordinates out of range\n",
+00406             lPtr->name, lPtr->circuit->name, lPtr->circuit->function->name,
+00407             lPtr->circuit->function->library->name, wPtr->layer,
+00408             wPtr->crd[XL], wPtr->crd[XR], wPtr->crd[YB], wPtr->crd[YT]);
+00409       usrErr("LayMap::addWires",EINPDAT);
+00410     }
+00411         int x,y;
+00412 
+00413         for(x=xBegin;x<=xEnd;x++)
+00414             for(y=yBegin;y<=yEnd;y++)
+00415       { 
+00416 
+00417     layoutMapType *m= &map[x][y];
+00418     m->layers |= layer;
+00419     
+00420     if(y < yEnd)               // mark connections between grid points
+00421       m->upWay |= layer;
+00422     if(y > yBegin)
+00423       m->downWay |= layer;
+00424     if(x < xEnd)
+00425       m->rightWay |= layer;
+00426     if(x > xBegin)
+00427       m->leftWay |= layer;
+00428       }
+00429   }
+00430 
+00431 }
+\end{verbatim}\normalsize 
+\label{LayMap_c7}
+\index{LayMap@{Lay\-Map}!clearFlags@{clearFlags}}
+\index{clearFlags@{clearFlags}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::clear\-Flags ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 554 of file lay\-Map.C.\small\begin{verbatim}00557 {
+00558   for(int i=0;i<=xMax-xMin;i++)
+00559   {
+00560     layoutMapType *lPtr = map[i];
+00561 
+00562     for(int j=0;j<=yMax-yMin;j++,lPtr++)
+00563     {
+00564       lPtr->visited=0;
+00565     }
+00566   }
+00567 }
+\end{verbatim}\normalsize 
+\label{LayMap_c1}
+\index{LayMap@{Lay\-Map}!create@{create}}
+\index{create@{create}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::create ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 280 of file lay\-Map.C.\small\begin{verbatim}00285 {
+00286   int bHigh = layout->bbx[VER],
+00287       bWidth = layout->bbx[HOR],
+00288       iHigh = imageMap->rows,
+00289       iWidth = imageMap->cols;
+00290 
+00291   if(bHigh < iHigh)
+00292     bHigh=iHigh;
+00293 
+00294   if(bWidth < iWidth)
+00295     bWidth=iWidth;
+00296 
+00297 
+00298   xMin=-bWidth;
+00299   xMax=2*bWidth-1;
+00300   yMin=-bHigh;
+00301   yMax=2*bHigh-1;
+00302 
+00303 
+00304   map=(layoutMapType**)allocArray2(xMax-xMin+2,yMax-yMin+2, sizeof(layoutMapType));
+00305   
+00306   // now we have to fill it out
+00307 
+00308   layoutMapType *sPtr,*dPtr;
+00309   
+00310   for(int i=xMin;i<=xMax;i++)  // for all columns
+00311   {
+00312     int  x = i % iWidth;
+00313     int  y = yMin % iHigh;
+00314 
+00315     if(y < 0)
+00316       y+=iHigh;
+00317 
+00318     if ( x < 0) 
+00319       x+=iWidth;              // x,y - coordinates inside cluster
+00320 
+00321                      
+00322     dPtr = &map[i+bWidth][0];     // destination column pointer
+00323     
+00324     sPtr = & imageMap->map[x][y];
+00325 
+00326     int j = yMin;             // i,j - coordinates inside new array
+00327     int numToCopy = iHigh - y;
+00328     
+00329     while( j<= yMax )
+00330     {
+00331       memcpy(dPtr,sPtr,numToCopy* sizeof(layoutMapType));
+00332       
+00333       sPtr=&imageMap->map[x][0];
+00334       dPtr+=numToCopy;
+00335       j+=numToCopy;
+00336 
+00337       if( yMax - j > iHigh)  // if last time
+00338     numToCopy=iHigh;
+00339       else
+00340     numToCopy=yMax+1-j;
+00341     }
+00342   }
+00343 
+00344 }
+\end{verbatim}\normalsize 
+\label{LayMap_a3}
+\index{LayMap@{Lay\-Map}!findNetId@{findNetId}}
+\index{findNetId@{findNetId}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}unsigned int Lay\-Map::find\-Net\-Id (int {\em x}, int {\em y}, {\bf layer\-Type} {\em layer}, short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 61 of file lay\-Map.C.
+
+Referenced by {\bf Clst::Clst}().\small\begin{verbatim}00073 {
+00074   if(!initFlag )
+00075   {
+00076     create();
+00077     recognizeTerminals();
+00078     addWires(0,0,layout,mtx);
+00079     addTerms(mtx);
+00080     initFlag=true;
+00081     actualMatrix=mtx;
+00082   }
+00083   else
+00084   {
+00085     if(actualMatrix == mtx)
+00086       clearFlags();
+00087     else
+00088     {
+00089       freeArray2(xMax-xMin+2,(void**)map);
+00090       actualMatrix=mtx;
+00091       create();
+00092       addWires(0,0,layout,mtx);
+00093       addTerms(mtx);
+00094     }  
+00095   }
+00096   if ( x >= xMin && x <= xMax && y >= yMin && y <=yMax)
+00097     return search(x,y,layer);
+00098   else
+00099     return 0;
+00100 
+00101 }
+\end{verbatim}\normalsize 
+\label{LayMap_a5}
+\index{LayMap@{Lay\-Map}!getHor@{getHor}}
+\index{getHor@{getHor}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::get\-Hor ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 54 of file lay\-Map.h.\small\begin{verbatim}00054 { return imageMap->cols;}
+\end{verbatim}\normalsize 
+\label{LayMap_a6}
+\index{LayMap@{Lay\-Map}!getVer@{getVer}}
+\index{getVer@{getVer}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::get\-Ver ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 55 of file lay\-Map.h.\small\begin{verbatim}00055 { return imageMap->rows;}
+\end{verbatim}\normalsize 
+\label{LayMap_c3}
+\index{LayMap@{Lay\-Map}!goDeeper@{goDeeper}}
+\index{goDeeper@{goDeeper}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::go\-Deeper (SLICE $\ast$ {\em slice}, LAYOUT $\ast$ {\em l\-Ptr}, short $\ast$ {\em matrix})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 435 of file lay\-Map.C.\small\begin{verbatim}00438 {
+00439   if(slice->chld_type == SLICE_CHLD)
+00440   {
+00441     for(SLICE *cslPtr=slice->chld.slice;cslPtr != NULL;cslPtr=cslPtr->next)
+00442       goDeeper(cslPtr,lPtr,matrix);
+00443   }
+00444   else
+00445   { 
+00446     for(LAYINST *liPtr=slice->chld.layinst;liPtr!=NULL;liPtr=liPtr->next)
+00447       if(strstr(liPtr->layout->name,"Tmp_Cell_")==NULL ) // don't consider 
+00448                                                      // nelsis's tmp cells
+00449       {
+00450      short out[6],
+00451           *mtxb=liPtr->mtx;
+00452                 // transformation for this cell is a multiplication
+00453                 // of transfomation of parrent and transformation
+00454                 // of child within parrent
+00455     
+00456     out[A11] = matrix[A11]*mtxb[A11] + matrix[A12]*mtxb[A21];
+00457     out[A12] = matrix[A11]*mtxb[A12] + matrix[A12]*mtxb[A22];
+00458     out[A21] = matrix[A21]*mtxb[A11] + matrix[A22]*mtxb[A21];
+00459     out[A22] = matrix[A21]*mtxb[A12] + matrix[A22]*mtxb[A22];
+00460     out[B1]  = matrix[A11]*mtxb[B1]  + matrix[A12]*mtxb[B2] + matrix[B1];
+00461     out[B2]  = matrix[A21]*mtxb[B1]  + matrix[A22]*mtxb[B2] + matrix[B2];
+00462 
+00463 
+00464     addWires(0,0,liPtr->layout,out);    
+00465 
+00466     // addWires(liPtr->mtx[B1],liPtr->mtx[B2],liPtr->layout,matrix);
+00467       }
+00468 
+00469 
+00470       else
+00471       {
+00472     cerr << "\n Layouts cannot be build of nelsis's temporary cells\n";
+00473     usrErr("LayMap::goDeeper",EINPDAT);
+00474       }
+00475 
+00476   }
+00477 
+00478 }
+\end{verbatim}\normalsize 
+\label{LayMap_c6}
+\index{LayMap@{Lay\-Map}!recognizeTerminals@{recognizeTerminals}}
+\index{recognizeTerminals@{recognizeTerminals}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::recognize\-Terminals ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 527 of file lay\-Map.C.\small\begin{verbatim}00529 : Each gets a number. When a terminal
+00530 // name is one of user defined "free" nets then number = position in array+2.
+00531 // It's because in map 0 means "no terminal" and "1"  "contrained" net, 
+00532 // otherwise number == 1.
+00533 {
+00534   for(LAYPORT *pPtr=layout->layport;pPtr!=NULL;pPtr=pPtr->next)
+00535   {
+00536     ArrayIterator aIter(*freeNets);
+00537     int  pos=0;
+00538     
+00539     for(;(Item&)aIter != NOITEM;aIter++,pos++)
+00540     {
+00541       CriNet &net = (CriNet&)(Item&)aIter;
+00542       if ( pPtr->cirport->name == net.name )
+00543     break;
+00544     }
+00545     if((Item&)aIter == NOITEM)       // no such name => "constrained" net
+00546       pPtr->flag.l=1;
+00547     else
+00548       pPtr->flag.l=pos+2;      
+00549   }
+00550 }
+\end{verbatim}\normalsize 
+\label{LayMap_c4}
+\index{LayMap@{Lay\-Map}!refresh@{refresh}}
+\index{refresh@{refresh}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Lay\-Map::refresh ()\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 482 of file lay\-Map.C.\small\begin{verbatim}00485 {
+00486   int toClear = Metal1Layer | Metal2Layer | MetalsViaLayer | ViaLayer;
+00487   toClear = ~toClear;
+00488 
+00489   for(int i=0;i<=xMax-xMin;i++)
+00490   {
+00491     layoutMapType *lPtr = map[i];
+00492     for(int j=0;j<=yMax-yMin;j++,lPtr++)
+00493     {
+00494       lPtr->layers &= toClear;
+00495       lPtr->visited =0;
+00496       lPtr->termNo = 0;
+00497       lPtr->upWay &= toClear;
+00498       lPtr->downWay &= toClear;
+00499       lPtr->rightWay &= toClear;
+00500       lPtr->leftWay &= toClear;
+00501     }
+00502   }
+00503 }
+\end{verbatim}\normalsize 
+\label{LayMap_c0}
+\index{LayMap@{Lay\-Map}!search@{search}}
+\index{search@{search}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}unsigned int Lay\-Map::search (int {\em x}, int {\em y}, {\bf layer\-Type} {\em layer})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 159 of file lay\-Map.C.\small\begin{verbatim}00161 : this function is called recursively
+00162 // for all still not visited points in the vicinity of (x,y),or other points
+00163 // in universal feed or tries to change layer if there's a via. If all these
+00164 // possibilities are already checked it returns 0.
+00165 {
+00166   unsigned int net;
+00167   layoutMapType *m=&map[x-xMin][y-yMin];
+00168 
+00169   if (m->visited & layer)          // we've already been here !
+00170     return 0;            
+00171 
+00172   if ( m->termNo )
+00173     switch (layer)
+00174     {
+00175     case DiffusionLayer:
+00176     case PolyLayer:
+00177                   if (!(m->layers & Metal1Layer)&& !(m->layers & Metal2Layer))
+00178             return m->termNo;
+00179           break;
+00180     case Metal1Layer:
+00181                   if (!(m->layers & Metal2Layer))
+00182             return m->termNo;
+00183           break;
+00184     case Metal2Layer:
+00185           return m->termNo;
+00186     }
+00187 
+00188 
+00189   m->visited |= layer;               // mark that place
+00190   
+00191 
+00192   // visiting points belonging to the same layer :
+00193 
+00194 
+00195 
+00196   if(layer != PolyLayer)             // restricted feeds && metal segments
+00197   {
+00198                                      // we have only to check this neighbors
+00199                                      // which have connection with our on
+00200                                      // the same layer
+00201     if(m->leftWay & layer && x > xMin)
+00202       if ( net = search(x-1,y,layer) )
+00203     return net;
+00204     if(m->upWay & layer && y < yMax)
+00205       if ( net = search(x,y+1,layer) )
+00206     return net;
+00207     if(m->rightWay & layer && x < xMax)
+00208       if ( net = search(x+1,y,layer) )
+00209     return net;
+00210     if(m->downWay & layer && y > yMin)
+00211       if ( net = search(x,y-1,layer) )
+00212     return net;
+00213     
+00214   }
+00215   else                                // for universal feed we have to
+00216                                       // go to visit all of the points from the 
+00217                                       // list
+00218   {
+00219 
+00220     ListIterator rIter(  (List&)(*imageMap)[m->uniNo] );
+00221     int a = x / imageMap->cols ,
+00222         b = y / imageMap->rows;
+00223     
+00224     if (x<0)
+00225       a--;
+00226     if (y<0)
+00227       b--;
+00228 
+00229     a*=imageMap->cols;
+00230     b*=imageMap->rows;
+00231                           // now we have coordinates of left-bottom point
+00232                           // in cluster
+00233 
+00234     for(;(Item&)rIter != NOITEM;rIter++)
+00235     {
+00236       Point &p = (Point&)(Item&)rIter;
+00237       if ( (x!= a+p.x || y!= b+p.y) && (net = search(a+p.x,b+p.y,layer))>0 )
+00238     return net;
+00239     }
+00240   }
+00241 
+00242 
+00243   // if all points on this layer visited lets try go to the other
+00244 
+00245 
+00246   if(m->layers & ViaLayer)          // normal via exists 
+00247     if ( (layer & Metal1Layer) || (layer & Metal2Layer) )
+00248     {
+00249       if( net = search(x,y,(m->layers & PolyLayer)>0 ? PolyLayer : DiffusionLayer))
+00250     return net;
+00251     }
+00252     else
+00253     {
+00254       if( net = search(x,y,(m->layers & Metal1Layer) ? Metal1Layer : Metal2Layer))
+00255     return net;
+00256     }
+00257 
+00258   if((m->layers  & MetalsViaLayer)>0)   // via between two metals
+00259     if ( (layer & Metal1Layer)>0  )
+00260     {  
+00261       if( net = search(x,y,Metal2Layer))
+00262     return net;
+00263     }
+00264     else
+00265     {
+00266       if( net = search(x,y,Metal1Layer))
+00267     return net;
+00268     }  
+00269 
+00270   
+00271 
+00272   // we cannot go further - must return
+00273 
+00274   return 0;
+00275 
+00276 }
+\end{verbatim}\normalsize 
+\label{LayMap_a2}
+\index{LayMap@{Lay\-Map}!viaToCriticalArea@{viaToCriticalArea}}
+\index{viaToCriticalArea@{viaToCriticalArea}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf layer\-Type} Lay\-Map::via\-To\-Critical\-Area (int, int)}\hfill
+
+
+
+\subsubsection{Member Data Documentation}
+\label{LayMap_o7}
+\index{LayMap@{Lay\-Map}!actualMatrix@{actualMatrix}}
+\index{actualMatrix@{actualMatrix}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}short $\ast$ Lay\-Map::actual\-Matrix\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 82 of file lay\-Map.h.\label{LayMap_o9}
+\index{LayMap@{Lay\-Map}!freeNets@{freeNets}}
+\index{freeNets@{freeNets}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Array} $\ast$ Lay\-Map::free\-Nets\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 84 of file lay\-Map.h.\label{LayMap_o8}
+\index{LayMap@{Lay\-Map}!imageMap@{imageMap}}
+\index{imageMap@{imageMap}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Image\-Map} $\ast$ Lay\-Map::image\-Map\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 83 of file lay\-Map.h.\label{LayMap_o4}
+\index{LayMap@{Lay\-Map}!initFlag@{initFlag}}
+\index{initFlag@{initFlag}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Lay\-Map::init\-Flag\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 78 of file lay\-Map.h.\label{LayMap_o6}
+\index{LayMap@{Lay\-Map}!layout@{layout}}
+\index{layout@{layout}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LAYOUT $\ast$ Lay\-Map::layout\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 81 of file lay\-Map.h.\label{LayMap_o5}
+\index{LayMap@{Lay\-Map}!map@{map}}
+\index{map@{map}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf layout\-Map\-Type} $\ast$$\ast$ Lay\-Map::map\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 79 of file lay\-Map.h.\label{LayMap_o1}
+\index{LayMap@{Lay\-Map}!xMax@{xMax}}
+\index{xMax@{xMax}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::x\-Max\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 74 of file lay\-Map.h.\label{LayMap_o0}
+\index{LayMap@{Lay\-Map}!xMin@{xMin}}
+\index{xMin@{xMin}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::x\-Min\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 73 of file lay\-Map.h.\label{LayMap_o3}
+\index{LayMap@{Lay\-Map}!yMax@{yMax}}
+\index{yMax@{yMax}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::y\-Max\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 76 of file lay\-Map.h.\label{LayMap_o2}
+\index{LayMap@{Lay\-Map}!yMin@{yMin}}
+\index{yMin@{yMin}!LayMap@{Lay\-Map}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Lay\-Map::y\-Min\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 75 of file lay\-Map.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf lay\-Map.h}\item 
+{\bf lay\-Map.C}\end{CompactItemize}

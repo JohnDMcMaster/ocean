@@ -1,0 +1,78 @@
+.TH Array 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Array \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <array.h>\fR
+.PP
+Inherits \fBBaseArray\fR.
+.PP
+Inherited by \fBDivTable\fR, and \fBImageMap\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBArray\fR ( int top, int bottom = 0, \fBsizeType\fR aDelta = 0 )"
+.br
+.ti -1c
+.RI "virtual \fB~Array\fR ()"
+.br
+.ti -1c
+.RI "\fBItem\fR& \fBoperator[]\fR ( int ) const"
+.br
+.ti -1c
+.RI "virtual void \fBadd\fR ( \fBItem\fR& )"
+.br
+.ti -1c
+.RI "void \fBaddAt\fR ( \fBItem\fR&, int )"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Array::Array (int top, int bottom = 0, \fBsizeType\fR aDelta = 0)
+.PP
+Definition at line 32 of file array.h.
+.SS Array::~Array ()\fC [virtual]\fR
+.PP
+Definition at line 25 of file array.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void Array::add (\fBItem\fR & toAdd)\fC [virtual]\fR
+.PP
+Reimplemented from \fBBaseArray\fR.
+.PP
+Definition at line 42 of file array.C.
+.SS void Array::addAt (\fBItem\fR & toAdd, int atIndex)
+.PP
+Definition at line 59 of file array.C.
+.SS char * Array::myName () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBBaseArray\fR.
+.PP
+Reimplemented in \fBDivTable\fR, and \fBImageMap\fR.
+.PP
+Definition at line 36 of file array.C.
+.SS \fBclassType\fR Array::myNo () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBBaseArray\fR.
+.PP
+Reimplemented in \fBDivTable\fR, and \fBImageMap\fR.
+.PP
+Definition at line 30 of file array.C.
+.SS \fBItem\fR & Array::operator[] (int at) const\fC [inline]\fR
+.PP
+Definition at line 46 of file array.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

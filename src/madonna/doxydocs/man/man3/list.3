@@ -1,0 +1,112 @@
+.TH List 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+List \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <list.h>\fR
+.PP
+Inherits \fBPackage\fR.
+.PP
+Inherited by \fBPattern\fR, and \fBPlaneCell\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBList\fR ()"
+.br
+.ti -1c
+.RI "virtual \fB~List\fR ()"
+.br
+.ti -1c
+.RI "\fBItem\fR& \fBpeekHead\fR () const"
+.br
+.ti -1c
+.RI "void \fBadd\fR ( \fBItem\fR& )"
+.br
+.ti -1c
+.RI "void \fBpickOut\fR ( const \fBItem\fR&, int = 0 )"
+.br
+.ti -1c
+.RI "void \fBremove\fR ( const \fBItem\fR& l )"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual \fBBoxIterator\fR& \fBinitIterator\fR () const"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "class \fBListIterator\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS List::List ()\fC [inline]\fR
+.PP
+Definition at line 41 of file list.h.
+.SS List::~List ()\fC [virtual]\fR
+.PP
+Definition at line 36 of file list.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void List::add (\fBItem\fR & toAdd)\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 48 of file list.C.
+.PP
+Referenced by \fBLayMap::addCriticalPoints\fR(), \fBImageMap::addFeeds\fR(), \fBImageMap::criticalFeed\fR(), \fBImageMap::criticalIsland\fR(), and \fBoperator|=\fR().
+.SS \fBBoxIterator\fR & List::initIterator () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 113 of file list.C.
+.SS char * List::myName () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Reimplemented in \fBPattern\fR, and \fBPlaneCell\fR.
+.PP
+Definition at line 107 of file list.C.
+.SS \fBclassType\fR List::myNo () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Reimplemented in \fBPattern\fR, and \fBPlaneCell\fR.
+.PP
+Definition at line 100 of file list.C.
+.SS \fBItem\fR & List::peekHead () const\fC [inline]\fR
+.PP
+Definition at line 44 of file list.h.
+.SS void List::pickOut (const \fBItem\fR & toDetach, int deleteItemToo = 0)\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 59 of file list.C.
+.SS void List::remove (const \fBItem\fR & l)\fC [inline]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 48 of file list.h.
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS class ListIterator\fC [friend]\fR
+.PP
+Definition at line 58 of file list.h.
+.PP
+Referenced by \fBinitIterator\fR().
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

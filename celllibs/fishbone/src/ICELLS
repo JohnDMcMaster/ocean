@@ -1,0 +1,239 @@
+# This script is to be sourced by ICELLS. It compiles and installs some nelsis
+# libraries in the global cell library tree.
+#
+# This script assumes that the following have been set by ICELLS:
+#      $BINLIBS   (the full path to the directory containing the
+#                  binary version of the libraries)
+#      $SRCLIBS   (the full path to the directory containing the ascii version
+#                  of the libraries, as well as the template directory)
+#      $LIBSCRIPT (the name of this script)
+#
+##############################################################################
+#
+# First set some parameters ...
+#
+LIB_PRIM=primitives
+LIB_DIG=digilib8_93
+LIB_G_DIG=g_digilib5_99
+LIB_ANA=analib8_00
+LIB_G_ANA=g_analib8_00
+LIB_EX=exlib8_93
+LIB_PDIMC3TUD=pdimc3tud_0295
+LIB_BONDING=bonding11_93
+##############################################################################
+#
+# And now for the real work ... The primitives first:
+#
+echo ======= creating project $BINLIBS/$LIB_PRIM =======
+checkOrCreateProject $BINLIBS/$LIB_PRIM      # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_PRIM/* $BINLIBS/$LIB_PRIM || exit 1
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_PRIM =======
+installCellLibrary $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= running \"gnarp -CFb $LIB_PRIM mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_PRIM/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_PRIM gnarp -CFb $LIB_PRIM mkLibprim
+chmod ugo=r $BINLIBS/$LIB_PRIM/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the digital library:
+#
+echo ======= creating project $BINLIBS/$LIB_DIG =======
+checkOrCreateProject $BINLIBS/$LIB_DIG        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_DIG/* $BINLIBS/$LIB_DIG || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_DIG $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_DIG =======
+installCellLibrary $BINLIBS/$LIB_DIG
+#
+#
+echo ======= running \"gnarp -CFb $LIB_DIG mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_DIG/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_DIG gnarp -CFb $LIB_DIG mkLibprim
+chmod ugo=r $BINLIBS/$LIB_DIG/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the gate version of the digital library:
+#
+echo ======= creating project $BINLIBS/$LIB_G_DIG =======
+checkOrCreateProject $BINLIBS/$LIB_G_DIG        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_G_DIG/* $BINLIBS/$LIB_G_DIG || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_G_DIG $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_G_DIG =======
+installCellLibrary $BINLIBS/$LIB_G_DIG
+#
+#
+echo ======= running \"gnarp -CFb $LIB_G_DIG mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_G_DIG/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_G_DIG gnarp -CFb $LIB_G_DIG mkLibprim
+chmod ugo=r $BINLIBS/$LIB_G_DIG/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the analog library:
+#
+echo ======= creating project $BINLIBS/$LIB_ANA =======
+checkOrCreateProject $BINLIBS/$LIB_ANA        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_ANA/* $BINLIBS/$LIB_ANA || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_ANA $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_ANA =======
+installCellLibrary $BINLIBS/$LIB_ANA
+#
+#
+echo ======= running \"gnarp -CFb $LIB_ANA mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_ANA/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_ANA gnarp -CFb $LIB_ANA mkLibprim
+chmod ugo=r $BINLIBS/$LIB_ANA/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the gate version of the analog library:
+#
+echo ======= creating project $BINLIBS/$LIB_G_ANA =======
+checkOrCreateProject $BINLIBS/$LIB_G_ANA        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_G_ANA/* $BINLIBS/$LIB_G_ANA || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_G_ANA $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_G_ANA =======
+installCellLibrary $BINLIBS/$LIB_G_ANA
+#
+#
+echo ======= running \"gnarp -CFb $LIB_G_ANA mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_G_ANA/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_G_ANA gnarp -CFb $LIB_G_ANA mkLibprim
+chmod ugo=r $BINLIBS/$LIB_G_ANA/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the extended lib:
+#
+echo ======= creating project $BINLIBS/$LIB_EX =======
+checkOrCreateProject $BINLIBS/$LIB_EX        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_EX/* $BINLIBS/$LIB_EX || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_EX $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_EX =======
+installCellLibrary $BINLIBS/$LIB_EX
+#
+#
+echo ======= running \"gnarp -CFb $LIB_EX mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_EX/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_EX gnarp -CFb $LIB_EX mkLibprim
+chmod ugo=r $BINLIBS/$LIB_EX/seadif/sealib.sdf      # make library read-only
+#
+#
+##############################################################################
+#
+# Then comes the pdimc3tud lib:
+#
+echo ======= creating project $BINLIBS/$LIB_PDIMC3TUD =======
+checkOrCreateProject $BINLIBS/$LIB_PDIMC3TUD        # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_PDIMC3TUD/* $BINLIBS/$LIB_PDIMC3TUD || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_PDIMC3TUD $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_PDIMC3TUD =======
+installCellLibrary $BINLIBS/$LIB_PDIMC3TUD
+#
+#
+echo ======= running \"gnarp -CFb $LIB_PDIMC3TUD mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_PDIMC3TUD/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_PDIMC3TUD gnarp -CFb $LIB_PDIMC3TUD mkLibprim
+chmod ugo=r $BINLIBS/$LIB_PDIMC3TUD/seadif/sealib.sdf      # make library read-only
+#
+#
+
+##############################################################################
+#
+# ...and finally the bonding:
+#
+echo ======= creating project $BINLIBS/$LIB_BONDING =======
+checkOrCreateProject $BINLIBS/$LIB_BONDING # no complaints if already exists
+#
+#
+echo ======= copying source files to $BINLIBS/$LIB_PRIM =======
+cp $SRCLIBS/$LIB_BONDING/* $BINLIBS/$LIB_BONDING || exit 1
+#
+#
+echo ======= importing library $LIB_PRIM =======
+importCellLibrary $BINLIBS/$LIB_BONDING $BINLIBS/$LIB_PRIM
+#
+#
+echo ======= compiling and installing $BINLIBS/$LIB_BONDING =======
+installCellLibrary $BINLIBS/$LIB_BONDING
+#
+#
+echo ======= running \"gnarp -CFb $LIB_BONDING mkLibprim\" =======
+SEALIB=./seadif; export SEALIB
+chmod u+rw $BINLIBS/$LIB_BONDING/seadif/sealib.sdf 
+runProgramInLib $BINLIBS/$LIB_BONDING gnarp -CFb $LIB_BONDING mkLibprim
+chmod ugo=r $BINLIBS/$LIB_BONDING/seadif/sealib.sdf # make library read-only
+#
+#
+##############################################################################
+#
+# We did it!
+echo ======= $LIBSCRIPT: program finished =======

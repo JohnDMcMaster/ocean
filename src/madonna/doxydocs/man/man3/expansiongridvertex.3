@@ -1,0 +1,64 @@
+.TH expansionGridVertex 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+expansionGridVertex \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <globRoute.h>\fR
+.PP
+Inherits \fBgraphVertex\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBexpansionGridVertex\fR (CIRCUITPTR partition, \fBexpansionGridVertexType\fR t, int x_coord, int y_coord)"
+.br
+.ti -1c
+.RI "expansionGridVertex* \fBneighbor\fR (\fBpointOfCompass\fR)"
+.br
+.ti -1c
+.RI "\fBexpansionGridEdge\fR* \fBedge\fR (\fBpointOfCompass\fR)"
+.br
+.ti -1c
+.RI "int \fBxCoord\fR ()"
+.br
+.ti -1c
+.RI "int \fByCoord\fR ()"
+.br
+.ti -1c
+.RI "\fBexpansionGridVertexType\fR \fBtype\fR ()"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS expansionGridVertex::expansionGridVertex (CIRCUITPTR partition, \fBexpansionGridVertexType\fR t, int x_coord, int y_coord)
+.PP
+Definition at line 217 of file globRoute.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBexpansionGridEdge\fR* expansionGridVertex::edge (\fBpointOfCompass\fR)
+.PP
+.SS expansionGridVertex* expansionGridVertex::neighbor (\fBpointOfCompass\fR)
+.PP
+.SS void expansionGridVertex::print ()\fC [inline, virtual]\fR
+.PP
+Definition at line 76 of file globRoute.h.
+.SS \fBexpansionGridVertexType\fR expansionGridVertex::type ()\fC [inline]\fR
+.PP
+Definition at line 75 of file globRoute.h.
+.SS int expansionGridVertex::xCoord ()\fC [inline]\fR
+.PP
+Definition at line 73 of file globRoute.h.
+.SS int expansionGridVertex::yCoord ()\fC [inline]\fR
+.PP
+Definition at line 74 of file globRoute.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

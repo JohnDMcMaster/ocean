@@ -1,0 +1,436 @@
+/*
+ *
+ * This is the file 'image.seadif'
+ * Contents: Image description for the the 'octagon' image. This image was
+ *           created at Twente University in Holland. The process is a
+ *           three-layer submicron process, which unfortunately cannot be
+ *           processed anymore.
+ * Purpose:  All OCEAN tools read this file to get process and image specific
+ *           information. This file is read by fish, sea nelsea, ghoti,
+ *           madonna, trout and seadali. You may edit this file to change the
+ *           behaviour of (for instance) the router. In that case you can copy
+ *           a version of this file into your process directory. All OCEAN
+ *           tools will read your local image description file in that case.
+ * Created:  by Patrick Groeneveld and Paul Stravers
+ *           march 1993
+ *
+ * (c) The OCEAN/NELSIS Sea-of-Gates design system
+ * Delft University of Technology
+ *
+ */
+
+(Seadif "Image description file for octagon image"
+
+   /*
+    * Set the size of an empty image if you press 'fish'
+    * for fishbone 25 times 1 is nice
+    */
+   (ChipDescription chip
+      (ChipSize 3 2)
+   )
+
+
+   /*
+    * blocks which describes an image
+    */
+   (ImageDescription "octagon"
+      (Technology "c1x3m"
+         (DesignRules
+	    /*
+	     * Specify data about routing layers. First metal layer
+             * (which is closest to the solicon) has index 0:
+	     *    -1  <- polysilicon/diffusion
+             *     0  <- metal 1
+             *     1  <- metal 2
+             *     2  <- metal 3
+             *    etc.
+             * Take as many layers as you want or have.
+             */
+            (NumberOfLayers 3)
+	    /* set wire width of the layer in lambda.
+	     * For display purposes, we made the top layer smaller
+	     */
+            (WireWidth 0 14)
+            (WireWidth 1 12)
+            (WireWidth 2 10)
+
+	    /* specify which mask corresponds to each layer */
+	    /* every layer MUST have one unique mask assigned */
+            (WireMaskName 0 "in")               /* layer0 name = in */
+            (WireMaskName 1 "ins")              /* layer1 name = ins */
+            (WireMaskName 2 "int")              /* layer2 name = int */
+
+	    /* set style of the layers for trout, must be alternating */
+            (WireOrient 0 horizontal)           /* style of the layers) */
+            (WireOrient 1 vertical)
+            (WireOrient 2 horizontal)
+
+	    /*
+	     * Declare the vias. For each via there must be an
+	     * instance containing the mask pattern. Between the
+	     * metal layers there is one via per adjacent pair of
+	     * layers. Between metal 1 and the silicon (poly,
+	     * diffusion, etc) there may be more than one type of via.
+	     */
+            (ViaCellName  1 2 "VIAinsint")   /* between metal 2 and metal 3 */
+            (ViaCellName  0 1 "VIAinins")    /* between metal 1 and metal 2 */
+            (ViaCellName -1 0 "VIAimagein")  /* between poly/diff and metal1 */
+
+	    /*
+	     * specify the mask name associated with each via. In this way
+	     * fish can map a mask pattern to the proper via. Any of the
+	     * contacts from metal1 down to the image is translated to the
+	     * proper mask pattern, using the feed statements in the
+	     * GridConnectList
+	     */
+            (ViaMaskName  1 2 "cot")
+            (ViaMaskName  0 1 "cos")
+            (ViaMaskName -1 0 "co")
+         )
+      )
+
+
+      /*
+       * description of the grid-image
+       */
+      (GridImage
+
+         /*
+          * declaration of the image grid.
+          * This image is a rectangular grid which is repeated
+          *
+	  * Set the size of a single grid cell in grid points in fishbone this
+	  * is 14 (x) by 14 (y), which means that the gridpositions range from
+	  * 0,0 to 13, 13
+	  */
+         (GridSize  14 14
+            /*
+             * specify how the gridpoints map to the layout coordinates
+             * in this case, for instance, the grid point (0, 1) will map to
+	     * point (10, 46) lambda in the actual image. In this way it is
+	     * possible to specify a non-regular grid
+             */
+            (GridMapping horizontal
+                10  46  82 118 154 190 226 262 298 334 370 406 442 478)
+            (GridMapping vertical
+                10  46  82 118 154 190 226 262 298 334 370 406 442 478)
+
+            /*
+             * implicit power lines in the image are not present
+             *
+             * (PowerLine <orient> <ident> <layer_no> <row or column number>)
+	     */
+
+	    /* overlap of the repeated image in x and y direction: */
+	    (ImageOverlap 0 0)
+         )
+
+	 (Axis
+	    /*
+	     * Mirror axis information for the detailed placer. Format is
+	     * (MirrorAxis x1 x2 y1 y2) where (x1,y1) and (x2,y2) are two
+	     * coordinates thru which the mirror axis runs. NOTE: because
+	     * a mirror axis can run just IN BETWEEN two gridpoints, the
+	     * arguments of MirrorAxis specify HALF GRIDPOINT UNITS. E.g.
+	     * a mirror axis running thru the gridpoints (1,1) and (5,5)
+	     * would be specified as (MirrorAxis 2 10 2 10).
+	     */
+	    (MirrorAxis 0  26 27 27)		/* x2 */
+	    (MirrorAxis 0  26 13 13)		/* x1 */
+	    (MirrorAxis 27 27  0 26)		/* y0 */
+	    (MirrorAxis 13 13  0 26)		/* y1 */
+	    (MirrorAxis  0 26  0 26)            /* xy 1 */
+	    (MirrorAxis  0 26 26  0)            /* xy 1 */
+	 )
+
+         /*
+          * Specifies the connections/feeds between grid points.
+          */
+         (GridConnectList
+            /*
+             * Default vias are allowed at EACH grid point between metal
+             * layers (layer no >= 0) and at NO gridpoint to the core (from
+             * layer 0 to -1).  Using the 'block' statement it is possible to
+             * remove edges from the graph and therefore also possible vias.
+             * In the image of the example no 'cos' vias are allowed at
+	     * some positions.
+             */
+            /* there are no blocks for metal vias */
+
+	    /*
+             * Declare the internal feeds of the image (e.g. feeds through a
+             * poly wire).  This declaration also implies that it is possible
+             * to make a via at a certain grid position. Therefore the cell
+             * name of the required via must be given at each feed position.
+             * The via cell name must be declared previously in the technology
+             * block using the 'ViaMaskName' statement.  We recoqnize two
+             * types of feeds: UniversalFeed and RestrictedFeed.  For fish
+             * there is no difference, but for the router there is.  The
+             * router can use universal feeds for arbitrary wire segments.
+             * Restricted feeds have a limited use: they can only indicate
+             * that a set of gridpoints (in the image = layer -1) are
+             * electrically equivalent.  In the example image the the poly
+             * gates can serve as universal feeds, while the diffusion source
+             * and drain cannot.  A feed position can also point to a position
+             * outside the size of the image cell.  Fish does not use the feed
+             * information, but it needs a via cell name for each position
+             * where a connection to layer -1 can be made.  It is allowed to
+             * add dummy feeds: e.g.
+             *    (UniversalFeed (Feed "Via_ps_in" 0   1))
+             * indicates that at 0,1 a via to core can be placed, with name
+             * Via_ps_in.  ExternalFeed - if this exists then this feed has an
+             * extension to the neighbor cluster in this direction ("hor" or
+             * "ver")
+	     * BusFeed - power or ground net
+	     */
+            /*
+             * substrate contacts
+             */
+            (RestrictedFeed (Feed "VIAimagein"  0  0))
+            (RestrictedFeed (Feed "VIAimagein" 13  0))
+            (RestrictedFeed (Feed "VIAimagein"  0 13))
+            (RestrictedFeed (Feed "VIAimagein" 13 13))
+
+            (RestrictedFeed (Feed "VIAimagein"  6  6))
+            (RestrictedFeed (Feed "VIAimagein"  6  7))
+            (RestrictedFeed (Feed "VIAimagein"  7  6))
+            (RestrictedFeed (Feed "VIAimagein"  7  7))
+
+            /*
+             * leftbottom corner
+             */
+            /* poly gates */
+            (UniversalFeed (Feed "VIAimagein"  0  1) (Feed "VIAimagein"  2  3))
+            (UniversalFeed (Feed "VIAimagein"  1  0) (Feed "VIAimagein"  3  2))
+            (UniversalFeed (Feed "VIAimagein"  0  4) (Feed "VIAimagein"  1  4))
+            (UniversalFeed (Feed "VIAimagein"  4  0) (Feed "VIAimagein"  4  1))
+
+            (UniversalFeed (Feed "VIAimagein"  2  4) (Feed "VIAimagein"  5  6))
+            (UniversalFeed (Feed "VIAimagein"  4  2) (Feed "VIAimagein"  6  5))
+            (UniversalFeed (Feed "VIAimagein"  0  5) (Feed "VIAimagein"  0  6))
+            (UniversalFeed (Feed "VIAimagein"  5  0) (Feed "VIAimagein"  6  0))
+
+            /* diff. source/drain contacts */
+            (RestrictedFeed (Feed "VIAimagein"  0  3))
+            (RestrictedFeed (Feed "VIAimagein"  3  0))
+            (RestrictedFeed (Feed "VIAimagein"  0  2) (Feed "VIAimagein"  1  3))
+            (RestrictedFeed (Feed "VIAimagein"  2  0) (Feed "VIAimagein"  3  1))
+            (RestrictedFeed (Feed "VIAimagein"  1  1) (Feed "VIAimagein"  2  2))
+
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  1  6) (Feed "VIAimagein"  2  6)
+	       (Feed "VIAimagein"  3  6))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  6  1) (Feed "VIAimagein"  6  2)
+	       (Feed "VIAimagein"  6  3))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  5  1) (Feed "VIAimagein"  5  2)
+	       (Feed "VIAimagein"  5  3) (Feed "VIAimagein"  6  4))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  1  5) (Feed "VIAimagein"  2  5)
+	       (Feed "VIAimagein"  3  5) (Feed "VIAimagein"  4  6))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  4  4) (Feed "VIAimagein"  5  5))
+
+
+            /*
+             * rightbottom corner
+             */
+            /* poly gates */
+            (UniversalFeed  (Feed "VIAimagein" 13 1) (Feed "VIAimagein" 11  3))
+            (UniversalFeed  (Feed "VIAimagein" 12 0) (Feed "VIAimagein" 10  2))
+            (UniversalFeed  (Feed "VIAimagein" 12 4) (Feed "VIAimagein" 13  4))
+            (UniversalFeed  (Feed "VIAimagein"  9 0) (Feed "VIAimagein"  9  1))
+
+            (UniversalFeed  (Feed "VIAimagein" 11 4) (Feed "VIAimagein"  8  6))
+            (UniversalFeed  (Feed "VIAimagein"  9 2) (Feed "VIAimagein"  7  5))
+            (UniversalFeed  (Feed "VIAimagein" 13 5) (Feed "VIAimagein" 13  6))
+            (UniversalFeed  (Feed "VIAimagein"  7 0) (Feed "VIAimagein"  8  0))
+
+            /* diff. source/drain contacts */
+            (RestrictedFeed (Feed "VIAimagein" 13 3))
+            (RestrictedFeed (Feed "VIAimagein" 10 0))
+            (RestrictedFeed (Feed "VIAimagein" 13 2) (Feed "VIAimagein" 12 3))
+            (RestrictedFeed (Feed "VIAimagein" 11 0) (Feed "VIAimagein" 10 1))
+            (RestrictedFeed (Feed "VIAimagein" 12 1) (Feed "VIAimagein" 11 2))
+
+	    (RestrictedFeed
+	       (Feed "VIAimagein" 10   6) (Feed "VIAimagein" 11   6)
+	       (Feed "VIAimagein" 12   6))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  7   1) (Feed "VIAimagein"  7   2)
+	       (Feed "VIAimagein"  7   3))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  8   1) (Feed "VIAimagein"  8   2)
+	       (Feed "VIAimagein"  8   3) (Feed "VIAimagein"  7   4))
+	    (RestrictedFeed
+	       (Feed "VIAimagein" 10   5) (Feed "VIAimagein" 11   5)
+	       (Feed "VIAimagein" 12   5) (Feed "VIAimagein"  9   6))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  9   4) (Feed "VIAimagein"  8   5))
+
+            /*
+             * lefttop corner
+             */
+            /* poly gates */
+	    (UniversalFeed 
+	       (Feed "VIAimagein"  0  12) (Feed "VIAimagein"  2  10))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  1  13) (Feed "VIAimagein"  3  11))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  0   9) (Feed "VIAimagein"  1   9))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  4  12) (Feed "VIAimagein"  4  13))
+
+	    (UniversalFeed
+	       (Feed "VIAimagein"  2   9) (Feed "VIAimagein"  5   7))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  4  11) (Feed "VIAimagein"  6   8))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  0   7) (Feed "VIAimagein"  0   8))
+	    (UniversalFeed
+	       (Feed "VIAimagein"  5  13) (Feed "VIAimagein"  6  13))
+
+            /* diff. source/drain contacts */
+            (RestrictedFeed (Feed "VIAimagein"  0 10))
+            (RestrictedFeed (Feed "VIAimagein"  3 13))
+            (RestrictedFeed (Feed "VIAimagein"  0 11) (Feed "VIAimagein" 1 10))
+            (RestrictedFeed (Feed "VIAimagein"  2 13) (Feed "VIAimagein" 3 12))
+            (RestrictedFeed (Feed "VIAimagein"  1 12) (Feed "VIAimagein" 2 11))
+
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  1   7) (Feed "VIAimagein"  2   7)
+	       (Feed "VIAimagein"  3   7))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  6  10) (Feed "VIAimagein"  6  11)
+	       (Feed "VIAimagein"  6  12))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  5  10) (Feed "VIAimagein"  5  11)
+	       (Feed "VIAimagein"  5  12) (Feed "VIAimagein"  6   9))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  1   8) (Feed "VIAimagein"  2   8)
+	       (Feed "VIAimagein"  3   8) (Feed "VIAimagein"  4   7))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  4   9) (Feed "VIAimagein"  5   8))
+
+            /*
+             * righttop corner
+             */
+            /* poly gates */
+            (UniversalFeed (Feed "VIAimagein" 13 12) (Feed "VIAimagein" 11 10))
+            (UniversalFeed (Feed "VIAimagein" 12 13) (Feed "VIAimagein" 10 11))
+            (UniversalFeed (Feed "VIAimagein" 12  9) (Feed "VIAimagein" 13  9))
+            (UniversalFeed (Feed "VIAimagein"  9 12) (Feed "VIAimagein"  9 13))
+
+            (UniversalFeed (Feed "VIAimagein" 11  9) (Feed "VIAimagein"  8  7))
+            (UniversalFeed (Feed "VIAimagein"  9 11) (Feed "VIAimagein"  7  8))
+            (UniversalFeed (Feed "VIAimagein" 13  7) (Feed "VIAimagein" 13  8))
+            (UniversalFeed (Feed "VIAimagein"  7 13) (Feed "VIAimagein"  8 13))
+
+            /* diff. source/drain contacts */
+            (RestrictedFeed (Feed "VIAimagein" 13 10))
+            (RestrictedFeed (Feed "VIAimagein" 10 13))
+            (RestrictedFeed (Feed "VIAimagein" 13 11) (Feed "VIAimagein" 12 10))
+            (RestrictedFeed (Feed "VIAimagein" 11 13) (Feed "VIAimagein" 10 12))
+            (RestrictedFeed (Feed "VIAimagein" 11 11) (Feed "VIAimagein" 12 12))
+
+	    (RestrictedFeed
+	       (Feed "VIAimagein" 10   7) (Feed "VIAimagein" 11   7)
+	       (Feed "VIAimagein" 12   7))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  7  10) (Feed "VIAimagein"  7  11)
+	       (Feed "VIAimagein"  7  12))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  8  10) (Feed "VIAimagein"  8  11)
+	       (Feed "VIAimagein"  8  12) (Feed "VIAimagein"  7   9))
+	    (RestrictedFeed
+	       (Feed "VIAimagein" 10   8) (Feed "VIAimagein" 11   8)
+	       (Feed "VIAimagein" 12   8) (Feed "VIAimagein"  9   7))
+	    (RestrictedFeed
+	       (Feed "VIAimagein"  8   8) (Feed "VIAimagein"  9   9))
+         )
+
+
+         /*
+          * cost parameters to steer the router.
+          */
+         (GridCostList  /* <cost> <vector> <startpoint_range> <endpoint_range> */
+	    /*
+	     * The format is:
+	     *     <cost> <vector> <startpoint_range> <endpoint_range>
+	     * example:
+	     *     (GridCost 1   1 0 0  0 0 0  0 27 0)
+	     * gives offset vector (1 0 0) = L cost 1 over range
+	     * (0 0 0) to (0 27 0) = entire layer 0
+	     */
+            /* horizontal cost in layer 0 */
+	    (GridCost 15   1 0 0  0 0 0  13 13 0)
+	    (GridCost 15  -1 0 0  0 0 0  13 13 0)
+            /* vertical cost in layer 0 */
+	    (GridCost 15   0  1 0  0 0 0  13 13 0)
+	    (GridCost 15   0 -1 0  0 0 0  13 13 0)
+
+            /* horizontal cost in layer 1 */
+	    (GridCost 12  1 0 0  0 0 1  13 13 1)
+	    (GridCost 12  -1 0 0  0 0 1  13 13 1)
+            /* vertical cost in layer 1 */
+	    (GridCost 3   0  1 0  0 0 1  13 13 1)
+	    (GridCost 3   0 -1 0  0 0 1  13 13 1)
+
+            /* horizontal cost in layer 2 */
+	    (GridCost 3   1 0 0  0 0 2  13 13 2)
+	    (GridCost 3  -1 0 0  0 0 2  13 13 2)
+            /* vertical cost in layer 2 */
+	    (GridCost 12   0  1 0  0 0 2  13 13 2)
+	    (GridCost 12   0 -1 0  0 0 2  13 13 2)
+
+            /* cost of a via between layer 0 and layer 1 */
+	    (GridCost 25   0 0 1  0 0 0  13 13 0)
+	    (GridCost 25   0 0 -1  0 0 1  13 13 1)
+
+            /* cost of a via between layer 1 and layer 2 */
+	    (GridCost 25   0 0  1  0 0 1  13 13 1)
+	    (GridCost 25   0 0 -1  0 0 2  13 13 2)
+
+	    /* cost of a very short (= useless) feed */
+	    (FeedCost 2000   1  0 0  0 0 0  13 13 0)
+	    (FeedCost 2000  -1  0 0  0 0 0  13 13 0)
+	    (FeedCost 2000   0  1 0  0 0 0  13 13 0)
+	    (FeedCost 2000   0 -1 0  0 0 0  13 13 0)
+
+	    /* nenh gate */
+	    (FeedCost 100   2  2 0  0 0 0  13 13 0)
+	    (FeedCost 100   2 -2 0  0 0 0  13 13 0)
+	    (FeedCost 100  -2  2 0  0 0 0  13 13 0)
+	    (FeedCost 100  -2 -2 0  0 0 0  13 13 0)
+
+	    /* penh gate */
+	    (FeedCost 100   3  2 0  0 0 0  13 13 0)
+	    (FeedCost 100  -3  2 0  0 0 0  13 13 0)
+	    (FeedCost 100   3 -2 0  0 0 0  13 13 0)
+	    (FeedCost 100  -3 -2 0  0 0 0  13 13 0)
+	    (FeedCost 100   2  3 0  0 0 0  13 13 0)
+	    (FeedCost 100  -2  3 0  0 0 0  13 13 0)
+	    (FeedCost 100   2 -3 0  0 0 0  13 13 0)
+	    (FeedCost 100  -2 -3 0  0 0 0  13 13 0)
+         )
+      )
+
+      /*
+       * decribe the actual layout of the image cell
+       */
+      (LayoutImage
+
+         /*
+          * The cell just imported as a model-call:
+          */
+         (LayoutModelCall "basic_image")
+
+         /*
+          * the repitition distance in x is 504 lambda,
+          * the repitition distance in y is 504 lambda.
+          */
+         (LayoutImageRepetition 504  504)
+      )
+   )
+)

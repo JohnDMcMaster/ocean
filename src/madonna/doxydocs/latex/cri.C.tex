@@ -1,0 +1,79 @@
+\subsection{cri.C File Reference}
+\label{cri.C}\index{cri.C@{cri.C}}
+{\tt \#include "cri.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf List}\& {\bf operator$|$=} ( {\bf List} \&l1,{\bf List} \&l2)
+\item 
+int {\bf operator \&} ({\bf List} \&l1,{\bf List} \&l2)
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{cri.C_a1}
+\index{cri.C@{cri.C}!operator &@{operator \&}}
+\index{operator &@{operator \&}!cri.C@{cri.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int operator \& ({\bf List} \& {\em l1}, {\bf List} \& {\em l2})}\hfill
+
+
+
+Definition at line 59 of file cri.C.\small\begin{verbatim}00062 {
+00063 
+00064   if ( l2.getItemsInBox())
+00065   {  
+00066     ListIterator crIter(l2);
+00067     for(;(Item&)crIter != NOITEM;crIter++)
+00068     {
+00069       CriPoint &foundRef = (CriPoint&)l1.findItem((Item&)crIter);
+00070       if ( foundRef != NOITEM )
+00071       {
+00072     CriPoint &curRef= (CriPoint&)(Item&)crIter;
+00073 
+00074 
+00075     if (curRef.net == 1 || foundRef.net == 1 || curRef.net != foundRef.net )
+00076 
+00077                               // .net == 0 means constrained net
+00078       return 1;
+00079       }
+00080     }  
+00081   }
+00082   return 0;
+00083  
+00084 }
+\end{verbatim}\normalsize 
+\label{cri.C_a0}
+\index{cri.C@{cri.C}!operator\texttt{"|}=@{operator\texttt{"|}=}}
+\index{operator\texttt{"|}=@{operator\texttt{"|}=}!cri.C@{cri.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List} \& operator$|$= ({\bf List} \& {\em l1}, {\bf List} \& {\em l2})}\hfill
+
+
+
+Definition at line 19 of file cri.C.\small\begin{verbatim}00023 {
+00024   
+00025   if (l2.getItemsInBox() )
+00026   {
+00027     ListIterator crIter(l2);
+00028     for(;(Item&)crIter != NOITEM;crIter++)
+00029     {
+00030       // because member function hasItem is checking first if types
+00031       // of objects are the same we have to create temporary object
+00032       // This is because we're using this operator for CriCandidates too
+00033 
+00034       CriPoint &prev = (CriPoint&)(Item&)crIter;
+00035       CriPoint p2(prev);
+00036 
+00037       if ( ! l1.hasItem ( p2 ))
+00038       {
+00039     CriPoint &prev= (CriPoint&)(Item&)crIter;
+00040     CriPoint &newRef = * new CriPoint( prev );
+00041 
+00042     l1.add(newRef);      
+00043       }
+00044 
+00045     }
+00046   }
+00047   return l1;
+00048   
+00049 }
+\end{verbatim}\normalsize 

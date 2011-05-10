@@ -1,0 +1,86 @@
+.TH globNet 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+globNet \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <globRoute.h>\fR
+.PP
+Inherits \fBsdfset\fR, and \fBsdfsetElmt\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBglobNet\fR (NETPTR n)"
+.br
+.ti -1c
+.RI "const NETPTR \fBnet\fR ()"
+.br
+.ti -1c
+.RI "int \fBweight\fR ()"
+.br
+.ti -1c
+.RI "int \fBweight\fR (const int w)"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ()"
+.br
+.ti -1c
+.RI "int \fBisInRoute\fR (\fBexpansionGridEdge\fR *e)"
+.br
+.ti -1c
+.RI "int \fBisInNet\fR (\fBexpansionGridVertex\fR *v)"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBsdfset\fR \fBroute\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS globNet::globNet (NETPTR n)
+.PP
+Definition at line 89 of file globRoute.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int globNet::isInNet (\fBexpansionGridVertex\fR * v)
+.PP
+Definition at line 629 of file globRoute.C.
+.PP
+Referenced by \fBexpansionGrid::printRoute\fR().
+.SS int globNet::isInRoute (\fBexpansionGridEdge\fR * e)
+.PP
+Definition at line 616 of file globRoute.C.
+.PP
+Referenced by \fBexpansionGrid::printRoute\fR().
+.SS const NETPTR globNet::net ()\fC [inline]\fR
+.PP
+Definition at line 91 of file globRoute.h.
+.PP
+Referenced by \fBexpansionGrid::routeGlobNets\fR().
+.SS void globNet::print ()\fC [inline, virtual]\fR
+.PP
+Definition at line 94 of file globRoute.h.
+.SS int globNet::weight (const int w)\fC [inline]\fR
+.PP
+Definition at line 93 of file globRoute.h.
+.SS int globNet::weight ()\fC [inline]\fR
+.PP
+Definition at line 92 of file globRoute.h.
+.PP
+Referenced by \fBexpansionGrid::routeGlobNet\fR(), and \fBexpansionGrid::routeGlobNets\fR().
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBsdfset\fR globNet::route
+.PP
+Definition at line 90 of file globRoute.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,72 @@
+.TH BoxIterator 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BoxIterator \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <box.h>\fR
+.PP
+Inherited by \fBArrayIterator\fR, and \fBListIterator\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBBoxIterator\fR ()"
+.br
+.ti -1c
+.RI "virtual \fB~BoxIterator\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator int\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBoperator Item &\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBget\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBItem\fR& \fBoperator++\fR (int) = 0"
+.br
+.ti -1c
+.RI "virtual void \fBrestart\fR () = 0"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS BoxIterator::BoxIterator ()\fC [inline]\fR
+.PP
+Definition at line 64 of file box.h.
+.SS BoxIterator::~BoxIterator ()\fC [virtual]\fR
+.PP
+Definition at line 103 of file box.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBItem\fR & BoxIterator::get ()\fC [inline, virtual]\fR
+.PP
+Reimplemented in \fBArrayIterator\fR, and \fBListIterator\fR.
+.PP
+Definition at line 69 of file box.h.
+.SS BoxIterator::operator \fBItem\fR & ()\fC [inline, virtual]\fR
+.PP
+Reimplemented in \fBArrayIterator\fR, and \fBListIterator\fR.
+.PP
+Definition at line 68 of file box.h.
+.SS BoxIterator::operator int ()\fC [inline, virtual]\fR
+.PP
+Reimplemented in \fBArrayIterator\fR, and \fBListIterator\fR.
+.PP
+Definition at line 67 of file box.h.
+.SS virtual \fBItem\fR& BoxIterator::operator++ (int)\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBArrayIterator\fR, and \fBListIterator\fR.
+.SS virtual void BoxIterator::restart ()\fC [pure virtual]\fR
+.PP
+Reimplemented in \fBArrayIterator\fR, and \fBListIterator\fR.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,117 @@
+.TH ParserInterface 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ParserInterface \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <parserIf.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBParserInterface\fR ()"
+.br
+.ti -1c
+.RI "\fB~ParserInterface\fR ()"
+.br
+.ti -1c
+.RI "void \fBread\fR (void)"
+.br
+.ti -1c
+.RI "\fBImageMap\fR* \fBgetImageMap\fR (void)"
+.br
+.ti -1c
+.RI "\fBIMAGEDESC\fR* \fBgetImageDesc\fR (void)"
+.br
+.ti -1c
+.RI "void \fBsetDim\fR (int,int)"
+.br
+.ti -1c
+.RI "void \fBinitImages\fR ()"
+.br
+.ti -1c
+.RI "void \fBaddMirrorAxis\fR (\fBMIRROR\fR *)"
+.br
+.ti -1c
+.RI "int \fBprocessFeeds\fR (\fBList\fR& f,\fBlayerType\fR l)"
+.br
+.ti -1c
+.RI "void \fBaddImageOverlap\fR (int x, int y)"
+.br
+.ti -1c
+.RI "void \fBsetNumLayers\fR (int numlay)"
+.br
+.ti -1c
+.RI "int \fBnumLayers\fR ()"
+.br
+.ti -1c
+.RI "void \fBsetRouteOrient\fR (int layer, int orient)"
+.br
+.ti -1c
+.RI "void \fBsetTransparency\fR (int layer, int transp)"
+.br
+.ti -1c
+.RI "void \fBaddPowerLine\fR (int orient, STRING name, int layer, int r_or_c)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS ParserInterface::ParserInterface (void)
+.PP
+Definition at line 27 of file parserIf.C.
+.SS ParserInterface::~ParserInterface ()
+.PP
+Definition at line 40 of file parserIf.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void ParserInterface::addImageOverlap (int x, int y)
+.PP
+Definition at line 131 of file parserIf.C.
+.SS void ParserInterface::addMirrorAxis (\fBMIRROR\fR * m)
+.PP
+Definition at line 105 of file parserIf.C.
+.SS void ParserInterface::addPowerLine (int orient, STRING name, int layer, int r_or_c)
+.PP
+.SS \fBIMAGEDESC\fR * ParserInterface::getImageDesc (void)\fC [inline]\fR
+.PP
+Definition at line 29 of file parserIf.h.
+.PP
+Referenced by \fBgetImageDesc\fR(), and \fBphil\fR().
+.SS \fBImageMap\fR * ParserInterface::getImageMap (void)\fC [inline]\fR
+.PP
+Definition at line 28 of file parserIf.h.
+.PP
+Referenced by \fBphil\fR().
+.SS void ParserInterface::initImages (void)
+.PP
+Definition at line 116 of file parserIf.C.
+.SS int ParserInterface::numLayers ()\fC [inline]\fR
+.PP
+Definition at line 38 of file parserIf.h.
+.SS int ParserInterface::processFeeds (\fBList\fR & f, \fBlayerType\fR l)
+.PP
+Definition at line 140 of file parserIf.C.
+.SS void ParserInterface::read (void)
+.PP
+Definition at line 55 of file parserIf.C.
+.PP
+Referenced by \fBreadImageFile\fR().
+.SS void ParserInterface::setDim (int x, int y)
+.PP
+Definition at line 94 of file parserIf.C.
+.SS void ParserInterface::setNumLayers (int numlay)
+.PP
+Definition at line 207 of file parserIf.C.
+.SS void ParserInterface::setRouteOrient (int layer, int orient)
+.PP
+Definition at line 217 of file parserIf.C.
+.SS void ParserInterface::setTransparency (int layer, int transp)
+.PP
+Definition at line 228 of file parserIf.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

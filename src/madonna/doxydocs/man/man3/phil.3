@@ -1,0 +1,176 @@
+.TH phil.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+phil.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include "usrlib.h"\fR
+.br
+\fC#include "sea.h"\fR
+.br
+\fC#include "phil_glob.h"\fR
+.br
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fBlayoutMapType\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBPointClass\fR  __firstUserClass"
+.br
+.ti -1c
+.RI "#define \fBDivTabClass\fR  (PointClass +1)"
+.br
+.ti -1c
+.RI "#define \fBClusterClass\fR  (DivTabClass+1)"
+.br
+.ti -1c
+.RI "#define \fBPatternClass\fR  (ClusterClass+1)"
+.br
+.ti -1c
+.RI "#define \fBWindowClass\fR  (PatternClass+1)"
+.br
+.ti -1c
+.RI "#define \fBPlaneClass\fR  (WindowClass +1)"
+.br
+.ti -1c
+.RI "#define \fBPlcmClass\fR  (PlaneClass + 1)"
+.br
+.ti -1c
+.RI "#define \fBClstClass\fR  (PlcmClass + 1)"
+.br
+.ti -1c
+.RI "#define \fBCriPointClass\fR  (ClstClass + 1)"
+.br
+.ti -1c
+.RI "#define \fBImageMapClass\fR  (CriPointClass +1)"
+.br
+.ti -1c
+.RI "#define \fBLayMapClass\fR  (ImageMapClass +1)"
+.br
+.ti -1c
+.RI "#define \fBCriNetClass\fR  (LayMapClass +1)"
+.br
+.ti -1c
+.RI "#define \fBPlaneCellClass\fR  (CriNetClass +1)"
+.br
+.ti -1c
+.RI "#define \fBCriCandidateClass\fR  (PlaneCellClass +1)"
+.br
+.ti -1c
+.RI "#define \fBProtAreaClass\fR  (CriCandidateClass +1)"
+.br
+.in -1c
+.SS Enumerations
+
+.in +1c
+.ti -1c
+.RI "enum \fBlayerType\fR { \fBNoneLayer\fR = 0, \fBDiffusionLayer\fR = 0x01, \fBPolyLayer\fR = 0x02, \fBMetal1Layer\fR = 0x04, \fBMetal2Layer\fR = 0x08, \fBMetalsViaLayer\fR = 0x10, \fBViaLayer\fR = 0x20 }"
+.br
+.ti -1c
+.RI "enum \fBflagType\fR { \fBCriticalAreaFlag\fR = 0x40, \fBTerminalFlag\fR = 0x80 }"
+.br
+.in -1c
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "\fBlayerType\fR \fBrecognizeLayer\fR (short layer)"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define ClstClass  (PlcmClass + 1)
+.PP
+Definition at line 27 of file phil.h.
+.SS #define ClusterClass  (DivTabClass+1)
+.PP
+Definition at line 22 of file phil.h.
+.SS #define CriCandidateClass  (PlaneCellClass +1)
+.PP
+Definition at line 33 of file phil.h.
+.SS #define CriNetClass  (LayMapClass +1)
+.PP
+Definition at line 31 of file phil.h.
+.SS #define CriPointClass  (ClstClass + 1)
+.PP
+Definition at line 28 of file phil.h.
+.SS #define DivTabClass  (PointClass +1)
+.PP
+Definition at line 21 of file phil.h.
+.SS #define ImageMapClass  (CriPointClass +1)
+.PP
+Definition at line 29 of file phil.h.
+.SS #define LayMapClass  (ImageMapClass +1)
+.PP
+Definition at line 30 of file phil.h.
+.SS #define PatternClass  (ClusterClass+1)
+.PP
+Definition at line 23 of file phil.h.
+.SS #define PlaneCellClass  (CriNetClass +1)
+.PP
+Definition at line 32 of file phil.h.
+.SS #define PlaneClass  (WindowClass +1)
+.PP
+Definition at line 25 of file phil.h.
+.SS #define PlcmClass  (PlaneClass + 1)
+.PP
+Definition at line 26 of file phil.h.
+.SS #define PointClass  __firstUserClass
+.PP
+Definition at line 20 of file phil.h.
+.SS #define ProtAreaClass  (CriCandidateClass +1)
+.PP
+Definition at line 34 of file phil.h.
+.SS #define WindowClass  (PatternClass+1)
+.PP
+Definition at line 24 of file phil.h.
+.SH ENUMERATION TYPE DOCUMENTATION
+.PP 
+.SS enum flagType
+.PP
+\fBEnumeration values:\fR
+.in +1c
+.TP
+\fB\fICriticalAreaFlag\fR \fR
+.TP
+\fB\fITerminalFlag\fR \fR
+.PP
+Definition at line 51 of file phil.h.
+.SS enum layerType
+.PP
+\fBEnumeration values:\fR
+.in +1c
+.TP
+\fB\fINoneLayer\fR \fR
+.TP
+\fB\fIDiffusionLayer\fR \fR
+.TP
+\fB\fIPolyLayer\fR \fR
+.TP
+\fB\fIMetal1Layer\fR \fR
+.TP
+\fB\fIMetal2Layer\fR \fR
+.TP
+\fB\fIMetalsViaLayer\fR \fR
+.TP
+\fB\fIViaLayer\fR \fR
+.PP
+Definition at line 38 of file phil.h.
+.PP
+Referenced by \fBLayMap::addCriticalPoints\fR().
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS \fBlayerType\fR recognizeLayer (short layer)
+.PP
+Definition at line 218 of file pattern.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

@@ -1,0 +1,57 @@
+# Process  fishbone
+# Lambda   0.2   
+# 
+# time units used   1 unit == 0.1 ns
+# 
+# chip area  used   1 unit == 1/2 of image's basic cell
+#
+# capacitance units : pF 
+
+
+GATE iv110	2	Y=!A;		PIN * INV 0.12 999 4  22  3   20
+GATE no210	3	Y=!(A+B);	PIN * INV 0.12 999 7  70  3   50
+GATE no310	4	Y=!(A+B+C);	PIN * INV 0.12 999 14 50  5  100
+GATE na210	3	Y=!(A*B);	PIN * INV 0.12 999 3  40  4   50
+GATE na310	4	Y=!(A*B*C);	PIN * INV 0.12 999 6  90 12   30
+GATE ex210	7	Y=A*!B+!A*B;	PIN * UNKNOWN 0.12 999 7  70 3  50
+GATE buf20      4       Y=A;            PIN * NONINV  0.12 999 6  11 7 10
+GATE mu111      7       Y=A*!S+B*S;
+     PIN A NONINV 0.12 999 7 11 8 11
+     PIN B NONINV 0.12 999 7 11 8 11
+     PIN S UNKNOWN 0.26 999 12 11 11 11
+GATE mu210      20      Y=A*!S1*!S2+B*S1*!S2+C*!S1*S2+D*S1*S2;
+     PIN A NONINV 0.12 999 24 30 21 70
+     PIN B NONINV 0.12 999 24 30 21 70
+     PIN C NONINV 0.12 999 24 30 21 70
+     PIN D NONINV 0.12 999 24 30 21 70
+     PIN S1 UNKNOWN 0.42 999 30 30 24 70
+     PIN S2 UNKNOWN 0.28 999 20 30 11 70
+GATE zero	0	Y=CONST0;
+GATE one	0	Y=CONST1;
+
+# Pure delay
+# LATCH   delay   1   Q=D;
+# PIN D   NONINV 1 999 0.01 0.01 0.01 0.01
+# SEQ Q ANY ASYNCH
+
+# LATCH dfn10 12 Q = D;
+# PIN D NONINV 0.12 999 30 80 30 70
+# SEQ Q ANY RISING_EDGE
+# CONTROL CLOCK 0.43 999 19 80 23 70
+# CONSTRAINT D 3 3
+
+# LATCH dfr11 15 Q = D*!R;
+# PIN D NONINV 0.12 999 30 80 30 70
+# PIN R INV 0.12 999 30 80 30 70
+# SEQ Q ANY RISING_EDGE
+# CONTROL CLOCK 0.43 999 18 80 23 70
+# CONSTRAINT D 3 3
+# CONSTRAINT R 3 3 
+
+# use resettable d-flipflop with external reset
+LATCH dfr11 15 Q = D;
+PIN D NONINV 0.12 999 30 80 30 70
+SEQ Q ANY RISING_EDGE
+CONTROL CLOCK 0.43 999 18 80 23 70
+CONSTRAINT D 3 3
+

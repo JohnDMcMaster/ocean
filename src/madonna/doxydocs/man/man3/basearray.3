@@ -1,0 +1,196 @@
+.TH BaseArray 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BaseArray \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <basearr.h>\fR
+.PP
+Inherits \fBPackage\fR.
+.PP
+Inherited by \fBArray\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBBaseArray\fR ( int top, int bottom = 0, \fBsizeType\fR aDelta = 0 )"
+.br
+.ti -1c
+.RI "virtual \fB~BaseArray\fR ()"
+.br
+.ti -1c
+.RI "int \fBbottomBound\fR () const"
+.br
+.ti -1c
+.RI "int \fBtopBound\fR () const"
+.br
+.ti -1c
+.RI "\fBsizeType\fR \fBarraySize\fR () const"
+.br
+.ti -1c
+.RI "virtual \fBBoxIterator\fR& \fBinitIterator\fR () const"
+.br
+.ti -1c
+.RI "virtual void \fBadd\fR ( \fBItem\fR& ) = 0"
+.br
+.ti -1c
+.RI "void \fBremove\fR ( int i )"
+.br
+.ti -1c
+.RI "void \fBpickOut\fR ( int, int = 0 )"
+.br
+.ti -1c
+.RI "virtual void \fBpickOut\fR ( const \fBItem\fR&, int = 0 )"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBprintContentsOn\fR ( ostream& ) const"
+.br
+.in -1c
+.SS Protected Methods
+
+.in +1c
+.ti -1c
+.RI "\fBItem\fR& \fBitemAt\fR ( int i ) const"
+.br
+.ti -1c
+.RI "void \fBreallocate\fR ( \fBsizeType\fR )"
+.br
+.in -1c
+.SS Protected Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBsizeType\fR \fBdelta\fR"
+.br
+.ti -1c
+.RI "int \fBbottombound\fR"
+.br
+.ti -1c
+.RI "int \fBtopbound\fR"
+.br
+.ti -1c
+.RI "int \fBwhereToAdd\fR"
+.br
+.ti -1c
+.RI "\fBItem\fR** \fBtheArray\fR"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "class \fBArrayIterator\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS BaseArray::BaseArray (int anUpper, int aLower = 0, \fBsizeType\fR aDelta = 0)
+.PP
+Definition at line 36 of file basearr.C.
+.SS BaseArray::~BaseArray ()\fC [virtual]\fR
+.PP
+Definition at line 50 of file basearr.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS virtual void BaseArray::add (\fBItem\fR & toAdd)\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Reimplemented in \fBArray\fR.
+.SS \fBsizeType\fR BaseArray::arraySize () const\fC [inline]\fR
+.PP
+Definition at line 70 of file basearr.h.
+.PP
+Referenced by \fBBaseArray\fR(), \fBisEqual\fR(), \fBpickOut\fR(), \fBreallocate\fR(), and \fB~BaseArray\fR().
+.SS int BaseArray::bottomBound () const\fC [inline]\fR
+.PP
+Definition at line 37 of file basearr.h.
+.SS \fBBoxIterator\fR & BaseArray::initIterator () const\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 175 of file basearr.C.
+.PP
+Referenced by \fBprintContentsOn\fR().
+.SS int BaseArray::isEqual (const \fBItem\fR & testItem) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBBox\fR.
+.PP
+Definition at line 139 of file basearr.C.
+.SS \fBItem\fR & BaseArray::itemAt (int i) const\fC [inline, protected]\fR
+.PP
+Definition at line 57 of file basearr.h.
+.PP
+Referenced by \fBArrayIterator::get\fR(), \fBArrayIterator::operator Item &\fR(), \fBArrayIterator::operator++\fR(), and \fBArray::operator[]\fR().
+.SS virtual char* BaseArray::myName () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBDivTable\fR, and \fBImageMap\fR.
+.SS virtual \fBclassType\fR BaseArray::myNo () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBDivTable\fR, and \fBImageMap\fR.
+.SS void BaseArray::pickOut (const \fBItem\fR & toPick, int deleteItemToo = 0)\fC [virtual]\fR
+.PP
+Reimplemented from \fBPackage\fR.
+.PP
+Definition at line 60 of file basearr.C.
+.SS void BaseArray::pickOut (int atIndex, int deleteItemToo = 0)
+.PP
+Definition at line 83 of file basearr.C.
+.SS void BaseArray::printContentsOn (ostream & out) const\fC [virtual]\fR
+.PP
+Definition at line 181 of file basearr.C.
+.SS void BaseArray::reallocate (\fBsizeType\fR newSize)\fC [protected]\fR
+.PP
+Definition at line 98 of file basearr.C.
+.PP
+Referenced by \fBArray::add\fR(), and \fBArray::addAt\fR().
+.SS void BaseArray::remove (int i)\fC [inline]\fR
+.PP
+Definition at line 46 of file basearr.h.
+.SS int BaseArray::topBound () const\fC [inline]\fR
+.PP
+Definition at line 39 of file basearr.h.
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS class ArrayIterator\fC [friend]\fR
+.PP
+Definition at line 66 of file basearr.h.
+.PP
+Referenced by \fBinitIterator\fR().
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int BaseArray::bottombound\fC [protected]\fR
+.PP
+Definition at line 61 of file basearr.h.
+.SS \fBsizeType\fR BaseArray::delta\fC [protected]\fR
+.PP
+Definition at line 60 of file basearr.h.
+.SS \fBItem\fR ** BaseArray::theArray\fC [protected]\fR
+.PP
+Definition at line 64 of file basearr.h.
+.SS int BaseArray::topbound\fC [protected]\fR
+.PP
+Definition at line 62 of file basearr.h.
+.SS int BaseArray::whereToAdd\fC [protected]\fR
+.PP
+Definition at line 63 of file basearr.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

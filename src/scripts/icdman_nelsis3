@@ -1,0 +1,85 @@
+#!/bin/sh
+#
+#	@(#)icdman_nelsis3 1.8 06/18/93 
+#
+# simple wrapper script for the standard "man" program that allows you to read
+# the manual pages of the OCEAN/Nelsis IC Design system. Note that this only
+# works for systems that honor the MANPAGE environment variable.
+#
+
+# the password file:
+PW=/etc/passwd
+
+# save the command line arguments:
+ARGV="$@"
+
+##############################################################################
+#			   F I N D - I C D - P A T H                         #
+##############################################################################
+# find where the ICD home is:
+#
+find_icd_manpath()
+{
+   if [ "$ICDPATH" = "" ] ; then
+      if [ "$ICDUSERNAME" = "" ]; then
+         ICDUSERNAME=cacd
+      fi
+      # get ICD home from the passwd file:
+      ICDPATH=`awk -F: "( \\$1 == \\"$ICDUSERNAME\\" ){print \\$6}" $PW \
+               | sed -n 1p`  # the sed helps if cacd occurs > 1 times in $PW
+      if [ "$ICDPATH" = "" ] ; then
+         echo "ERROR: I cannot find the ICD home directory ..." 1>&2
+         exit 1
+      fi
+   fi
+   ICDMANPATH=${ICDPATH}/man
+   if [ ! -d "$ICDMANPATH" ] ; then
+      echo ERROR: ICD manpage directory \"$ICDMANPATH\" does not exist ... 1>&2
+      exit 1
+   fi
+}
+
+##############################################################################
+#			 F I N D - O C E A N - P A T H                       #
+##############################################################################
+# find where the OCEAN home is:
+#
+find_ocean_manpath()
+{
+   if [ "$OCEANPATH" = "" ] ; then
+      # get ocean home from the passwd file:
+      OCEANPATH=`awk -F: "( \\$1 == \\"ocean\\" ){print \\$6}" $PW \
+                 | sed -n 1p` # the sed helps if ocean occurs > 1 times in $PW
+      if [ "$OCEANPATH" = "" ] ; then
+         # check if the fixed path "/usr/ocean" exists:
+         if [ -d /usr/ocean ] ; then
+            OCEANPATH=/usr/ocean
+         fi
+      fi
+      if [ "$OCEANPATH" = "" ] ; then
+         echo "ERROR: I cannot find the OCEAN home directory ..." 1>&2
+         exit 1
+      fi
+   fi
+   OCEANMANPATH="$OCEANPATH/man"
+   if [ ! -d "$OCEANMANPATH" ] ; then
+      echo ERROR: OCEAN manpage directory \"$OCEANMANPATH\" does not exist ... 1>&2
+      exit 1
+   fi
+}
+
+
+##############################################################################
+#				    M A I N                                  #
+##############################################################################
+#
+# set the MANPATH environment to the the manpage directories of the ICD and
+# the OCEAN system, then execute the "man" program.
+#
+
+find_icd_manpath
+find_ocean_manpath
+MANPATH="$ICDMANPATH:$OCEANMANPATH" ; export MANPATH
+exec man $ARGV
+
+##############################################################################

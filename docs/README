@@ -1,0 +1,44 @@
+ocean/docs: 
+
+	         DOCUMENTATION ABOUT THE OCEAN SYSTEM
+
+This directory contains the following documentation related to the OCEAN
+system:
+
+
+"OCEAN: the Sea-of-Gates design system manual"
+ file:     Oceanmanual.ps   (1.9 Mbyte, 118 pages, in 'ocean_docs.tar.gz')
+ contents: Comprehensive manual of the entire sea-of-gates OCEAN system, 
+	   including tutorials, library descriptions and the latest features. 
+	   We strongly recommend to print this manual before using the system.
+-----
+
+"The TU Delft undergraduate design course: Students design a complex 
+ sea-of-gates chip from scratch up to a working 'product'"
+ file:     designcourse.ps  (0.1 Mbyte, 4 pages, in 'ocean_docs.tar.gz' 
+           and 'other_info/designcourse.ps.gz')
+ contents: Describing the design course in which the students work with OCEAN.
+-----
+
+"SIS: A System for Sequential Circuit Synthesis"
+ file:     SIS_paper.ps (0.4 Mbyte, 45 pages, in 'ocean_docs.tar.gz')
+ contents: Paper describing the SIS logic synthesis tool from the UC Berkeley.
+-----
+
+
+Some other documents, e.g. the SLS switch-level simulator user's manual 
+and the Space layout-to-circuit extractor user's manual, are available in
+the directory doc of the Nelsis distribution (file cacd_general.tar.gz).
+
+All documents are in postscript format, ready to print. 
+Again: first print "Oceanmanual.ps" and get familiar with the system. 
+The the other manuals might be useful later on.
+
+The latex and troff sources of these manual pages are available upon request.
+
+  Delft University of Technology
+  Mekelweg 4
+  2628 CD   Delft
+  The Netherlands
+
+  Email: ocean@cas.et.tudelft.nl 

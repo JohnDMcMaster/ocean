@@ -1,0 +1,82 @@
+.TH ProtArea 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ProtArea \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <protArea.h>\fR
+.PP
+Inherits \fBCluster\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBProtArea\fR (\fBCluster\fR &c)"
+.br
+.ti -1c
+.RI "\fB~ProtArea\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "void \fBupdate\fR (int hor,int ver)"
+.br
+.ti -1c
+.RI "int \fBis\fR (int h,int v) const"
+.br
+.in -1c
+.SS Public Attributes
+
+.in +1c
+.ti -1c
+.RI "int \fBmaxX\fR"
+.br
+.ti -1c
+.RI "int \fBmaxY\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS ProtArea::ProtArea (\fBCluster\fR & c)
+.PP
+Definition at line 17 of file protArea.h.
+.SS ProtArea::~ProtArea ()\fC [inline]\fR
+.PP
+Definition at line 20 of file protArea.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS int ProtArea::is (int h, int v) const\fC [inline]\fR
+.PP
+Definition at line 29 of file protArea.h.
+.SS char * ProtArea::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 23 of file protArea.h.
+.SS \fBclassType\fR ProtArea::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBCluster\fR.
+.PP
+Definition at line 22 of file protArea.h.
+.SS void ProtArea::update (int h, int v)
+.PP
+Definition at line 14 of file protArea.C.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS int ProtArea::maxX
+.PP
+Definition at line 25 of file protArea.h.
+.SS int ProtArea::maxY
+.PP
+Definition at line 26 of file protArea.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

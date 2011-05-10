@@ -1,0 +1,144 @@
+\subsection{expansion\-Grid\-Vertex  Class Reference}
+\label{expansionGridVertex}\index{expansionGridVertex@{expansion\-Grid\-Vertex}}
+{\tt \#include $<$glob\-Route.h$>$}
+
+Inheritance diagram for expansion\-Grid\-Vertex:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_expansiongridvertex.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf expansion\-Grid\-Vertex} (CIRCUITPTR partition, {\bf expansion\-Grid\-Vertex\-Type} t, int x\_\-coord, int y\_\-coord)
+\item 
+expansion\-Grid\-Vertex$\ast$ {\bf neighbor} ({\bf point\-Of\-Compass})
+\item 
+{\bf expansion\-Grid\-Edge}$\ast$ {\bf edge} ({\bf point\-Of\-Compass})
+\item 
+int {\bf x\-Coord} ()
+\item 
+int {\bf y\-Coord} ()
+\item 
+{\bf expansion\-Grid\-Vertex\-Type} {\bf type} ()
+\item 
+virtual void {\bf print} ()
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf \_\-x\_\-coord}
+\item 
+int {\bf \_\-y\_\-coord}
+\item 
+{\bf expansion\-Grid\-Vertex\-Type} {\bf \_\-type}
+\item 
+CIRCUITPTR {\bf \_\-partition}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{expansionGridVertex_a0}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!expansionGridVertex@{expansionGridVertex}}
+\index{expansionGridVertex@{expansionGridVertex}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid\-Vertex::expansion\-Grid\-Vertex (CIRCUITPTR {\em partition}, {\bf expansion\-Grid\-Vertex\-Type} {\em t}, int {\em x\_\-coord}, int {\em y\_\-coord})}\hfill
+
+
+
+Definition at line 217 of file glob\-Route.C.\small\begin{verbatim}00220 {
+00221    _partition = partition;
+00222    _type = t;
+00223    _x_coord = x_coord;
+00224    _y_coord = y_coord;
+00225 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{expansionGridVertex_a2}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!edge@{edge}}
+\index{edge@{edge}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Edge}$\ast$ expansion\-Grid\-Vertex::edge ({\bf point\-Of\-Compass})}\hfill
+
+\label{expansionGridVertex_a1}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!neighbor@{neighbor}}
+\index{neighbor@{neighbor}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}expansion\-Grid\-Vertex$\ast$ expansion\-Grid\-Vertex::neighbor ({\bf point\-Of\-Compass})}\hfill
+
+\label{expansionGridVertex_a6}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!print@{print}}
+\index{print@{print}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void expansion\-Grid\-Vertex::print ()\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Definition at line 76 of file glob\-Route.h.\small\begin{verbatim}00076 {cout << form("egVx(%d,%d) ",_x_coord, _y_coord);}
+\end{verbatim}\normalsize 
+\label{expansionGridVertex_a5}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!type@{type}}
+\index{type@{type}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Vertex\-Type} expansion\-Grid\-Vertex::type ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 75 of file glob\-Route.h.
+
+Referenced by {\bf check\-This\-Edge\-Side}().\small\begin{verbatim}00075 {return _type;}
+\end{verbatim}\normalsize 
+\label{expansionGridVertex_a3}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!xCoord@{xCoord}}
+\index{xCoord@{xCoord}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Vertex::x\-Coord ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 73 of file glob\-Route.h.\small\begin{verbatim}00073 {return _x_coord;}
+\end{verbatim}\normalsize 
+\label{expansionGridVertex_a4}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!yCoord@{yCoord}}
+\index{yCoord@{yCoord}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Vertex::y\-Coord ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 74 of file glob\-Route.h.\small\begin{verbatim}00074 {return _y_coord;}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{expansionGridVertex_o3}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!_partition@{\_\-partition}}
+\index{_partition@{\_\-partition}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUITPTR expansion\-Grid\-Vertex::\_\-partition\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 67 of file glob\-Route.h.\label{expansionGridVertex_o2}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!_type@{\_\-type}}
+\index{_type@{\_\-type}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf expansion\-Grid\-Vertex\-Type} expansion\-Grid\-Vertex::\_\-type\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 66 of file glob\-Route.h.\label{expansionGridVertex_o0}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!_x_coord@{\_\-x\_\-coord}}
+\index{_x_coord@{\_\-x\_\-coord}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Vertex::\_\-x\_\-coord\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 65 of file glob\-Route.h.\label{expansionGridVertex_o1}
+\index{expansionGridVertex@{expansion\-Grid\-Vertex}!_y_coord@{\_\-y\_\-coord}}
+\index{_y_coord@{\_\-y\_\-coord}!expansionGridVertex@{expansion\-Grid\-Vertex}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expansion\-Grid\-Vertex::\_\-y\_\-coord\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 65 of file glob\-Route.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf glob\-Route.h}\item 
+{\bf glob\-Route.C}\end{CompactItemize}

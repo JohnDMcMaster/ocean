@@ -1,0 +1,157 @@
+\subsection{Point  Class Reference}
+\label{Point}\index{Point@{Point}}
+{\tt \#include $<$point.h$>$}
+
+Inheritance diagram for Point:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_point.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Point} ()
+\item 
+{\bf Point} (int gx,int gy)
+\item 
+{\bf Point} (int $\ast$pair)
+\item 
+{\bf $\sim$Point} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual void {\bf print} ( ostream\& ) const
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& o) const
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf x}
+\item 
+int {\bf y}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Point_a0}
+\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Point::Point ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 24 of file point.h.\small\begin{verbatim}00024 {x=y=0;}
+\end{verbatim}\normalsize 
+\label{Point_a1}
+\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Point::Point (int {\em gx}, int {\em gy})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 25 of file point.h.\small\begin{verbatim}00025 { x=gx; y=gy;}
+\end{verbatim}\normalsize 
+\label{Point_a2}
+\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Point::Point (int $\ast$ {\em pair})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 26 of file point.h.\small\begin{verbatim}00026 { x=pair[HOR];y=pair[VER]; }
+\end{verbatim}\normalsize 
+\label{Point_a3}
+\index{Point@{Point}!~Point@{$\sim$Point}}
+\index{~Point@{$\sim$Point}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Point::$\sim$Point ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 28 of file point.h.\small\begin{verbatim}00028 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Point_a7}
+\index{Point@{Point}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Point::is\-Equal (const {\bf Item} \& {\em o}) const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a5})}.
+
+Reimplemented in {\bf Cluster} {\rm (p.\,\pageref{Cluster_a5})}, and {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a6})}.
+
+Definition at line 33 of file point.h.\small\begin{verbatim}00034 {return ((Point&)o).x == x && ((Point&)o).y==y;}
+\end{verbatim}\normalsize 
+\label{Point_a5}
+\index{Point@{Point}!myName@{myName}}
+\index{myName@{myName}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Point::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a4})}.
+
+Reimplemented in {\bf Clst} {\rm (p.\,\pageref{Clst_a4})}, {\bf Cluster} {\rm (p.\,\pageref{Cluster_a4})}, {\bf Cri\-Candidate} {\rm (p.\,\pageref{CriCandidate_a3})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a4})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a3})}, and {\bf Window} {\rm (p.\,\pageref{Window_a3})}.
+
+Definition at line 31 of file point.h.\small\begin{verbatim}00031 { return "Point"; }
+\end{verbatim}\normalsize 
+\label{Point_a4}
+\index{Point@{Point}!myNo@{myNo}}
+\index{myNo@{myNo}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Point::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a3})}.
+
+Reimplemented in {\bf Clst} {\rm (p.\,\pageref{Clst_a3})}, {\bf Cluster} {\rm (p.\,\pageref{Cluster_a3})}, {\bf Cri\-Candidate} {\rm (p.\,\pageref{CriCandidate_a2})}, {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a3})}, {\bf Prot\-Area} {\rm (p.\,\pageref{ProtArea_a2})}, and {\bf Window} {\rm (p.\,\pageref{Window_a2})}.
+
+Definition at line 30 of file point.h.\small\begin{verbatim}00030 { return PointClass; }
+\end{verbatim}\normalsize 
+\label{Point_a6}
+\index{Point@{Point}!print@{print}}
+\index{print@{print}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Point::print (ostream \& {\em os}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a8})}.
+
+Reimplemented in {\bf Clst} {\rm (p.\,\pageref{Clst_a5})}, and {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a5})}.
+
+Definition at line 11 of file point.C.\small\begin{verbatim}00013 {
+00014   os<< "(x=" << x << ",y="<< y << ")";
+00015 
+00016 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Point_m0}
+\index{Point@{Point}!x@{x}}
+\index{x@{x}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Point::x}\hfill
+
+
+
+Definition at line 37 of file point.h.\label{Point_m1}
+\index{Point@{Point}!y@{y}}
+\index{y@{y}!Point@{Point}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Point::y}\hfill
+
+
+
+Definition at line 38 of file point.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf point.h}\item 
+{\bf point.C}\end{CompactItemize}

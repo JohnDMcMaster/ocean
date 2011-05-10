@@ -1,0 +1,6 @@
+define  LatchOut_v2 LatchOut_v3 : State  \
+            h l : off1 \
+            l l : off0 \
+            l h : on1 \
+            h h : on0
+print State

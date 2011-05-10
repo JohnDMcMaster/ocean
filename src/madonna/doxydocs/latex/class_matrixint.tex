@@ -1,0 +1,227 @@
+\subsection{matrix\-Int  Class Reference}
+\label{matrixInt}\index{matrixInt@{matrix\-Int}}
+{\tt \#include $<$matrix\-Int.h$>$}
+
+Inheritance diagram for matrix\-Int:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_matrixint.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf matrix\-Int} (int dimension1, int dimension2)
+\item 
+{\bf matrix\-Int} (matrix\-Int\&)
+\item 
+{\bf $\sim$matrix\-Int} ()
+\item 
+int$\ast$ {\bf operator[$\,$]} (int i)
+\item 
+int {\bf dimension1} ()
+\item 
+int {\bf dimension2} ()
+\item 
+matrix\-Int\& {\bf exchange\-Rows} (int a, int b)
+\item 
+matrix\-Int\& {\bf exchange\-Columns} (int a, int b)
+\item 
+void {\bf print} ({\bf Transposition} =Not\-Transposed)
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+void {\bf create\-And\-Initialize} (int dimension1, int dimension2)
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+int$\ast$$\ast$ {\bf thematrix}
+\item 
+int {\bf dim1}
+\item 
+int {\bf dim2}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{matrixInt_a0}
+\index{matrixInt@{matrix\-Int}!matrixInt@{matrixInt}}
+\index{matrixInt@{matrixInt}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Int::matrix\-Int (int {\em dimension1}, int {\em dimension2})}\hfill
+
+
+
+Definition at line 10 of file matrix\-Int.C.\small\begin{verbatim}00011 {
+00012    createAndInitialize(dimension1,dimension2);
+00013 }
+\end{verbatim}\normalsize 
+\label{matrixInt_a1}
+\index{matrixInt@{matrix\-Int}!matrixInt@{matrixInt}}
+\index{matrixInt@{matrixInt}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Int::matrix\-Int (matrix\-Int \& {\em orig})}\hfill
+
+
+
+Definition at line 17 of file matrix\-Int.C.\small\begin{verbatim}00018 {
+00019    dim1 = orig.dim1;
+00020    dim2 = orig.dim2;
+00021    thematrix = orig.thematrix;  // do not copy the array, just the pointer...
+00022 }
+\end{verbatim}\normalsize 
+\label{matrixInt_a2}
+\index{matrixInt@{matrix\-Int}!~matrixInt@{$\sim$matrixInt}}
+\index{~matrixInt@{$\sim$matrixInt}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Int::$\sim$matrix\-Int ()}\hfill
+
+
+
+Definition at line 26 of file matrix\-Int.C.\small\begin{verbatim}00027 {
+00028    for (int i=0; i<dim1; ++i)
+00029       delete thematrix[i];
+00030    delete thematrix; 
+00031 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{matrixInt_c0}
+\index{matrixInt@{matrix\-Int}!createAndInitialize@{createAndInitialize}}
+\index{createAndInitialize@{createAndInitialize}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void matrix\-Int::create\-And\-Initialize (int {\em dimension1}, int {\em dimension2})\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 35 of file matrix\-Int.C.
+
+Referenced by {\bf matrix\-Int}().\small\begin{verbatim}00036 {
+00037    dim1 = dimension1;
+00038    dim2 = dimension2;
+00039    thematrix = new (int *[dim1]);
+00040    for (int i=0; i<dim1; ++i)
+00041    {
+00042       int *subarray = new int[dim2];
+00043       for (int j=0; j<dim2; ++j)
+00044      subarray[j] = 0;   // initialize the matrix to null.
+00045       thematrix[i] = subarray;
+00046    }
+00047 }
+\end{verbatim}\normalsize 
+\label{matrixInt_a4}
+\index{matrixInt@{matrix\-Int}!dimension1@{dimension1}}
+\index{dimension1@{dimension1}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Int::dimension1 ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 26 of file matrix\-Int.h.
+
+Referenced by {\bf dist\-Info::numparts}(), and {\bf connect\-Info::numparts}().\small\begin{verbatim}00026 {return dim1;}
+\end{verbatim}\normalsize 
+\label{matrixInt_a5}
+\index{matrixInt@{matrix\-Int}!dimension2@{dimension2}}
+\index{dimension2@{dimension2}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Int::dimension2 ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 27 of file matrix\-Int.h.\small\begin{verbatim}00027 {return dim2;}
+\end{verbatim}\normalsize 
+\label{matrixInt_a7}
+\index{matrixInt@{matrix\-Int}!exchangeColumns@{exchangeColumns}}
+\index{exchangeColumns@{exchangeColumns}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Int \& matrix\-Int::exchange\-Columns (int {\em a}, int {\em b})}\hfill
+
+
+
+Definition at line 60 of file matrix\-Int.C.
+
+Referenced by {\bf dist\-Info::exchange}().\small\begin{verbatim}00061 {
+00062    int i = 0;
+00063    while (i < dim1)
+00064    {
+00065       int *thisRow = thematrix[i++];
+00066       int tmp    = thisRow[a];
+00067       thisRow[a] = thisRow[b];
+00068       thisRow[b] = tmp;
+00069    }
+00070    return *this;
+00071 }
+\end{verbatim}\normalsize 
+\label{matrixInt_a6}
+\index{matrixInt@{matrix\-Int}!exchangeRows@{exchangeRows}}
+\index{exchangeRows@{exchangeRows}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}matrix\-Int \& matrix\-Int::exchange\-Rows (int {\em a}, int {\em b})}\hfill
+
+
+
+Definition at line 51 of file matrix\-Int.C.
+
+Referenced by {\bf dist\-Info::exchange}().\small\begin{verbatim}00052 {
+00053    int *tmpRow  = thematrix[a];
+00054    thematrix[a] = thematrix[b];
+00055    thematrix[b] = tmpRow;
+00056    return *this;
+00057 }
+\end{verbatim}\normalsize 
+\label{matrixInt_a3}
+\index{matrixInt@{matrix\-Int}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$ matrix\-Int::operator[$\,$] (int {\em i})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 25 of file matrix\-Int.h.\small\begin{verbatim}00025 {return thematrix[i];}
+\end{verbatim}\normalsize 
+\label{matrixInt_a8}
+\index{matrixInt@{matrix\-Int}!print@{print}}
+\index{print@{print}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void matrix\-Int::print ({\bf Transposition} {\em transp} = Not\-Transposed)}\hfill
+
+
+
+Definition at line 75 of file matrix\-Int.C.\small\begin{verbatim}00076 {
+00077    int vertical = transp==Transposed ? dim2 : dim1;
+00078    int horizontal = transp==Transposed ? dim1 : dim2;
+00079    for (int i=0; i<vertical; ++i)
+00080    {
+00081       cout << "\n";
+00082       for (int j=0; j<horizontal; ++j)
+00083      cout << form(" %3d", transp==Transposed ? thematrix[j][i] : thematrix[i][j])
+00084           << flush;
+00085    }
+00086    cout << "\n\n" << flush;
+00087 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{matrixInt_o1}
+\index{matrixInt@{matrix\-Int}!dim1@{dim1}}
+\index{dim1@{dim1}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Int::dim1\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 19 of file matrix\-Int.h.\label{matrixInt_o2}
+\index{matrixInt@{matrix\-Int}!dim2@{dim2}}
+\index{dim2@{dim2}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int matrix\-Int::dim2\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 19 of file matrix\-Int.h.\label{matrixInt_o0}
+\index{matrixInt@{matrix\-Int}!thematrix@{thematrix}}
+\index{thematrix@{thematrix}!matrixInt@{matrix\-Int}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int $\ast$$\ast$ matrix\-Int::thematrix\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 18 of file matrix\-Int.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf matrix\-Int.h}\item 
+{\bf matrix\-Int.C}\end{CompactItemize}

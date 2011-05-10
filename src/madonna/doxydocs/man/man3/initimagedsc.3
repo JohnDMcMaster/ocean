@@ -1,0 +1,97 @@
+.TH initimagedsc.C 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+initimagedsc.C \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sea_func.h>\fR
+.br
+\fC#include <sealib.h>\fR
+.br
+\fC#include "image.h"\fR
+.br
+\fC#include "plaza.h"\fR
+.br
+\fC#include "sea.h"\fR
+.br
+\fC#include "im.h"\fR
+.br
+.SS Functions
+
+.in +1c
+.ti -1c
+.RI "void \fBinitimagedesc\fR (\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBdrawmirroraxis\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBcomputetransrotmtx\fR (\fBMIRRORPTR\fR mirror)"
+.br
+.ti -1c
+.RI "void \fBlabelallsectors\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBlabelsector\fR (int **stamp,int px,int py,int xsiz,int ysiz,int label)"
+.br
+.ti -1c
+.RI "void \fBlabelhalfsector\fR (int **stamp,int dx,int px,int py,int xsiz,int ysiz,int label)"
+.br
+.ti -1c
+.RI "void \fBmkequivalencelist\fR (int dblsize[],\fBIMAGEDESCPTR\fR imagedesc)"
+.br
+.ti -1c
+.RI "void \fBmtxdoubletonormal\fR (\fBMIRRORPTR\fR maxis)"
+.br
+.ti -1c
+.RI "void \fBreadmirroraxis\fR (\fBIMAGEDESCPTR\fR imagedescptr)"
+.br
+.in -1c
+.SH FUNCTION DOCUMENTATION
+.PP 
+.SS void computetransrotmtx (\fBMIRRORPTR\fR mirror)
+.PP
+Definition at line 96 of file initimagedsc.C.
+.PP
+Referenced by \fBdrawmirroraxis\fR().
+.SS void drawmirroraxis (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 41 of file initimagedsc.C.
+.PP
+Referenced by \fBinitimagedesc\fR().
+.SS void initimagedesc (\fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 11 of file initimagedsc.C.
+.PP
+Referenced by \fBParserInterface::initImages\fR().
+.SS void labelallsectors (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 129 of file initimagedsc.C.
+.PP
+Referenced by \fBinitimagedesc\fR().
+.SS void labelhalfsector (int ** stamp, int dx, int px, int py, int xsiz, int ysiz, int label)
+.PP
+Definition at line 166 of file initimagedsc.C.
+.PP
+Referenced by \fBlabelsector\fR().
+.SS void labelsector (int ** stamp, int px, int py, int xsiz, int ysiz, int label)
+.PP
+Definition at line 157 of file initimagedsc.C.
+.PP
+Referenced by \fBlabelallsectors\fR().
+.SS void mkequivalencelist (int dblsize[], \fBIMAGEDESCPTR\fR imagedesc)
+.PP
+Definition at line 195 of file initimagedsc.C.
+.SS void mtxdoubletonormal (\fBMIRRORPTR\fR maxis)
+.PP
+Definition at line 237 of file initimagedsc.C.
+.PP
+Referenced by \fBinitimagedesc\fR().
+.SS void readmirroraxis (\fBIMAGEDESCPTR\fR imagedescptr)
+.PP
+Definition at line 259 of file initimagedsc.C.
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

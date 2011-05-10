@@ -1,0 +1,108 @@
+.TH Pattern 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Pattern \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <pattern.h>\fR
+.PP
+Inherits \fBList\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBPattern\fR (LAYOUT *l,\fBIMAGEDESC\fR *i, short *m,\fBLayMap\fR&,int doCheck=0, int isMacro = 0,int doTransAna=0)"
+.br
+.ti -1c
+.RI "\fB~Pattern\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& o) const"
+.br
+.ti -1c
+.RI "\fBoperator short *\fR ()"
+.br
+.ti -1c
+.RI "void \fBaddCriticals\fR (\fBLayMap\fR &lMap)"
+.br
+.ti -1c
+.RI "void \fBremoveUnnessesery\fR (\fBImageMap\fR &)"
+.br
+.ti -1c
+.RI "int \fBisMacro\fR () const"
+.br
+.ti -1c
+.RI "int \fBgetHor\fR () const"
+.br
+.ti -1c
+.RI "int \fBgetVer\fR () const"
+.br
+.ti -1c
+.RI "\fBTransparency\fR* \fBgetTranMaps\fR ()"
+.br
+.ti -1c
+.RI "void \fBfindNewLeftBottom\fR (int,int,short*,int&,int&)"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Pattern::Pattern (LAYOUT * l, \fBIMAGEDESC\fR * i, short * m, \fBLayMap\fR & lMap, int dc = 0, int im = 0, int da = 0)
+.PP
+Definition at line 20 of file pattern.C.
+.SS Pattern::~Pattern ()
+.PP
+Definition at line 71 of file pattern.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void Pattern::addCriticals (\fBLayMap\fR & lMap)
+.PP
+Definition at line 246 of file pattern.C.
+.SS void Pattern::findNewLeftBottom (int x, int y, short * mx, int & cx, int & cy)
+.PP
+Definition at line 365 of file pattern.C.
+.SS int Pattern::getHor () const\fC [inline]\fR
+.PP
+Definition at line 66 of file pattern.h.
+.SS \fBTransparency\fR * Pattern::getTranMaps ()\fC [inline]\fR
+.PP
+Definition at line 68 of file pattern.h.
+.SS int Pattern::getVer () const\fC [inline]\fR
+.PP
+Definition at line 67 of file pattern.h.
+.SS int Pattern::isEqual (const \fBItem\fR & o) const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBBox\fR.
+.PP
+Definition at line 58 of file pattern.h.
+.SS int Pattern::isMacro () const\fC [inline]\fR
+.PP
+Definition at line 65 of file pattern.h.
+.SS char * Pattern::myName () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBList\fR.
+.PP
+Definition at line 57 of file pattern.h.
+.SS \fBclassType\fR Pattern::myNo () const\fC [inline, virtual]\fR
+.PP
+Reimplemented from \fBList\fR.
+.PP
+Definition at line 56 of file pattern.h.
+.SS Pattern::operator short * ()\fC [inline]\fR
+.PP
+Definition at line 61 of file pattern.h.
+.SS void Pattern::removeUnnessesery (\fBImageMap\fR & iMap)
+.PP
+Definition at line 308 of file pattern.C.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

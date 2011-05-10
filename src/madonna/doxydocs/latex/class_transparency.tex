@@ -1,0 +1,229 @@
+\subsection{Transparency  Class Reference}
+\label{Transparency}\index{Transparency@{Transparency}}
+{\tt \#include $<$pattern.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Transparency} ()
+\item 
+{\bf Transparency} (int sh,int sv)
+\item 
+{\bf $\sim$Transparency} ()
+\item 
+Transparency\& {\bf operator=} (const Transparency\& o)
+\item 
+int {\bf free\-Tracks} (int dir)
+\item 
+Transparency$\ast$ {\bf transform} (short$\ast$ mtx)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf trans\-Grid\-Type}$\ast$ {\bf ver\-Grid\-Map}
+\item 
+{\bf trans\-Grid\-Type}$\ast$ {\bf hor\-Grid\-Map}
+\item 
+int {\bf size\-Hor}
+\item 
+int {\bf size\-Ver}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Transparency_a0}
+\index{Transparency@{Transparency}!Transparency@{Transparency}}
+\index{Transparency@{Transparency}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Transparency::Transparency ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 24 of file pattern.h.\small\begin{verbatim}00024 {}
+\end{verbatim}\normalsize 
+\label{Transparency_a1}
+\index{Transparency@{Transparency}!Transparency@{Transparency}}
+\index{Transparency@{Transparency}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Transparency::Transparency (int {\em sh}, int {\em sv})}\hfill
+
+
+
+Definition at line 395 of file pattern.C.\small\begin{verbatim}00395 :sizeHor(sh),sizeVer(sv)
+00396 //
+00397 //
+00398 {
+00399   verGridMap = new transGridType [sv];
+00400   horGridMap = new transGridType [sh];
+00401   memset(horGridMap,0,sizeHor*sizeof(char));
+00402   memset(verGridMap,0,sizeVer*sizeof(char));
+00403 
+00404 }
+\end{verbatim}\normalsize 
+\label{Transparency_a2}
+\index{Transparency@{Transparency}!~Transparency@{$\sim$Transparency}}
+\index{~Transparency@{$\sim$Transparency}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Transparency::$\sim$Transparency ()}\hfill
+
+
+
+Definition at line 421 of file pattern.C.\small\begin{verbatim}00424 {
+00425   delete verGridMap;
+00426   delete horGridMap;
+00427 
+00428 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Transparency_a4}
+\index{Transparency@{Transparency}!freeTracks@{freeTracks}}
+\index{freeTracks@{freeTracks}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Transparency::free\-Tracks (int {\em dir})}\hfill
+
+
+
+Definition at line 508 of file pattern.C.
+
+Referenced by {\bf Plcm::calc\-Transp}().\small\begin{verbatim}00511 {
+00512   transGridType* ptr;
+00513   transGridType* end;
+00514 
+00515   if(dir == VER)
+00516   {
+00517     ptr=horGridMap;
+00518     end=ptr+sizeHor;
+00519   }
+00520   else
+00521   {
+00522     ptr=verGridMap;
+00523     end=ptr+sizeVer;
+00524   }
+00525 
+00526   int sum=0;
+00527 
+00528   for(;ptr<end;ptr++)
+00529     sum+=!(*ptr);
+00530 
+00531   return sum;
+00532 }
+\end{verbatim}\normalsize 
+\label{Transparency_a3}
+\index{Transparency@{Transparency}!operator=@{operator=}}
+\index{operator=@{operator=}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Transparency \& Transparency::operator= (const Transparency \& {\em other})}\hfill
+
+
+
+Definition at line 407 of file pattern.C.\small\begin{verbatim}00410 {
+00411   sizeVer=other.sizeVer;
+00412   sizeHor=other.sizeHor;
+00413   verGridMap = new transGridType [sizeVer];
+00414   horGridMap = new transGridType [sizeHor];
+00415   memcpy(horGridMap,other.horGridMap,sizeHor*sizeof(char));
+00416   memcpy(verGridMap,other.verGridMap,sizeVer*sizeof(char));
+00417   return *this;
+00418 }
+\end{verbatim}\normalsize 
+\label{Transparency_a5}
+\index{Transparency@{Transparency}!transform@{transform}}
+\index{transform@{transform}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Transparency $\ast$ Transparency::transform (short $\ast$ {\em mtx})}\hfill
+
+
+
+Definition at line 432 of file pattern.C.
+
+Referenced by {\bf Plcm::calc\-Transp}().\small\begin{verbatim}00447 {
+00448   Boolean reverseHor=false,reverseVer=false,doSwitch=false;
+00449 
+00450   if ( mtx[A11] == 0)
+00451     doSwitch=true;
+00452   if ( mtx[A11] == -1 || mtx[A12] == -1)
+00453     reverseHor=true;
+00454   if ( mtx[A12] == 1 || mtx[A22]== -1)
+00455     reverseVer=true;
+00456 
+00457                 // so now when we know what we 
+00458                 // should do let\'s do it
+00459   Transparency* output;
+00460   transGridType* srcPtr;
+00461 
+00462   if(doSwitch)
+00463     output = new Transparency(sizeVer,sizeHor);
+00464   else
+00465     output = new Transparency(sizeHor,sizeVer);
+00466 
+00467                 // first horGridMap
+00468   if(doSwitch)
+00469     srcPtr = verGridMap;
+00470   else
+00471     srcPtr = horGridMap;
+00472 
+00473   int i;
+00474 
+00475   for(i=0;i<output->sizeHor;i++)
+00476   {
+00477     if(reverseHor)
+00478       output->horGridMap[i]=srcPtr[output->sizeHor-i-1];
+00479     else
+00480       output->horGridMap[i]=srcPtr[i];
+00481   }
+00482 
+00483                 // and the same for vertical map
+00484 
+00485   if(doSwitch)
+00486     srcPtr = horGridMap;
+00487   else
+00488     srcPtr = verGridMap;
+00489   
+00490 
+00491   for(i=0;i<output->sizeVer;i++)
+00492   {
+00493     if(reverseVer)
+00494       output->verGridMap[i]=srcPtr[output->sizeVer-i-1];
+00495     else
+00496       output->verGridMap[i]=srcPtr[i];
+00497   }
+00498 
+00499                 // done.
+00500 
+00501   return output;
+00502 
+00503 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Transparency_m1}
+\index{Transparency@{Transparency}!horGridMap@{horGridMap}}
+\index{horGridMap@{horGridMap}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf trans\-Grid\-Type} $\ast$ Transparency::hor\-Grid\-Map}\hfill
+
+
+
+Definition at line 33 of file pattern.h.\label{Transparency_m2}
+\index{Transparency@{Transparency}!sizeHor@{sizeHor}}
+\index{sizeHor@{sizeHor}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Transparency::size\-Hor}\hfill
+
+
+
+Definition at line 36 of file pattern.h.\label{Transparency_m3}
+\index{Transparency@{Transparency}!sizeVer@{sizeVer}}
+\index{sizeVer@{sizeVer}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Transparency::size\-Ver}\hfill
+
+
+
+Definition at line 37 of file pattern.h.\label{Transparency_m0}
+\index{Transparency@{Transparency}!verGridMap@{verGridMap}}
+\index{verGridMap@{verGridMap}!Transparency@{Transparency}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf trans\-Grid\-Type} $\ast$ Transparency::ver\-Grid\-Map}\hfill
+
+
+
+Definition at line 32 of file pattern.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf pattern.h}\item 
+{\bf pattern.C}\end{CompactItemize}

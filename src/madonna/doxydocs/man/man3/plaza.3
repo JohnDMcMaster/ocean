@@ -1,0 +1,106 @@
+.TH plaza.h 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+plaza.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libstruct.h>\fR
+.br
+.SS Compounds
+
+.in +1c
+.ti -1c
+.RI "struct \fB_MIR\fR"
+.br
+.ti -1c
+.RI "struct \fB_PIVOT\fR"
+.br
+.ti -1c
+.RI "struct \fB_PLAZGLAF\fR"
+.br
+.in -1c
+.SS Defines
+
+.in +1c
+.ti -1c
+.RI "#define \fBEDGE\fR  2"
+.br
+.ti -1c
+.RI "#define \fBNewPlazglaf\fR(p)   ((p)=(\fBPLAZGLAFPTR\fR)mnew(sizeof(\fBPLAZGLAF\fR)))"
+.br
+.ti -1c
+.RI "#define \fBFreePlazglaf\fR(p)   mfree((char **)(p),sizeof(\fBPLAZGLAF\fR))"
+.br
+.ti -1c
+.RI "#define \fBMAX\fR(a,b)   ((a) > (b) ? (a) : (b))"
+.br
+.ti -1c
+.RI "#define \fBMIN\fR(a,b)   ((a) < (b) ? (a) : (b))"
+.br
+.in -1c
+.SS Typedefs
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_MIR\fR
+ \fBMIR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_MIR\fR* \fBMIRPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PLAZGLAF\fR
+ \fBPLAZGLAF\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PLAZGLAF\fR* \fBPLAZGLAFPTR\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PIVOT\fR
+ \fBPIVOT\fR"
+.br
+.ti -1c
+.RI "typedef struct \fB_PIVOT\fR* \fBPIVOTPTR\fR"
+.br
+.in -1c
+.SH DEFINE DOCUMENTATION
+.PP 
+.SS #define EDGE  2
+.PP
+Definition at line 47 of file plaza.h.
+.SS #define FreePlazglaf(p)  mfree((char **)(p),sizeof(\fBPLAZGLAF\fR))
+.PP
+Definition at line 51 of file plaza.h.
+.SS #define MAX(a, b)  ((a) > (b) ? (a) : (b))
+.PP
+Definition at line 53 of file plaza.h.
+.PP
+Referenced by \fBTOO_BIG\fR(), \fBVERY_NEGATIVE\fR(), and \fBfindrectangleandcostfunctions\fR().
+.SS #define MIN(a, b)  ((a) < (b) ? (a) : (b))
+.PP
+Definition at line 54 of file plaza.h.
+.SS #define NewPlazglaf(p)  ((p)=(\fBPLAZGLAFPTR\fR)mnew(sizeof(\fBPLAZGLAF\fR)))
+.PP
+Definition at line 50 of file plaza.h.
+.SH TYPEDEF DOCUMENTATION
+.PP 
+.SS typedef struct \fB_MIR\fR
+ MIR
+.PP
+.SS typedef struct \fB_MIR\fR* MIRPTR
+.PP
+.SS typedef struct \fB_PIVOT\fR
+ PIVOT
+.PP
+.SS typedef struct \fB_PIVOT\fR* PIVOTPTR
+.PP
+.SS typedef struct \fB_PLAZGLAF\fR
+ PLAZGLAF
+.PP
+.SS typedef struct \fB_PLAZGLAF\fR* PLAZGLAFPTR
+.PP
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

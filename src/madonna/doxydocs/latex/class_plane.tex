@@ -1,0 +1,198 @@
+\subsection{Plane  Class Reference}
+\label{Plane}\index{Plane@{Plane}}
+{\tt \#include $<$plane.h$>$}
+
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Plane} ( int {\bf rows},int {\bf cols})
+\item 
+{\bf $\sim$Plane} ()
+\item 
+{\bf cluster\-Map\-Type} {\bf get\-Pattern} (int x,int y)
+\item 
+{\bf List}\& {\bf get\-Criticals} (int x,int y)
+\item 
+void {\bf mark} (int x,int y,{\bf cluster\-Map\-Type},{\bf List} \&)
+\item 
+void {\bf get\-Eff\-Size} (int\& x,int\& y)
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+int {\bf rows}
+\item 
+int {\bf cols}
+\end{CompactItemize}
+\subsubsection*{Private Methods}
+\begin{CompactItemize}
+\item 
+{\bf Boolean} {\bf chk} (int ,int )
+\end{CompactItemize}
+\subsubsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+{\bf Plane\-Cell}$\ast$$\ast$ {\bf array}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Plane_a0}
+\index{Plane@{Plane}!Plane@{Plane}}
+\index{Plane@{Plane}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Plane::Plane (int {\em r}, int {\em c})}\hfill
+
+
+
+Definition at line 17 of file plane.C.\small\begin{verbatim}00021 {
+00022   rows=r;
+00023   cols=c;
+00024 
+00025   if( (array = (PlaneCell**)calloc(cols,sizeof(PlaneCell*) )) ==NULL)
+00026     usrErr("Plane::Plane",ENOTMEM);
+00027   
+00028   PlaneCell **colPtr=array;
+00029   for(int i=0;i<cols;i++,colPtr++)
+00030   {
+00031     if( (*colPtr = new PlaneCell[rows]) ==NULL)
+00032       usrErr("Plane::Plane",ENOTMEM);
+00033   }
+00034 
+00035 }
+\end{verbatim}\normalsize 
+\label{Plane_a1}
+\index{Plane@{Plane}!~Plane@{$\sim$Plane}}
+\index{~Plane@{$\sim$Plane}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Plane::$\sim$Plane (void)}\hfill
+
+
+
+Definition at line 38 of file plane.C.\small\begin{verbatim}00040 : frees allocated memory.
+00041 {
+00042   PlaneCell **colPtr=array;
+00043 
+00044     for(int i=0;i<cols;i++,colPtr++)
+00045     {
+00046         PlaneCell *tmp=*colPtr;
+00047         delete [] tmp;
+00048     }
+00049     delete array;
+00050 
+00051 
+00052 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Plane_c0}
+\index{Plane@{Plane}!chk@{chk}}
+\index{chk@{chk}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Boolean} Plane::chk (int {\em x}, int {\em y})\hspace{0.3cm}{\tt  [inline, private]}}\hfill
+
+
+
+Definition at line 61 of file plane.h.\small\begin{verbatim}00064 {
+00065   return (Boolean(x<0 || x>=cols || y<0 || y>=rows));
+00066 
+00067 }
+\end{verbatim}\normalsize 
+\label{Plane_a3}
+\index{Plane@{Plane}!getCriticals@{getCriticals}}
+\index{getCriticals@{getCriticals}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf List} \& Plane::get\-Criticals (int {\em x}, int {\em y})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 86 of file plane.h.\small\begin{verbatim}00089 {
+00090   if ( chk(x,y) )
+00091     return (List&)NOITEM;
+00092   else
+00093     return (List&)array[x][y];
+00094 
+00095 }
+\end{verbatim}\normalsize 
+\label{Plane_a5}
+\index{Plane@{Plane}!getEffSize@{getEffSize}}
+\index{getEffSize@{getEffSize}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plane::get\-Eff\-Size (int \& {\em x}, int \& {\em y})}\hfill
+
+
+
+Definition at line 55 of file plane.C.\small\begin{verbatim}00058 {
+00059   x=y=0;
+00060 
+00061   for(int i=0;i<rows;i++)
+00062     for(int j=0;j<cols;j++)
+00063       if( getPattern(j,i) ) // there is something here
+00064       {
+00065     if(i>y)
+00066       y=i;
+00067     if(j>x)
+00068       x=j;
+00069       }
+00070   x++;
+00071   y++;
+00072 }
+\end{verbatim}\normalsize 
+\label{Plane_a2}
+\index{Plane@{Plane}!getPattern@{getPattern}}
+\index{getPattern@{getPattern}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf cluster\-Map\-Type} Plane::get\-Pattern (int {\em x}, int {\em y})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 71 of file plane.h.\small\begin{verbatim}00076 {
+00077 
+00078   if( chk(x,y) )
+00079     return ~0x0;                       // to set all bits
+00080   else
+00081     return array[x][y].pattern;
+00082 
+00083 }
+\end{verbatim}\normalsize 
+\label{Plane_a4}
+\index{Plane@{Plane}!mark@{mark}}
+\index{mark@{mark}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Plane::mark (int {\em x}, int {\em y}, {\bf cluster\-Map\-Type} {\em map}, {\bf List} \& {\em crit\-List\-Ref})\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 99 of file plane.h.\small\begin{verbatim}00103 {
+00104   if( ! chk(x,y) )
+00105   {
+00106     array[x][y].pattern |= map;
+00107 
+00108     array[x][y] |= critListRef;
+00109   }
+00110 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{Plane_o0}
+\index{Plane@{Plane}!array@{array}}
+\index{array@{array}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane\-Cell} $\ast$$\ast$ Plane::array\hspace{0.3cm}{\tt  [private]}}\hfill
+
+
+
+Definition at line 56 of file plane.h.\label{Plane_m1}
+\index{Plane@{Plane}!cols@{cols}}
+\index{cols@{cols}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plane::cols}\hfill
+
+
+
+Definition at line 49 of file plane.h.\label{Plane_m0}
+\index{Plane@{Plane}!rows@{rows}}
+\index{rows@{rows}!Plane@{Plane}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Plane::rows}\hfill
+
+
+
+Definition at line 48 of file plane.h.
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf plane.h}\item 
+{\bf plane.C}\end{CompactItemize}

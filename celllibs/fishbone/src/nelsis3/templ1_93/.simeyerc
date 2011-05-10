@@ -1,0 +1,10 @@
+SLS: sls $cell $cell.cmd
+SLS_LOGIC_LEVEL: 2
+SLS_LOGIC_SIGNAL: D
+SLS_TIMING_SIGNAL: A
+SPICE: nspice $cell $cell.cmd
+XDUMP_FILE: simeye.wd
+PRINT: xpr -device ps -output $cell.ps simeye.wd; pspr $cell.ps; rm simeye.wd $cell.ps
+PRINT_LABEL: $cell  $date  $time
+SETTINGS_FILE: simeye.set
+TRY_NON_CAPITAL_ON

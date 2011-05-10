@@ -1,0 +1,88 @@
+\subsection{connect\-Info  Class Reference}
+\label{connectInfo}\index{connectInfo@{connect\-Info}}
+Inheritance diagram for connect\-Info:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_connectinfo.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf connect\-Info} (int numparts, CIRCUITPTR)
+\item 
+int {\bf operator()} (int pi, int pj)
+\item 
+int {\bf numparts} ()
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{connectInfo_a0}
+\index{connectInfo@{connect\-Info}!connectInfo@{connectInfo}}
+\index{connectInfo@{connectInfo}!connectInfo@{connect\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}connect\-Info::connect\-Info (int {\em numparts}, CIRCUITPTR {\em circuit})}\hfill
+
+
+
+Definition at line 40 of file cluster\-Perm.C.\small\begin{verbatim}00041 :matrixInt(numparts, numparts)
+00042 {
+00043    int *row = new int[numparts];
+00044    matrixInt& mtx = (matrixInt&) *this;
+00045    for (NETPTR net = circuit->netlist; net != NIL; net = net->next)
+00046    {
+00047       int j;
+00048       for (j = 0; j < numparts; ++j) row[j] = 0;
+00049       // now mark all partitions that this net connects to:
+00050       for (CIRPORTREFPTR cpr = net->terminals; cpr != NIL; cpr = cpr->next)
+00051       {
+00052      if (cpr->cirinst == NIL) continue; // terminal on top circuit
+00053      int partition = atoi(cpr->cirinst->name) - 1;
+00054      row[partition] = 1;    // mark this partition
+00055       }
+00056       //
+00057       // row[] is now a boolean vector with a 1 for each partition that is
+00058       // visited by this net. Now add the matrix row*Transpose(row) to mtx:
+00059       for (int i = 0; i < numparts; ++i)
+00060       {
+00061      if (row[i] == 0) continue; // this net is not in partition i
+00062      for (j = 0; j < numparts; ++j)
+00063         mtx[i][j] += row[j]; // account for this net
+00064       }
+00065    }
+00066    for (int ij = 0; ij < numparts; ++ij) mtx[ij][ij] = 0; // reset diagonal
+00067    delete row;
+00068 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{connectInfo_a2}
+\index{connectInfo@{connect\-Info}!numparts@{numparts}}
+\index{numparts@{numparts}!connectInfo@{connect\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int connect\-Info::numparts ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 18 of file cluster\-Perm.C.
+
+Referenced by {\bf apply\-Permutation}(), and {\bf cluster\-Cost}().\small\begin{verbatim}00018 {return dimension1();}
+\end{verbatim}\normalsize 
+\label{connectInfo_a1}
+\index{connectInfo@{connect\-Info}!operator()@{operator()}}
+\index{operator()@{operator()}!connectInfo@{connect\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int connect\-Info::operator() (int {\em pi}, int {\em pj})}\hfill
+
+
+
+Definition at line 33 of file cluster\-Perm.C.\small\begin{verbatim}00034 {
+00035    matrixInt& mtx = (matrixInt&) *this;
+00036    return mtx[pi][pj];
+00037 }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf cluster\-Perm.C}\end{CompactItemize}

@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# SccsId = @(#)dist 1.6 10/31/94 Delft University of Technology
+#
+# USAGE
+#     dist [-n] [destdir]
+# DESCRIPTION
+#     dist distributes the subdirs HP-PA_7 HP-PA_8 PA-RISC1.1_8 HP-MC680X0_8 in
+#     the local ocean/bin directory to remote directories.  Without args, the
+#     default remote directories are /mnt/ljouwert/usrL0/ocean/bin and
+#     /usr4/ocean/bin.
+# OPTIONS
+#     -n  No execute mode. Only show what *should* be updated without updating it.
+#
+SOURCE=/usr1/ocean/bin
+SUBDIRS="HP-PA_7 PA-RISC1.1_8 HP-MC680X0_8 hppa1.1_gcc"
+LASTDIST=".lastdist"
+noexec=0
+
+if [ "X$1" = "X-n" ] ; then
+   echo No-execute mode. ; echo ""
+   noexec=1 ; shift
+fi
+
+if [ $# = 0 ] ; then
+   LIST="/usr4/ocean/bin /mnt/ljouwert/usrL0/ocean/bin"
+else
+   LIST="$@"
+fi
+
+if [ $noexec = 0 -a "`whoami`" != ocean ] ; then
+   echo you must SU ocean to run this program... 1>&2
+   exit 1
+fi
+
+for TARGET in $LIST ; do
+   if [ ! -d "$TARGET" ] ; then
+      echo directory $TARGET does not exist... 1>&2
+      exit 1
+   fi
+   if [ `basename $TARGET` != bin ] ; then
+      echo directory $TARGET is not a BIN... 1>&2
+      exit 1
+   fi
+   cd $SOURCE
+   if [ ! -f $TARGET/$LASTDIST ] ; then touch -t 7001010000 $TARGET/$LASTDIST; fi
+   FILES=`find $SUBDIRS ! -type d -newer $TARGET/$LASTDIST -print \
+          | grep -v -e '\.old' -e '~$' -e '^core$'`
+   if [ "$noexec" = 1 ] ; then
+      if [ "$FILES" != "" ] ; then
+         echo ''
+         echo Update required for files in $TARGET ...:
+         echo $FILES
+         echo ''
+      else
+         echo no updates required for $TARGET
+      fi
+   else
+      for f in $FILES ; do
+          mv -f $TARGET/$f $TARGET/$f.old 2> /dev/null
+      done
+      if [ "$FILES" != "" ] ; then
+         echo ''
+         echo updating files in $TARGET ...:
+	 echo ''
+         echo $FILES
+         tar cf - $FILES | (cd $TARGET ; tar xf - )
+         touch $TARGET/$LASTDIST
+      else
+         echo no updates required for $TARGET
+      fi
+   fi
+done

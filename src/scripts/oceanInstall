@@ -1,0 +1,138 @@
+
+# @(#)oceanInstall 1.3 03/10/00 
+
+set SOURCE_DIR=`pwd`
+
+if (! $?MACHINE) then
+   echo Please set the environment variable MACHINE to the type of machine that you use
+   echo "(e.g. PA-RISC1.1_10, sun4_5 or i486_Linux)".
+   exit
+endif
+
+
+if ($?OCEANALLPATH) then
+   if (! -d $OCEANALLPATH) then
+      echo $OCEANALLPATH is not a directory.
+      exit
+   endif
+   setenv OCEANPATH $OCEANALLPATH/ocean
+   setenv ICDPATH $OCEANALLPATH/cacd
+   if (! -d $OCEANPATH) mkdir $OCEANPATH 
+   if (! -d $ICDPATH) mkdir $ICDPATH 
+   if (-f $SOURCE_DIR/sis-1.2_${MACHINE}.tar.gz) then
+      setenv SISPATH $OCEANALLPATH/sis
+      if (! -d $SISPATH) mkdir $SISPATH 
+   endif
+   if (-f $SOURCE_DIR/spice3f4_${MACHINE}.tar.gz) then
+      setenv SPICEPATH $OCEANALLPATH/spice
+      if (! -d $SPICEPATH) mkdir $SPICEPATH
+   endif
+endif
+
+if (! -f $SOURCE_DIR/cacd_${MACHINE}_A.tar.gz) then
+   echo $SOURCE_DIR/cacd_${MACHINE}_A.tar.gz not available.
+   echo "Are you sure you set the environment variable MACHINE correctly ?"
+   echo Valid values are PA-RISC1.1_10, sun4_5 and i486_Linux.
+   exit
+endif
+if (! -f $SOURCE_DIR/cacd_${MACHINE}_B.tar.gz) then
+   echo $SOURCE_DIR/cacd_${MACHINE}_B.tar.gz not available.
+   echo "Are you sure you set the environment variable MACHINE correctly ?"
+   exit
+endif
+if (! -f $SOURCE_DIR/cacd_general.tar.gz) then
+   echo $SOURCE_DIR/cacd_general.tar.gz not available.
+   exit
+endif
+if (! -f $SOURCE_DIR/ocean_bin_${MACHINE}.tar.gz) then
+   echo $SOURCE_DIR/ocean_bin_${MACHINE}.tar.gz not available.
+   echo "Are you sure you set the environment variable MACHINE correctly ?"
+   exit
+endif
+if (! -f $SOURCE_DIR/ocean_celllibs.tar.gz) then
+   echo $SOURCE_DIR/ocean_celllibs.tar.gz not available.
+   exit
+endif
+
+if (-f $SOURCE_DIR/sis-1.2_${MACHINE}.tar.gz && ! $?SISPATH) then
+   echo -------------------------------------------------------------------------------
+   echo SIS package available, but not installed.  If you want to install it, set the 
+   echo environment variable SISPATH to the directory where you want to install it
+   echo and rerun this script.
+   echo -------------------------------------------------------------------------------
+endif
+
+if (-f $SOURCE_DIR/spice3f4_${MACHINE}.tar.gz && ! $?SPICEPATH) then
+   echo -------------------------------------------------------------------------------
+   echo Spice package available, but not installed.  If you want to install it, set the 
+   echo environment variable SPICEPATH to the directory where you want to install it
+   echo and rerun this script.
+   echo -------------------------------------------------------------------------------
+endif
+
+if (! $?ICDPATH) then
+   echo Please set the environment variable ICDPATH to the directory where you want to 
+   echo install the Nelsis software.
+   exit
+endif
+if (! -d $ICDPATH) then
+   echo $ICDPATH is not a directory.
+   exit
+endif
+
+if (! $?OCEANPATH) then
+   echo Please set the environment variable OCEANPATH to the directory where you want to 
+   echo install the Ocean software.
+   exit
+endif
+if (! -d $OCEANPATH) then
+   echo $OCEANPATH is not a directory.
+   exit
+endif
+
+if ($ICDPATH == $OCEANPATH) then
+   echo the variables OCEANPATH and ICDPATH may not be equal.
+   exit
+endif
+
+if ($?SISPATH) then
+   if (! -d $SISPATH) then
+      echo $SISPATH is not a directory.
+      exit
+   endif
+   if (-f $SOURCE_DIR/sis-1.2_${MACHINE}.tar.gz) then
+      (cd $SISPATH; gzip -dc $SOURCE_DIR/sis-1.2_${MACHINE}.tar.gz | tar xf - )
+   endif
+endif
+
+if ($?SPICEPATH) then
+   if (! -d $SPICEPATH) then
+      echo $SPICEPATH is not a directory.
+      exit
+   endif
+   if (-f $SOURCE_DIR/spice3f4_${MACHINE}.tar.gz) then
+      (cd $SPICEPATH; gzip -dc $SOURCE_DIR/spice3f4_${MACHINE}.tar.gz | tar xf - )
+   endif
+endif
+
+(cd $ICDPATH; \
+gzip -dc $SOURCE_DIR/cacd_${MACHINE}_A.tar.gz | tar xf - ; \
+gzip -dc $SOURCE_DIR/cacd_${MACHINE}_B.tar.gz | tar xf - ; \
+gzip -dc $SOURCE_DIR/cacd_general.tar.gz | tar xf - )
+
+(cd $OCEANPATH; \
+gzip -dc $SOURCE_DIR/ocean_bin_${MACHINE}.tar.gz | tar xf - ; \
+gzip -dc $SOURCE_DIR/ocean_celllibs.tar.gz | tar xf - )
+setenv OCEANMACHINE $MACHINE
+setenv OCEAN $OCEANPATH
+echo +++++++++++++++++ START OF COMPILING OCEAN CELL LIBRARIES ++++++++++++++++
+$OCEANPATH/bin/$MACHINE/nelsis3/ICELLS
+echo ++++++++++++++++++ END OF COMPILING OCEAN CELL LIBRARIES ++++++++++++++++
+(cd $OCEANPATH; gzip -dc $SOURCE_DIR/ocean_docs.tar.gz | tar xf - )
+
+if (-f $OCEANPATH/bin/oceanSet) then
+   source $OCEANPATH/bin/oceanSet
+else
+   echo Cannot source the file $OCEANPATH/bin/oceanSet.
+   exit
+endif

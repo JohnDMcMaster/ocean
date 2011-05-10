@@ -1,0 +1,123 @@
+\subsection{Dummy  Class Reference}
+\label{Dummy}\index{Dummy@{Dummy}}
+{\tt \#include $<$item.h$>$}
+
+Inheritance diagram for Dummy:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_dummy.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Dummy} ()
+\item 
+virtual {\bf $\sim$Dummy} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\item 
+virtual int {\bf is\-Equal} ( const {\bf Item}\& ) const
+\item 
+virtual void {\bf print} ( ostream\& ) const
+\item 
+void {\bf operator delete} ( void $\ast$ )
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{Dummy_a0}
+\index{Dummy@{Dummy}!Dummy@{Dummy}}
+\index{Dummy@{Dummy}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Dummy::Dummy ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 63 of file item.h.\small\begin{verbatim}00063 {}
+\end{verbatim}\normalsize 
+\label{Dummy_a1}
+\index{Dummy@{Dummy}!~Dummy@{$\sim$Dummy}}
+\index{~Dummy@{$\sim$Dummy}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Dummy::$\sim$Dummy ()\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Definition at line 73 of file item.C.\small\begin{verbatim}00074 {
+00075 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{Dummy_a4}
+\index{Dummy@{Dummy}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int Dummy::is\-Equal (const {\bf Item} \& {\em test\-Item}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a5})}.
+
+Definition at line 101 of file item.C.\small\begin{verbatim}00102 {
+00103   return &testItem == this;
+00104 }
+\end{verbatim}\normalsize 
+\label{Dummy_a3}
+\index{Dummy@{Dummy}!myName@{myName}}
+\index{myName@{myName}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Dummy::my\-Name () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a4})}.
+
+Definition at line 89 of file item.C.\small\begin{verbatim}00090 {
+00091   return "Dummy";
+00092 }
+\end{verbatim}\normalsize 
+\label{Dummy_a2}
+\index{Dummy@{Dummy}!myNo@{myNo}}
+\index{myNo@{myNo}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Dummy::my\-No () const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a3})}.
+
+Definition at line 83 of file item.C.\small\begin{verbatim}00084 {
+00085   return dummyClass; 
+00086 }
+\end{verbatim}\normalsize 
+\label{Dummy_a6}
+\index{Dummy@{Dummy}!operator delete@{operator delete}}
+\index{operator delete@{operator delete}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Dummy::operator delete (void $\ast$ {\em to\-Free})}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a7})}.
+
+Definition at line 78 of file item.C.\small\begin{verbatim}00079 {
+00080 }
+\end{verbatim}\normalsize 
+\label{Dummy_a5}
+\index{Dummy@{Dummy}!print@{print}}
+\index{print@{print}!Dummy@{Dummy}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void Dummy::print (ostream \& {\em out}) const\hspace{0.3cm}{\tt  [virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Item} {\rm (p.\,\pageref{Item_a8})}.
+
+Definition at line 95 of file item.C.\small\begin{verbatim}00096 {
+00097   out << "Dummy\n";
+00098 }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf item.h}\item 
+{\bf item.C}\end{CompactItemize}

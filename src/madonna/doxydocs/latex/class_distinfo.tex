@@ -1,0 +1,92 @@
+\subsection{dist\-Info  Class Reference}
+\label{distInfo}\index{distInfo@{dist\-Info}}
+Inheritance diagram for dist\-Info:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{2cm}
+\epsfbox{class_distinfo.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf dist\-Info} (int nx, int ny)
+\item 
+int {\bf operator()} (int pi, int pj)
+\item 
+void {\bf exchange} (int pi, int pj)
+\item 
+int {\bf numparts} ()
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{distInfo_a0}
+\index{distInfo@{dist\-Info}!distInfo@{distInfo}}
+\index{distInfo@{distInfo}!distInfo@{dist\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}dist\-Info::dist\-Info (int {\em nx}, int {\em ny})}\hfill
+
+
+
+Definition at line 94 of file cluster\-Perm.C.\small\begin{verbatim}00095 :matrixInt(nx * ny, nx * ny)
+00096 {
+00097    for (int i=0; i < numparts(); ++i)
+00098    {
+00099       int yi = i % nx;
+00100       int xi = i / nx;
+00101       for (int j=0; j < numparts(); ++j)
+00102       {
+00103      int yj = j % nx;
+00104      int xj = j / nx;
+00105      int dist = absolute(xi - xj) + absolute(yi - yj);
+00106      matrixInt& mtx = (matrixInt&) *this;
+00107      mtx[i][j] = dist;
+00108       }
+00109    }
+00110 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{distInfo_a2}
+\index{distInfo@{dist\-Info}!exchange@{exchange}}
+\index{exchange@{exchange}!distInfo@{dist\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void dist\-Info::exchange (int {\em pi}, int {\em pj})}\hfill
+
+
+
+Definition at line 83 of file cluster\-Perm.C.
+
+Referenced by {\bf apply\-Permutation}().\small\begin{verbatim}00084 {
+00085    exchangeRows(pi,pj);
+00086    exchangeColumns(pi,pj);
+00087 }
+\end{verbatim}\normalsize 
+\label{distInfo_a3}
+\index{distInfo@{dist\-Info}!numparts@{numparts}}
+\index{numparts@{numparts}!distInfo@{dist\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int dist\-Info::numparts ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 29 of file cluster\-Perm.C.
+
+Referenced by {\bf generate\-Permutations}().\small\begin{verbatim}00029 {return dimension1();}
+\end{verbatim}\normalsize 
+\label{distInfo_a1}
+\index{distInfo@{dist\-Info}!operator()@{operator()}}
+\index{operator()@{operator()}!distInfo@{dist\-Info}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int dist\-Info::operator() (int {\em pi}, int {\em pj})}\hfill
+
+
+
+Definition at line 72 of file cluster\-Perm.C.\small\begin{verbatim}00073 {
+00074    matrixInt& mtx = (matrixInt&) *this;
+00075    return mtx[pi][pj];
+00076 }
+\end{verbatim}\normalsize 
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf cluster\-Perm.C}\end{CompactItemize}

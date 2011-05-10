@@ -1,0 +1,152 @@
+.TH Box 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Box \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <box.h>\fR
+.PP
+Inherits \fBItem\fR.
+.PP
+Inherited by \fBPackage\fR.
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBBox\fR ()"
+.br
+.ti -1c
+.RI "\fBBox\fR ( const Box& )"
+.br
+.ti -1c
+.RI "virtual \fB~Box\fR ()"
+.br
+.ti -1c
+.RI "virtual \fBBoxIterator\fR& \fBinitIterator\fR () const"
+.br
+.ti -1c
+.RI "virtual \fBclassType\fR \fBmyNo\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual char* \fBmyName\fR () const = 0"
+.br
+.ti -1c
+.RI "virtual int \fBisEqual\fR ( const \fBItem\fR& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBprint\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBmakeHeader\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBmakeSeparator\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "virtual void \fBmakeFooter\fR ( ostream& ) const"
+.br
+.ti -1c
+.RI "int \fBisEmpty\fR () const"
+.br
+.ti -1c
+.RI "\fBcountType\fR \fBgetItemsInBox\fR () const"
+.br
+.in -1c
+.SS Protected Attributes
+
+.in +1c
+.ti -1c
+.RI "\fBcountType\fR \fBitemsInBox\fR"
+.br
+.in -1c
+.SS Friends
+
+.in +1c
+.ti -1c
+.RI "class \fBBoxIterator\fR"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS Box::Box ()\fC [inline]\fR
+.PP
+Definition at line 31 of file box.h.
+.SS Box::Box (const Box &)
+.PP
+Definition at line 22 of file box.C.
+.SS Box::~Box ()\fC [inline, virtual]\fR
+.PP
+Definition at line 34 of file box.h.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS \fBcountType\fR Box::getItemsInBox () const\fC [inline]\fR
+.PP
+Definition at line 51 of file box.h.
+.PP
+Referenced by \fBClst::operator Boolean\fR().
+.SS \fBBoxIterator\fR & Box::initIterator () const\fC [inline, virtual]\fR
+.PP
+Reimplemented in \fBBaseArray\fR, \fBList\fR, and \fBPackage\fR.
+.PP
+Definition at line 39 of file box.h.
+.PP
+Referenced by \fBisEqual\fR(), and \fBprint\fR().
+.SS int Box::isEmpty () const\fC [inline]\fR
+.PP
+Definition at line 50 of file box.h.
+.SS int Box::isEqual (const \fBItem\fR & o) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBBaseArray\fR, and \fBPattern\fR.
+.PP
+Definition at line 28 of file box.C.
+.SS void Box::makeFooter (ostream & out) const\fC [virtual]\fR
+.PP
+Definition at line 97 of file box.C.
+.PP
+Referenced by \fBprint\fR(), and \fBBaseArray::printContentsOn\fR().
+.SS void Box::makeHeader (ostream & out) const\fC [virtual]\fR
+.PP
+Definition at line 85 of file box.C.
+.PP
+Referenced by \fBprint\fR(), and \fBBaseArray::printContentsOn\fR().
+.SS void Box::makeSeparator (ostream & out) const\fC [virtual]\fR
+.PP
+Definition at line 91 of file box.C.
+.PP
+Referenced by \fBprint\fR(), and \fBBaseArray::printContentsOn\fR().
+.SS virtual char* Box::myName () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBDivTable\fR, \fBImageMap\fR, \fBList\fR, \fBPackage\fR, \fBPattern\fR, and \fBPlaneCell\fR.
+.PP
+Referenced by \fBmakeHeader\fR().
+.SS virtual \fBclassType\fR Box::myNo () const\fC [pure virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Reimplemented in \fBArray\fR, \fBBaseArray\fR, \fBDivTable\fR, \fBImageMap\fR, \fBList\fR, \fBPackage\fR, \fBPattern\fR, and \fBPlaneCell\fR.
+.SS void Box::print (ostream & out) const\fC [virtual]\fR
+.PP
+Reimplemented from \fBItem\fR.
+.PP
+Definition at line 61 of file box.C.
+.SH FRIENDS AND RELATED FUNCTION DOCUMENTATION
+.PP 
+.SS class BoxIterator\fC [friend]\fR
+.PP
+Definition at line 57 of file box.h.
+.SH MEMBER DATA DOCUMENTATION
+.PP 
+.SS \fBcountType\fR Box::itemsInBox\fC [protected]\fR
+.PP
+Definition at line 54 of file box.h.
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

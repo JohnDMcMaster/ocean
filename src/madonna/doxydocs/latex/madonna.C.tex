@@ -1,0 +1,296 @@
+\subsection{madonna.C File Reference}
+\label{madonna.C}\index{madonna.C@{madonna.C}}
+{\tt \#include $<$iostream.h$>$}\par
+{\tt \#include $<$malloc.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$libstruct.h$>$}\par
+{\tt \#include $<$sealibio.h$>$}\par
+{\tt \#include "genpart.h"}\par
+{\tt \#include "cost.h"}\par
+{\tt \#include "part.h"}\par
+{\tt \#include "glob\-Route.h"}\par
+{\tt \#include "phil\_\-glob.h"}\par
+\subsubsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf print\-Netlist\-Statistics} (CIRCUITPTR circuit)
+\item 
+CIRCUITPTR {\bf madonna} (CIRCUIT $\ast$circuit)
+\end{CompactItemize}
+\subsubsection*{Variables}
+\begin{CompactItemize}
+\item 
+int {\bf requested\-Grid\-Points} [$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}
+\item 
+int {\bf expandable\-Direction} = NOTINITIALIZED
+\item 
+LIBTABPTR {\bf thislibtab}
+\item 
+FUNTABPTR {\bf thisfuntab}
+\item 
+CIRTABPTR {\bf thiscirtab}
+\item 
+LAYTABPTR {\bf thislaytab}
+\item 
+LIBRARYPTR {\bf thislib}
+\item 
+FUNCTIONPTR {\bf thisfun}
+\item 
+CIRCUITPTR {\bf thiscir}
+\item 
+LAYOUTPTR {\bf thislay}
+\item 
+char$\ast$ {\bf circuit\_\-name} = NIL
+\item 
+char $\ast$ {\bf function\_\-name} = NIL
+\item 
+char $\ast$ {\bf library\_\-name} = NIL
+\item 
+char $\ast$ {\bf layoutname} = NIL
+\item 
+double {\bf extraplaza} = 1.0
+\item 
+int {\bf madonnamakeminiplaza} = TRUE
+\item 
+int {\bf madonnamakepartition} = TRUE
+\end{CompactItemize}
+
+
+\subsubsection{Function Documentation}
+\label{madonna.C_a1}
+\index{madonna.C@{madonna.C}!madonna@{madonna}}
+\index{madonna@{madonna}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUITPTR madonna (CIRCUIT $\ast$ {\em circuit})}\hfill
+
+
+
+Definition at line 76 of file madonna.C.\small\begin{verbatim}00077 {
+00078    TOTALPPTR    total=NIL;
+00079    FUNCTIONPTR  savethisfun=thisfun;
+00080    CIRCUITPTR   savethiscir=thiscir,thecircuit,bestcircuit;
+00081    LAYOUTPTR    savethislay=thislay;
+00082    LIBRARYPTR   savethislib=thislib;
+00083    
+00084    initnetcostinfo();
+00085 
+00086    readImageFile();         // Here we call the parser to read all 
+00087                                     // the stuff about image
+00088    
+00089    printNetlistStatistics(circuit);
+00090 
+00091    if (madonnamakepartition)
+00092    {
+00093       madonna_(&total,circuit,1);
+00094 
+00095 #ifdef __MSDOS__
+00096       cerr << "\nAvailable memory: " << coreleft() << "\n\n";
+00097 #endif
+00098 
+00099       bestcircuit=(total ? total->bestpart : NIL);
+00100    }
+00101    else
+00102       bestcircuit=NIL;
+00103 
+00104    if (total==NIL || total->bestpart==NIL)
+00105       thecircuit=circuit;
+00106    else
+00107       thecircuit=total->bestpart;
+00108    if (madonnamakeminiplaza )
+00109    {
+00110 
+00111       if(! madonnamakepartition )
+00112       {
+00113      phil(circuit_name,function_name,library_name,
+00114           layoutname,extraplaza,NULL,NULL,NULL);
+00115       }
+00116       else
+00117       {
+00118      if (total != NIL && total->nx >= 1 && total->ny >= 1)
+00119      {
+00120         // ...and now for the global routing:
+00121         expansionGrid globgrid(total); // create global grid and globl nets
+00122         globgrid.routeGlobNets();      // route the nets
+00123 
+00124         phil(circuit_name,function_name,library_name,layoutname,
+00125          extraplaza,thecircuit,savethiscir,total->routing);
+00126      }
+00127      else
+00128      {
+00129         // nothing to do for the global router ...
+00130         phil(circuit_name,function_name,library_name,layoutname,
+00131          extraplaza,thecircuit,savethiscir,NIL);
+00132      }
+00133       }
+00134 #ifdef __MSDOS__
+00135       cerr << "\nAvailable memory: " << coreleft() << "\n\n";
+00136 #endif
+00137    }
+00138    thislay=savethislay; thiscir=savethiscir;
+00139    thisfun=savethisfun; thislib=savethislib;
+00140    
+00141    return bestcircuit;
+00142 }
+\end{verbatim}\normalsize 
+\label{madonna.C_a0}
+\index{madonna.C@{madonna.C}!printNetlistStatistics@{printNetlistStatistics}}
+\index{printNetlistStatistics@{printNetlistStatistics}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}void print\-Netlist\-Statistics (CIRCUITPTR {\em circuit})\hspace{0.3cm}{\tt  [static]}}\hfill
+
+
+
+Definition at line 42 of file madonna.C.
+
+Referenced by {\bf madonna}().\small\begin{verbatim}00043 {
+00044    NETPTR net;
+00045    int netdist[10],j,total_nets=0;
+00046    for (j=0; j<10; ++j)
+00047       netdist[j] = 0;
+00048    for (net = circuit->netlist; net != NIL; net = net->next)
+00049    {
+00050       j = net->num_term;
+00051       if (j < 0)
+00052          ;
+00053       else if (j <= 1)
+00054          netdist[0] += 1;
+00055       else if (j <= 7)
+00056          netdist[j-1] += 1;
+00057       else if (j <= 10)
+00058          netdist[7] += 1;
+00059       else if (j <= 20)
+00060          netdist[8] += 1;
+00061       else
+00062          netdist[9] += 1;
+00063    }
+00064    for (j=0; j<10; ++j)
+00065       total_nets += netdist[j];
+00066    printf("------ net distribution (total #nets = %d):\n"
+00067           "        0..1     2     3     4     5     6     7 8..10 11..20  >20\n\n"
+00068           "      ",total_nets);
+00069    for (j=0; j<10; ++j)
+00070       printf(" %5d",netdist[j]);
+00071    printf("\n\n");
+00072 }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Variable Documentation}
+\label{madonna.C_a12}
+\index{madonna.C@{madonna.C}!circuit_name@{circuit\_\-name}}
+\index{circuit_name@{circuit\_\-name}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ circuit\_\-name = NIL}\hfill
+
+
+
+Definition at line 33 of file madonna.C.\label{madonna.C_a3}
+\index{madonna.C@{madonna.C}!expandableDirection@{expandableDirection}}
+\index{expandableDirection@{expandableDirection}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int expandable\-Direction = NOTINITIALIZED}\hfill
+
+
+
+Definition at line 20 of file madonna.C.\label{madonna.C_a16}
+\index{madonna.C@{madonna.C}!extraplaza@{extraplaza}}
+\index{extraplaza@{extraplaza}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}double extraplaza = 1.0}\hfill
+
+
+
+Definition at line 37 of file madonna.C.\label{madonna.C_a13}
+\index{madonna.C@{madonna.C}!function_name@{function\_\-name}}
+\index{function_name@{function\_\-name}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ function\_\-name = NIL}\hfill
+
+
+
+Definition at line 34 of file madonna.C.\label{madonna.C_a15}
+\index{madonna.C@{madonna.C}!layoutname@{layoutname}}
+\index{layoutname@{layoutname}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ layoutname = NIL}\hfill
+
+
+
+Definition at line 36 of file madonna.C.\label{madonna.C_a14}
+\index{madonna.C@{madonna.C}!library_name@{library\_\-name}}
+\index{library_name@{library\_\-name}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ library\_\-name = NIL}\hfill
+
+
+
+Definition at line 35 of file madonna.C.\label{madonna.C_a17}
+\index{madonna.C@{madonna.C}!madonnamakeminiplaza@{madonnamakeminiplaza}}
+\index{madonnamakeminiplaza@{madonnamakeminiplaza}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int madonnamakeminiplaza = TRUE}\hfill
+
+
+
+Definition at line 38 of file madonna.C.\label{madonna.C_a18}
+\index{madonna.C@{madonna.C}!madonnamakepartition@{madonnamakepartition}}
+\index{madonnamakepartition@{madonnamakepartition}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int madonnamakepartition = TRUE}\hfill
+
+
+
+Definition at line 39 of file madonna.C.\label{madonna.C_a2}
+\index{madonna.C@{madonna.C}!requestedGridPoints@{requestedGridPoints}}
+\index{requestedGridPoints@{requestedGridPoints}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}int requested\-Grid\-Points[$\,$] = \{NOTINITIALIZED, NOTINITIALIZED, NOTINITIALIZED\}}\hfill
+
+
+
+Definition at line 19 of file madonna.C.\label{madonna.C_a10}
+\index{madonna.C@{madonna.C}!thiscir@{thiscir}}
+\index{thiscir@{thiscir}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRCUITPTR thiscir}\hfill
+
+
+
+Definition at line 29 of file madonna.C.\label{madonna.C_a6}
+\index{madonna.C@{madonna.C}!thiscirtab@{thiscirtab}}
+\index{thiscirtab@{thiscirtab}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}CIRTABPTR thiscirtab}\hfill
+
+
+
+Definition at line 24 of file madonna.C.\label{madonna.C_a9}
+\index{madonna.C@{madonna.C}!thisfun@{thisfun}}
+\index{thisfun@{thisfun}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}FUNCTIONPTR thisfun}\hfill
+
+
+
+Definition at line 28 of file madonna.C.\label{madonna.C_a5}
+\index{madonna.C@{madonna.C}!thisfuntab@{thisfuntab}}
+\index{thisfuntab@{thisfuntab}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}FUNTABPTR thisfuntab}\hfill
+
+
+
+Definition at line 23 of file madonna.C.\label{madonna.C_a11}
+\index{madonna.C@{madonna.C}!thislay@{thislay}}
+\index{thislay@{thislay}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LAYOUTPTR thislay}\hfill
+
+
+
+Definition at line 30 of file madonna.C.\label{madonna.C_a7}
+\index{madonna.C@{madonna.C}!thislaytab@{thislaytab}}
+\index{thislaytab@{thislaytab}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LAYTABPTR thislaytab}\hfill
+
+
+
+Definition at line 25 of file madonna.C.\label{madonna.C_a8}
+\index{madonna.C@{madonna.C}!thislib@{thislib}}
+\index{thislib@{thislib}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LIBRARYPTR thislib}\hfill
+
+
+
+Definition at line 27 of file madonna.C.\label{madonna.C_a4}
+\index{madonna.C@{madonna.C}!thislibtab@{thislibtab}}
+\index{thislibtab@{thislibtab}!madonna.C@{madonna.C}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}LIBTABPTR thislibtab}\hfill
+
+
+
+Definition at line 22 of file madonna.C.

@@ -1,0 +1,90 @@
+\subsection{Cri\-Candidate  Class Reference}
+\label{CriCandidate}\index{CriCandidate@{Cri\-Candidate}}
+{\tt \#include $<$cricand.h$>$}
+
+Inheritance diagram for Cri\-Candidate:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\setlength{\epsfysize}{4cm}
+\epsfbox{class_cricandidate.eps}
+\end{center}
+\end{figure}
+\subsubsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Cri\-Candidate} (int {\bf x},int {\bf y},{\bf layer\-Type} lay,unsigned int k,{\bf cluster\-Map\-Type} nb)
+\item 
+{\bf $\sim$Cri\-Candidate} ()
+\item 
+virtual {\bf class\-Type} {\bf my\-No} () const
+\item 
+virtual char$\ast$ {\bf my\-Name} () const
+\end{CompactItemize}
+\subsubsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf cluster\-Map\-Type} {\bf neighbors}
+\end{CompactItemize}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\label{CriCandidate_a0}
+\index{CriCandidate@{Cri\-Candidate}!CriCandidate@{CriCandidate}}
+\index{CriCandidate@{CriCandidate}!CriCandidate@{Cri\-Candidate}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cri\-Candidate::Cri\-Candidate (int {\em x}, int {\em y}, {\bf layer\-Type} {\em lay}, unsigned int {\em k}, {\bf cluster\-Map\-Type} {\em nb})}\hfill
+
+
+
+Definition at line 27 of file cricand.h.\small\begin{verbatim}00027 :
+00028               CriPoint(x,y,lay,k),neighbors(nb){};
+
+\end{verbatim}\normalsize 
+\label{CriCandidate_a1}
+\index{CriCandidate@{Cri\-Candidate}!~CriCandidate@{$\sim$CriCandidate}}
+\index{~CriCandidate@{$\sim$CriCandidate}!CriCandidate@{Cri\-Candidate}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}Cri\-Candidate::$\sim$Cri\-Candidate ()\hspace{0.3cm}{\tt  [inline]}}\hfill
+
+
+
+Definition at line 30 of file cricand.h.\small\begin{verbatim}00030 {}
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Function Documentation}
+\label{CriCandidate_a3}
+\index{CriCandidate@{Cri\-Candidate}!myName@{myName}}
+\index{myName@{myName}!CriCandidate@{Cri\-Candidate}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Cri\-Candidate::my\-Name () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a4})}.
+
+Definition at line 33 of file cricand.h.\small\begin{verbatim}00033 { return "CriCandidate"; }
+\end{verbatim}\normalsize 
+\label{CriCandidate_a2}
+\index{CriCandidate@{Cri\-Candidate}!myNo@{myNo}}
+\index{myNo@{myNo}!CriCandidate@{Cri\-Candidate}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf class\-Type} Cri\-Candidate::my\-No () const\hspace{0.3cm}{\tt  [inline, virtual]}}\hfill
+
+
+
+Reimplemented from {\bf Cri\-Point} {\rm (p.\,\pageref{CriPoint_a3})}.
+
+Definition at line 32 of file cricand.h.\small\begin{verbatim}00032 { return CriCandidateClass; }
+\end{verbatim}\normalsize 
+
+
+\subsubsection{Member Data Documentation}
+\label{CriCandidate_m0}
+\index{CriCandidate@{Cri\-Candidate}!neighbors@{neighbors}}
+\index{neighbors@{neighbors}!CriCandidate@{Cri\-Candidate}}
+\paragraph{\setlength{\rightskip}{0pt plus 5cm}{\bf cluster\-Map\-Type} Cri\-Candidate::neighbors}\hfill
+
+
+
+Definition at line 38 of file cricand.h.
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf cricand.h}\end{CompactItemize}

@@ -1,0 +1,66 @@
+.TH LayMap 3 "28 Sep 2000" "madonna" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LayMap \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <layMap.h>\fR
+.PP
+.SS Public Methods
+
+.in +1c
+.ti -1c
+.RI "\fBLayMap\fR (LAYOUT *,\fBImageMap\fR *,\fBArray\fR *)"
+.br
+.ti -1c
+.RI "\fB~LayMap\fR ()"
+.br
+.ti -1c
+.RI "\fBlayerType\fR \fBviaToCriticalArea\fR (int,int)"
+.br
+.ti -1c
+.RI "unsigned int \fBfindNetId\fR (int,int,\fBlayerType\fR,short*)"
+.br
+.ti -1c
+.RI "void \fBaddCriticalPoints\fR (\fBClst\fR &,short*)"
+.br
+.ti -1c
+.RI "int \fBgetHor\fR ()"
+.br
+.ti -1c
+.RI "int \fBgetVer\fR ()"
+.br
+.in -1c
+.SH CONSTRUCTOR & DESTRUCTOR DOCUMENTATION
+.PP 
+.SS LayMap::LayMap (LAYOUT * l, \fBImageMap\fR * i, \fBArray\fR * n)
+.PP
+Definition at line 15 of file layMap.C.
+.SS LayMap::~LayMap ()
+.PP
+Definition at line 28 of file layMap.C.
+.SH MEMBER FUNCTION DOCUMENTATION
+.PP 
+.SS void LayMap::addCriticalPoints (\fBClst\fR & c, short * mtx)
+.PP
+Definition at line 105 of file layMap.C.
+.SS unsigned int LayMap::findNetId (int x, int y, \fBlayerType\fR layer, short * mtx)
+.PP
+Definition at line 61 of file layMap.C.
+.PP
+Referenced by \fBClst::Clst\fR().
+.SS int LayMap::getHor ()\fC [inline]\fR
+.PP
+Definition at line 54 of file layMap.h.
+.SS int LayMap::getVer ()\fC [inline]\fR
+.PP
+Definition at line 55 of file layMap.h.
+.SS \fBlayerType\fR LayMap::viaToCriticalArea (int, int)
+.PP
+
+
+.SH AUTHOR
+.PP 
+Generated automatically by Doxygen for madonna from the source code.

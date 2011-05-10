@@ -1,0 +1,68 @@
+
+# @(#)oceanSet 1.2 03/10/00 
+
+if ($?OCEANALLPATH) then
+   if (! -d $OCEANALLPATH) then
+      echo $OCEANALLPATH is not a directory.
+      exit
+   endif
+   setenv OCEANPATH $OCEANALLPATH/ocean
+   setenv ICDPATH $OCEANALLPATH/cacd
+   if (-d $OCEANALLPATH/sis) then
+      setenv SISPATH $OCEANALLPATH/sis
+   endif
+   if (-d $OCEANALLPATH/spice) then
+      setenv SPICEPATH $OCEANALLPATH/spice
+   endif
+endif
+
+if (! $?ICDPATH) then
+   echo Please set the environment variable ICDPATH to the directory where you have
+   echo installed the Nelsis software.
+   exit
+endif
+if (! -d $ICDPATH) then
+   echo $ICDPATH is not a directory.
+   exit
+endif
+if (! $?OCEANPATH) then
+   echo Please set the environment variable OCEANPATH to the directory where you have
+   echo installed the Ocean software.
+   exit
+endif
+if (! -d $OCEANPATH) then
+   echo $OCEANPATH is not a directory.
+   exit
+endif
+if ($ICDPATH == $OCEANPATH) then
+   echo the variables OCEANPATH and ICDPATH may not be equal.
+   exit
+endif
+if (! $?MACHINE || ! -d $OCEANPATH/bin/$MACHINE) then
+   echo Please set \$MACHINE to the type of machine that you use
+   echo (e.g. PA-RISC1.1_10, sun4_5 or i486_Linux).
+   exit
+endif
+setenv OCEANMACHINE $MACHINE
+if ($?SISPATH) then
+   if (! -d $SISPATH) then
+      echo $SISPATH is not a directory.
+      exit
+   endif
+   set path = ( $SISPATH/bin $path )
+endif
+if ($?SPICEPATH) then
+   if (! -d $SPICEPATH) then
+      echo $SPICEPATH is not a directory.
+      exit
+   endif
+   set path = ( $SPICEPATH/bin $path )
+endif
+set path = ( \
+$OCEANPATH/bin/$MACHINE/nelsis3 \
+$OCEANPATH/bin/$MACHINE \
+$OCEANPATH/bin  \
+. \
+$ICDPATH/bin \
+$path )
+

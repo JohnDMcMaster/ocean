@@ -1,0 +1,331 @@
+                                Welcome to 
+
+    O C E A N :  T H E  S E A - O F - G A T E S  D E S I G N  S Y S T E M
+
+
+     Summary
+     -------
+
+This directory contains OCEAN, a comprehensive chip design package which
+was developed at Delft University of Technology, the Netherlands. It
+includes a full set of powerful tools for the synthesis and verification
+of semi-custom sea-of-gates and gate-array chips.  OCEAN covers the
+back-end of the design trajectory: from circuit level, down to layout
+and a working chip. In a nutshell, OCEAN has the following features:
+
+   + Available for free, including all source code.
+   + Short learning curve making it suitable for student design courses.
+   + Hierarchical (full-custom-like) layout style on sea-of-gates.
+   + Powerful tools for placement, routing, simulation and extraction.
+   + Any combination of automatic and interactive manual layout.
+   + OCEAN can handle even the largest designs.
+   + Running on popular HP, Sun, Silicon Graphics and 386/486/pentium PCs
+   + Easy and automated installation.
+   + Includes three sea-of-gates images with libraries and template chip.
+   + Can be easily adapted to arbitrary images with any number of layers.
+   + Interface programs for other tools and systems (SIS, cadence, etc.)
+   + Robust and 'combat-proven', used by hundreds of people.
+
+
+     What is in this directory?
+     --------------------------
+
+       4292 Aug 23 11:21 COMPILATION		How to compile ocean yourself
+      17982 Dec 16  1992 COPYING		Your rights are GNU rights
+       3715 Aug 26 14:48 COPYRIGHTS		Our copyright statement
+      29817 Sep  3 09:56 ICELLS_mesg		Output of a successful ICELLS run
+      22563 Sep  3 09:59 INSTALLATION		How to install the ocean binaries
+      15032 Sep 25 15:48 OCEAN.readme		This file
+      18631 Jul 19 13:31 blif2sls.tar.gz	ocean source: blif2sls
+    5397399 Aug 29 10:27 cacd_bin.tar.gz	cacd binaries, statically linked
+     394574 Dec 14  1995 cacd_process.tar.gz	cacd process libraries
+    1052085 Sep 15 17:25 cacd_src.tar.gz	cacd sources
+      16024 Dec 22  1994 colaps.tar.gz		ocean source: colaps
+      31943 Dec 13  1994 esea.tar.gz		ocean source: cedif and friends
+       3316 Aug 26 10:32 g++			Shell script works around g++ bug
+       8068 Aug 20 14:19 gnarp.tar.gz		ocean source: gnarp
+     116145 Aug 20 14:18 libocean.tar.gz	ocean source: libocean.a
+     127677 May 12  1995 libseadif.tar.gz	ocean source libseadif.a
+     109520 Sep 15 17:18 madonna.tar.gz		ocean source: madonna
+       8079 Sep  6 09:51 makebus.tar.gz		ocean source: makebus
+     131196 Sep 15 17:19 nelsea.tar.gz		ocean source: nelsea and friends
+    1725224 Aug 26 10:31 ocean_bin.tar.gz	ocean binaries, statically linked
+    1146775 Aug 16  1993 ocean_celllibs.tar.gz	ocean sea-of-gates cell libraries
+    1156768 Nov  2  1993 ocean_docs.tar.gz	ocean documentation
+      38731 Sep  3 09:39 scripts.tar.gz		collection of helper scripts
+     143337 Aug  6 10:10 seadali.tar.gz		ocean source: seadali
+       6105 Nov 10  1994 seedif.tar.gz		ocean source: seedif and friends
+      98802 Sep 15 17:19 trout.tar.gz		ocean source: trout
+
+The file ocean_docs.tar.gz contains elaborate documentation of the system
+in postscript format (ready for the laserprinter). We recomment to
+retrieve this file first.
+
+
+     OCEAN: overview of the package
+     ------------------------------
+
+OCEAN allows you to:
+
+ * Run logic synthesis tools and enter the circuit in various formats.
+         Convenient input from logical synthesis tools (e.g MIS, SIS). 
+	 SLS-network format for textual circuit entry. Edif circuit 
+	 interface.
+
+ * Interactively simulate this circuit at logic level, switch-level and 
+   SPICE.
+         The simulator interface has the unique capability to switch the 
+	 simulation level just at the stroke of a button. Graphical input 
+	 simulation stimuli. A very powerful and fast switch-level 
+	 simulator is included.
+
+ * Create hierarchical layouts of hierarchical circuits.
+         In contrast to other sea-of-gates and gate-array systems, the
+         circuit hierarchy does not have to be flattened. You can use and 
+	 create modules of any shape and size. Complexity can be handled 
+	 effectively. OCEAN can handle very large layouts.
+
+ * Enter the circuit in various formats.
+         Convenient input from logical synthesis tools (e.g MIS, SIS). 
+	 SLS-network format for textual circuit entry. Edif circuit 
+	 interface.
+
+ * Interactively simulate this circuit at logic level, switch-level and 
+   SPICE.
+         The simulator interface has the unique capability to switch the 
+	 simulation level just at the stroke of a button. Graphical input 
+	 simulation stimuli. Very powerful and fast switch-level simulator.
+
+ * Automatically place and route.
+         The state-of-the-art placer and router are simply started by the 
+	 touch of a button from the layout interface. Both the placer and 
+	 the router make efficiently use of the unused space in the sub-
+	 modules. Any number of interconnect layers can be handled. Manual 
+	 pre-routing of critical nets, special power and clock routing 
+	 facilities enable high-performance designs. Many special 
+	 provisions for semi-custom layout (e.g. substrate contacts, power 
+	 rails connection) are supported. Unused transistors can be 
+	 automatically converted into capacitances for power decoupling.
+
+ * Manually place, route, view and modify the layout. 
+         The interactive layout interface give a easy control over any 
+	 combination of automatic and manual design. For example, You can 
+	 make part of a wire, and just click a button to make the automatic
+	 router finish the rest of it. Mask-level layout (polygons) is 
+	 displayed. Very fast graphics for even the largest layout 
+	 (2,000,000 boxes).
+
+ * Verify the connectivity and correctness of the layout design. 
+         Any short-circuits and unconnects are indicated in the layout.
+
+ * Perform design rule checking and layout purification of manual layouts.
+         Objects are snapped to the grid.  Stacked vias are indicated. 
+
+ * Extract the circuit back from the layout. 
+	 An advanced layout to circuit extractor is included, which 
+	 is capable of extracting accurate parasitics.
+
+ * Interactively simulate the extracted circuit on three levels of accuracy.
+         Easy comparison with the original circuit. 
+
+ * Perform this fast and convenient design cycle as many times as necessary.
+
+
+
+     OCEAN: Flexible hierarchical sea-of-gates design
+     ------------------------------------------------
+
+The hierarchical layout design style is the key feature of OCEAN. It
+allows you to structure the layout in the same way as the circuit. Larger
+structured blocks (such as registers, RAM, ALU) can be designed
+efficiently, much in the same way as on a full-custom chip, but at the
+cost and design speed of a gate-array.  Many levels of hierarchy may be
+used to smash the complexity and to speed up design.  Unlike other
+standard-cell, gate-array or sea-of-gates design packages, there is no
+need to break up the entire circuit into a two-level hierarchy with small
+equal-sized modules. From our experience, OCEAN's unique clear and visible
+relation between layout and circuit has many advantages. Not only does it
+give the novice user (e.g. student) a better comprehension of the design,
+it also allows expert designers and tools to make better use of the
+inherent structure and regularity of the circuit.
+
+
+
+    Sea-of-gates chips, images and libraries included in OCEAN
+    ----------------------------------------------------------
+
+The OCEAN system comes with technology files and libraries for three images:
+
+  * fishbone   (gate-isolation image in double metal process)
+  * octagon    (symmetrical and rotatable image in 3 metal layer process)
+  * gatearray  (old fashioned row-based gate-array in single-layer process)
+
+Adding your own image, library and technology description is easy. OCEAN
+can handle any number of interconnect layers and intricate image
+structures. The basic library allows you to create digital as well as
+analog designs. The layout of an entire 200,000 transistor chip in the
+'fishbone' image is included with OCEAN. This chip has 144 pins on the
+area of approx. 10 x 10 mm. At Delft University, we can perform the
+metallization of the fishbone chip at low costs and with a short
+turn-around time.  We designed and fabricated 13 chips over the past 12
+months, containing various digital and mixed analog-digital designs.
+For smaller circuits the chip can be configured as a multi-project chip
+containing 2 or 4 separated designs.
+
+
+
+     Who is OCEAN intended for?
+     --------------------------
+
+OCEAN is suitable for any low-cost chip design application. Low cost,
+however, does not necessarily mean simple circuits. Large
+high-performance circuits (e.g. 90 MIPS processor) have also been
+designed with OCEAN. The tools are also suitable for mixed
+analog-digital designs.
+
+Coming from a University, OCEAN was originally intended for research but
+especially for educational purposes. At Delft University, all 160 2nd
+year students follow a design course in which they design an entire chip
+using OCEAN.  The short learning curve of OCEAN makes it possible that a
+complex chip (spanning 45,000 transistors) is designed by a group of 16
+students in just 8 weeks (2 afternoons per week). More information and
+course material is available upon request. See also appendix A.
+
+
+
+     Hardware requirements of OCEAN
+     ------------------------------
+
+Currently OCEAN is running on the following machines:
+
+    * Hewlett-Packard 9000 series 700 and series 800
+    * Sun Sparc, running SunOS-4 or Solaris-2
+    * Silicon Graphics, running IRIX
+    * 386, 486, Pentium PC, running Linux
+
+The minimum requirement is that the computer runs UNIX (or LINUX for PC)
+with X-window release 11.3 or higher. The memory requirement during
+run-time is remarkably small, even for large designs (in the order of a
+few megabytes). A disk space of about 30 Megabyte is required for
+installation. To give an indication of the computer load: We run an entire
+design course for students with 19 X-terminals on a single HP-730 desktop
+workstation, and still have reasonable response.
+
+
+
+     How to retrieve OCEAN?
+     ----------------------
+
+The entire OCEAN system is available for free via anonymous ftp, gopher or
+on tape. You may redistribute it and/or modify it under the terms of the
+GNU General Public License as published by the Free Software Foundation.
+Our current distribution includes:
+    
+    * executables for 3 popular hardware platforms
+    * source code (C/C++) of all tools
+    * cell libraries for 3 different semi-custom images
+    * full documentation with hands-on tutorial examples
+    * conversion tools for SIS, cadence.
+    * much more.
+
+A powerful installation script is included, so you can get started very
+quickly without hacking up the code. You can retrieve OCEAN and additional
+documentation via:
+
+   anonymous ftp:      donau.et.tudelft.nl,  directory pub/ocean
+   the wold wide web:  http://olt.et.tudelft.nl/ocean/ocean.html
+
+We advise to retrieve first the documents with the user manual. (The file
+'ocean_docs.tar.gz') All interfaces for the SPICE simulator and the SIS
+(UC Berkeley) logic synthesis package are included.  For copyright reasons
+we cannot distribute these packages, but we can supply formation how you
+can obtain them.
+
+If you have any questions, remarks or problems, just contact us:
+
+  Patrick Groeneveld or Paul Stravers
+  Electronic Engineering Group, Electrical Engineering Faculty
+  Delft University of Technology
+  Mekelweg 4
+  2628 CD   Delft
+  The Netherlands
+
+  Email: ocean@muresh.et.tudelft.nl 
+         stravers@muresh.et.tudelft.nl
+         patrick@muresh.et.tudelft.nl
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+                              APPENDICES
+
+Appendix A:  Background of OCEAN
+--------------------------------
+
+OCEAN is the result of a joint effort of many people from the Electrical
+Engineering Faculty at Delft University of Technology. It is based to a
+large extent on the NELSIS IC design system and database. This full-custom
+system was developed over the past 10 years at Delft University,
+especially in the Network Theory group. To handle sea-of-gates design, new
+tools were created and other tools were modified. Most of this work was
+performed as a result of the IOP sea-of-gates project, which started 4
+years ago. The main drive to make the package more user-friendly was the
+advent of the new curriculum for EE students. The latter included a
+practical design course in which the students design a complex circuit in
+a group, simulating a commercial environment. This course started
+september 1992 for the first time and has been quite successful.
+
+
+Appendix B:  Why sea-of-gates??
+-------------------------------
+
+The OCEAN design system is targeted to produce sea-of-gates layout. This
+means that they deal with a prefabricated transistor pattern on the chip.
+To implement a circuit, the tools (or the designer, for that matter)
+interconnect these transistors with metal wires. Our sea-of-gates layout
+strategy aims at four goals:
+
+ 1. Minimization of the fabrication time. Because the chips are 
+    prefabricated (the transistors are already on the master image), the 
+    silicon foundry only processes the masks related to metal wires. 
+
+ 2. Minimization of the design time. The time involved in designing a cell
+    layout is reduced dramatically (as compared to full-custom) because the
+    transistors are preplaced on the image. Typically, it takes only a few 
+    minutes to layout a flipflop or a combinatorial gate, and the designer 
+    does not need to know anything about the process design rules.
+
+ 3. Minimization of the chip cost. The layout design starts with a 
+    prefabricated master image. This is a semi-manufactured article that 
+    can be produced in large quantities. At Delft University of Technology, 
+    we have 150 wafers for the 'fishbone' image in stock.
+
+ 4. Full-custom properties on Semi-Custom chips: Efficient implementation 
+    of structured logic (RAM, PLA etc.). In contrast to the conventional 
+    gate-array, a sea-of-gates does not have pre-defined routing channels. 
+    This enables a much more compact and clean implementation of structured 
+    circuits such as processors.
+
+The OCEAN suite of tools handles a wide variety of sea-of-gates master
+images and process technologies. The tools MADONNA (the placer), TROUT
+(the router) and FISH (purifier and design rule checker) handle the
+various peculiarities of the images to produce optimal layout.
+
+
+Appendix C:  List of primary programs in OCEAN
+----------------------------------------------
+
+
+        - SEADALI     Interactive layout editor, general interface for
+		      automatic and manual layout generation.
+        - MADONNA     Automatic placer.
+	- TROUT	      Automatic router, connectivity verifier.
+	- FISH	      Layout purifier for sea-of-gates, design rule checker.
+        - SPACE	      Fast & accurate layout extractor.
+        - SLS         Logic level and switch-level simulator.
+        - SIMEYE      Interactive simulator interface, enables
+	              unequaled smooth work with SLS and SPICE.
+	- GHOTI	      Circuit purifier for spice.
+	- CSLS XSLS   Compile or eXtract the SLS netlist format
+	- CEDIF XEDIF Compile or eXtract the EDIF netlist format
+
+...and many others!
